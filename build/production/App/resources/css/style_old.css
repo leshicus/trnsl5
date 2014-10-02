@@ -1,0 +1,225 @@
+/*ExtJs css*/
+
+/* заголовок fieldset */
+.x-fieldset-header-default > .x-fieldset-header-text {
+    color: rgb(39, 127, 204);
+}
+
+/* заголовки grid */
+.x-column-header {
+    color: rgb(39, 127, 204);
+}
+
+/* убираем надпись Trial из заголовка панелей */
+.x-panel-header-title-default-framed > .x-title-text-default-framed:after {
+    content: '';
+}
+
+.x-panel-header-title-default > .x-title-text-default:after {
+    content: '';
+}
+
+.x-toolbar-default {
+    border: 0;
+}
+
+/* исправление бага, когда длинный текст radiofield переносится на другую строчку */
+/* будем ждать исправления */
+.x-form-cb-label-after {
+    display: inline !important;
+    margin-left: 10px;
+}
+
+.x-form-cb {
+    margin-top: 0px;
+}
+/* шрифт displayfield */
+.x-form-display-field {
+    font-size: 17px;
+}
+/* шрифт радио кнопок внутри аккордиона */
+.x-form-cb-label {
+    font-size:17px;
+}
+/* шрифт заголовка аккордиона */
+.x-panel-header-text-container-default {
+    font-size:17px;
+    font-weight: normal !important;
+}
+
+/* не показывть пустые элементы в легенде диаграмм */
+.x-legend-item:empty {
+    display: none;
+}
+
+/* закругления заголовков таб */
+.x-tab-default-top {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+/* стиль заголовков подсистем */
+.mystyle_title_subsystem {
+    color: #666666;
+    background:#E6F1F9;
+    padding: 2 0 0 5;
+    font-size: x-large;
+    font-variant: small-caps;
+    font-family: serif;
+    border-radius: 4 0 0 4;
+    text-align: left;
+}
+.mystyle_title_user {
+    color: #666666;
+    background:#E6F1F9;
+    padding: 5 5 0 0;
+    font-size: medium;
+    font-variant: small-caps;
+    font-family: serif;
+    border-radius: 0 4 4 0;
+    text-align: right;
+}
+
+/* label */
+/*.x-form-item-label {
+    font-variant: small-caps;
+}*/
+
+/* фон */
+/*.ContentPanel > .x-panel-body {
+    background-image: url(resources/image/square.gif);
+}*/
+
+/* фон выделенного поля (по умолчанию- белый) */
+.x-form-focus,textarea.x-form-focus {
+    background: #C1DDF1;
+}
+/* фон инвалидного поля (по умолчанию- белый)*/
+.x-form-type-text textarea.x-form-invalid-field, .x-form-type-text input.x-form-invalid-field, .x-form-type-password textarea.x-form-invalid-field, .x-form-type-password input.x-form-invalid-field, .x-form-type-number textarea.x-form-invalid-field, .x-form-type-number input.x-form-invalid-field, .x-form-type-email textarea.x-form-invalid-field, .x-form-type-email input.x-form-invalid-field, .x-form-type-search textarea.x-form-invalid-field, .x-form-type-search input.x-form-invalid-field, .x-form-type-tel textarea.x-form-invalid-field, .x-form-type-tel input.x-form-invalid-field {
+    background-color: #FFECE8;
+}
+
+/* толщина рамочки frame */
+.x-panel-default-framed {
+    border-width: 3px;
+}
+
+/* перенос строки в гриде*/
+.wrapText .x-grid-cell-inner {
+    white-space: normal;
+}
+/* чтобы texеarea кнопки были внизу, а не внутри поля */
+/*.x-grid-row-editor-buttons-default-bottom{
+    top: 76;
+}*/
+/* переопределение картинки в дереве leaf */
+/*.x-tree-icon-leaf {
+    background-image: url(resources/img/subject.ico);
+}*/
+/*.x-tree-icon {
+    width: 35px;
+    height: 30px;
+}*/
+
+
+/*заголовок окна*/
+.x-window-header-text-default{
+    font-size:13px
+}
+/*заголовок панели*/
+.x-panel-header-text-default-framed{
+    font-size:13px;
+}
+/*текст кнопок тулбара*/
+.x-btn-default-toolbar-small .x-btn-inner{
+    font-size:13px;
+}
+/*названия полей грида*/
+.x-column-header{
+    font:normal 13px arial;
+}
+/*отступ сверху названий полей грида*/
+.x-column-header-inner{
+    line-height:17px;
+}
+/*группированные значения в гриде*/
+.x-grid-group-title{
+    font:bold 13px arial;
+}
+/*текст полей в гриде*/
+.x-grid-row .x-grid-cell{
+    font:normal 13px/13px arial;
+}
+/*текст полей в гриде*/
+.x-grid-editor .x-form-text,.x-grid-row-editor .x-form-text{
+    font:normal 13px/13px arial;
+}
+/*заголовок fieldset*/
+.x-fieldset-header{
+    font: bold 13px/13px arial;
+}
+/*текст кнопок*/
+.x-btn-default-small .x-btn-inner{
+    font-size:13px;
+}
+/*Текст заголовка таб панелей*/
+.x-tab button{
+    font-size:13px;
+}
+/*Бордюр таб панелей*/
+.x-tab-bar-top .x-tab-bar-body{
+    border-width:0px 0px 0;
+    padding:1px 3px 3px;
+}
+/*Текст внутри fieldset*/
+.x-form-item{
+    font:normal 13px arial;
+}
+
+.x-panel-body {
+    font-size: 13px;
+}
+/*Заголовок fieldset*/
+.x-fieldset-header-text{
+    font-size: 12px;
+    /*font-weight: bold;*/
+}
+
+
+/*Выпадающий список*/
+/*.x-boundlist-item {
+    background-color: rgb(255, 250, 210);
+    border-color: rgb(255, 250, 210);
+}*/
+
+.x-boundlist-item {
+    background-color: rgb(240, 248, 252);
+    border-color: rgba(208, 208, 209, 1);
+    border-style: solid;
+}
+/* комбо - цвет отмеченных элементов */
+.x-boundlist-selected {
+    background: #E1F0E2;
+}
+/* цвет курсора в выпадающем списке комбо */
+.x-boundlist-item-over {
+    background: rgb(182, 223, 248);
+}
+.x-body {
+    /*font-weight: bold;*/
+}
+/*Цвет группировок*/
+.x-grid-group-hd{
+    background: #F0F0F0;
+    border-width: 1 0 1 0;
+}
+
+/*           Мои стили        */
+/*Не редактируемая ячейка*/
+.my_readonly .x-form-text {
+    background: rgb(240, 255, 241);
+}
+/*Обязательная для заполнения ячейка*/
+.my_obligatory .x-form-text {
+    background: rgba(255, 213, 213, 0.29);
+}

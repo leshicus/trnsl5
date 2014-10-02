@@ -1,0 +1,32 @@
+[
+    {
+        "id": "1",
+        "text": "Верхневолжское",
+        "orgid": 1,
+        "leaf": false,
+        "expanded": true,
+        "children": [
+            {
+                "id": "1-1",
+                "text": "СДКУ",
+                "actid": 1,
+                "leaf": false,
+                "expanded": true,
+                "children": [
+                    {
+                        "id": "1-1-1",
+                        "text": "Группа № 1.1 ",
+                        "leaf": true,
+                        "groupid": 1
+                    },
+                    {
+                        "id": "1-1-2",
+                        "text": "Группа № 1.2 ",
+                        "leaf": true,
+                        "groupid": 2
+                    }
+                ]
+            }
+        ]
+    }
+]
