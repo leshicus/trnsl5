@@ -1,14 +1,14 @@
 Ext.define('App.view.manage.toolbar.ToolbarManageV', {
     extend: 'Ext.toolbar.Toolbar',
     requires: [
-        'App.view.manage.toolbar.ToolbarManageC',
+        'App.view.manage.toolbar.ToolbarManageC'
     ],
     alias: 'widget.toolbarManage',
     controller: 'toolbarmanage',
     itemId: 'toolbarManage',
     defaults: {
         toggleGroup: "manage",
-        allowDepress: false
+        allowDepress: true
     },
     initComponent: function () {
         console.log('ToolbarManageV init');

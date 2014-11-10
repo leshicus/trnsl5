@@ -1,20 +1,20 @@
 Ext.define('App.controller.admin.FormToolC', {
     extend: 'Ext.app.Controller',
     views: [
-        'admin.FormToolV'
+        //'admin.FormToolV'
     ],
     models: [
-        'admin.FormToolM'
+        //'admin.FormToolM'
     ],
     stores: [
-        'admin.FormToolS'
+        //'admin.FormToolS'
     ],
-    refs: [
+   /* refs: [
         {
             ref: 'formTool',
             selector: 'formTool'
         }
-    ],
+    ],*/
 
     onLaunch: function () {
 

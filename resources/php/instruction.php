@@ -1,7 +1,7 @@
 <?php
 $taskname = $_REQUEST["taskname"];
 $subsystem = $_REQUEST["subsystem"];
-$filename='../resources/instruction/'.$subsystem.'/'.$taskname.'.doc';
+$filename='../../instruction/'.$subsystem.'/'.$taskname.'.doc';
 $file_name= $taskname.'.doc';
 header("Cache-control: private");
 header("Content-type: application/force-download");

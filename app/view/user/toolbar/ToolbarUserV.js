@@ -1,13 +1,14 @@
-Ext.define('App.view.user.ToolbarUserV', {
+Ext.define('App.view.user.toolbar.ToolbarUserV', {
     extend: 'Ext.toolbar.Toolbar',
     requires: [
-
+        'App.view.user.toolbar.ToolbarUserC',
     ],
     alias: 'widget.toolbarUser',
+    controller: 'toolbaruser',
     itemId: 'toolbarUser',
     defaults    : {
         toggleGroup    : "user",
-        allowDepress    : false
+        allowDepress    : true
     },
     initComponent: function () {
         console.log('ToolbarUserV init');
@@ -17,20 +18,20 @@ Ext.define('App.view.user.ToolbarUserV', {
                 text: 'Главная',
                 itemId: 'mainMI',
                 scale:'medium',
-                iconCls: 'icon_back'
+                //iconCls: 'icon_back'
             },
             '-',
             {
                 text: 'Тестирование',
                 itemId: 'testMI',
                 scale:'medium',
-                iconCls: 'icon_test'
+                //iconCls: 'icon_test'
             },
             {
                 text: 'Самоподготовка',
                 itemId: 'selfMI',
                 scale:'medium',
-                iconCls: 'icon_self'
+                //iconCls: 'icon_self'
             }
         ];
         this.callParent(arguments);

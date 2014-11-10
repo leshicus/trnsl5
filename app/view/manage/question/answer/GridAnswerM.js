@@ -1,10 +1,40 @@
-Ext.define('App.model.manage.GridAnswerM', {
-    extend:'Ext.data.Model',
-    fields:[
-        {name: 'answerid'},
-        {name: 'answertext'},
-        {name: 'questionid'},
-        {name: 'correct',type:'bool'},
-        {name: 'normdoc'}
-    ]
+Ext.define('App.view.manage.question.answer.GridAnswerM', {
+    extend: 'Ext.app.ViewModel',
+    requires: [
+
+    ],
+    alias: 'viewmodel.gridanswer',
+    stores: {
+       answer: {
+           fields: [
+               {name:'correct',type:'bool'}
+           ],
+           autoSync: true,
+           //autoLoad: true,
+           proxy: {
+               type: 'rest',
+               api: {
+                   create: 'resources/php/manage/syncGridAnswer.php?act=create',
+                   read: 'resources/php/manage/syncGridAnswer.php?act=read',
+                   update: 'resources/php/manage/syncGridAnswer.php?act=update',
+                   destroy: 'resources/php/manage/syncGridAnswer.php?act=destroy'
+               },
+               reader: {
+                   type: 'json'
+               },
+               writer: {
+                   type: 'json',
+                   writeAllFields: true
+                   //allowSingle:true  // * чтобы всегда передавал массив
+               },
+               appendId: false,
+               actionMethods: {
+                   create : 'POST',
+                   read   : 'POST',
+                   update : 'POST',
+                   destroy: 'POST'
+               }
+           }
+        }
+    }
 });

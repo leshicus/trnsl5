@@ -8,7 +8,7 @@ Ext.define('App.view.admin.toolbar.ToolbarAdminV', {
     controller: 'toolbaradmin',
     defaults: {
         toggleGroup: "admin",
-        allowDepress: false
+        allowDepress: true
     },
     initComponent: function () {
         console.log('ToolbarAdminV init');

@@ -7,7 +7,7 @@ Ext.define('App.view.main.Main', {
         'App.view.main.MainM',
         'App.view.auth.tabreg.TabRegV',
         'App.view.auth.tabauth.TabAuthV',
-        'App.view.user.ToolbarUserV',
+        'App.view.user.toolbar.ToolbarUserV',
         'App.view.manage.toolbar.ToolbarManageV',
         'App.view.admin.toolbar.ToolbarAdminV',
         'App.view.common.SubsystemTitleV'

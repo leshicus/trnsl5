@@ -1,10 +1,17 @@
-Ext.define('App.view.manage.GridOrgV', {
+Ext.define('App.view.manage.org.GridOrgV', {
     extend: 'Ext.grid.Panel',
+    requires: [
+        'App.view.main.MainM',
+        'App.view.manage.org.GridOrgC'
+    ],
+    viewModel: {type: 'main'},
+    controller:'gridOrg',
+    bind: '{org}',
     alias: 'widget.gridOrg',
     itemId: 'gridOrg',
     frame: true,
     flex:1,
-    store: 'manage.GridOrgS',
+    //store: 'manage.GridOrgS',
     title: 'Организации',
     columnLines: true,
     viewConfig: {
@@ -44,7 +51,8 @@ Ext.define('App.view.manage.GridOrgV', {
                 itemId: 'columnOrgname',
                 dataIndex: 'orgname',
                 tdCls: 'wrapText',
-                flex:1,
+                //flex:1,
+                width:400,
                 editor: {
                     xtype: 'textfield'
                 }

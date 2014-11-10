@@ -1,11 +1,12 @@
 Ext.define('App.util.Utilities', {
     singleton: true,
+    alternateClassName: ['Utilities'],
 
     /*dataSystem: [
-        [1, "Тестирование"],
-        [2, "Администрирование"],
-        [3, "Ведение"]
-    ],*/
+     [1, "Тестирование"],
+     [2, "Администрирование"],
+     [3, "Ведение"]
+     ],*/
     dataStat: [
         ['1', "Количество экзаменуемых по видам деятельности"],
         ['2', "Успеваемость по видам деятельности"],
@@ -17,7 +18,7 @@ Ext.define('App.util.Utilities', {
     uncorrectString: 'неверный',
     passString: 'экзамен сдан',
     unpassString: 'экзамен не сдан',
-    startSubsystem: 2, // * подсистема выбранная по-умолчанию в стартовом окне
+    startSubsystem: 3, // * подсистема выбранная по-умолчанию в стартовом окне
     examTimerSec: 60, // * секунд в минуте
     //userid: 0,
     nullDate: '00.00.0000 00:00',
@@ -83,19 +84,19 @@ Ext.define('App.util.Utilities', {
         }
     },
 
-    comboRendererVM: function (combo,storeName) {
+    comboRendererVM: function (combo, storeName) {
         //console.info(arguments);
         return function (value) {
 
             var vm = combo.getViewModel(),
                 store = vm.getStore(storeName);
-                //result = '';
-                store.findBy(function(item){
-                    var id  = item.getIdProperty();
-                    console.info(rec.get(id),item.getIdProperty(),item.getId());
-                      if(rec.get(id) == value)
-                          return item ? item.get(combo.displayField) : combo.valueNotFoundText;
-                });
+            //result = '';
+            store.findBy(function (item) {
+                var id = item.getIdProperty();
+                console.info(item.getIdProperty(), item.getId());
+                if (item.getIdProperty() == value)
+                    return item ? item.get(combo.displayField) : combo.valueNotFoundText;
+            });
             //console.info(record,combo.valueField,value);
 
         }
@@ -120,8 +121,22 @@ Ext.define('App.util.Utilities', {
     },
 
     renderGridGroup: function (combo) {
+        var main = Ext.ComponentQuery.query('main')[0],
+            mainVM = main.getViewModel(),
+            storeAct = mainVM.getStore('act');
+
         return function (value) {
-            var record = combo.findRecord(combo.valueField || combo.displayField, value, 0, false, true, true);
+            var record = storeAct.findRecord('actid', value);
+            return record ? record.get(combo.displayField) : combo.valueNotFoundText;
+        }
+    },
+    renderOrg: function (combo) {
+        var main = Ext.ComponentQuery.query('main')[0],
+            mainVM = main.getViewModel(),
+            storeAct = mainVM.getStore('org');
+
+        return function (value) {
+            var record = storeAct.findRecord('orgid', value);
             return record ? record.get(combo.displayField) : combo.valueNotFoundText;
         }
     },
@@ -142,7 +157,9 @@ Ext.define('App.util.Utilities', {
 
     // * GridGroup knowids
     renderGroupknow: function (value, metaData, record, rowIndex, colIndex, store, view) {
-        var storeKnow = Ext.data.StoreManager.lookup('manage.GridKnowS');
+        var main = Ext.ComponentQuery.query('main')[0],
+            mainVM = main.getViewModel(),
+            storeKnow = mainVM.getStore('know');
         // проверка на массив (для списочных элементов, multiselect)
         if (value instanceof Array) {
             var str = Array();
@@ -229,5 +246,33 @@ Ext.define('App.util.Utilities', {
 // * преобразование даты в удобочитаемый формат
     reverseDate: function (x) {
         return ((x < 10 ? '0' : '') + x)
+    },
+
+    // * скрыть/раскрыть дерево
+    treeCollapse: function (button, e, tree) {
+        if(tree){
+            if (tree._collapsed) {
+                tree.getEl().mask('Раскрываем...');
+                Ext.defer(function () {
+                    tree.expandAll(function () {
+                            tree.getEl().unmask();
+                            tree._collapsed = false;
+                        },
+                        this
+                    );
+                }, 10, this);
+            } else {
+                tree.getEl().mask('Скрываем...');
+                Ext.defer(function () {
+                    tree.collapseAll(function () {
+                            tree.getEl().unmask();
+                            tree._collapsed = true;
+                        },
+                        this
+                    );
+                }, 10, this);
+            }
+        }
+
     }
 });

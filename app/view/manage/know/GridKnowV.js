@@ -1,10 +1,17 @@
-Ext.define('App.view.manage.GridKnowV', {
+Ext.define('App.view.manage.know.GridKnowV', {
     extend: 'Ext.grid.Panel',
+    requires: [
+        'App.view.main.MainM',
+        'App.view.manage.know.GridKnowC'
+    ],
     alias: 'widget.gridKnow',
+    viewModel: {type: 'main'},
+    controller:'gridKnow',
+    bind: '{know}',
     itemId: 'gridKnow',
     frame: true,
     flex:1,
-    store: 'manage.GridKnowS',
+    //store: 'manage.GridKnowS',
     title: 'Области знания',
     columnLines: true,
     viewConfig: {
@@ -34,7 +41,7 @@ Ext.define('App.view.manage.GridKnowV', {
                 text: 'Номер',
                 itemId: 'columnKnownum',
                 dataIndex: 'knownum',
-                width:100,
+                width:70,
                 editor: {
                     xtype: 'textfield'
                 }
@@ -53,7 +60,8 @@ Ext.define('App.view.manage.GridKnowV', {
                 itemId: 'columnKnowfullname',
                 dataIndex: 'knowfullname',
                 tdCls: 'wrapText',
-                flex:1,
+                //flex:1,
+                width:400,
                 editor: {
                     xtype: 'textfield'
                 }

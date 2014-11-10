@@ -2,8 +2,6 @@
 require_once("../db_connect.php");
 require_once("../include.php");
 
-$success = true;
-
 // * организации
 $orgQuery = "
             select

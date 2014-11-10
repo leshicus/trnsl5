@@ -17,10 +17,10 @@ Ext.define('App.view.admin.treeuser.TreeUserM', {
            },
            //idProperty: 'id',
            // * если не указывать нижние строчки, то ругается на isUtilObservable of undefined
-           root: {
+         /*  root: {
                text: 'Организации',
                expanded: true
-           },
+           },*/
            autoLoad:true
         }
     }

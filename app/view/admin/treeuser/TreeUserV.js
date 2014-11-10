@@ -16,10 +16,11 @@ Ext.define('App.view.admin.treeuser.TreeUserV', {
     resizable: true,
     margin: '0 5 0 0',
     rootVisible: false,
+    _collapsed: true,
     initComponent: function () {
         console.log('TreeUserV init');
         this.tools = [
-            {
+            /*{
                 type: 'expand',
                 itemId: 'expandTreeUser',
                 tooltip: 'Раскрыть все'
@@ -28,6 +29,10 @@ Ext.define('App.view.admin.treeuser.TreeUserV', {
                 type: 'collapse',
                 itemId: 'collapseTreeUser',
                 tooltip: 'Скрыть все'
+            },*/
+            {
+                type: 'maximize',
+                tooltip: 'Скрыть/Раскрыть'
             },
             {
                 type: 'refresh',

@@ -1,11 +1,18 @@
-Ext.define('App.view.manage.GridSpecV', {
+Ext.define('App.view.manage.spec.GridSpecV', {
     extend: 'Ext.grid.Panel',
+    requires: [
+        'App.view.manage.spec.GridSpecM',
+        'App.view.manage.spec.GridSpecC'
+    ],
+    viewModel: {type: 'gridSpec'},
+    controller:'gridSpec',
+    bind: '{spec}',
     alias: 'widget.gridSpec',
     itemId: 'gridSpec',
     frame: true,
     flex: 1,
     forceFit: true,  // * ячейки распределяются по ширине всей таблицы
-    store: 'manage.GridSpecS',
+    //store: 'manage.GridSpecS',
     title: 'Специальности',
     viewConfig: {
         plugins: {
@@ -15,7 +22,6 @@ Ext.define('App.view.manage.GridSpecV', {
         enableTextSelection:true
     },
     columnLines: true,
-    plugins: 'bufferedrenderer',
     initComponent: function () {
         console.log('GridSpec init');
 
@@ -38,7 +44,7 @@ Ext.define('App.view.manage.GridSpecV', {
                 itemId: 'refreshGridSpecS',
                 tooltip: 'Обновить'
             }
-        ]
+        ];
 
         this.columns = [
             {

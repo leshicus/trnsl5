@@ -1,11 +1,18 @@
-Ext.define('App.view.manage.GridGroupV', {
+Ext.define('App.view.manage.group.GridGroupV', {
     extend: 'Ext.grid.Panel',
+    requires: [
+        'App.view.main.MainM',
+        'App.view.manage.group.GridGroupC'
+    ],
+    viewModel: {type: 'main'},
+    controller:'gridGroup',
+    bind: '{group}',
     alias: 'widget.gridGroup',
     itemId: 'gridGroup',
     frame: true,
     flex: 1,
     //forceFit: true,
-    store: 'manage.GridGroupS',
+    //store: 'manage.GridGroupS',
     title: 'Группы',
     columnLines: true,
     viewConfig: {
@@ -34,10 +41,14 @@ Ext.define('App.view.manage.GridGroupV', {
             }
         ]
 
-        var storeAct = Ext.data.StoreManager.lookup('manage.GridActS'),
-            storeKnow = Ext.data.StoreManager.lookup('manage.GridKnowS'),
+        var main = Ext.ComponentQuery.query('main')[0],
+            mainVM = main.getViewModel(),
+            storeAct = mainVM.getStore('act'),
+            storeKnow = mainVM.getStore('know'),
             comboAct = Ext.create('Ext.form.ComboBox', {
-                store: storeAct,
+                //store: storeAct,
+                bind:{store:'{act}'},
+                viewModel: {type: 'main'},
                 valueField: 'actid',
                 name: 'actid',
                 editable: false,
@@ -50,37 +61,46 @@ Ext.define('App.view.manage.GridGroupV', {
                  }*/
             }),
             comboKnow = Ext.create('Ext.form.ComboBox', {
-                store: storeKnow,
+                //store: storeKnow,
+                bind:{store:'{know}'},
+                viewModel: {type: 'main'},
                 valueField: 'knowid',
                 name: 'knowid',
                 multiSelect: true,
                 editable: false,
                 displayField: 'knowname'
             });
-
         this.columns = [
             {
-                text: 'Номер',
+                text: 'id',
+                itemId: 'columnGroupid',
+                dataIndex: 'groupid',
+                width: 50
+            },
+            {
+                text: 'Вид<br>деятельности',
+                itemId: 'columnActid',
+                dataIndex: 'actid',
+                width: 130,
+                editor: comboAct,
+                renderer: App.util.Utilities.renderGridGroup(comboAct)
+                //renderer: App.util.Utilities.comboRendererVM(comboAct,'act')
+            },
+            {
+                text: 'Номер<br>группы',
                 itemId: 'columnGroupnum',
                 dataIndex: 'groupnum',
-                width: 100,
+                width: 70,
                 editor: {
                     xtype: 'textfield'
                 }
             },
             {
-                text: 'Вид деятельности',
-                itemId: 'columnActid',
-                dataIndex: 'actid',
-                width: 200,
-                editor: comboAct,
-                renderer: App.util.Utilities.renderGridGroup(comboAct)
-            },
-            {
                 text: 'Наименование',
                 itemId: 'columnGroupname',
                 dataIndex: 'groupname',
-                flex: 1,
+                //flex: 1,
+                width: 300,
                 editor: {
                     xtype: 'textfield'
                 }
@@ -100,9 +120,11 @@ Ext.define('App.view.manage.GridGroupV', {
                 itemId: 'columnGroupknow',
                 dataIndex: 'knowids',
                 tdCls: 'wrapText',
-                flex: 1,
+                //flex: 1,
+                width: 300,
                 editor: comboKnow,
                 renderer: App.util.Utilities.renderGroupknow
+                //renderer: App.util.Utilities.comboRendererVM(comboKnow,'know')
             }
         ];
         this.callParent(arguments);

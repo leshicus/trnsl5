@@ -1,18 +1,25 @@
-Ext.define('App.view.user.PanelSelfV', {
-    extend: 'Ext.panel.Panel',
+Ext.define('App.view.user.self.PanelSelfV', {
+    extend: 'Ext.container.Container',
+    requires: [
+        'App.view.main.MainM',
+        'App.view.user.self.PanelSelfC'
+    ],
+    viewModel: {type: 'main'},
+    controller:'panelSelf',
     alias: 'widget.panelSelf',
-    itemId: 'panelSelf',
+    itemId: 'content',
     flex: 1,
-    border: false,
-    padding: '0 0 0 0',
     layout: {
         type: 'hbox',
         align: 'stretch'
     },
+    border:false,
+    frame:false,
     questionMaxInCardSelf : 0, // * число вопросов в билете
-    myTooltip: Ext.create('Ext.tip.ToolTip', {
+   /* myTooltip: Ext.create('Ext.tip.ToolTip', {
         renderTo: Ext.getBody()
-    }),
+    }),*/
+
     constructor: function () {
         console.log('PanelSelfV init');
 
@@ -21,11 +28,17 @@ Ext.define('App.view.user.PanelSelfV', {
 // * левая половина: Информация
             {
                 xtype: 'panel',
+                cls: 'my_shadowborder',
+                margin: 5,
                 frame: true,
                 border: false,
                 width: 300,
                 itemId: 'panelProgress',
                 title: 'Прогресс',
+                layout: {
+                    type: 'vbox',
+                    align: 'stretch'
+                },
                 defaults: {
                     margin: '5 5 5 5',
                     labelWidth: 130
@@ -33,7 +46,8 @@ Ext.define('App.view.user.PanelSelfV', {
                 items: [
                     {
                         xtype: 'combobox',
-                        store: 'user.KnowS',
+                        //store: 'user.KnowS',
+                        bind: {store: '{know}'},
                         itemId: 'comboKnow',
                         queryMode: 'local',
                         editable: false,
@@ -65,7 +79,10 @@ Ext.define('App.view.user.PanelSelfV', {
                         xtype: 'displayfield',
                         fieldLabel: 'Ответ',
                         myCustomText:' ', // * текст вопроса во всплывающей подсказке
-                        itemId: 'textAnswer'
+                        itemId: 'textAnswer',
+                        listeners: {
+                            //afterrender: 'answerTooltip'
+                        }
                     },
                     {
                         xtype: 'displayfield',
@@ -88,10 +105,11 @@ Ext.define('App.view.user.PanelSelfV', {
             {
                 xtype: 'panel',
                 title: 'Билет',
+                cls: 'my_shadowborder',
+                margin: 5,
                 itemId: 'panelCard',
                 flex: 1,
                 frame: true,
-                margin: '0 0 0 5',
                 border: false,
                 buttonAlign: 'left',
                 questionNumber: 0, // * текущий вопрос билета

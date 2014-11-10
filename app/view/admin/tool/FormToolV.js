@@ -3,10 +3,10 @@ Ext.define('App.view.admin.tool.FormToolV', {
     requires: [
         //'App.view.admin.clas.GridExamM',
         'App.view.admin.tool.FormToolC',
-        'App.view.admin.tool.FormToolM'
+        'App.view.main.MainM'
     ],
     alias: 'widget.formTool',
-    viewModel: {type: 'formtool'},
+    viewModel: {type: 'main'},
     controller:'formtool',
     frame: true,
     flex: 1,
@@ -36,6 +36,7 @@ Ext.define('App.view.admin.tool.FormToolV', {
             {
                 itemId: 'maxquestion',
                 name: 'maxquestion',
+                bind:'{tool.maxquestion}',
                 fieldLabel: 'Число вопросов в билете'
             },
             {

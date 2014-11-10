@@ -1,6 +1,11 @@
-﻿Ext.define('App.view.manage.FormQuestionV', {
+﻿Ext.define('App.view.manage.question.question.FormQuestionV', {
     extend: 'Ext.form.Panel',
+    requires: [
+        'App.view.manage.question.question.FormQuestionC',
+        'Ext.form.field.HtmlEditor'
+    ],
     alias: 'widget.formQuestion',
+    controller:'formquestion',
     itemId: 'formQuestion',
     bodyPadding: 5,
     defaults: {
@@ -10,13 +15,13 @@
     layout: 'fit',
     constructor: function () {
         console.log('formQuestion init');
-        var self = this;
 
-        this.items = [
+        this.items = [//todo не показывает иконки
             {
                 xtype: 'htmleditor',
                 itemId: 'textQuestion',
                 name: 'questiontext',
+                allowBlank:false,
                 enableColors: false,
                 enableFont: false,
                 defaultFont: 'Arial',

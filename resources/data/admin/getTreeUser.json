@@ -1,32 +1,74 @@
-[
-    {
-        "id": "1",
-        "text": "Верхневолжское",
-        "orgid": 1,
-        "leaf": false,
-        "expanded": true,
-        "children": [
-            {
-                "id": "1-1",
-                "text": "СДКУ",
-                "actid": 1,
-                "leaf": false,
-                "expanded": true,
-                "children": [
-                    {
-                        "id": "1-1-1",
-                        "text": "Группа № 1.1 ",
-                        "leaf": true,
-                        "groupid": 1
-                    },
-                    {
-                        "id": "1-1-2",
-                        "text": "Группа № 1.2 ",
-                        "leaf": true,
-                        "groupid": 2
-                    }
-                ]
-            }
-        ]
-    }
-]
+{
+    "success": true,
+    "children": [
+        {
+            "id": "1",
+            "text": "Верхневолжское",
+            "orgid": "1",
+            "leaf": false,
+            "children": [
+                {
+                    "id": "1-1",
+                    "text": "СДКУ",
+                    "actid": "1",
+                    "leaf": false,
+                    "children": [
+                        {
+                            "id": "1-1-1",
+                            "text": "Группа № 1.1 ",
+                            "groupid": 1,"leaf": false},
+                        {
+                            "id": "1-1-2",
+                            "text": "Группа № 1.2 ",
+                            "groupid": 2,"leaf": false}]},
+                {
+                    "id": "1-2",
+                    "text": "АСУ ТП",
+                    "actid": "2",
+                    "leaf": false,
+                    "children": [
+                        {
+                            "id": "1-2-3",
+                            "text": "Группа № 2.1 ",
+                            "groupid": 3,"leaf": false},
+                        {
+                            "id": "1-2-4",
+                            "text": "Группа № 2.2 ",
+                            "groupid": 4,"leaf": false}]},
+                {
+                    "id": "1-3",
+                    "text": "КИПиА",
+                    "actid": "3",
+                    "leaf": false,
+                    "children": [
+                        {
+                            "id": "1-3-5",
+                            "text": "Группа № 3.1 ",
+                            "groupid": 5,"leaf": false},
+                        {
+                            "id": "1-3-6",
+                            "text": "Группа № 3.2 ",
+                            "groupid": 6,"leaf": false},
+                        {
+                            "id": "1-3-7",
+                            "text": "Группа № 3.3 ",
+                            "groupid": 7,"leaf": false},
+                        {
+                            "id": "1-3-8",
+                            "text": "Группа № 3.4 ",
+                            "groupid": 8,"leaf": false},
+                        {
+                            "id": "1-3-9",
+                            "text": "Группа № 3.5 ",
+                            "groupid": 9,"leaf": false}]}
+            ]
+        },
+        {
+            "id": "2",
+            "text": "Нижнекамское",
+            "orgid": "2",
+            "leaf": false,
+            "children": [
+            ]
+        }
+    ]}

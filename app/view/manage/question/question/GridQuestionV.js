@@ -1,11 +1,21 @@
 Ext.define('App.view.manage.question.question.GridQuestionV', {
     extend: 'Ext.grid.Panel',
+    requires: [
+        'App.view.manage.question.question.GridQuestionM',
+        'App.view.manage.question.question.GridQuestionC',
+        'Ext.form.field.File',
+        'Ext.form.field.FileButton',
+        'Ext.form.trigger.Component'
+    ],
+    viewModel: {type: 'gridQuestion'},
+    controller:'gridQuestion',
+    bind: '{question}',
     alias: 'widget.gridQuestion',
     itemId: 'gridQuestion',
     frame: true,
     flex: 1,
-    forceFit: true,  // * ячейки распределяются по ширине всей таблицы
-    store: 'manage.GridQuestionS',
+    //forceFit: true,  // * ячейки распределяются по ширине всей таблицы
+    //store: 'manage.GridQuestionS',
     title: 'Вопросы',
     viewConfig: {
         plugins: {
@@ -21,7 +31,7 @@ Ext.define('App.view.manage.question.question.GridQuestionV', {
     },
     selType: 'checkboxmodel',
     columnLines: true,
-    plugins: 'bufferedrenderer',
+   // plugins: 'bufferedrenderer',
     initComponent: function () {
         console.log('GridQuestion init');
 
@@ -58,15 +68,17 @@ Ext.define('App.view.manage.question.question.GridQuestionV', {
                 iconCls: 'icon_delete'
             },
             '->',
-            {
+            {//todo что тут с загрузкой файла
                 xtype: 'filefield',
                 name: 'import',
                 itemId: 'import',
                 buttonOnly: true,
+                allowBlank: false,
                 msgTarget: 'side',
                 regex: /^.*\.(xml|XML)$/,
                 regexText: 'Допустимы только файлы c расширением *.XML',
-                anchor: '100%',
+                //anchor: '100%',
+                width:100,
                 buttonConfig: {
                     text: 'Загрузка',
                     scale: 'medium',
@@ -92,7 +104,8 @@ Ext.define('App.view.manage.question.question.GridQuestionV', {
                 text: 'Текст вопроса',
                 itemId: 'columnQuestiontext',
                 dataIndex: 'questiontext',
-                tdCls: 'wrapText'
+                tdCls: 'wrapText',
+                width:500
                 //renderer:App.util.Utilities.questionGridColumnRenderer
             }
         ];

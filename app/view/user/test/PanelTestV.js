@@ -1,9 +1,18 @@
-Ext.define('App.view.user.PanelTestV', {
-    extend: 'Ext.panel.Panel',
+Ext.define('App.view.user.test.PanelTestV', {
+    extend: 'Ext.container.Container',
+    requires: [
+        'App.view.main.MainM',
+        'App.view.user.test.PanelTestC',
+        'App.view.user.test.PanelTestM',
+        'Ext.layout.container.Accordion'
+    ],
+    viewModel: {type: 'paneltest'},
+    controller:'panelTest',
     alias: 'widget.panelTest',
-    itemId: 'panelTest',
+    itemId: 'content',
     flex: 1,
     border: false,
+    frame:false,
     padding: '0 0 0 0',
     layout: {
         type: 'hbox',
@@ -40,18 +49,18 @@ Ext.define('App.view.user.PanelTestV', {
     regstatdur:0,
     passed:false, // * проходился тест или не
     examTimerSec : App.util.Utilities.examTimerSec, // * секунд в минуте
-    myTooltip: Ext.create('Ext.tip.ToolTip', {
+    /*myTooltip: Ext.create('Ext.tip.ToolTip', {
         renderTo: Ext.getBody()
-    }),
+    }),*/ //todo разобраться
     constructor: function () {
         console.log('PanelTestV init');
 
-        var storeExam = Ext.create('App.store.admin.GridExamS');
+       /* var storeExam = Ext.create('App.store.admin.GridExamS');
         storeExam.load({
             params:{
                 testMode:1
             }
-        });
+        });*/
         this.items = [
 // * левая половина: регистрация и прогресс
             {
@@ -59,18 +68,20 @@ Ext.define('App.view.user.PanelTestV', {
                     type: 'vbox',
                     align: 'stretch'
                 },
-                border: false,
-                frame: false,
+                //border: false,
+                //frame: false,
                 width: 300,
                 items: [
 // * регистрация
                     {
                         xtype: 'panel',
+                        cls: 'my_shadowborder',
+                        margin: 5,
                         title: 'Регистрация на экзамен',
                         frame: true,
                         height: 150,
-                        border: false,
-                        margin: '0 0 5 0',
+                        //border: false,
+                        //margin: '0 0 5 0',
                         layout: {
                             type: 'vbox',
                             align: 'stretch'
@@ -82,7 +93,8 @@ Ext.define('App.view.user.PanelTestV', {
                         items: [
                             {
                                 xtype: 'combobox',
-                                store: storeExam,
+                                //store: storeExam,
+                                bind:'{exam}',
                                 //store: 'admin.GridExamS',
                                 itemId: 'comboExam',
                                 queryMode: 'local',
@@ -133,6 +145,8 @@ Ext.define('App.view.user.PanelTestV', {
                     {
                         xtype: 'panel',
                         frame: true,
+                        cls: 'my_shadowborder',
+                        margin: 5,
                         flex: 2,
                         itemId: 'panelProgress',
                         title: 'Прогресс',
@@ -198,10 +212,12 @@ Ext.define('App.view.user.PanelTestV', {
             {
                 xtype: 'panel',
                 title: 'Билет',
+                cls: 'my_shadowborder',
+                margin: 5,
                 itemId: 'panelCard',
                 flex: 1,
                 frame: true,
-                margin: '0 0 0 5',
+                //margin: '0 0 0 5',
                 border: false,
                 buttonAlign: 'left',
                 questionNumber: 0, // * текущий вопрос билета

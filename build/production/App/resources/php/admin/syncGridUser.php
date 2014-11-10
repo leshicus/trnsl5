@@ -23,6 +23,7 @@ switch ($act) {
                   DATE_FORMAT(u.begindate, '%d.%m.%Y %H:%i') as begindate,
                   DATE_FORMAT(u.enddate, '%d.%m.%Y %H:%i') as enddate,
                   u.specid,
+                  s.specname,
                   s.groupid,
                   u.password,
                   a.orgid,

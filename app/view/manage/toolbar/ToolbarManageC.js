@@ -4,6 +4,12 @@ Ext.define('App.view.manage.toolbar.ToolbarManageC', {
         'App.view.manage.question.question.GridQuestionV',
         'App.view.manage.question.tree.TreeQuestionV',
         'App.view.manage.question.answer.GridAnswerV',
+        'App.view.manage.spec.TreeSpecV',
+        'App.view.manage.spec.GridSpecV',
+        'App.view.manage.group.GridGroupV',
+        'App.view.manage.know.GridKnowV',
+        'App.view.manage.org.GridOrgV',
+        'App.view.manage.GridActV'
     ],
     alias: 'controller.toolbarmanage',
 
@@ -62,12 +68,12 @@ Ext.define('App.view.manage.toolbar.ToolbarManageC', {
                         tree = Ext.StoreManager.lookup('manage.TreeQuestionS'),
                         layout = viewport.getLayout();*/
                     // * чтобы при переключении кнопок в тулбаре не оставались значения в гридах
-                    storeQuest.filter(function () {
+                   /* storeQuest.filter(function () {
                         return false;
                     });
                     storeAnswer.filter(function () {
                         return false;
-                    });
+                    });*/
                     /*if (!panel) {
                         panel = Ext.create('App.view.manage.PanelQuestionV');
                     }
@@ -82,7 +88,40 @@ Ext.define('App.view.manage.toolbar.ToolbarManageC', {
                 if (me.pressed) {
                     console.log('click specialityMI');
 
-                    var toolbarManage = me.up('toolbarManage'),
+                    var main = me.up('main'),
+                        toolbar = me.up('toolbar'),
+                        layout = main.getLayout(),
+                        content = layout.activeItem.query('#content')[0];
+                    if (content) {
+                        layout.activeItem.remove(content);
+                    }
+                    content = Ext.create('Ext.container.Container', {
+                        border: false,
+                        itemId: 'content',
+                        flex: 1,
+                        layout: {
+                            type: 'hbox',
+                            align: 'stretch'
+                        },
+                        items: [
+                            {
+                                xtype: 'treeSpec',
+                                cls: 'my_shadowborder',
+                                margin: 5,
+                                width: 270
+                            },
+                            {
+                                xtype: 'gridSpec',
+                                cls: 'my_shadowborder',
+                                margin: 5,
+                                flex: 1
+                            }
+                        ]
+                    });
+                    //storeTreeUser.getRootNode().expand(true);
+                    layout.activeItem.add(content);
+
+                    /*var toolbarManage = me.up('toolbarManage'),
                         panel = Ext.ComponentQuery.query('panelSpec')[0],
                         storeSpec = Ext.StoreManager.lookup('manage.GridSpecS'),
                         tree = Ext.StoreManager.lookup('manage.TreeSpecS'),
@@ -96,7 +135,7 @@ Ext.define('App.view.manage.toolbar.ToolbarManageC', {
                     }
                     tree.getRootNode().expand(true);
                     layout.activeItem.query('.panel').forEach(App.util.Utilities.cascadeRemoveGrid);
-                    layout.activeItem.add(panel);
+                    layout.activeItem.add(panel);*/
                 }
             }
         },
@@ -105,7 +144,34 @@ Ext.define('App.view.manage.toolbar.ToolbarManageC', {
                 if (me.pressed) {
                     console.log('click groupMI');
 
-                    var toolbarManage = me.up('toolbarManage'),
+                    var main = me.up('main'),
+                        toolbar = me.up('toolbar'),
+                        layout = main.getLayout(),
+                        content = layout.activeItem.query('#content')[0];
+                    if (content) {
+                        layout.activeItem.remove(content);
+                    }
+                    content = Ext.create('Ext.container.Container', {
+                        border: false,
+                        itemId: 'content',
+                        flex: 1,
+                        layout: {
+                            type: 'hbox',
+                            align: 'stretch'
+                        },
+                        items: [
+                            {
+                                xtype: 'gridGroup',
+                                cls: 'my_shadowborder',
+                                margin: 5,
+                                flex: 1
+                            }
+                        ]
+                    });
+                    //storeTreeUser.getRootNode().expand(true);
+                    layout.activeItem.add(content);
+
+                    /*var toolbarManage = me.up('toolbarManage'),
                         panel = Ext.ComponentQuery.query('gridGroupV')[0],
                         viewport = me.up('viewport'),
                         layout = viewport.getLayout();
@@ -113,7 +179,7 @@ Ext.define('App.view.manage.toolbar.ToolbarManageC', {
                         panel = Ext.create('App.view.manage.GridGroupV');
                     }
                     layout.activeItem.query('.panel').forEach(App.util.Utilities.cascadeRemoveGrid);
-                    layout.activeItem.add(panel);
+                    layout.activeItem.add(panel);*/
                 }
             }
         },
@@ -122,7 +188,7 @@ Ext.define('App.view.manage.toolbar.ToolbarManageC', {
                 if (me.pressed) {
                     console.log('click activityMI');
 
-                    var toolbarManage = me.up('toolbarManage'),
+                    /*var toolbarManage = me.up('toolbarManage'),
                         panel = Ext.ComponentQuery.query('gridActV')[0],
                         viewport = me.up('viewport'),
                         layout = viewport.getLayout();
@@ -130,7 +196,33 @@ Ext.define('App.view.manage.toolbar.ToolbarManageC', {
                         panel = Ext.create('App.view.manage.GridActV');
                     }
                     layout.activeItem.query('.panel').forEach(App.util.Utilities.cascadeRemoveGrid);
-                    layout.activeItem.add(panel);
+                    layout.activeItem.add(panel);*/
+                    var main = me.up('main'),
+                        toolbar = me.up('toolbar'),
+                        layout = main.getLayout(),
+                        content = layout.activeItem.query('#content')[0];
+                    if (content) {
+                        layout.activeItem.remove(content);
+                    }
+                    content = Ext.create('Ext.container.Container', {
+                        border: false,
+                        itemId: 'content',
+                        flex: 1,
+                        layout: {
+                            type: 'hbox',
+                            align: 'stretch'
+                        },
+                        items: [
+                            {
+                                xtype: 'gridAct',
+                                cls: 'my_shadowborder',
+                                margin: 5,
+                                flex: 1
+                            }
+                        ]
+                    });
+                    //storeTreeUser.getRootNode().expand(true);
+                    layout.activeItem.add(content);
                 }
             }
         },
@@ -139,7 +231,7 @@ Ext.define('App.view.manage.toolbar.ToolbarManageC', {
                 if (me.pressed) {
                     console.log('click knowMI');
 
-                    var toolbarManage = me.up('toolbarManage'),
+                    /*var toolbarManage = me.up('toolbarManage'),
                         panel = Ext.ComponentQuery.query('gridKnowV')[0],
                         viewport = me.up('viewport'),
                         layout = viewport.getLayout();
@@ -147,7 +239,33 @@ Ext.define('App.view.manage.toolbar.ToolbarManageC', {
                         panel = Ext.create('App.view.manage.GridKnowV');
                     }
                     layout.activeItem.query('.panel').forEach(App.util.Utilities.cascadeRemoveGrid);
-                    layout.activeItem.add(panel);
+                    layout.activeItem.add(panel);*/
+                    var main = me.up('main'),
+                        toolbar = me.up('toolbar'),
+                        layout = main.getLayout(),
+                        content = layout.activeItem.query('#content')[0];
+                    if (content) {
+                        layout.activeItem.remove(content);
+                    }
+                    content = Ext.create('Ext.container.Container', {
+                        border: false,
+                        itemId: 'content',
+                        flex: 1,
+                        layout: {
+                            type: 'hbox',
+                            align: 'stretch'
+                        },
+                        items: [
+                            {
+                                xtype: 'gridKnow',
+                                cls: 'my_shadowborder',
+                                margin: 5,
+                                flex: 1
+                            }
+                        ]
+                    });
+                    //storeTreeUser.getRootNode().expand(true);
+                    layout.activeItem.add(content);
                 }
             }
         },
@@ -156,7 +274,7 @@ Ext.define('App.view.manage.toolbar.ToolbarManageC', {
                 if (me.pressed) {
                     console.log('click orgMI');
 
-                    var toolbarManage = me.up('toolbarManage'),
+                    /*var toolbarManage = me.up('toolbarManage'),
                         panel = Ext.ComponentQuery.query('gridOrgV')[0],
                         viewport = me.up('viewport'),
                         layout = viewport.getLayout();
@@ -164,21 +282,47 @@ Ext.define('App.view.manage.toolbar.ToolbarManageC', {
                         panel = Ext.create('App.view.manage.GridOrgV');
                     }
                     layout.activeItem.query('.panel').forEach(App.util.Utilities.cascadeRemoveGrid);
-                    layout.activeItem.add(panel);
+                    layout.activeItem.add(panel);*/
+                    var main = me.up('main'),
+                        toolbar = me.up('toolbar'),
+                        layout = main.getLayout(),
+                        content = layout.activeItem.query('#content')[0];
+                    if (content) {
+                        layout.activeItem.remove(content);
+                    }
+                    content = Ext.create('Ext.container.Container', {
+                        border: false,
+                        itemId: 'content',
+                        flex: 1,
+                        layout: {
+                            type: 'hbox',
+                            align: 'stretch'
+                        },
+                        items: [
+                            {
+                                xtype: 'gridOrg',
+                                cls: 'my_shadowborder',
+                                margin: 5,
+                                flex: 1
+                            }
+                        ]
+                    });
+                    //storeTreeUser.getRootNode().expand(true);
+                    layout.activeItem.add(content);
                 }
             }
         },
         'toolbarManage #mainMI': {
-            toggle: function (me, state) {
-                if (me.pressed) {
+            toggle: function (button, state) {
+                if (button.pressed) {
                     console.log('click mainMI');
 
-                    var viewport = me.up('viewport'),
-                        layout = viewport.getLayout();
-                    layout.activeItem.query('.panel').forEach(App.util.Utilities.cascadeRemoveGrid);
+                    var main = button.up('main'),
+                        layout = main.getLayout();
+                    layout.activeItem.query('panel').forEach(App.util.Utilities.cascadeRemoveGrid);
                     layout.setActiveItem(0);
-                    var storeSpec = Ext.data.StoreManager.lookup('manage.GridSpecS');
-                    storeSpec.clearFilter();
+                   /* var storeSpec = Ext.data.StoreManager.lookup('manage.GridSpecS');
+                    storeSpec.clearFilter();*/
                 }
             }
         }

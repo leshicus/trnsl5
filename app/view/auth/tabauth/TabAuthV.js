@@ -21,10 +21,12 @@ Ext.define('App.view.auth.tabauth.TabAuthV', {
     defaults:{
         blankText:'Обязательное поле'
     },
+    defaultButton: '[reference=enter]',
     initComponent: function () {
         console.log('TabAuthV init');
 
-        var textLogin = {
+        var me = this,
+            textLogin = {
                 xtype: 'textfield',
                 itemId: 'textLogin',
                 name: 'textLogin',
@@ -99,6 +101,13 @@ Ext.define('App.view.auth.tabauth.TabAuthV', {
                     textNewPassword,
                     buttonChangePas
                 ]
+            }),
+            buttonEnter = Ext.create('Ext.button.Button',{
+                text: 'Вход',
+                scale:'medium',
+                action: 'enter',
+                reference: 'enter',
+                itemId:'enter'
             });
 
         this.items = [
@@ -109,11 +118,7 @@ Ext.define('App.view.auth.tabauth.TabAuthV', {
         ];
 
         this.buttons = [
-            {
-                text: 'Вход',
-                scale:'medium',
-                action: 'enter'
-            },
+            buttonEnter,
             {
                 text: 'Очистить',
                 scale:'medium',
@@ -121,10 +126,15 @@ Ext.define('App.view.auth.tabauth.TabAuthV', {
             }/*,
              { xtype: 'tbspacer', width: 150 }*/
         ];
-
+        Ext.apply(App, {
+            defaultButton: '[itemId=enter]'
+        });
+        //buttonEnter.focus(); //todo почему-то не работает
         this.callParent(arguments);
+
         console.log('TabAuthV end');
     },
+
     // * латинский алфавит, длиннее 3-х букв
     validatorLogin:function (val) {
         //var regex = /^\d+(.(\d+){1})?$/;
@@ -150,4 +160,11 @@ Ext.define('App.view.auth.tabauth.TabAuthV', {
          }*/
         return true;
     }
+},
+
+function () {
+    // * короткие имена для полезных методов
+    Ext.apply(App, {
+        defaultButton: '[reference=enter]'
+    });
 });

@@ -50,7 +50,12 @@ Ext.define('App.view.admin.treeuser.TreeUserC', {
                 treeUser.store.load();
             }
         },
-        '#expandTreeUser': {
+        'tool[type=maximize]': {
+            click: function (button, e, tree) {
+                Utilities.treeCollapse(button, e, tree);
+            }
+        }
+        /*'#expandTreeUser': {
             click: function (button) {
                 var treeUser = button.up('treepanel');
                 treeUser.expandAll();
@@ -61,6 +66,6 @@ Ext.define('App.view.admin.treeuser.TreeUserC', {
                 var treeUser = button.up('treepanel');
                 treeUser.collapseAll();
             }
-        }
+        }*/
     }
 });

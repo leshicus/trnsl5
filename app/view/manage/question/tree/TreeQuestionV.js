@@ -1,19 +1,21 @@
 Ext.define('App.view.manage.question.tree.TreeQuestionV', {
     extend: 'Ext.tree.TreePanel',
     requires: [
-        'Ext.tree.*',
-        'Ext.data.*',
-        'Ext.util.Point',
-        'Ext.layout.container.HBox'
+        'App.view.manage.question.tree.TreeQuestionC',
+        'App.view.manage.question.tree.TreeQuestionM'
     ],
+    viewModel: {type: 'treeQuestion'},
+    controller:'treeQuestion',
     frame:true,
     border: 5,
     title: 'Структура',
     alias:'widget.treeQuestion',
     itemId:'treeQuestion',
-    store: 'manage.TreeQuestionS',
+    //store: 'manage.TreeQuestionS',
+    bind:'{treequestion}',
     margin: '0 5 0 0',
     resizable:true,
+    _collapsed: true,
    // allowDeselect: true,
     //selModel: {  allowDeselect: true },
     rootVisible: false,
@@ -31,6 +33,10 @@ Ext.define('App.view.manage.question.tree.TreeQuestionV', {
     initComponent: function(){
         this.tools = [
             {
+                type: 'maximize',
+                tooltip: 'Скрыть/Раскрыть'
+            },
+            /*{
                 type:'expand',
                 itemId:'expandTreeQuestionS',
                 tooltip: 'Раскрыть все'
@@ -39,7 +45,7 @@ Ext.define('App.view.manage.question.tree.TreeQuestionV', {
                 type:'collapse',
                 itemId:'collapseTreeQuestionS',
                 tooltip: 'Скрыть все'
-            },
+            },*/
             {
                 type:'refresh',
                 itemId:'refreshTreeQuestionS',

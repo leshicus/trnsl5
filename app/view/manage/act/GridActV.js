@@ -1,12 +1,19 @@
 Ext.define('App.view.manage.GridActV', {
     extend: 'Ext.grid.Panel',
+    requires: [
+        'App.view.main.MainM',
+        'App.view.manage.act.GridActC'
+    ],
     alias: 'widget.gridAct',
+    viewModel: {type: 'main'},
+    controller:'gridAct',
+    bind: '{act}',
     itemId: 'gridAct',
     frame: true,
     flex:1,
     //height: gridHeight,
     //forceFit: true,
-    store: 'manage.GridActS',
+    //store: 'manage.GridActS',
     title: 'Виды деятельности',
     columnLines: true,
     viewConfig: {
@@ -36,9 +43,9 @@ Ext.define('App.view.manage.GridActV', {
             }
         ]
 
-        var storeOrg = Ext.data.StoreManager.lookup('manage.GridOrgS'),
+        var //storeOrg = Ext.data.StoreManager.lookup('manage.GridOrgS'),
             comboOrg = Ext.create('Ext.form.ComboBox', {
-                store: storeOrg,
+                bind:{store: '{org}'},
                 valueField: 'orgid',
                 name: 'orgid',
                 editable: false,
@@ -50,7 +57,7 @@ Ext.define('App.view.manage.GridActV', {
                 text: 'Номер',
                 itemId: 'columnActnum',
                 dataIndex: 'actnum',
-                width:100,
+                width:70,
                 editor: {
                     xtype: 'textfield'
                 }
@@ -70,8 +77,8 @@ Ext.define('App.view.manage.GridActV', {
                 itemId: 'columnActname',
                 dataIndex: 'actname',
                 tdCls: 'wrapText',
-                //width:100,
-                flex:1,
+                width:400,
+                //flex:1,
                 editor: {
                     xtype: 'textfield'
                 }
@@ -82,7 +89,7 @@ Ext.define('App.view.manage.GridActV', {
                 dataIndex: 'orgid',
                 width: 200,
                 editor: comboOrg,
-                renderer: App.util.Utilities.renderGridGroup(comboOrg)
+                renderer: App.util.Utilities.renderOrg(comboOrg)
             },
             {
                 text: 'Лимит времени (мин)',
