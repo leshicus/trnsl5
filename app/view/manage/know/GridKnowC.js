@@ -14,7 +14,7 @@ Ext.define('App.view.manage.know.GridKnowC', {
                 console.log('click refreshGridKnowS');
 
                 var gridKnow = this.getView();
-                gridKnow.store.load();
+                gridKnow.getViewModel().getStore('know').load();
             }
         },
         'button[action=add]': {
@@ -25,7 +25,7 @@ Ext.define('App.view.manage.know.GridKnowC', {
                     newRecord = Ext.create('App.model.manage.know.GridKnowM'),
                     rowEditing = grid.plugins[0];
                 rowEditing.cancelEdit();
-                grid.store.insert(0, newRecord);
+                grid.getViewModel().getStore('know').insert(0, newRecord);
                 rowEditing.startEdit(0, 0);
             }
         },
@@ -35,7 +35,7 @@ Ext.define('App.view.manage.know.GridKnowC', {
 
                 var grid = button.up('grid'),
                     selection = grid.getSelected();
-                grid.store.remove(selection);
+                grid.getViewModel().getStore('know').remove(selection);
                 /*controllerQuestion = App.app.getController('manage.PanelQuestionC'),
                  tree = controllerQuestion.getTreeQuestion();*/
                 /*if (selection) {

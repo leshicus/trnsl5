@@ -9,12 +9,14 @@ Ext.define('App.view.manage.org.GridOrgV', {
     bind: '{org}',
     alias: 'widget.gridOrg',
     itemId: 'gridOrg',
-    frame: true,
+    frame: false,
+    forceFit: true,
     flex:1,
     //store: 'manage.GridOrgS',
     title: 'Организации',
     columnLines: true,
     viewConfig: {
+        stripeRows: true,
         enableTextSelection:true // * allow to select text in grid. Actually it's a gridview property
     },
     initComponent: function () {

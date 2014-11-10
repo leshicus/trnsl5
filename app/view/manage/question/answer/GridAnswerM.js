@@ -1,16 +1,14 @@
 Ext.define('App.view.manage.question.answer.GridAnswerM', {
     extend: 'Ext.app.ViewModel',
-    requires: [
 
-    ],
     alias: 'viewmodel.gridanswer',
     stores: {
        answer: {
            fields: [
                {name:'correct',type:'bool'}
            ],
-           autoSync: true,
-           //autoLoad: true,
+           //autoSync: true,
+           autoLoad: false,
            proxy: {
                type: 'rest',
                api: {

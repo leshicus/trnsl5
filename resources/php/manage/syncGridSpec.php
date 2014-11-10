@@ -29,6 +29,21 @@ switch ($act) {
         }
         break;
     case 'read':
+        $actid = $_REQUEST['actid'];
+        $id = $_REQUEST['id'];
+        $groupid = $_REQUEST['groupid'];
+        $orgid = $_REQUEST['orgid'];
+        $where = ' where 1=1 ';
+
+        if($actid)
+            $where .= ' and g.actid = '.$actid;
+        if($groupid)
+            $where .= ' and g.groupid = '.$groupid;
+        if($orgid)
+            $where .= ' and a.orgid = '.$orgid;
+        if($id == 'root')
+            $where = ' where 1=1 ';
+
         $sql = 'select
                   s.specid,
                   s.specname,
@@ -36,8 +51,9 @@ switch ($act) {
                   a.orgid
 		        from speciality s
 		         left join `group` g on g.groupid = s.groupid
-		         left join `activity` a on a.actid = g.actid
-		        order by s.specname';
+		         left join `activity` a on a.actid = g.actid '
+                .$where.
+		        ' order by s.specname';
         try {
             $res = $mysqli->query($sql);
             $list=array();

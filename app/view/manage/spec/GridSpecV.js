@@ -1,10 +1,11 @@
 Ext.define('App.view.manage.spec.GridSpecV', {
     extend: 'Ext.grid.Panel',
     requires: [
-        'App.view.manage.spec.GridSpecM',
+        //'App.view.manage.spec.GridSpecM',
+        'App.view.main.MainM',
         'App.view.manage.spec.GridSpecC'
     ],
-    viewModel: {type: 'gridSpec'},
+    viewModel: {type: 'main'},
     controller:'gridSpec',
     bind: '{spec}',
     alias: 'widget.gridSpec',
@@ -19,6 +20,7 @@ Ext.define('App.view.manage.spec.GridSpecV', {
             ptype: 'gridviewdragdrop',
             ddGroup: 'ddspec'
         },
+        stripeRows: true,
         enableTextSelection:true
     },
     columnLines: true,
@@ -27,7 +29,7 @@ Ext.define('App.view.manage.spec.GridSpecV', {
 
         this.plugins = [
             Ext.create('Ext.grid.plugin.CellEditing', {
-                clicksToEdit: 1
+                clicksToEdit: 2
             })
         ];
 

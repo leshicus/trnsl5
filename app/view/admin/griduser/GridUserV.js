@@ -19,6 +19,7 @@ Ext.define('App.view.admin.griduser.GridUserV', {
     //selType: 'checkboxmodel',
     columnLines: true,
     viewConfig: {
+        stripeRows: true,
         enableTextSelection:true // * allow to select text in grid. Actually it's a gridview property
     },
     initComponent: function () {

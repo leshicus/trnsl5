@@ -31,7 +31,7 @@ Ext.define('App.controller.admin.ToolbarAdminC', {
                             storeUser = Ext.StoreManager.lookup('admin.GridUserS'),
                             treeUser = Ext.StoreManager.lookup('admin.TreeUserS'),
                             layout = viewport.getLayout();
-                        storeUser.filter(function () {
+                        storeUser.filterBy(function () {
                             return false;
                         });
                         if (!panel) {
@@ -98,10 +98,10 @@ Ext.define('App.controller.admin.ToolbarAdminC', {
 
                         var gridPerson = Ext.ComponentQuery.query('gridPerson')[0],
                             gridSigngroup = Ext.ComponentQuery.query('gridSigngroup')[0];
-                        gridPerson.store.filter(function () {
+                        gridPerson.store.filterBy(function () {
                             return false
                         });
-                        gridSigngroup.store.filter(function () {
+                        gridSigngroup.store.filterBy(function () {
                             return false
                         });
                     }

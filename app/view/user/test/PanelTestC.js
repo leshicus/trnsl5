@@ -479,7 +479,7 @@ Ext.define('App.view.user.test.PanelTestC', {
             panelTest.questionNumber = num;
             // * ответы
             answerAccordion.removeAll(true);
-            storeCard.filter(function (rec) {
+            storeCard.filterBy(function (rec) {
                 if (rec.get('rownum') == num)
                     return true;
             });

@@ -22,7 +22,7 @@ if (strtoupper($textPassword) == strtoupper($initPassword)) {
      select u.userid
      from `user` u
      where u.login = '$textLogin'
-     and u.enddate = 0
+     and (u.enddate is null or u.enddate = '0000-00-00 00:00:00')
     ";
 
     try {

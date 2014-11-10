@@ -14,11 +14,20 @@ Ext.define('App.view.manage.spec.TreeSpecM', {
                    type: 'json'
                }
            },
-           /*root: {
+           /*rootVisible: false,
+
+           root: {
                text: 'Организации',
-               expanded: true
+               expanded: true,
+               id:0
            },*/
-           autoLoad:true
+           root: {expanded: true, children: [] },
+           autoLoad:true,
+           listeners: {
+               beforeload: function (store, operation, eOpts) {
+                   if (store.isLoading()) return false;
+               }
+           }
         }
     }
 });

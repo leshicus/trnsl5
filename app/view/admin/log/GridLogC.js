@@ -13,7 +13,7 @@ Ext.define('App.view.admin.log.GridLogC', {
                     dateFindFrom = gridLog.down('#dateFindFrom'),
                     dateFindTo = gridLog.down('#dateFindTo'),
                     comboLogtype = gridLog.down('#comboLogtype');
-                gridLog.store.load({
+                gridLog.getViewModel().getStore('log').load({
                     params: {
                         dateFindFrom: dateFindFrom.getValue(),
                         dateFindTo: dateFindTo.getValue(),
@@ -32,7 +32,7 @@ Ext.define('App.view.admin.log.GridLogC', {
                         var grid = field.up('grid'),
                             dateFindTo = grid.down('#dateFindTo'),
                             comboLogtype = grid.down('#comboLogtype');
-                        grid.store.load({
+                        grid.getViewModel().getStore('log').load({
                             params: {
                                 dateFindFrom: field.getValue(),
                                 dateFindTo: dateFindTo.getValue(),
@@ -52,7 +52,7 @@ Ext.define('App.view.admin.log.GridLogC', {
                     var grid = field.up('grid'),
                         dateFindFrom = grid.down('#dateFindFrom'),
                         comboLogtype = grid.down('#comboLogtype');
-                    grid.store.load({
+                    grid.getViewModel().getStore('log').load({
                         params: {
                             dateFindFrom: dateFindFrom.getValue(),
                             dateFindTo: field.getValue(),
@@ -71,7 +71,7 @@ Ext.define('App.view.admin.log.GridLogC', {
                     var grid = field.up('grid'),
                         dateFindFrom = grid.down('#dateFindFrom'),
                         dateFindTo = grid.down('#dateFindTo');
-                    grid.store.load({
+                    grid.getViewModel().getStore('log').load({
                         params: {
                             dateFindFrom: dateFindFrom.getValue(),
                             dateFindTo: dateFindTo.getValue(),

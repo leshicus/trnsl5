@@ -14,7 +14,7 @@ Ext.define('App.view.manage.org.GridOrgC', {
                 console.log('click refreshGridOrgS');
 
                 var gridOrg = this.getView();
-                gridOrg.store.load();
+                gridOrg.getViewModel().getStore('org').load();
             }
         },
         'button[action=add]': {
@@ -23,7 +23,7 @@ Ext.define('App.view.manage.org.GridOrgC', {
 
                 var grid = button.up('grid'),
                     newRecord = Ext.create('App.model.manage.GridOrgM');
-                grid.store.insert(0, newRecord);
+                grid.getViewModel().getStore('org').insert(0, newRecord);
             }
         },
         'button[action=delete]': {
@@ -32,7 +32,7 @@ Ext.define('App.view.manage.org.GridOrgC', {
 
                 var grid = button.up('grid'),
                     selection = grid.getSelected();
-                grid.store.remove(selection);
+                grid.getViewModel().getStore('org').remove(selection);
             }
         }
 

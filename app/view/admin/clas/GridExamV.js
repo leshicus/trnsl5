@@ -21,6 +21,7 @@ Ext.define('App.view.admin.clas.GridExamV', {
     selType: 'checkboxmodel',
     //bufferedRenderer : false,
     viewConfig: {
+        stripeRows: true
         //enableTextSelection:true // * allow to select text in grid. Actually it's a gridview property
     },
     plugins: [

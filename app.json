@@ -154,6 +154,10 @@
         {
             "path": "resources/css/ico.css",
             "bootstrap": true
+        },
+        {
+            "path": "resources/css/crisp.css",
+            "bootstrap": true
         }
     ],
 

@@ -2,24 +2,30 @@ Ext.define('App.view.manage.question.tree.TreeQuestionV', {
     extend: 'Ext.tree.TreePanel',
     requires: [
         'App.view.manage.question.tree.TreeQuestionC',
-        'App.view.manage.question.tree.TreeQuestionM'
+        'App.view.manage.question.tree.TreeQuestionM',
+        'Ext.tree.View',
+        'Ext.tree.Panel',
+        'Ext.data.Session'
     ],
     viewModel: {type: 'treeQuestion'},
-    controller:'treeQuestion',
-    frame:true,
+    controller: 'treeQuestion',
+    frame: false,
     border: 5,
     title: 'Структура',
-    alias:'widget.treeQuestion',
-    itemId:'treeQuestion',
+    alias: 'widget.treeQuestion',
+    itemId: 'treeQuestion',
+    forceFit: true,
     //store: 'manage.TreeQuestionS',
-    bind:'{treequestion}',
+    bind: '{treequestion}',
     margin: '0 5 0 0',
-    resizable:true,
+    resizable: true,
     _collapsed: true,
-   // allowDeselect: true,
+    //rowLines: true,
+    // allowDeselect: true,
     //selModel: {  allowDeselect: true },
     rootVisible: false,
     viewConfig: {
+        stripeRows: true,
         plugins: {
             ptype: 'treeviewdragdrop',
             dropGroup: 'ddgroup',
@@ -30,25 +36,26 @@ Ext.define('App.view.manage.question.tree.TreeQuestionV', {
             containerScroll: true
         }
     },
-    initComponent: function(){
+    session: Ext.create('Ext.data.Session'),
+    initComponent: function () {
         this.tools = [
             {
                 type: 'maximize',
                 tooltip: 'Скрыть/Раскрыть'
             },
             /*{
-                type:'expand',
-                itemId:'expandTreeQuestionS',
-                tooltip: 'Раскрыть все'
-            },
+             type:'expand',
+             itemId:'expandTreeQuestionS',
+             tooltip: 'Раскрыть все'
+             },
+             {
+             type:'collapse',
+             itemId:'collapseTreeQuestionS',
+             tooltip: 'Скрыть все'
+             },*/
             {
-                type:'collapse',
-                itemId:'collapseTreeQuestionS',
-                tooltip: 'Скрыть все'
-            },*/
-            {
-                type:'refresh',
-                itemId:'refreshTreeQuestionS',
+                type: 'refresh',
+                itemId: 'refreshTreeQuestionS',
                 tooltip: 'Обновить'
             }
         ]

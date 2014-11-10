@@ -53,7 +53,7 @@ Ext.define('App.controller.manage.PanelQuestionC', {
                         gridAnswer = this.getGridAnswer(),
                         storeAnswer = gridAnswer.store;
 
-                    storeAnswer.filter(function () {
+                    storeAnswer.filterBy(function () {
                         return false
                     });
 
@@ -75,7 +75,7 @@ Ext.define('App.controller.manage.PanelQuestionC', {
                                 }
                             });
                             // * фильтрация вопросов в зависимости от того какой уровень в структуре выбрали
-                            /*storeQuestion.filter(function (rec) {
+                            /*storeQuestion.filterBy(function (rec) {
                              if ((rec.get('knowid') == knowid
                              && rec.get('groupid') == groupid) // * ОЗ
                              ||
@@ -97,10 +97,10 @@ Ext.define('App.controller.manage.PanelQuestionC', {
                  storeAnswer = gridAnswer.store,
                  gridQuestion = this.getGridQuestion(),
                  storeQuestion = gridQuestion.store;
-                 storeAnswer.filter(function () {
+                 storeAnswer.filterBy(function () {
                  return false
                  });
-                 storeQuestion.filter(function () {
+                 storeQuestion.filterBy(function () {
                  return false
                  });
                  }*/
@@ -132,7 +132,7 @@ Ext.define('App.controller.manage.PanelQuestionC', {
                             storeAnswer = gridAnswer.store,
                             knowid,
                             groupid;
-                        storeAnswer.filter(function () {
+                        storeAnswer.filterBy(function () {
                             return false
                         });
                         Ext.iterate(this.droppedRecords, function (record) {
@@ -177,10 +177,10 @@ Ext.define('App.controller.manage.PanelQuestionC', {
                         storeAnswer = gridAnswer.store,
                         gridQuestion = this.getGridQuestion(),
                         storeQuestion = gridQuestion.store;
-                    storeAnswer.filter(function () {
+                    storeAnswer.filterBy(function () {
                         return false
                     });
-                    storeQuestion.filter(function () {
+                    storeQuestion.filterBy(function () {
                         return false
                     });
                     treeQuestion.store.load();
@@ -396,7 +396,7 @@ Ext.define('App.controller.manage.PanelQuestionC', {
                         selectedTree = treeQuestion.getSelected(),
                         gridAnswer = this.getGridAnswer(),
                         storeAnswer = gridAnswer.store;
-                    storeAnswer.filter(function () {
+                    storeAnswer.filterBy(function () {
                         return false
                     });
                     if (selectedTree.raw) {
@@ -412,7 +412,7 @@ Ext.define('App.controller.manage.PanelQuestionC', {
                     ;
 
                     /*gridAnswer.store.load();
-                     gridAnswer.store.filter(function () {
+                     gridAnswer.store.filterBy(function () {
                      return false
                      });*/
                 }
@@ -525,7 +525,7 @@ Ext.define('App.controller.manage.PanelQuestionC', {
                                 selectedTree = treeQuestion.getSelected(),
                                 gridAnswer = this.getGridAnswer(),
                                 storeAnswer = gridAnswer.store;
-                            storeAnswer.filter(function () {
+                            storeAnswer.filterBy(function () {
                                 return false
                             });
                             newRecord.set(values);
@@ -666,7 +666,7 @@ Ext.define('App.controller.manage.PanelQuestionC', {
      if (selectedQuestion != '') {
      var questionid = selectedQuestion[0].get('questionid');
      if (questionid)
-     store.filter(function (rec) {
+     store.filterBy(function (rec) {
      if (rec.get('questionid') == questionid)
      return true;
      });

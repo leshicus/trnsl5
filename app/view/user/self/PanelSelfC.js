@@ -171,7 +171,7 @@ Ext.define('App.view.user.self.PanelSelfC', {
             panelSelf.questionNumber = num;
             // * ответы
             answerAccordion.removeAll(true);
-            storeCard.filter(function (rec) {
+            storeCard.filterBy(function (rec) {
                 if (rec.get('rownum') == num)
                     return true;
             });

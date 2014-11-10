@@ -10,12 +10,12 @@ Ext.define('App.view.manage.question.tree.TreeQuestionC', {
 
                 var treeQuestion = tree.up('#content').down('treepanel'),
                     gridQuestion = tree.up('#content').down('gridQuestion'),
-                    storeQuestion = gridQuestion.store,
+                    storeQuestion = gridQuestion.getViewModel().getStore('question'),
                     selection = treeQuestion.getSelected(),
                     gridAnswer = tree.up('#content').down('gridAnswer'),
-                    storeAnswer = gridAnswer.store;
+                    storeAnswer = gridAnswer.getViewModel().getStore('answer');
 
-                storeAnswer.filter(function () {
+                storeAnswer.filterBy(function () {
                     return false
                 });
 
@@ -37,7 +37,7 @@ Ext.define('App.view.manage.question.tree.TreeQuestionC', {
                             }
                         });
                         // * фильтрация вопросов в зависимости от того какой уровень в структуре выбрали
-                        /*storeQuestion.filter(function (rec) {
+                        /*storeQuestion.filterBy(function (rec) {
                          if ((rec.get('knowid') == knowid
                          && rec.get('groupid') == groupid) // * ОЗ
                          ||
@@ -80,20 +80,21 @@ Ext.define('App.view.manage.question.tree.TreeQuestionC', {
                 Ext.getBody().mask('Идет перемещение...');
                 // * отложенный вызов функции, чтобы маска успевала поставиться
                 Ext.defer(function () {
-                    var treeQuestion = button.up('treepanel'),
+                    var treeQuestion = Ext.ComponentQuery.query('treeQuestion')[0],
                         sel = treeQuestion.getSelected(),
                         gridQuestion = treeQuestion.up('#content').down('gridQuestion'),
+                        storeQuestion = gridQuestion.getViewModel().getStore('question'),
                         gridAnswer = treeQuestion.up('#content').down('gridAnswer'),
-                        storeAnswer = gridAnswer.store,
+                        storeAnswer = gridAnswer.getViewModel().getStore('answer'),
                         knowid,
                         groupid;
-                    storeAnswer.filter(function () {
+                    storeAnswer.filterBy(function () {
                         return false
                     });
                     Ext.iterate(this.droppedRecords, function (record) {
                         var questionid = record.get('questionid'),
-                            oldRec = gridQuestion.store.findRecord('questionid', questionid, 0, false, true, true);
-                        gridQuestion.store.clearFilter();
+                            oldRec = storeQuestion.findRecord('questionid', questionid, 0, false, true, true);
+                        gridQuestion.getViewModel().getStore('question').clearFilter();
                         if (treeRec.raw) {
                             knowid = treeRec.raw.knowid;
                             groupid = treeRec.raw.groupid;
@@ -102,9 +103,9 @@ Ext.define('App.view.manage.question.tree.TreeQuestionC', {
                         }
                     });
                     this.droppedRecords = undefined;
-                    gridQuestion.store.sync({
+                    storeQuestion.sync({
                         success: function () {
-                            gridQuestion.store.load({
+                            gridQuestion.getViewModel().getStore('question').load({
                                 params: {
                                     knowid: knowid,
                                     groupid: groupid
@@ -128,17 +129,18 @@ Ext.define('App.view.manage.question.tree.TreeQuestionC', {
                 console.log('click refreshTreeQuestionS');
 
                 var treeQuestion = button.up('treepanel'),
+                    storeTree = treeQuestion.getViewModel().getStore('treequestion'),
                     gridAnswer = treeQuestion.up('#content').down('gridAnswer'),
-                    storeAnswer = gridAnswer.store,
+                    storeAnswer = gridAnswer.getViewModel().getStore('answer'),
                     gridQuestion = treeQuestion.up('#content').down('gridQuestion'),
-                    storeQuestion = gridQuestion.store;
-                storeAnswer.filter(function () {
+                    storeQuestion = gridQuestion.getViewModel().getStore('question');
+                storeAnswer.filterBy(function () {
                     return false
                 });
-                storeQuestion.filter(function () {
+                storeQuestion.filterBy(function () {
                     return false
                 });
-                treeQuestion.store.load();
+                storeTree.reload();
             }
         },
         /*'#expandTreeQuestionS': {

@@ -49,11 +49,11 @@ Ext.define('App.controller.admin.PanelClassC', {
                         examid = selection.get('examid');
                     gridSigngroup.store.clearFilter();
                     gridPerson.store.clearFilter();
-                    gridSigngroup.store.filter(function (rec) {
+                    gridSigngroup.store.filterBy(function (rec) {
                         if (rec.get('examid') == examid)
                             return true;
                     });
-                    gridPerson.store.filter(function (rec) {
+                    gridPerson.store.filterBy(function (rec) {
                         if (rec.get('examid') == examid)
                             return true;
                     });

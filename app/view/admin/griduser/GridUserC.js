@@ -12,7 +12,7 @@ Ext.define('App.view.admin.griduser.GridUserC', {
                 console.log('click refreshGridUserS');
 
                 var gridUser = button.up('grid');
-                gridUser.store.load();
+                gridUser.getViewModel().getStore('user').load();
             }
         },
         'gridUser': {
@@ -50,7 +50,7 @@ Ext.define('App.view.admin.griduser.GridUserC', {
                 // * удаляем несколько пемеченных записей
                 if(selection != ''){
                     Ext.each(selection, function (item) {
-                        grid.store.remove(item);
+                        grid.getViewModel().getStore('user').remove(item);
                     });
                     grid.store.load();
                 }else {

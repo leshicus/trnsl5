@@ -10,66 +10,81 @@ Ext.define('App.view.manage.spec.TreeSpecC', {
 
                 var treeSpec = this.getView(),
                     gridSpec = this.getView().up('#content').down('gridSpec'),
-                    storeSpec = gridSpec.store,
+                    storeSpec = gridSpec.getViewModel().getStore('spec'),
                     selection = treeSpec.getSelected();
-                if(selection.raw){
-                    var groupid = selection.raw.groupid;
-                    storeSpec.clearFilter();
-                    storeSpec.filter(function (rec) {
-                        if (rec.get('groupid') == groupid)
-                            return true;
-                    });
+                if (selection) {
+                    if (selection.raw) {
+                        var groupid = selection.raw.groupid,
+                            orgid = selection.raw.orgid,
+                            actid = selection.raw.actid,
+                            id = selection.raw.id;
+                        storeSpec.clearFilter();
+                        /*storeSpec.filterBy(function (rec) {
+                         if (rec.get('groupid') == groupid)
+                         return true;
+                         });*/
+                        storeSpec.load({
+                            params: {
+                                id: id,
+                                orgid: orgid,
+                                actid: actid,
+                                groupid: groupid
+                            }
+                        });
+                    }
                 }
             },
-            render: function () {
-                var gridSpec = this.getView(),
-                    storeSpec = gridSpec.store;
-                storeSpec.filter(function () {
-                    return false
-                });
-            }
+            /*render: function () {
+             var gridSpec = this.getView().up('#content').down('gridSpec'),
+             storeSpec = gridSpec.getViewModel().getStore('spec');
+             storeSpec.filterBy(function () {
+             return false
+             });
+             }*/
         },
 
-        'dataview':{
+        'dataview': {
             // чтобы не добавлялась запись в tree при драгндропе:
             // сохраняем перемещаемую запись в переменную droppedRecords, очищаем список перемещаемых записей
-            beforedrop:function (node, gridRec, overModel, dropPos, opts) {
+            beforedrop: function (node, gridRec, overModel, dropPos, opts) {
                 this.droppedRecords = gridRec.records;
                 gridRec.records = [];
             },
-            nodedragover: function(targetNode, position, dragData){ // * добавляьб только в ОЗ
+            nodedragover: function (targetNode, position, dragData) { // * добавляьб только в ОЗ
                 var groupid = targetNode.raw.groupid;
                 return groupid ? true : false;
             },
-            drop:function (node, data, treeRec, dropPosition) {
-                var gridSpec = this.getView();
+            drop: function (node, data, treeRec, dropPosition) {
+                var gridSpec = this.getView(),
+                    main = gridSpec.up('main'),
+                    storeSpec = main.getViewModel().getStore('spec');
 
-                Ext.iterate(this.droppedRecords, function(record) {
+                Ext.iterate(this.droppedRecords, function (record) {
                     var specid = record.get('specid'),
-                        oldRec = gridSpec.store.findRecord('specid',specid, 0,false,true,true);
-                    if(treeRec.raw){
+                        oldRec = storeSpec.findRecord('specid', specid, 0, false, true, true);
+                    if (treeRec.raw) {
                         var groupid = treeRec.raw.groupid;
-                        oldRec.set('groupid',groupid);
-                        gridSpec.store.clearFilter();
-                        gridSpec.store.filter(function (rec) {
+                        oldRec.set('groupid', groupid);
+                        storeSpec.clearFilter();
+                        storeSpec.filterBy(function (rec) {
                             if (rec.get('groupid') == groupid)
                                 return true;
                         });
                     }
                 });
                 this.droppedRecords = undefined;
-                gridSpec.store.sync();
+                storeSpec.sync();
             }
         },
         '#refreshTreeSpec': {
             click: function (button) {
                 var treeSpec = this.getView(),
                     gridSpec = button.up('#content').down('gridSpec'),
-                    storeSpec = gridSpec.store;
-                storeSpec.filter(function () {
+                    storeSpec = gridSpec.getViewModel().getStore('spec');
+                storeSpec.filterBy(function () {
                     return false
                 });
-                treeSpec.store.load();
+                treeSpec.getViewModel().getStore('treespec').load();
             }
         },
         'tool[type=maximize]': {
@@ -78,16 +93,16 @@ Ext.define('App.view.manage.spec.TreeSpecC', {
             }
         }
         /*'#expandTreeSpec': {
-            click: function (button) {
-                var treeSpec = this.getView();
-                treeSpec.expandAll();
-            }
-        },
-        '#collapseTreeSpec': {
-            click: function (button) {
-                var treeSpec = this.getView();
-                treeSpec.collapseAll();
-            }
-        }*/
+         click: function (button) {
+         var treeSpec = this.getView();
+         treeSpec.expandAll();
+         }
+         },
+         '#collapseTreeSpec': {
+         click: function (button) {
+         var treeSpec = this.getView();
+         treeSpec.collapseAll();
+         }
+         }*/
     }
 });

@@ -16,7 +16,7 @@ Ext.define('App.view.admin.clas.GridSigngroupC', {
                 if (selectionExam) {
                     var examid = selectionExam.get('examid');
                     newRecord.set('examid', examid);
-                    grid.store.insert(0, newRecord);
+                    grid.getViewModel().getStore('signgroup').insert(0, newRecord);
                     /*grid.store.sync({
                      failure: function () {
                      Ext.MessageBox.alert('Ошибка', 'Подписант не добавлен');
@@ -33,7 +33,7 @@ Ext.define('App.view.admin.clas.GridSigngroupC', {
 
                 var grid = button.up('grid'),
                     selection = grid.getSelected();
-                grid.store.remove(selection);
+                grid.getViewModel().getStore('signgroup').remove(selection);
                 /*grid.store.sync({
                  failure: function () {
                  Ext.MessageBox.alert('Ошибка', 'Пользователь не удален');

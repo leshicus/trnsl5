@@ -1,7 +1,7 @@
 Ext.define('App.view.auth.tabreg.TabRegC', {
     extend: 'Ext.app.ViewController',
     requires: [
-       // 'Office.view.card.FormCardV'
+        'App.view.main.MainM'
     ],
     alias: 'controller.tabReg',
 
@@ -20,7 +20,7 @@ Ext.define('App.view.auth.tabreg.TabRegC', {
                 form.reset();
             }
         },
-        'tabReg button[action=register]': {
+        'button[action=register]': {
             click: function (button) {
                 console.log('action=register');
 
@@ -38,7 +38,7 @@ Ext.define('App.view.auth.tabreg.TabRegC', {
                 }
             }
         },
-        'tabReg button[action=refresh]': {
+        'button[action=refresh]': {
             click: function (button) {
                 console.log('action=refresh');
 
@@ -46,14 +46,17 @@ Ext.define('App.view.auth.tabreg.TabRegC', {
                 form.getForm().reset();
             }
         },
-        'tabReg #comboOrg': {
+        '#comboOrg': {
             change: function (field, newValue, oldValue, eOpts) {
                 console.log('comboOrg change');
-
                 var tabReg = field.up('#tabReg'),
-                    comboSpec = tabReg.down('#comboSpeciality');
-                comboSpec.store.clearFilter();
-                comboSpec.store.filter(function(item){
+                    comboSpec = tabReg.down('#comboSpeciality'),
+                    main = field.up('main'),
+                    storeSpec = main.getViewModel().getStore('spec');
+                storeSpec.clearFilter();
+                comboSpec.disable();
+                comboSpec.reset();
+                storeSpec.filterBy(function(item){
                     if(item.get('orgid') == newValue){
                         comboSpec.enable();
                         return true;

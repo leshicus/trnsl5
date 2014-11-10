@@ -6,7 +6,7 @@ Ext.define('App.view.manage.question.question.GridQuestionM', {
         question: {
             fields: [],
             //autoSync: true,
-            autoLoad: true,
+            autoLoad: false,
             //idProperty:'userid',
             proxy: {
                 type: 'ajax',

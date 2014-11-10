@@ -5,8 +5,8 @@ Ext.define('App.view.manage.spec.GridSpecM', {
     stores: {
         spec: {
             fields: [],
-            //autoSync: true,
-            autoLoad: true,
+            autoSync: false,
+            autoLoad: false,
             proxy: {
                 type: 'ajax',
                 api: {

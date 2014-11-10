@@ -9,7 +9,7 @@ Ext.define('App.view.manage.toolbar.ToolbarManageC', {
         'App.view.manage.group.GridGroupV',
         'App.view.manage.know.GridKnowV',
         'App.view.manage.org.GridOrgV',
-        'App.view.manage.GridActV'
+        'App.view.manage.act.GridActV'
     ],
     alias: 'controller.toolbarmanage',
 
@@ -20,7 +20,6 @@ Ext.define('App.view.manage.toolbar.ToolbarManageC', {
                     console.log('click questionMI');
 
                     var main = me.up('main'),
-                        toolbar = me.up('toolbar'),
                         layout = main.getLayout(),
                         content = layout.activeItem.query('#content')[0];
                     if (content) {
@@ -68,10 +67,10 @@ Ext.define('App.view.manage.toolbar.ToolbarManageC', {
                         tree = Ext.StoreManager.lookup('manage.TreeQuestionS'),
                         layout = viewport.getLayout();*/
                     // * чтобы при переключении кнопок в тулбаре не оставались значения в гридах
-                   /* storeQuest.filter(function () {
+                   /* storeQuest.filterBy(function () {
                         return false;
                     });
-                    storeAnswer.filter(function () {
+                    storeAnswer.filterBy(function () {
                         return false;
                     });*/
                     /*if (!panel) {
@@ -89,7 +88,6 @@ Ext.define('App.view.manage.toolbar.ToolbarManageC', {
                     console.log('click specialityMI');
 
                     var main = me.up('main'),
-                        toolbar = me.up('toolbar'),
                         layout = main.getLayout(),
                         content = layout.activeItem.query('#content')[0];
                     if (content) {
@@ -127,7 +125,7 @@ Ext.define('App.view.manage.toolbar.ToolbarManageC', {
                         tree = Ext.StoreManager.lookup('manage.TreeSpecS'),
                         viewport = me.up('viewport'),
                         layout = viewport.getLayout();
-                    storeSpec.filter(function () {
+                    storeSpec.filterBy(function () {
                         return false;
                     });
                     if (!panel) {
@@ -145,7 +143,6 @@ Ext.define('App.view.manage.toolbar.ToolbarManageC', {
                     console.log('click groupMI');
 
                     var main = me.up('main'),
-                        toolbar = me.up('toolbar'),
                         layout = main.getLayout(),
                         content = layout.activeItem.query('#content')[0];
                     if (content) {
@@ -198,7 +195,6 @@ Ext.define('App.view.manage.toolbar.ToolbarManageC', {
                     layout.activeItem.query('.panel').forEach(App.util.Utilities.cascadeRemoveGrid);
                     layout.activeItem.add(panel);*/
                     var main = me.up('main'),
-                        toolbar = me.up('toolbar'),
                         layout = main.getLayout(),
                         content = layout.activeItem.query('#content')[0];
                     if (content) {
@@ -241,7 +237,6 @@ Ext.define('App.view.manage.toolbar.ToolbarManageC', {
                     layout.activeItem.query('.panel').forEach(App.util.Utilities.cascadeRemoveGrid);
                     layout.activeItem.add(panel);*/
                     var main = me.up('main'),
-                        toolbar = me.up('toolbar'),
                         layout = main.getLayout(),
                         content = layout.activeItem.query('#content')[0];
                     if (content) {
@@ -284,7 +279,6 @@ Ext.define('App.view.manage.toolbar.ToolbarManageC', {
                     layout.activeItem.query('.panel').forEach(App.util.Utilities.cascadeRemoveGrid);
                     layout.activeItem.add(panel);*/
                     var main = me.up('main'),
-                        toolbar = me.up('toolbar'),
                         layout = main.getLayout(),
                         content = layout.activeItem.query('#content')[0];
                     if (content) {

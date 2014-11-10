@@ -14,13 +14,13 @@ Ext.define('App.view.admin.clas.GridExamC', {
                     gridExam = grid.up('gridExam'),
                     selection = gridExam.getSelected()[0],
                     examid = selection.get('examid');
-                gridSigngroup.store.clearFilter();
-                gridPerson.store.clearFilter();
-                gridSigngroup.store.filter(function (rec) {
+                gridSigngroup.getViewModel().getStore('signgroup').clearFilter();
+                gridPerson.getViewModel().getStore('person').clearFilter();
+                gridSigngroup.getViewModel().getStore('signgroup').filterBy(function (rec) {
                     if (rec.get('examid') == examid)
                         return true;
                 });
-                gridPerson.store.filter(function (rec) {
+                gridPerson.getViewModel().getStore('person').filterBy(function (rec) {
                     if (rec.get('examid') == examid)
                         return true;
                 });
@@ -28,7 +28,7 @@ Ext.define('App.view.admin.clas.GridExamC', {
                 var taskClassCheck = {
                     run: function () {
                         var gridPerson = Ext.ComponentQuery.query('#gridPerson')[0];
-                        gridPerson.store.load();
+                        gridPerson.getViewModel().getStore('person').load();
                     },
                     interval: 1000 * this.getTool('regstatint'), // в секундах
                     duration: 1000 * 60 * this.getTool('regstatdur')
@@ -69,7 +69,7 @@ Ext.define('App.view.admin.clas.GridExamC', {
                     selection = grid.getSelected(),
                     examid = selection.get('examid'),
                     gridPerson = this.getGridPerson(),
-                    storePerson = gridPerson.store,
+                    storePerson = gridPerson.getViewModel().getStore('person'),
                     recordUser = storePerson.findRecord('examid', examid, 0, false, true, true);
                 if (examid && !recordUser) {
                     grid.store.remove(selection);
@@ -92,7 +92,7 @@ Ext.define('App.view.admin.clas.GridExamC', {
                 if (e.getKey() == e.ENTER) {
                     var grid = field.up('grid'),
                         dateFindTo = grid.down('#dateFindTo');
-                    grid.store.load({
+                    grid.getViewModel().getStore('exam').load({
                         params: {
                             dateFindFrom: field.getValue(),
                             dateFindTo: dateFindTo.getValue()
@@ -109,7 +109,7 @@ Ext.define('App.view.admin.clas.GridExamC', {
                 if (e.getKey() == e.ENTER) {
                     var grid = field.up('grid'),
                         dateFindFrom = grid.down('#dateFindFrom');
-                    grid.store.load({
+                    grid.getViewModel().getStore('exam').load({
                         params: {
                             dateFindFrom: dateFindFrom.getValue(),
                             dateFindTo: field.getValue()
@@ -123,7 +123,7 @@ Ext.define('App.view.admin.clas.GridExamC', {
                 console.log('click refreshGridExamS');
 
                 var gridExam = button.up('grid');
-                gridExam.store.load();
+                gridExam.getViewModel().getStore('exam').load();
             }
         },
         '#menuPrintConsolidated': {

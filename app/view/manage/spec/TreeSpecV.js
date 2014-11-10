@@ -18,6 +18,7 @@ Ext.define('App.view.manage.spec.TreeSpecV', {
     rootVisible : false,
     _collapsed: true,
     viewConfig: {
+        stripeRows: true,
         plugins: {
             ptype: 'treeviewdragdrop',
             dropGroup: 'ddspec',

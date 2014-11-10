@@ -41,7 +41,7 @@ Ext.define('App.controller.manage.PanelSpecC', {
                     if(selection.raw){
                         var groupid = selection.raw.groupid;
                         storeSpec.clearFilter();
-                        storeSpec.filter(function (rec) {
+                        storeSpec.filterBy(function (rec) {
                             if (rec.get('groupid') == groupid)
                                 return true;
                         });
@@ -50,7 +50,7 @@ Ext.define('App.controller.manage.PanelSpecC', {
                 render: function () {
                     var gridSpec = this.getGridSpec(),
                         storeSpec = gridSpec.store;
-                    storeSpec.filter(function () {
+                    storeSpec.filterBy(function () {
                         return false
                     });
                 }
@@ -76,7 +76,7 @@ Ext.define('App.controller.manage.PanelSpecC', {
                             var groupid = treeRec.raw.groupid;
                             oldRec.set('groupid',groupid);
                             gridSpec.store.clearFilter();
-                            gridSpec.store.filter(function (rec) {
+                            gridSpec.store.filterBy(function (rec) {
                                 if (rec.get('groupid') == groupid)
                                     return true;
                             });
@@ -91,7 +91,7 @@ Ext.define('App.controller.manage.PanelSpecC', {
                     var treeSpec = this.getTreeSpec(),
                         gridSpec = this.getGridSpec(),
                         storeSpec = gridSpec.store;
-                    storeSpec.filter(function () {
+                    storeSpec.filterBy(function () {
                         return false
                     });
                     treeSpec.store.load();

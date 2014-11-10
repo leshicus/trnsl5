@@ -18,7 +18,7 @@ Ext.define('App.view.manage.question.answer.FormAnswerC', {
                     gridQuestion = Ext.ComponentQuery.query('gridQuestion')[0],
                     selectedQuestion = gridQuestion.getSelected(),
                     gridAnswer = Ext.ComponentQuery.query('gridAnswer')[0],
-                    storeAnswer = gridAnswer.store,
+                    storeAnswer = gridAnswer.getViewModel().getStore('answer'),
                     countAnswer = storeAnswer.getCount(),
                     normdoc = values['normdoc'];
                 //todo не должно давать отмечать второй правильный ответ
@@ -32,7 +32,7 @@ Ext.define('App.view.manage.question.answer.FormAnswerC', {
                             if (countAnswer == 0) {
                                 if (normdoc) { // * ставим галочку верный
                                     newRecord.set('correct', 1);
-                                    gridAnswer.store.add(newRecord);
+                                    gridAnswer.getViewModel().getStore('answer').add(newRecord);
                                     win.close();
                                 } else {
                                     Ext.Msg.alert('Нормативный документ', 'Нормативный документ должен быть указан для первого ответа');
@@ -42,7 +42,7 @@ Ext.define('App.view.manage.question.answer.FormAnswerC', {
                                     Ext.Msg.alert('Нормативный документ', 'Нормативный документ должен быть пустым для не первого ответа');
                                 } else {
                                     newRecord.set('correct', 0);
-                                    gridAnswer.store.add(newRecord);
+                                    gridAnswer.getViewModel().getStore('answer').add(newRecord);
                                     win.close();
                                 }
                             }

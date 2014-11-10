@@ -59,9 +59,13 @@ Ext.define('App.controller.TabpanelAuthC', {
                     console.log('comboOrg change');
 
                     var tabReg = field.up('#tabReg'),
-                        comboSpec = tabReg.down('#comboSpeciality');
-                    comboSpec.store.clearFilter();
-                    comboSpec.store.filter(function(item){
+                        comboSpec = tabReg.down('#comboSpeciality'),
+                        storeSpec = comboSpec.getViewModel().getStore('spec');
+                    storeSpec.clearFilter();
+                    comboSpec.reset();
+                    console.info(storeSpec);
+                    storeSpec.filterBy(function(item){
+                        console.info(arguments);
                        if(item.get('orgid') == newValue){
                            comboSpec.enable();
                            return true;

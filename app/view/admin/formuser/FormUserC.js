@@ -18,7 +18,7 @@ Ext.define('App.view.admin.formuser.FormUserC', {
                 if (form.isValid()) {
                     record.set(values);
                     win.close();
-                    grid.store.load();
+                    grid.getViewModel().getStore('user').load();
                 } else {
                     Ext.Msg.alert('Форма', 'Форма заполнена не правильно');
                 }

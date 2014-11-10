@@ -3,7 +3,7 @@ Ext.define('App.view.manage.question.question.GridQuestionV', {
     requires: [
         'App.view.manage.question.question.GridQuestionM',
         'App.view.manage.question.question.GridQuestionC',
-        'Ext.form.field.File',
+        //'Ext.form.field.File',
         'Ext.form.field.FileButton',
         'Ext.form.trigger.Component'
     ],
@@ -12,9 +12,9 @@ Ext.define('App.view.manage.question.question.GridQuestionV', {
     bind: '{question}',
     alias: 'widget.gridQuestion',
     itemId: 'gridQuestion',
-    frame: true,
+    frame: false,
     flex: 1,
-    //forceFit: true,  // * ячейки распределяются по ширине всей таблицы
+    forceFit: true,  // * ячейки распределяются по ширине всей таблицы
     //store: 'manage.GridQuestionS',
     title: 'Вопросы',
     viewConfig: {
@@ -22,13 +22,15 @@ Ext.define('App.view.manage.question.question.GridQuestionV', {
             ptype: 'gridviewdragdrop',
             ddGroup: 'ddgroup'
         },
-        enableTextSelection:true
+        enableTextSelection:true,
+        stripeRows: true
     },
     selModel: {
         mode: 'MULTI',
         ignoreRightMouseSelection: true
         //checkOnly:true
     },
+    rowLines: true,
     selType: 'checkboxmodel',
     columnLines: true,
    // plugins: 'bufferedrenderer',
@@ -68,7 +70,7 @@ Ext.define('App.view.manage.question.question.GridQuestionV', {
                 iconCls: 'icon_delete'
             },
             '->',
-            {//todo что тут с загрузкой файла
+            /*{//todo что тут с загрузкой файла
                 xtype: 'filefield',
                 name: 'import',
                 itemId: 'import',
@@ -84,8 +86,13 @@ Ext.define('App.view.manage.question.question.GridQuestionV', {
                     scale: 'medium',
                     iconCls: 'icon_import'
                 }
+            },*/
+            {
+                text: 'Загрузка',
+                action: 'import',
+                scale: 'medium',
+                iconCls: 'icon_import'
             },
-
             {
                 text: 'Выгрузка',
                 action: 'export',
@@ -105,7 +112,7 @@ Ext.define('App.view.manage.question.question.GridQuestionV', {
                 itemId: 'columnQuestiontext',
                 dataIndex: 'questiontext',
                 tdCls: 'wrapText',
-                width:500
+                //width:500
                 //renderer:App.util.Utilities.questionGridColumnRenderer
             }
         ];

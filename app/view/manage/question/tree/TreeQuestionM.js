@@ -15,17 +15,19 @@ Ext.define('App.view.manage.question.tree.TreeQuestionM', {
                }
            },
            // * если не указывать нижние строчки, то ругается на isUtilObservable of undefined
-          // rootVisible: false,
-           /*root: {
-               //text: 'children',
-               expanded: false
-
+           /*rootVisible: true,
+           root: {
+               text: 'Организации',
+               expanded: true,
+               id:0
            },*/
-           /*root: {
-               text: 'текст',
-               loaded: true // * нужно, чтобы реагировало на autoLoad: false, а иначе все равно грузит
-           },*/
-           autoLoad:true
+           root: {expanded: true, children: [] },
+           autoLoad:true,
+           listeners: {
+               beforeload: function (store, operation, eOpts) {
+                   if (store.isLoading()) return false;
+               }
+           }
         }
     }
 });

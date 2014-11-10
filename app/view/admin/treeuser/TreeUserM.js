@@ -21,6 +21,7 @@ Ext.define('App.view.admin.treeuser.TreeUserM', {
                text: 'Организации',
                expanded: true
            },*/
+           root: {expanded: true, children: [] },
            autoLoad:true
         }
     }

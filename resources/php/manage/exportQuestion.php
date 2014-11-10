@@ -79,7 +79,7 @@ $xml .= '</render_choice></response_lid>
         </item>
 </questestinterop>';
 
-$filename ="_questions_export.xml";
+$filename ="export_imsqti_questions_".time().".xml";
 
 header("Content-type: application/force-download");
 //header('Content-Type: text/xml');

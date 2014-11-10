@@ -152,10 +152,10 @@ Ext.define('App.view.admin.toolbar.ToolbarAdminC', {
 
                     var gridPerson = Ext.ComponentQuery.query('gridPerson')[0],
                         gridSigngroup = Ext.ComponentQuery.query('gridSigngroup')[0];
-                    gridPerson.store.filter(function () {
+                    gridPerson.getViewModel().getStore('person').filterBy(function () {
                         return false
                     });
-                    gridSigngroup.store.filter(function () {
+                    gridSigngroup.getViewModel().getStore('signgroup').filterBy(function () {
                         return false
                     });
                 }

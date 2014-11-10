@@ -17,6 +17,9 @@ Ext.define('App.view.admin.treeuser.TreeUserV', {
     margin: '0 5 0 0',
     rootVisible: false,
     _collapsed: true,
+    viewConfig: {
+        stripeRows: true
+    },
     initComponent: function () {
         console.log('TreeUserV init');
         this.tools = [

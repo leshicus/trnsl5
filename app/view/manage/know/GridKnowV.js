@@ -9,12 +9,14 @@ Ext.define('App.view.manage.know.GridKnowV', {
     controller:'gridKnow',
     bind: '{know}',
     itemId: 'gridKnow',
-    frame: true,
+    frame: false,
     flex:1,
+    forceFit: true,
     //store: 'manage.GridKnowS',
     title: 'Области знания',
     columnLines: true,
     viewConfig: {
+        stripeRows: true,
         enableTextSelection:true // * allow to select text in grid. Actually it's a gridview property
     },
     initComponent: function () {

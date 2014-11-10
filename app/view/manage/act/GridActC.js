@@ -40,7 +40,7 @@ Ext.define('App.view.manage.act.GridActC', {
                 console.log('click refreshGridActS');
 
                 var gridAct = this.getView();
-                gridAct.store.load();
+                gridAct.getViewModel().getStore('act').load();
             }
         },
         'button[action=add]': {
@@ -49,7 +49,7 @@ Ext.define('App.view.manage.act.GridActC', {
 
                 var grid = button.up('grid'),
                     newRecord = Ext.create('App.model.manage.GridActM');
-                grid.store.insert(0, newRecord);
+                grid.getViewModel().getStore('act').insert(0, newRecord);
             }
         },
         'button[action=delete]': {
@@ -66,7 +66,7 @@ Ext.define('App.view.manage.act.GridActC', {
                         recGroup = storeGroup.findRecord('actid', actid, 0,false,true,true);
                     // * проверка, что нет видов деятельности в группах
                     if (!recGroup) {
-                        grid.store.remove(selection);
+                        grid.getViewModel().getStore('act').remove(selection);
                     } else {
                         Ext.Msg.alert('Не удалено', 'Есть привязка в группах к данному виду деятельности');
                     }

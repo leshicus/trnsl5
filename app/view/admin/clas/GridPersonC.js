@@ -22,7 +22,7 @@ Ext.define('App.view.admin.clas.GridPersonC', {
                 Ext.each(selection, function (item) {
                     var result = item.get('result');
                     if (result == -1) {
-                        grid.store.remove(item);
+                        grid.getViewModel().getStore('person').remove(item);
                     } else {
                         Ext.Msg.alert('Не удалено', 'Сотрудник проходил тест');
                     }
@@ -58,7 +58,7 @@ Ext.define('App.view.admin.clas.GridPersonC', {
                 Ext.each(selection, function (item) {
                     item.set('reg', 0);
                 });
-                grid.store.load();
+                grid.getViewModel().getStore('person').load();
             }
         },
         '#menuPrintOne': {
@@ -80,7 +80,7 @@ Ext.define('App.view.admin.clas.GridPersonC', {
         '#refreshGridPerson': {
             click: function (button) {
                 var grid = button.up('grid');
-                grid.store.load();
+                grid.getViewModel().getStore('person').load();
             }
         }
 

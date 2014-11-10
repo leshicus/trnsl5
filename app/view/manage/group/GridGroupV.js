@@ -9,13 +9,14 @@ Ext.define('App.view.manage.group.GridGroupV', {
     bind: '{group}',
     alias: 'widget.gridGroup',
     itemId: 'gridGroup',
-    frame: true,
+    frame: false,
     flex: 1,
-    //forceFit: true,
+    forceFit: true,
     //store: 'manage.GridGroupS',
     title: 'Группы',
     columnLines: true,
     viewConfig: {
+        stripeRows: true,
         enableTextSelection:true // * allow to select text in grid. Actually it's a gridview property
     },
     initComponent: function () {
@@ -100,7 +101,7 @@ Ext.define('App.view.manage.group.GridGroupV', {
                 itemId: 'columnGroupname',
                 dataIndex: 'groupname',
                 //flex: 1,
-                width: 300,
+                //width: 300,
                 editor: {
                     xtype: 'textfield'
                 }

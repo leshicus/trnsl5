@@ -10,7 +10,7 @@ Ext.define('App.view.manage.group.GridGroupC', {
             edit: function (editor, context) {
                 console.log('edit');
 
-                context.grid.store.sync({
+                context.grid.getViewModel().getStore('group').sync({
                     failure: function () {
                         Ext.MessageBox.alert('Ошибка', 'Не сохранено');
                     },
@@ -28,7 +28,7 @@ Ext.define('App.view.manage.group.GridGroupC', {
                 console.log('click refreshGridGroupS');
 
                 var gridGroup = this.getView();
-                gridGroup.store.load();
+                gridGroup.getViewModel().getStore('group').load();
             }
         },
         'button[action=add]': {
@@ -36,11 +36,13 @@ Ext.define('App.view.manage.group.GridGroupC', {
                 console.log('action=add');
 
                 var grid = button.up('grid'),
-                    newRecord = Ext.create('App.view.manage.group.GridGroupM'),
-                    rowEditing = grid.plugins[0];
-                rowEditing.cancelEdit();
-                grid.store.insert(0, newRecord);
-                rowEditing.startEdit(0, 0);
+                    //newRecord = Ext.create('App.view.manage.group.GridGroupM'),
+                    store = grid.getViewModel().getStore('spec'),
+                    newRecord = store.add({})[0];
+                    //rowEditing = grid.plugins[0];
+                //rowEditing.cancelEdit();
+                grid.getViewModel().getStore('group').insert(0, newRecord);
+               // rowEditing.startEdit(0, 0);
             }
         },
         'button[action=delete]': {
@@ -49,26 +51,31 @@ Ext.define('App.view.manage.group.GridGroupC', {
 
                 var grid = button.up('grid'),
                     selection = grid.getSelected(),
-                    storeGroup = Ext.StoreManager.lookup('manage.GridGroupS'),
-                    storeQuest = Ext.StoreManager.lookup('manage.GridQuestionS');
-                // * проверка, что нет групп в специальностях и вопросах
-                storeGroup.clearFilter();
-                storeQuest.clearFilter();
-                if (selection) {
-                    var groupid = selection.get('groupid'),
-                        recGroup = storeGroup.findRecord('groupid', groupid, 0,false,true,true),
-                        recQuest = storeQuest.findRecord('groupid', groupid, 0,false,true,true);
-                    if (!recGroup) {
-                        if (!recQuest) {
-                            grid.store.remove(selection);
-                            grid.store.sync();
-                        }else {
-                            Ext.Msg.alert('Не удалено', 'Существуют вопросы привязанные к данной группе');
+                    main = button.up('main'),
+                    storeSpec = main.getViewModel().getStore('spec'),
+                    storeGroup = grid.getViewModel().getStore('group'),
+                    gridQuestion = Ext.create('App.view.manage.question.question.GridQuestionV'),
+                    storeQuest = gridQuestion.getViewModel().getStore('question');
+                storeSpec.reload();
+                storeQuest.load({
+                    callback: function (records, operation, success) {
+                        if (selection) {
+                            var groupid = selection.get('groupid'),
+                                recGroup = storeSpec.findRecord('groupid', groupid, 0,false,true,true),
+                                recQuest = storeQuest.findRecord('groupid', groupid, 0,false,true,true);
+                            if (!recGroup) {
+                                if (!recQuest) {
+                                    storeGroup.remove(selection);
+                                    storeGroup.sync();
+                                }else {
+                                    Ext.Msg.alert('Не удалено', 'Существуют вопросы привязанные к данной группе');
+                                }
+                            } else {
+                                Ext.Msg.alert('Не удалено', 'Существуют специальности привязанные к данной группе');
+                            }
                         }
-                    } else {
-                        Ext.Msg.alert('Не удалено', 'Существуют специальности привязанные к данной группе');
                     }
-                }
+                });
             }
         }
 

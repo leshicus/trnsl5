@@ -189,7 +189,7 @@ Ext.define('App.util.Utilities', {
 
      console.log(record);
      storeAnswer.clearFilter();
-     storeAnswer.filter(function (rec) {
+     storeAnswer.filterBy(function (rec) {
      if (rec.get('questionid') == questionid){
      return true;
      }else

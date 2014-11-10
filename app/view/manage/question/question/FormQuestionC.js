@@ -12,17 +12,18 @@ Ext.define('App.view.manage.question.question.FormQuestionC', {
                     win = form.up('window'),
                     values = form.getValues(),
                     record = form.getForm().getRecord(),
-                    grid = Ext.ComponentQuery.query('gridQuestion')[0];
+                    grid = Ext.ComponentQuery.query('gridQuestion')[0],
+                    storeQuest = grid.getViewModel().getStore('question');
                 if (values.questiontext) { // * такая вот валидация, allowBlank=false не работает
                     if (!record) { // * создание
                         var newRecord = Ext.create('App.model.manage.GridQuestionM'),
                             treeQuestion = Ext.ComponentQuery.query('treeQuestion')[0],
                             selectedTree = treeQuestion.getSelected(),
                             gridAnswer = Ext.ComponentQuery.query('gridAnswer')[0],
-                            storeAnswer = gridAnswer.store;
-                        storeAnswer.filter(function () {
+                            storeAnswer = gridAnswer.getViewModel().getStore('answer');
+                        /*storeAnswer.filterBy(function () {
                             return false
-                        });
+                        });*/
                         newRecord.set(values);
                         if (selectedTree.raw) {
                             var knowid = selectedTree.raw.knowid,
@@ -30,11 +31,11 @@ Ext.define('App.view.manage.question.question.FormQuestionC', {
                             newRecord.set('groupid', groupid);
                             newRecord.set('knowid', knowid);
                         }
-                        grid.store.insert(0, newRecord);
+                        storeQuest.insert(0, newRecord);
                     } else { // * исправление
                         record.set(values);
                     }
-                    grid.store.sync({
+                    storeQuest.sync({
                         success: function () {
                         },
                         failure: function () {
@@ -42,7 +43,7 @@ Ext.define('App.view.manage.question.question.FormQuestionC', {
                         },
                         scope: this
                     });
-
+                    storeQuest.reload();
                     win.close();
                 } else {
                     Ext.Msg.alert('Внимание', 'Значение не может быть пустым');

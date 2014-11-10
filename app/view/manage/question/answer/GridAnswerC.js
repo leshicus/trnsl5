@@ -59,7 +59,7 @@ Ext.define('App.view.manage.question.answer.GridAnswerC', {
                 // * удаляем несколько пемеченных записей
                 if (selection != '') {
                     Ext.each(selection, function (item) {
-                        grid.store.remove(item);
+                        grid.getViewModel().getStore('answer').remove(item);
                     });
                 }else {
                     Ext.Msg.alert('Ошибка', 'Не выбран ни один ответ');

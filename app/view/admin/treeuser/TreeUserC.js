@@ -10,14 +10,14 @@ Ext.define('App.view.admin.treeuser.TreeUserC', {
                 console.log('treeUser cellclick');
                 var treeUser = tree.up('#content').down('treepanel'),
                     gridUser = tree.up('#content').down('grid'),
-                    storeUser = gridUser.store,
+                    storeUser = gridUser.getViewModel().getStore('user'),
                     selection = treeUser.getSelected();
                 if (selection) {
                     var groupid = selection.raw.groupid,
                         actid = selection.raw.actid,
                         orgid = selection.raw.orgid;
                     storeUser.clearFilter();
-                    storeUser.filter(function (rec) {
+                    storeUser.filterBy(function (rec) {
                         if(groupid)
                             if (rec.get('groupid') == groupid)
                                 return true;
@@ -32,8 +32,8 @@ Ext.define('App.view.admin.treeuser.TreeUserC', {
             },
             render: function (tree) {
                 var gridUser = tree.up('#content').down('grid'),
-                    storeUser = gridUser.store;
-                storeUser.filter(function () {
+                    storeUser = gridUser.getViewModel().getStore('user');
+                storeUser.filterBy(function () {
                     return false
                 });
             }
@@ -43,11 +43,11 @@ Ext.define('App.view.admin.treeuser.TreeUserC', {
             click: function (button) {
                 var treeUser = button.up('treepanel'),
                     gridUser = treeUser.up('#content').down('grid'),
-                    storeUser = gridUser.store;
-                storeUser.filter(function () {
+                    storeUser = gridUser.getViewModel().getStore('user');
+                storeUser.filterBy(function () {
                     return false
                 });
-                treeUser.store.load();
+                treeUser.getViewModel().getStore('treeuser').load();
             }
         },
         'tool[type=maximize]': {

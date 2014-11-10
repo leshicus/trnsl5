@@ -44,7 +44,7 @@ Ext.define('App.controller.admin.PanelUserC', {
                             actid = selection.raw.actid,
                             orgid = selection.raw.orgid;
                         storeUser.clearFilter();
-                        storeUser.filter(function (rec) {
+                        storeUser.filterBy(function (rec) {
                             if(groupid)
                                 if (rec.get('groupid') == groupid)
                                     return true;
@@ -60,7 +60,7 @@ Ext.define('App.controller.admin.PanelUserC', {
                 render: function () {
                     var gridUser = this.getGridUser(),
                         storeUser = gridUser.store;
-                    storeUser.filter(function () {
+                    storeUser.filterBy(function () {
                         return false
                     });
                 }
@@ -71,7 +71,7 @@ Ext.define('App.controller.admin.PanelUserC', {
                     var treeUser = this.getTreeUser(),
                         gridUser = this.getGridUser(),
                         storeUser = gridUser.store;
-                    storeUser.filter(function () {
+                    storeUser.filterBy(function () {
                         return false
                     });
                     treeUser.store.load();

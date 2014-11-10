@@ -16,6 +16,7 @@ Ext.define('App.view.admin.log.GridLogV', {
     title: 'Журнал действий пользователя',
     columnLines: true,
     viewConfig: {
+        stripeRows: true,
         enableTextSelection: true // * allow to select text in grid. Actually it's a gridview property
     },
     initComponent: function () {

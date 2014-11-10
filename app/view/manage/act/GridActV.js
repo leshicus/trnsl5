@@ -1,4 +1,4 @@
-Ext.define('App.view.manage.GridActV', {
+Ext.define('App.view.manage.act.GridActV', {
     extend: 'Ext.grid.Panel',
     requires: [
         'App.view.main.MainM',
@@ -9,14 +9,15 @@ Ext.define('App.view.manage.GridActV', {
     controller:'gridAct',
     bind: '{act}',
     itemId: 'gridAct',
-    frame: true,
+    frame: false,
     flex:1,
     //height: gridHeight,
-    //forceFit: true,
+    forceFit: true,
     //store: 'manage.GridActS',
     title: 'Виды деятельности',
     columnLines: true,
     viewConfig: {
+        stripeRows: true,
         enableTextSelection:true // * allow to select text in grid. Actually it's a gridview property
     },
     initComponent: function () {

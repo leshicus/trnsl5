@@ -1,7 +1,9 @@
 Ext.define('App.view.manage.question.question.GridQuestionC', {
     extend: 'Ext.app.ViewController',
     requires: [
-        'App.view.manage.question.question.FormQuestionV'
+        'App.view.manage.question.question.FormQuestionV',
+        'App.view.manage.question.question.FormUploadV',
+        'Ext.dom.Helper'
     ],
     alias: 'controller.gridQuestion',
 
@@ -11,7 +13,7 @@ Ext.define('App.view.manage.question.question.GridQuestionC', {
                 console.log('gridQuestion cellclick');
 
                 var gridAnswer = grid.up('#content').down('gridAnswer'),
-                    storeAnswer = gridAnswer.store,
+                    storeAnswer = gridAnswer.getViewModel().getStore('answer'),
                     gridQuestion = this.getView(),
                     selection = gridQuestion.getSelected(),
                     questionid = selection[0].get('questionid');
@@ -80,9 +82,9 @@ Ext.define('App.view.manage.question.question.GridQuestionC', {
                     // * отложенный вызов функции, чтобы маска успевала поставиться
                     Ext.defer(function () {
                         Ext.each(selection, function (item) {
-                            grid.store.remove(item);
+                            grid.getViewModel().getStore('question').remove(item);
                         });
-                        grid.store.sync({
+                        grid.getViewModel().getStore('question').sync({
                             success: function (response, options) {
                                 Ext.getBody().unmask();
                             },
@@ -115,17 +117,33 @@ Ext.define('App.view.manage.question.question.GridQuestionC', {
                 }
             }
         },
+        'button[action=import]': {
+            click: function (button) {
+                console.log('filefield');
+
+                var form = Ext.create('App.view.manage.question.question.FormUploadV'),
+                    window = Ext.create('Ext.Window', {
+                        frame: true,
+                        title: 'Загрузка вопросов',
+                        closable: false,
+                        modal: true,
+                        layout: 'fit'
+                    });
+                window.add(form);
+                window.show();
+            }
+        },
         'gridQuestion filefield': {
             change: function (field, value, eOpts) {
                 console.log('filefield');
 
                 // * загрузка файла в базу
-                var time = new Date().getTime();
+               /* var time = new Date().getTime();
                 var formId = 'fileupload-form-' + time;
                 var formEl = Ext.DomHelper.append(Ext.getBody(), '<form id="' + formId + '" method="POST" enctype="multipart/form-data" class="x-hide-display"></form>');
-                formEl.appendChild(field.extractFileInput());
+                formEl.appendChild(field.extractFileInput());*/
 
-                var gridQuestion = this.getView(),
+                 /*var gridQuestion = this.getView(),
                     gridAnswer = gridQuestion.up('#content').down('gridAnswer'),
                     treeQuestion = gridQuestion.up('#content').down('treeQuestion'),
                     selectedTree = treeQuestion.getSelected(),
@@ -181,7 +199,7 @@ Ext.define('App.view.manage.question.question.GridQuestionC', {
                     }
                 } else {
                     App.util.Utilities.errorMessage('Ошибка импорта', field.regexText);
-                }
+                }*/
             }
         },
         /*'gridQuestion button[action=import]': {
@@ -200,15 +218,15 @@ Ext.define('App.view.manage.question.question.GridQuestionC', {
                     treeQuestion = gridQuestion.up('#content').down('treeQuestion'),
                     selectedTree = treeQuestion.getSelected(),
                     gridAnswer = gridQuestion.up('#content').down('gridAnswer'),
-                    storeAnswer = gridAnswer.store;
-                storeAnswer.filter(function () {
+                    storeAnswer = gridAnswer.getViewModel().getStore('answer');
+                storeAnswer.filterBy(function () {
                     return false
                 });
                 if(selectedTree){
                     if (selectedTree.raw) {
                         var knowid = selectedTree.raw.knowid,
                             groupid = selectedTree.raw.groupid;
-                        gridQuestion.store.load({
+                        gridQuestion.getViewModel().getStore('question').load({
                             params: {
                                 knowid: knowid,
                                 groupid: groupid
@@ -221,7 +239,7 @@ Ext.define('App.view.manage.question.question.GridQuestionC', {
 
 
                 /*gridAnswer.store.load();
-                 gridAnswer.store.filter(function () {
+                 gridAnswer.store.filterBy(function () {
                  return false
                  });*/
             }
