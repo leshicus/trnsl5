@@ -18,7 +18,7 @@ Ext.define('App.view.manage.spec.TreeSpecC', {
                             orgid = selection.raw.orgid,
                             actid = selection.raw.actid,
                             id = selection.raw.id;
-                        storeSpec.clearFilter();
+                        //storeSpec.clearFilter();
                         /*storeSpec.filterBy(function (rec) {
                          if (rec.get('groupid') == groupid)
                          return true;

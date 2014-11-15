@@ -16,8 +16,7 @@ Ext.define('App.view.manage.group.GridGroupV', {
     title: 'Группы',
     columnLines: true,
     viewConfig: {
-        stripeRows: true,
-        enableTextSelection:true // * allow to select text in grid. Actually it's a gridview property
+        stripeRows: true
     },
     initComponent: function () {
         console.log('GridGroup init');
@@ -84,9 +83,9 @@ Ext.define('App.view.manage.group.GridGroupV', {
                 dataIndex: 'actid',
                 width: 130,
                 editor: comboAct,
-                renderer: App.util.Utilities.renderGridGroup(comboAct)
+                renderer: Utilities.renderGridGroup(comboAct)
                 //renderer: App.util.Utilities.comboRendererVM(comboAct,'act')
-            },
+            },//todo после добавления Вида деятельности, здесь не отображается до перезагрузки
             {
                 text: 'Номер<br>группы',
                 itemId: 'columnGroupnum',

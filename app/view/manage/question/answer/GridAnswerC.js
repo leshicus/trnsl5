@@ -60,6 +60,12 @@ Ext.define('App.view.manage.question.answer.GridAnswerC', {
                 if (selection != '') {
                     Ext.each(selection, function (item) {
                         grid.getViewModel().getStore('answer').remove(item);
+                        grid.getViewModel().getStore('answer').sync({
+                            failure: function () {
+                                Ext.MessageBox.alert('Ошибка', 'Экзамен не добавлен');
+                            },
+                            scope: this
+                        });
                     });
                 }else {
                     Ext.Msg.alert('Ошибка', 'Не выбран ни один ответ');

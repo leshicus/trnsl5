@@ -8,7 +8,6 @@ Ext.define('App.view.admin.treeuser.TreeUserV', {
     ],
     viewModel: {type: 'treeuser'},
     controller:'treeuser',
-    frame: true,
     title: 'Структура',
     alias: 'widget.treeUser',
     itemId: 'treeUser',

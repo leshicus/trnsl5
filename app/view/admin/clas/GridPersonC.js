@@ -86,3 +86,4 @@ Ext.define('App.view.admin.clas.GridPersonC', {
 
     }
 });
+//todo добавление вопроса в организацию

@@ -3,7 +3,8 @@ require_once("../db_connect.php");
 require_once("../include.php");
 
 $str = $_REQUEST['str'];
-
+echo $str;
+//todo new format
 $xml = '<?xml version="1.0" encoding="utf-8" ?>
 <questestinterop>';
 // * одновременно с выгрузкой заменяем все & на #, т.к. для xml это спецсимвол

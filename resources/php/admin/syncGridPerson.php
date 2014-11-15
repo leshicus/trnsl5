@@ -38,6 +38,11 @@ switch ($act) {
         }*/
         break;
     case 'read':
+        $examid = $_REQUEST['examid'];
+
+        if($examid)
+            $where .= ' and c.examid = '.$examid;
+
         $sql = "select
                   examid,
                   c.userid,
@@ -55,8 +60,10 @@ switch ($act) {
 		        where u.userid = c.userid
                 and s.specid = u.specid
                 and g.groupid = s.groupid
-                and a.actid = g.actid
-		        order by fio";
+                and a.actid = g.actid "
+                .$where.
+		        " order by fio";
+
         try {
             $res = $mysqli->query($sql);
             $list=array();

@@ -7,7 +7,16 @@ Ext.define('App.view.manage.org.GridOrgC', {
 
     control: {
         '#':{
+            edit: function (editor, context) {
+                console.log('edit');
 
+                context.grid.getViewModel().getStore('org').sync({
+                    failure: function () {
+                        Ext.MessageBox.alert('Ошибка', 'Не сохранено');
+                    },
+                    scope: this
+                });
+            }
         },
         '#refreshGridOrgS': {
             click: function (button) {
@@ -22,8 +31,15 @@ Ext.define('App.view.manage.org.GridOrgC', {
                 console.log('action=add');
 
                 var grid = button.up('grid'),
-                    newRecord = Ext.create('App.model.manage.GridOrgM');
+                    store = grid.getViewModel().getStore('org'),
+                    newRecord = store.add({})[0];
                 grid.getViewModel().getStore('org').insert(0, newRecord);
+                grid.getViewModel().getStore('org').sync({
+                    failure: function () {
+                        Ext.MessageBox.alert('Ошибка', 'Не сохранено');
+                    },
+                    scope: this
+                });
             }
         },
         'button[action=delete]': {
@@ -33,6 +49,12 @@ Ext.define('App.view.manage.org.GridOrgC', {
                 var grid = button.up('grid'),
                     selection = grid.getSelected();
                 grid.getViewModel().getStore('org').remove(selection);
+                grid.getViewModel().getStore('org').sync({
+                    failure: function () {
+                        Ext.MessageBox.alert('Ошибка', 'Не сохранено');
+                    },
+                    scope: this
+                });
             }
         }
 

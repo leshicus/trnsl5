@@ -16,8 +16,7 @@ Ext.define('App.view.manage.org.GridOrgV', {
     title: 'Организации',
     columnLines: true,
     viewConfig: {
-        stripeRows: true,
-        enableTextSelection:true // * allow to select text in grid. Actually it's a gridview property
+        stripeRows: true
     },
     initComponent: function () {
         console.log('GridOrg init');

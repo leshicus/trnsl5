@@ -150,14 +150,14 @@ Ext.define('App.view.admin.toolbar.ToolbarAdminC', {
                     });
                     layout.activeItem.add(content);
 
-                    var gridPerson = Ext.ComponentQuery.query('gridPerson')[0],
+              /*      var gridPerson = Ext.ComponentQuery.query('gridPerson')[0],
                         gridSigngroup = Ext.ComponentQuery.query('gridSigngroup')[0];
                     gridPerson.getViewModel().getStore('person').filterBy(function () {
                         return false
                     });
                     gridSigngroup.getViewModel().getStore('signgroup').filterBy(function () {
                         return false
-                    });
+                    });*/
                 }
             }
         },

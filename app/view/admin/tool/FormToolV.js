@@ -8,7 +8,6 @@ Ext.define('App.view.admin.tool.FormToolV', {
     alias: 'widget.formTool',
     viewModel: {type: 'main'},
     controller:'formtool',
-    frame: true,
     flex: 1,
     title: 'Глобальные настройки системы',
     layout: {

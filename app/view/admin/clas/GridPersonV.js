@@ -9,16 +9,14 @@ Ext.define('App.view.admin.clas.GridPersonV', {
     viewModel: {type: 'gridperson'},
     controller:'gridperson',
     itemId: 'gridPerson',
-    frame: true,
     //margin: '0 0 0 5',
     bind: '{person}',
     title: 'Сотрудники',
     columnLines: true,
     selType: 'checkboxmodel',
-    //plugins: 'bufferedrenderer',
+    forceFit:true,
     viewConfig: {
-        stripeRows: true,
-        enableTextSelection:true // * allow to select text in grid. Actually it's a gridview property
+        stripeRows: true
     },
     initComponent: function () {
         console.log('GridPerson init');
@@ -57,7 +55,7 @@ Ext.define('App.view.admin.clas.GridPersonV', {
                 text: 'ФИО',
                 itemId: 'columnFio',
                 dataIndex: 'fio',
-                flex:1
+                //flex:1
             },
             {
                 text: 'Время',

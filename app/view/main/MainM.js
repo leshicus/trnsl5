@@ -13,7 +13,7 @@ Ext.define('App.view.main.MainM', {
                 {name: 'orgname'},
                 {name: 'orgabbr',type:'string'}
             ],
-            autoSync: true,
+            //autoSync: true,
             idProperty:'orgid',
             autoLoad: true,
             proxy: {
@@ -92,7 +92,7 @@ Ext.define('App.view.main.MainM', {
         },
         know: {
             fields: [],
-            autoSync: true,
+            //autoSync: true,
             autoLoad: true,
             idProperty:'knowid',
             proxy: {
@@ -121,7 +121,7 @@ Ext.define('App.view.main.MainM', {
         },
         act: {
             fields: [],
-            autoSync: true,
+            //autoSync: true,
             autoLoad: true,
             idProperty:'actid',
             proxy: {

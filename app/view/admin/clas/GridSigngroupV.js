@@ -8,16 +8,13 @@ Ext.define('App.view.admin.clas.GridSigngroupV', {
     viewModel: {type: 'gridsigngroup'},
     controller:'gridsigngroup',
     itemId: 'gridSigngroup',
-    frame: true,
-    //flex:1,
     height:250,
     forceFit: true,
     bind:'{signgroup}',
     title: 'Комиссия',
     columnLines: true,
     viewConfig: {
-        stripeRows: true,
-        enableTextSelection:true // * allow to select text in grid. Actually it's a gridview property
+        stripeRows: true
     },
     initComponent: function () {
         console.log('GridSigngroup init');

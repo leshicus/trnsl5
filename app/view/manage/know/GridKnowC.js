@@ -7,7 +7,16 @@ Ext.define('App.view.manage.know.GridKnowC', {
 
     control: {
         '#':{
-            
+            edit: function (editor, context) {
+                console.log('edit');
+
+                context.grid.getViewModel().getStore('know').sync({
+                    failure: function () {
+                        Ext.MessageBox.alert('Ошибка', 'Не сохранено');
+                    },
+                    scope: this
+                });
+            }
         },
         '#refreshGridKnowS': {
             click: function (button) {
@@ -22,13 +31,18 @@ Ext.define('App.view.manage.know.GridKnowC', {
                 console.log('action=add');
 
                 var grid = button.up('grid'),
-                    newRecord = Ext.create('App.model.manage.know.GridKnowM'),
-                    rowEditing = grid.plugins[0];
-                rowEditing.cancelEdit();
+                    store = grid.getViewModel().getStore('know'),
+                    newRecord = store.add({})[0];
                 grid.getViewModel().getStore('know').insert(0, newRecord);
-                rowEditing.startEdit(0, 0);
+                grid.getViewModel().getStore('know').sync({
+                    failure: function () {
+                        Ext.MessageBox.alert('Ошибка', 'Не сохранено');
+                    },
+                    scope: this
+                });
             }
         },
+        //todo написать проверки на удаление
         'button[action=delete]': {
             click: function (button) {
                 console.log('action=delete');
@@ -36,19 +50,12 @@ Ext.define('App.view.manage.know.GridKnowC', {
                 var grid = button.up('grid'),
                     selection = grid.getSelected();
                 grid.getViewModel().getStore('know').remove(selection);
-                /*controllerQuestion = App.app.getController('manage.PanelQuestionC'),
-                 tree = controllerQuestion.getTreeQuestion();*/
-                /*if (selection) {
-                 var actid = selection.get('actid'),
-                 storeGroup = Ext.StoreManager.lookup('manage.GridGroupS'),
-                 recGroup = storeGroup.findRecord('actid', actid, 0,false,true,true);
-                 // * проверка, что нет видов деятельности в группах
-                 if (!recGroup) {
-                 grid.store.remove(selection);
-                 } else {
-                 Ext.Msg.alert('Не удалено', 'Есть привязка в группах к данному виду деятельности');
-                 }
-                 }*/
+                grid.getViewModel().getStore('know').sync({
+                    failure: function () {
+                        Ext.MessageBox.alert('Ошибка', 'Не сохранено');
+                    },
+                    scope: this
+                });
             }
         }
 

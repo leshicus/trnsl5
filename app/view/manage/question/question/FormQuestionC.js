@@ -39,7 +39,7 @@ Ext.define('App.view.manage.question.question.FormQuestionC', {
                         success: function () {
                         },
                         failure: function () {
-                            errorMessage('Ошибка подключения к базе', 'Не обновлено');
+                            Utilities.errorMessage('Ошибка подключения к базе', 'Не обновлено');
                         },
                         scope: this
                     });

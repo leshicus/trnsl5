@@ -15,8 +15,9 @@ Ext.define('App.view.admin.treeuser.TreeUserC', {
                 if (selection) {
                     var groupid = selection.raw.groupid,
                         actid = selection.raw.actid,
-                        orgid = selection.raw.orgid;
-                    storeUser.clearFilter();
+                        orgid = selection.raw.orgid,
+                        id = selection.raw.id;
+                    /*storeUser.clearFilter();
                     storeUser.filterBy(function (rec) {
                         if(groupid)
                             if (rec.get('groupid') == groupid)
@@ -27,15 +28,23 @@ Ext.define('App.view.admin.treeuser.TreeUserC', {
                         if(orgid)
                             if (rec.get('orgid') == orgid)
                                 return true;
+                    });*/
+                    storeUser.load({
+                        params: {
+                            id: id,
+                            orgid: orgid,
+                            actid: actid,
+                            groupid: groupid
+                        }
                     });
                 }
             },
             render: function (tree) {
-                var gridUser = tree.up('#content').down('grid'),
+               /* var gridUser = tree.up('#content').down('grid'),
                     storeUser = gridUser.getViewModel().getStore('user');
                 storeUser.filterBy(function () {
                     return false
-                });
+                });*/
             }
         },
 
@@ -44,9 +53,9 @@ Ext.define('App.view.admin.treeuser.TreeUserC', {
                 var treeUser = button.up('treepanel'),
                     gridUser = treeUser.up('#content').down('grid'),
                     storeUser = gridUser.getViewModel().getStore('user');
-                storeUser.filterBy(function () {
+               /* storeUser.filterBy(function () {
                     return false
-                });
+                });*/
                 treeUser.getViewModel().getStore('treeuser').load();
             }
         },

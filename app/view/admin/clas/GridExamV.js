@@ -11,7 +11,6 @@ Ext.define('App.view.admin.clas.GridExamV', {
     viewModel: {type: 'gridexam'},
     controller: 'gridexam',
     itemId: 'gridExam',
-    frame: true,
     flex: 1,
     //margin: '0 0 5 0',
     forceFit: true,
@@ -43,15 +42,15 @@ Ext.define('App.view.admin.clas.GridExamV', {
             mode: 'MULTI'
         });
 
-     /*   this.plugins = [
-            Ext.create('Ext.grid.plugin.CellEditing', {
-                clicksToEdit: 1,
-                listeners: {
-                    scope: 'this',
-                    edit: 'onEdit'
-                }
-            })
-        ];*/
+        /*   this.plugins = [
+         Ext.create('Ext.grid.plugin.CellEditing', {
+         clicksToEdit: 1,
+         listeners: {
+         scope: 'this',
+         edit: 'onEdit'
+         }
+         })
+         ];*/
 
         this.tools = [
             {
@@ -62,9 +61,21 @@ Ext.define('App.view.admin.clas.GridExamV', {
         ]
 
         this.tbar = Ext.create('Ext.toolbar.Toolbar');
-        var datefromto = Ext.create('App.view.common.DateFromToV');
+
+        var now = new Date(),
+            year = now.getFullYear(),
+            month = App.util.Utilities.reverseDate(now.getMonth() + 1),
+            day = App.util.Utilities.reverseDate(now.getDate()),
+            dateBegin = [[day, month, year].join('.'), '00:00'].join(' ');
+
         this.tbar.add(App.util.Utilities.buttonSaveDelete);
-        this.tbar.add(datefromto);
+        this.tbar.add(
+            {
+                xtype: 'datefromto',
+                _dateFrom: dateBegin,
+                _allowBlankFrom: false
+            });
+
 
         var comboOrg = Ext.create('Ext.form.ComboBox', {
             bind: {store: '{org1}'},

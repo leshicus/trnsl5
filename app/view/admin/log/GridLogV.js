@@ -9,7 +9,6 @@ Ext.define('App.view.admin.log.GridLogV', {
     viewModel: {type: 'gridlog'},
     controller: 'gridlog',
     itemId: 'gridLog',
-    frame: true,
     flex: 1,
     //forceFit: true,  // * ячейки распределяются по ширине всей таблицы
     bind: {store: '{log}'},

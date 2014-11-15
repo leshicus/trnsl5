@@ -37,11 +37,11 @@ Ext.define('App.view.manage.group.GridGroupC', {
 
                 var grid = button.up('grid'),
                     //newRecord = Ext.create('App.view.manage.group.GridGroupM'),
-                    store = grid.getViewModel().getStore('spec'),
-                    newRecord = store.add({})[0];
+                    store = grid.getViewModel().getStore('group'),
+                    newRecord = store.insert(0,{})[0];
                     //rowEditing = grid.plugins[0];
                 //rowEditing.cancelEdit();
-                grid.getViewModel().getStore('group').insert(0, newRecord);
+                //store.insert(0, newRecord);
                // rowEditing.startEdit(0, 0);
             }
         },

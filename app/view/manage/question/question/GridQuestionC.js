@@ -103,7 +103,7 @@ Ext.define('App.view.manage.question.question.GridQuestionC', {
         'gridQuestion button[action=export]': {
             click: function (button) {
                 console.log('action=export');
-
+//todo make it another way (json)
                 var gridQuestion = button.up('gridQuestion'),
                     selection = gridQuestion.getSelected(),
                     arr = Array();
@@ -111,7 +111,19 @@ Ext.define('App.view.manage.question.question.GridQuestionC', {
                     Ext.each(selection, function (item) {
                         arr.push(item.get('questionid'));
                     });
-                    window.open('resources/php/manage/exportQuestion.php?str=' + arr/*, '_blank','location=0'*/);
+                    //var obj = {str:arr};
+                    Ext.Ajax.request({
+                        url: 'resources/php/manage/exportQuestion.php',
+                        params: {str:Ext.encode(arr)},
+                        method: 'POST',
+                        callback : function (opt, success, response) {
+                            var o = Ext.decode(response.responseText);
+                            if(!o.success){
+                                Ext.Msg.alert('Ошибка', 'not exported');
+                            }
+                        }
+                    });
+                    //window.open('resources/php/manage/exportQuestion.php?str=' + arr/*, '_blank','location=0'*/);
                 } else {
                     Ext.Msg.alert('Внимание', 'Отметьте вопросы для экспорта');
                 }

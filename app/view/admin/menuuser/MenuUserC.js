@@ -17,7 +17,12 @@ Ext.define('App.view.admin.menuuser.MenuUserC', {
                         Ext.each(selection, function (item) {
                             item.set('password', null);
                         });
-                        //grid.store.sync();
+                        grid.getViewModel().getStore('user').sync({
+                            failure: function () {
+                                Ext.MessageBox.alert('Ошибка', 'Не сохранено');
+                            },
+                            scope: this
+                        });
                     }
                 }, this);
 
@@ -37,7 +42,12 @@ Ext.define('App.view.admin.menuuser.MenuUserC', {
                         Ext.each(selection, function (item) {
                             item.set('enddate', date);
                         });
-                        //grid.store.sync();
+                        grid.getViewModel().getStore('user').sync({
+                            failure: function () {
+                                Ext.MessageBox.alert('Ошибка', 'Не сохранено');
+                            },
+                            scope: this
+                        });
                     }
                 }, this);
             }
@@ -53,7 +63,12 @@ Ext.define('App.view.admin.menuuser.MenuUserC', {
                         Ext.each(selection, function (item) {
                             item.set('enddate', App.util.Utilities.nullDate);
                         });
-                        //grid.store.sync();
+                        grid.getViewModel().getStore('user').sync({
+                            failure: function () {
+                                Ext.MessageBox.alert('Ошибка', 'Не сохранено');
+                            },
+                            scope: this
+                        });
                     }
                 }, this);
 

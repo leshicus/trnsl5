@@ -10,7 +10,6 @@ Ext.define('App.view.admin.stat.PanelStatV', {
     controller: 'panelstat',
     itemId: 'panelStat',
     flex: 1,
-    border: false,
     autoScroll:true,
     layout: {
         type: 'hbox',
@@ -29,8 +28,6 @@ Ext.define('App.view.admin.stat.PanelStatV', {
 // * левая половина: Установки
             {
                 xtype: 'panel',
-                frame: true,
-                border: false,
                 width: 300,
                 itemId: 'panelSet',
                 title: 'Установка',
@@ -85,12 +82,10 @@ Ext.define('App.view.admin.stat.PanelStatV', {
                 title: 'Диаграмма',
                 itemId: 'panelChart',
                 flex: 1,
-                frame: true,
                 autoScroll:true,
                 //margin: '0 0 0 5',
                 margin: 5,
                 cls: 'my_shadowborder',
-                border: false,
                 layout: {
                     type: 'vbox',
                     align: 'stretch'

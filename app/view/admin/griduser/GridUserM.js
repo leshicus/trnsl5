@@ -21,8 +21,8 @@ Ext.define('App.view.admin.griduser.GridUserM', {
                 {name: 'actid'},
                 {name: 'orgid'}*/
             ],
-           autoSync: true,
-           autoLoad: true,
+           //autoSync: true,
+           //autoLoad: true,
            idProperty:'userid',
            proxy: {
                type: 'ajax',

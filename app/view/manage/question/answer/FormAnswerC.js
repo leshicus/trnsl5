@@ -26,13 +26,16 @@ Ext.define('App.view.manage.question.answer.FormAnswerC', {
                     var questionid = selectedQuestion[0].get('questionid');
                     if (values.answertext) { // * такая вот валидация, allowBlank=false не работает
                         if (!record) { // * создание
-                            var newRecord = Ext.create('App.model.manage.GridAnswerM');
-                            newRecord.set('questionid', questionid);
-                            newRecord.set(values);
+                            //var newRecord = storeAnswer.insert(0, {})[0];
+                            //newRecord.set('questionid', questionid);
+                            values['questionid'] = questionid;
+                            //newRecord.set(values);
                             if (countAnswer == 0) {
                                 if (normdoc) { // * ставим галочку верный
-                                    newRecord.set('correct', 1);
-                                    gridAnswer.getViewModel().getStore('answer').add(newRecord);
+                                    //newRecord.set('correct', 1);
+                                    values['correct'] = 1;
+                                    //gridAnswer.getViewModel().getStore('answer').add(newRecord);
+                                    var newRecord = storeAnswer.insert(0, values)[0];
                                     win.close();
                                 } else {
                                     Ext.Msg.alert('Нормативный документ', 'Нормативный документ должен быть указан для первого ответа');
@@ -41,8 +44,10 @@ Ext.define('App.view.manage.question.answer.FormAnswerC', {
                                 if (normdoc) { // * ставим галочку верный
                                     Ext.Msg.alert('Нормативный документ', 'Нормативный документ должен быть пустым для не первого ответа');
                                 } else {
-                                    newRecord.set('correct', 0);
-                                    gridAnswer.getViewModel().getStore('answer').add(newRecord);
+                                    //newRecord.set('correct', 0);
+                                    values['correct'] = 0;
+                                    //gridAnswer.getViewModel().getStore('answer').add(newRecord);
+                                    var newRecord = storeAnswer.insert(0, values)[0];
                                     win.close();
                                 }
                             }
@@ -64,7 +69,12 @@ Ext.define('App.view.manage.question.answer.FormAnswerC', {
                                 }
                             }
                         }
-
+                        storeAnswer.sync({
+                            failure: function () {
+                                Ext.MessageBox.alert('Ошибка', 'Экзамен не добавлен');
+                            },
+                            scope: this
+                        });
                     } else {
                         Ext.Msg.alert('Ответ', 'Ответ не может быть пустым');
                     }

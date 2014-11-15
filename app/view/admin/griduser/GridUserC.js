@@ -12,7 +12,7 @@ Ext.define('App.view.admin.griduser.GridUserC', {
                 console.log('click refreshGridUserS');
 
                 var gridUser = button.up('grid');
-                gridUser.getViewModel().getStore('user').load();
+                gridUser.getViewModel().getStore('user').reload();
             }
         },
         'gridUser': {
@@ -52,13 +52,18 @@ Ext.define('App.view.admin.griduser.GridUserC', {
                     Ext.each(selection, function (item) {
                         grid.getViewModel().getStore('user').remove(item);
                     });
-                    grid.store.load();
+                    grid.getViewModel().getStore('user').sync({
+                        failure: function () {
+                            Ext.MessageBox.alert('Ошибка', 'Не сохранено');
+                        },
+                        scope: this
+                    });
                 }else {
                     Ext.Msg.alert('Ошибка', 'Не выбран ни один пользователь');
                 }
             }
         },
-        '#menuResetPassword': {
+       /* '#menuResetPassword': {
             click: function (button) {
                 console.log('click menuResetPassword');
 
@@ -69,7 +74,12 @@ Ext.define('App.view.admin.griduser.GridUserC', {
                         Ext.each(selection, function (item) {
                             item.set('password', null);
                         });
-                        //grid.store.sync();
+                        grid.getViewModel().getStore('user').sync({
+                            failure: function () {
+                                Ext.MessageBox.alert('Ошибка', 'Не сохранено');
+                            },
+                            scope: this
+                        });
                     }
                 }, this);
 
@@ -89,7 +99,12 @@ Ext.define('App.view.admin.griduser.GridUserC', {
                         Ext.each(selection, function (item) {
                             item.set('enddate', date);
                         });
-                        //grid.store.sync();
+                        grid.getViewModel().getStore('user').sync({
+                            failure: function () {
+                                Ext.MessageBox.alert('Ошибка', 'Не сохранено');
+                            },
+                            scope: this
+                        });
                     }
                 }, this);
             }
@@ -105,12 +120,17 @@ Ext.define('App.view.admin.griduser.GridUserC', {
                         Ext.each(selection, function (item) {
                             item.set('enddate', App.util.Utilities.nullDate);
                         });
-                        //grid.store.sync();
+                        grid.getViewModel().getStore('user').sync({
+                            failure: function () {
+                                Ext.MessageBox.alert('Ошибка', 'Не сохранено');
+                            },
+                            scope: this
+                        });
                     }
                 }, this);
 
             }
-        }, /*,
+        }, *//*,
          'gridUser actioncolumn': {
          click: function (grid, view, recordIndex, cellIndex, item, e) {
          console.log('actioncolumn');

@@ -18,7 +18,7 @@ Ext.define('App.util.Utilities', {
     uncorrectString: 'неверный',
     passString: 'экзамен сдан',
     unpassString: 'экзамен не сдан',
-    startSubsystem: 3, // * подсистема выбранная по-умолчанию в стартовом окне
+    startSubsystem: 2, // * подсистема выбранная по-умолчанию в стартовом окне
     examTimerSec: 60, // * секунд в минуте
     //userid: 0,
     nullDate: '00.00.0000 00:00',
@@ -121,9 +121,7 @@ Ext.define('App.util.Utilities', {
     },
 
     renderGridGroup: function (combo) {
-        var main = Ext.ComponentQuery.query('main')[0],
-            mainVM = main.getViewModel(),
-            storeAct = mainVM.getStore('act');
+        var storeAct = Ext.ComponentQuery.query('main')[0].getViewModel().getStore('act');
 
         return function (value) {
             var record = storeAct.findRecord('actid', value);
