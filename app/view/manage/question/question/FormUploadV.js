@@ -38,7 +38,7 @@
             },
             '->',
             {
-                text: 'Очистить',
+                text: 'Отмена',
                 action: 'reset',
                 scale: 'medium'
             }

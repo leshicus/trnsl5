@@ -10,9 +10,8 @@ Ext.define('App.view.manage.question.question.FormUploadC', {
 
 
                 var form = button.up('formUpload'),
-                    field = form.down('#import'),
                     gridQuestion = Ext.ComponentQuery.query('gridQuestion')[0],
-                    gridAnswer = gridQuestion.up('#content').down('gridAnswer'),
+                    gridAnswer = gridQuestion.up('#content').down('gridAnswer')[0],
                     treeQuestion = gridQuestion.up('#content').down('treeQuestion'),
                     selectedTree = treeQuestion.getSelected(),
                     knowid,

@@ -8,7 +8,7 @@ Ext.define('App.view.manage.question.question.GridQuestionC', {
     alias: 'controller.gridQuestion',
 
     control: {
-        '#':{
+        '#': {
             cellclick: function (grid, td, cellIndex, record, tr, rowIndex, e, eOpts) {
                 console.log('gridQuestion cellclick');
 
@@ -103,7 +103,6 @@ Ext.define('App.view.manage.question.question.GridQuestionC', {
         'gridQuestion button[action=export]': {
             click: function (button) {
                 console.log('action=export');
-//todo make it another way (json)
                 var gridQuestion = button.up('gridQuestion'),
                     selection = gridQuestion.getSelected(),
                     arr = Array();
@@ -111,19 +110,32 @@ Ext.define('App.view.manage.question.question.GridQuestionC', {
                     Ext.each(selection, function (item) {
                         arr.push(item.get('questionid'));
                     });
-                    //var obj = {str:arr};
-                    Ext.Ajax.request({
-                        url: 'resources/php/manage/exportQuestion.php',
-                        params: {str:Ext.encode(arr)},
-                        method: 'POST',
-                        callback : function (opt, success, response) {
-                            var o = Ext.decode(response.responseText);
-                            if(!o.success){
-                                Ext.Msg.alert('Ошибка', 'not exported');
-                            }
-                        }
-                    });
+                    var str = arr.join(',');
+
                     //window.open('resources/php/manage/exportQuestion.php?str=' + arr/*, '_blank','location=0'*/);
+                    var body = Ext.getBody(),
+                        iframe = body.appendChild({
+                            tag: 'iframe',
+                            id: 'iframe-helper',
+                            cls: 'x-hidden'
+                        }),
+                        form = body.appendChild({
+                            tag: 'form',
+                            method: 'post',
+                            target: 'iframe-helper',
+                            action: 'resources/php/manage/exportQuestion.php',
+                            cls: 'x-hidden'
+                        }),
+                        input = form.appendChild({
+                            tag: 'input',
+                            type: 'hidden',
+                            name: 'str',
+                            value: str,
+                            cls:'x-hidden'
+                        });
+                    form.dom.submit();
+                    iframe.destroy();
+                    form.destroy();
                 } else {
                     Ext.Msg.alert('Внимание', 'Отметьте вопросы для экспорта');
                 }
@@ -150,68 +162,68 @@ Ext.define('App.view.manage.question.question.GridQuestionC', {
                 console.log('filefield');
 
                 // * загрузка файла в базу
-               /* var time = new Date().getTime();
-                var formId = 'fileupload-form-' + time;
-                var formEl = Ext.DomHelper.append(Ext.getBody(), '<form id="' + formId + '" method="POST" enctype="multipart/form-data" class="x-hide-display"></form>');
-                formEl.appendChild(field.extractFileInput());*/
+                /* var time = new Date().getTime();
+                 var formId = 'fileupload-form-' + time;
+                 var formEl = Ext.DomHelper.append(Ext.getBody(), '<form id="' + formId + '" method="POST" enctype="multipart/form-data" class="x-hide-display"></form>');
+                 formEl.appendChild(field.extractFileInput());*/
 
-                 /*var gridQuestion = this.getView(),
-                    gridAnswer = gridQuestion.up('#content').down('gridAnswer'),
-                    treeQuestion = gridQuestion.up('#content').down('treeQuestion'),
-                    selectedTree = treeQuestion.getSelected(),
-                    knowid,
-                    groupid;
-                if (field.regex.test(value)) {
-                    if (selectedTree) {
-                        if (selectedTree.raw) {
-                            knowid = selectedTree.raw.knowid;
-                            groupid = selectedTree.raw.groupid;
-                        }
-                        //Ext.getBody().mask('Идет загрузка...');
-                        // * отложенный вызов функции, чтобы маска успевала поставиться
-                        Ext.defer(function () {
-                            Ext.Ajax.request({
-                                url: 'resources/php/manage/importQuestion.php',
-                                isUpload: true,
-                                params: {
-                                    knowid: knowid,
-                                    groupid: groupid
-                                },
-                                timeout: 600000,  // * 5 минут
-                                method: 'POST',
-                                form: formId,
-                                success: function (response, options) {
-                                    var resp = Ext.decode(response.responseText),
-                                        message = resp.message,
-                                        success = resp.success;
-                                    if (success) {
-                                        Ext.Msg.alert('Успех', message);
-                                    } else {
-                                        App.util.Utilities.errorMessage('Ошибка файла', message);
-                                    }
-                                    gridQuestion.store.load({
-                                        params: {
-                                            knowid: knowid,
-                                            groupid: groupid
-                                        }
-                                    });
-                                    Ext.getBody().unmask();
-                                },
-                                failure: function (response, options) {
-                                    var resp = Ext.decode(response.responseText),
-                                        message = resp.message;
-                                    App.util.Utilities.errorMessage('Ошибка подключения к базе', message);
-                                    Ext.getBody().unmask();
-                                },
-                                scope: this
-                            });
-                        }, 10, this);
-                    } else {
-                        App.util.Utilities.errorMessage('Ошибка импорта', 'Не выбран каталог для импорта');
-                    }
-                } else {
-                    App.util.Utilities.errorMessage('Ошибка импорта', field.regexText);
-                }*/
+                /*var gridQuestion = this.getView(),
+                 gridAnswer = gridQuestion.up('#content').down('gridAnswer'),
+                 treeQuestion = gridQuestion.up('#content').down('treeQuestion'),
+                 selectedTree = treeQuestion.getSelected(),
+                 knowid,
+                 groupid;
+                 if (field.regex.test(value)) {
+                 if (selectedTree) {
+                 if (selectedTree.raw) {
+                 knowid = selectedTree.raw.knowid;
+                 groupid = selectedTree.raw.groupid;
+                 }
+                 //Ext.getBody().mask('Идет загрузка...');
+                 // * отложенный вызов функции, чтобы маска успевала поставиться
+                 Ext.defer(function () {
+                 Ext.Ajax.request({
+                 url: 'resources/php/manage/importQuestion.php',
+                 isUpload: true,
+                 params: {
+                 knowid: knowid,
+                 groupid: groupid
+                 },
+                 timeout: 600000,  // * 5 минут
+                 method: 'POST',
+                 form: formId,
+                 success: function (response, options) {
+                 var resp = Ext.decode(response.responseText),
+                 message = resp.message,
+                 success = resp.success;
+                 if (success) {
+                 Ext.Msg.alert('Успех', message);
+                 } else {
+                 App.util.Utilities.errorMessage('Ошибка файла', message);
+                 }
+                 gridQuestion.store.load({
+                 params: {
+                 knowid: knowid,
+                 groupid: groupid
+                 }
+                 });
+                 Ext.getBody().unmask();
+                 },
+                 failure: function (response, options) {
+                 var resp = Ext.decode(response.responseText),
+                 message = resp.message;
+                 App.util.Utilities.errorMessage('Ошибка подключения к базе', message);
+                 Ext.getBody().unmask();
+                 },
+                 scope: this
+                 });
+                 }, 10, this);
+                 } else {
+                 App.util.Utilities.errorMessage('Ошибка импорта', 'Не выбран каталог для импорта');
+                 }
+                 } else {
+                 App.util.Utilities.errorMessage('Ошибка импорта', field.regexText);
+                 }*/
             }
         },
         /*'gridQuestion button[action=import]': {
@@ -234,7 +246,7 @@ Ext.define('App.view.manage.question.question.GridQuestionC', {
                 storeAnswer.filterBy(function () {
                     return false
                 });
-                if(selectedTree){
+                if (selectedTree) {
                     if (selectedTree.raw) {
                         var knowid = selectedTree.raw.knowid,
                             groupid = selectedTree.raw.groupid;
@@ -245,7 +257,7 @@ Ext.define('App.view.manage.question.question.GridQuestionC', {
                             }
                         });
                     }
-                }else{
+                } else {
                     App.util.Utilities.errorMessage('Ошибка', 'Не выбран каталог');
                 }
 
