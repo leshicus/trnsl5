@@ -1,7 +1,6 @@
 Ext.define('App.view.admin.tool.FormToolV', {
     extend: 'Ext.form.Panel',
     requires: [
-        //'App.view.admin.clas.GridExamM',
         'App.view.admin.tool.FormToolC',
         'App.view.main.MainM'
     ],
@@ -14,22 +13,18 @@ Ext.define('App.view.admin.tool.FormToolV', {
         type: 'vbox'/*,
          align: 'stretch'*/
     },
-    //buttonAlign: 'left',
     defaults: {
-        xtype: 'textfield',
+        xtype: 'numberfield',
         labelWidth: 250,
         margin: '5 5 5 5',
         labelAlign: 'left',
         allowBlank:false,
-        width: '30%'
+        width: '30%',
+        maxValue: 1000,
+        minValue: 1
     },
     initComponent: function () {
         console.log('FormToolV init');
-        /*var store = Ext.data.StoreManager.lookup('admin.FormToolS'),
-         rec = store.getAt(0);
-         content.down('formTool').getForm().loadRecord(rec);*/
-
-
 
         this.items = [
             {

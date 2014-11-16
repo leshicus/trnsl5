@@ -15,7 +15,7 @@ Ext.define('App.view.admin.toolbar.ToolbarAdminV', {
 
         this.items = [
             {
-                text: 'Главная',
+                text: 'Выход',
                 itemId: 'mainMI',
                 scale: 'medium',
                 //iconCls: 'icon_back'

@@ -1,4 +1,4 @@
-Ext.define('App.controller.user.PanelSelfC', {
+Ext.define('App.controller.user.PanelSelfC-', {
     extend: 'Ext.app.Controller',
     views: [
         'user.PanelSelfV'

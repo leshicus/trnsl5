@@ -19,10 +19,10 @@ Ext.define('App.view.user.test.PanelTestC', {
                  *  3. Очистка панели Прогресс и Билет prepareForTest
                  * */
                 // * очистим панель Прогресс
-                var panelTest = combo.up('panelTest'),
+                var panelTest = this.getView(),
                     panelProgress = panelTest.down('#panelProgress'),
                     counter = new this.answerCounter();
-                panelProgress.query('.displayfield').forEach(function (item) {
+                panelProgress.query('displayfield').forEach(function (item) {
                     if (item.xtype == 'displayfield') {
                         if (item.fieldLabel == "Времени на тест"
                             || item.fieldLabel == "Времени на вопрос"
@@ -42,12 +42,12 @@ Ext.define('App.view.user.test.PanelTestC', {
                     answerAccordion = panelCard.down('#answerAccordion');
                 question.reset();
                 questionAccordion.setTitle('Вопрос');
-                answerAccordion.query('.radiofield').forEach(function (item) {
+                answerAccordion.query('radiofield').forEach(function (item) {
                     if (item.xtype == 'radio') {
                         answerAccordion.remove(item, true);
                     }
                 });
-
+//todo при переключении на самоподготовку зависает таймраннер
                 var examid = combo.getValue();
                 var taskRegStatus = {
                     run: function () {
@@ -113,7 +113,7 @@ Ext.define('App.view.user.test.PanelTestC', {
             click: function (button) {
                 console.log('action=starttest');
 
-                var panelTest = button.up('panelTest'),
+                var panelTest = this.getView(),
                     comboExam = panelTest.down('#comboExam'),
                     examid = comboExam.getValue();
 
@@ -124,11 +124,11 @@ Ext.define('App.view.user.test.PanelTestC', {
                 panelTest.examTimerMin = 0;
                 panelTest.examTimerQuestionMin = 0;
                 panelTest.setOuterCount();
-                panelTest.maxquestion = this.getTool('maxquestion');
-                panelTest.minquestion = this.getTool('minquestion');
-                panelTest.examTimerMin = this.getTool('examtimermin');
-                panelTest.regstatint = this.getTool('regstatint');
-                panelTest.regstatdur = this.getTool('regstatdur');
+                panelTest.maxquestion = Utilities.getTool('maxquestion');
+                panelTest.minquestion = Utilities.getTool('minquestion');
+                panelTest.examTimerMin = Utilities.getTool('examtimermin');
+                panelTest.regstatint = Utilities.getTool('regstatint');
+                panelTest.regstatdur = Utilities.getTool('regstatdur');
                 // * проверить, что экзамен еще не пройден
                 Ext.Ajax.request({
                     url: 'resources/php/user/getExam.php?examid=' + examid,
@@ -147,7 +147,7 @@ Ext.define('App.view.user.test.PanelTestC', {
                                         timelimit = resp.timelimit;
                                     if (cnt != 0) { // * старт теста
                                         // * генерация билета
-                                        var storeCard = Ext.data.StoreManager.lookup('user.CardS'),
+                                        var storeCard = panelTest.getViewModel().getStore('card'),
                                             buttonNextQuestion = panelTest.down('#nextQuestion');
                                         buttonNextQuestion.enable();
                                         // * показ вопросов на событие load в storeCard
@@ -188,13 +188,13 @@ Ext.define('App.view.user.test.PanelTestC', {
             click: function (button) {
                 console.log('action=nextquestion');
 
-                var panelTest = button.up('panelTest'),
+                var panelTest = this.getView(),
                     panelCard = panelTest.down('#panelCard'),
                     panelProgress = panelTest.down('#panelProgress'),
                     rownum = panelTest.questionNumber,
                     answerAccordion = panelTest.down('#answerAccordion'),
                     arrayAnswers = answerAccordion.query('radiofield'),
-                    storeCard = Ext.data.StoreManager.lookup('user.CardS'),
+                    storeCard = panelTest.getViewModel().getStore('card'),
                     questionRec = storeCard.findRecord('rownum', rownum, 0, false, true, true),
                     answerText = 'нет ответа',
                     buttonNextQuestion = panelTest.down('#nextQuestion'),
@@ -260,11 +260,11 @@ Ext.define('App.view.user.test.PanelTestC', {
              2. Если не заблокирован, то обновим его стор
              * */
             click: function (button) {
-                var comboExam = this.getComboExam(),
-                    panelTest = this.getPanelTest(),
+                var panelTest = this.getView(),
+                    comboExam = panelTest.down('#comboExam'),
                     textStatus = panelTest.down('#textStatus'),
                     examid = comboExam.getValue(),
-                    storeCard = Ext.data.StoreManager.lookup('user.CardS'),
+                    storeCard = panelTest.getViewModel().getStore('card'),
                     textStatus = panelTest.down('#textStatus'),
                     buttonStartTest = panelTest.down('#startTest'),
                     buttonNextQuestion = panelTest.down('#nextQuestion');
@@ -307,7 +307,7 @@ Ext.define('App.view.user.test.PanelTestC', {
         },
         '#panelCard #answerAccordion radiofield': {
             change: function (radio, newValue, oldValue, eOpts) {
-                var panelTest = this.getPanelTest(),
+                var panelTest = this.getView(),
                     buttonNextQuestion = panelTest.down('#nextQuestion');
                 if (panelTest.passed == 0)
                     buttonNextQuestion.enable();
@@ -341,7 +341,7 @@ Ext.define('App.view.user.test.PanelTestC', {
 
 // * запуск таймера теста
     runTimerAll: function () {
-        var panelTest = this.getPanelTest(),
+        var panelTest = this.getView(),
             textTime = panelTest.down('#textTime'),
             buttonNextQuestion = panelTest.down('#nextQuestion'),
             varExamTimerSec = panelTest.examTimerSec,
@@ -379,7 +379,7 @@ Ext.define('App.view.user.test.PanelTestC', {
     },
     // * запуск таймера вопросов
     runTimerQuestion: function () {
-        var panelTest = this.getPanelTest(),
+        var panelTest = this.getView(),
             textTime = panelTest.down('#textTimeQuestion'),
             buttonNextQuestion = panelTest.down('#nextQuestion'),
             varExamTimerSec = panelTest.examTimerSec,
@@ -427,7 +427,7 @@ Ext.define('App.view.user.test.PanelTestC', {
         console.log('onStoreCardLoad');
 
         // * проверим, что в билете необходимое число вопросов
-        var panelTest = this.getPanelTest(),
+        var panelTest = this.getView(),
             maxRownum = this.getStoreMaxValue(storeCard, 'rownum'), //* число вопросов в билете
             maxquestion = panelTest.maxquestion,
             buttonNextQuestion = panelTest.down('#nextQuestion'),
@@ -435,7 +435,9 @@ Ext.define('App.view.user.test.PanelTestC', {
         if (maxRownum != maxquestion) {
             App.util.Utilities.errorMessage('Ошибка генерации билета', 'Не верное число вопросов в билете. Нужно: ' + maxquestion + ', сгенерировано: ' + maxRownum);
             // * тут нужно сбросить билет, т.к. пользователь не проходил экзамен
-            this.cardReset();
+            Ext.defer(function () {
+                this.cardReset();
+            }, 5000, this);
             buttonNextQuestion.setDisabled(true);
         } else {
             this.runTimerAll();
@@ -443,8 +445,8 @@ Ext.define('App.view.user.test.PanelTestC', {
             this.showCard(1);
             startTest.setDisabled(true);
             // * нельзя проходить самоподготовку во время теста
-            var viewport = panelTest.up('viewport'),
-                buttonSelf = viewport.down('toolbarUser #selfMI');
+            var main = panelTest.up('main'),
+                buttonSelf = main.down('toolbarUser #selfMI');
             buttonSelf.disable();
         }
     },
@@ -462,14 +464,14 @@ Ext.define('App.view.user.test.PanelTestC', {
     },
     // * смена вопросов и ответов
     showCard: function (num) {
-        var storeCard = Ext.data.StoreManager.lookup('user.CardS');
-        storeCard.clearFilter();
-        var panelTest = this.getPanelTest(),
+        var panelTest = this.getView(),
             panelCard = panelTest.down('#panelCard'),// * билет
+            storeCard = panelTest.getViewModel().getStore('card'),
             questionAccordion = panelCard.down('#questionAccordion'),
             answerAccordion = panelCard.down('#answerAccordion'),
             question = panelCard.down('#question'), // * поле внутри аккордиона Вопрос
             textQuestion = panelTest.down('#textQuestion'); // * Прогресс - Вопрос
+        storeCard.clearFilter();
         if (storeCard.count() > 0) {
             var questionText = storeCard.findRecord('rownum', num, 0, false, true, true).get('questiontext'); //* текст вопроса
             // * вопросы
@@ -499,10 +501,10 @@ Ext.define('App.view.user.test.PanelTestC', {
         }
     },
     showNextQuestion: function (buttonNextQuestion) {
-        var panelTest = this.getPanelTest();
+        var panelTest = this.getView();
         if (panelTest.questionNumber < panelTest.maxquestion) {
             //* следующий вопрос, но только если Результат пустой
-            var panelProgress = this.getPanelProgress(),
+            var panelProgress = panelTest.down('#panelProgress'),
                 textResult = panelProgress.down('#textResult');
             if (!textResult.getValue()) {
                 buttonNextQuestion.setDisabled(false);
@@ -515,7 +517,7 @@ Ext.define('App.view.user.test.PanelTestC', {
     },
     // * сохранить в базу ответ пользователя
     saveResult: function (questionId, answerid) {
-        var panelTest = Ext.ComponentQuery.query('panelTest')[0],
+        var panelTest = this.getView(),
             comboExam = panelTest.down('#comboExam'),
             examid = comboExam.getValue();
         Ext.Ajax.request({
@@ -535,7 +537,7 @@ Ext.define('App.view.user.test.PanelTestC', {
     saveToClass: function () {
         App.util.Utilities.runnerExamTestAll.stopAll();
         App.util.Utilities.runnerExamTestQuestion.stopAll();
-        var panelTest = Ext.ComponentQuery.query('panelTest')[0];
+        var panelTest = this.getView();
         if (panelTest.passed == 0) {
             var comboExam = panelTest.down('#comboExam'),
                 examid = comboExam.getValue(),
@@ -559,11 +561,12 @@ Ext.define('App.view.user.test.PanelTestC', {
                 + '&result=' + result,
                 success: function (response, options) {
                     App.util.Utilities.infoMessage('Внимание', 'Результаты экзамена сохранены');
-                    var storeCard = Ext.data.StoreManager.lookup('user.CardS');
+                    var storeCard = panelTest.getViewModel().getStore('card');
                     storeCard.removeAll(); // * чтобы после того, как результат сохранен, можно было обновить список экзаменов
-                    var viewport = panelTest.up('viewport'),
-                        buttonSelf = viewport.down('toolbarUser #selfMI');
+                    var main = panelTest.up('main'),
+                        buttonSelf = main.down('toolbarUser #selfMI');
                     buttonSelf.enable();
+                    App.util.Utilities.runnerExamTestQuestion.stopAll();
                 },
                 failure: function () {
                     App.util.Utilities.errorMessage('Ошибка подключения к базе', 'Результат экзамена не сохранен в базу');
@@ -574,34 +577,36 @@ Ext.define('App.view.user.test.PanelTestC', {
     },
     // * Отмена билета
     cardReset: function () {
-        var panelTest = Ext.ComponentQuery.query('panelTest')[0],
+        var panelTest = this.getView(),
             comboExam = panelTest.down('#comboExam'),
             examid = comboExam.getValue();
         Ext.Ajax.request({
             url: 'resources/php/user/resetCard.php?examid=' + examid,
             success: function (response, options) {
-                Ext.example.msg('Внимание', 'Билет отменен');
+                //Ext.example.msg('Внимание', 'Билет отменен');
+                //Ext.Msg.alert('Внимание', 'Билет отменен');
+                Utilities.errorMessage('Внимание', 'Билет отменен. Перезайдите в систему.');
             },
             failure: function () {
-                App.util.Utilities.errorMessage('Ошибка подключения к базе', 'Билет не отменен');
+                Utilities.errorMessage('Ошибка подключения к базе', 'Билет не отменен');
             },
             scope: this
         });
     },
     // * возвращает значение константы из Tool
-    getTool: function (field) {
-        var storeTool = Ext.data.StoreManager.lookup('admin.FormToolS'),
+  /*  getTool: function (field) {
+        var main = this.getView().up('main'),
+            storeTool = main.getViewModel().getStore('tool'),
             recTool = storeTool.getAt(0),
             value = recTool.get(field);
         return value;
-    },
+    },*/
     answerCounter: function () {
         if (!this.no) {
             this.no = 0;
         } else {
             this.no = this.no + 1;
         }
-        ;
     }
 
 

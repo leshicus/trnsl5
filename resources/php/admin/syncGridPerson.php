@@ -149,6 +149,17 @@ switch ($act) {
             } catch (Exception $e) {
                 $success = false;
             }
+            // * удаление билета
+            $sql = "
+                delete from `card`
+                where userid = '$userid'
+                and examid = '$examid'
+            ";
+            try {
+                $res = $mysqli->query($sql);
+            } catch (Exception $e) {
+                $success = false;
+            }
         }
         if($success){
             echo json_encode(

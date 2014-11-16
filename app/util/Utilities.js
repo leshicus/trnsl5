@@ -18,7 +18,7 @@ Ext.define('App.util.Utilities', {
     uncorrectString: 'неверный',
     passString: 'экзамен сдан',
     unpassString: 'экзамен не сдан',
-    startSubsystem: 3, // * подсистема выбранная по-умолчанию в стартовом окне
+    startSubsystem: 1, // * подсистема выбранная по-умолчанию в стартовом окне
     examTimerSec: 60, // * секунд в минуте
     //userid: 0,
     nullDate: '00.00.0000 00:00',
@@ -272,5 +272,12 @@ Ext.define('App.util.Utilities', {
             }
         }
 
+    },
+    getTool: function (field) {
+        var main = Ext.ComponentQuery.query('main')[0],
+            storeTool = main.getViewModel().getStore('tool'),
+            recTool = storeTool.getAt(0),
+            value = recTool.get(field);
+        return value;
     }
 });

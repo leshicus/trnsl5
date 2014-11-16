@@ -311,12 +311,11 @@ Ext.define('App.view.manage.toolbar.ToolbarManageC', {
                 if (button.pressed) {
                     console.log('click mainMI');
 
-                    var main = button.up('main'),
+                    /*var main = button.up('main'),
                         layout = main.getLayout();
                     layout.activeItem.query('panel').forEach(App.util.Utilities.cascadeRemoveGrid);
-                    layout.setActiveItem(0);
-                   /* var storeSpec = Ext.data.StoreManager.lookup('manage.GridSpecS');
-                    storeSpec.clearFilter();*/
+                    layout.setActiveItem(0);*/
+                    location.reload();
                 }
             }
         }

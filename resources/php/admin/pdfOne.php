@@ -125,28 +125,29 @@ if($success){
     $html = "<table cellpadding='3' border='1' align='left'>
     <tr>
 		<td height='1' align='left' border='0000' width='30'>ФИО:</td>
-		<td height='1' align='left' border='0000' style='bold'>$fioFull</td>
+		<td height='1' align='left' border='0000' style='bold'>".$fioFull."</td>
     </tr>
     <tr>
 	    <td height='1' align='left' border='0000' width='30'>Организация:</td>
-		<td height='1' align='left' border='0000'>$orgabbr</td>
+		<td height='1' align='left' border='0000'>".$orgabbr."</td>
 	</tr>
 	<tr>
 	    <td height='1' align='left' border='0000' width='30'>Должность:</td>
-		<td height='1' align='left' border='0000'>$specName</td>
+		<td height='1' align='left' border='0000'>".$specName."</td>
 	</tr>
 	<tr>
 	    <td height='1' align='left' border='0000' width='30'>Дата:</td>
-		<td height='1' align='left' border='0000'>$examDate</td>
+		<td height='1' align='left' border='0000'>".$examDate."</td>
 	</tr>
 	</table>";
-    $p->htmltable($p->convert($html));
+    $htmlConverted = $p->convert($html);
+    $p->htmltable($htmlConverted);
 
     $p->Ln(5);
 
     // * таблица
-    $html = "<table cellpadding='3' border='1' align='left' width='.$p->width.'>
-    <tr repeat=1 bgcolor=#eeeeee>
+    $html = "<table cellpadding='3' border='1' align='left' width='".$p->width."'>
+    <tr repeat=1>
 	    <td height='1' align='center' width='10'>№</td>
 		<td height='1' align='center'>Вопрос</td>
 		<td height='1' align='center'>Ответ</td>
@@ -159,14 +160,15 @@ if($success){
         $j = $i + 1;
         $html .= "
         <tr>
-            <td height='1' align='center'>$j</td>
+            <td height='1' align='center'>".$j."</td>
             <td height='1' align='left'>".$listQuestion[$i]['questiontext']."</td>
             <td height='1' align='left'>".$listQuestion[$i]['answertext']."</td>
             <td height='1' align='center'>".$listQuestion[$i]['correct']."</td>
         </tr>";
     }
     $html .= "</table>";
-    $p->htmltable($p->convert($html));
+    $htmlConverted = $p->convert($html);
+    $p->htmltable($htmlConverted);
 
     // * результат
     $p->Ln(5);
@@ -177,11 +179,11 @@ if($success){
     $html = "<table cellpadding='3' border='1' align='left'>
     <tr>
 	    <td height='15' align='left' border='0000' width='80'>Результат:</td>
-		<td align='left' border='0000' style='bold'>$result</td>
+		<td align='left' border='0000' style='bold'>".$result."</td>
 	</tr>
     <tr>
 	    <td height='15' align='left' border='0000' width='80'>Экзаменуемый:</td>
-		<td align='left' border='0000' style='bold'>($fioAbbr)</td>
+		<td align='left' border='0000' style='bold'>(".$fioAbbr.")</td>
 	</tr>";
 
     $i=0;
@@ -195,7 +197,8 @@ if($success){
         </tr>";
     }
     $html .= "</table>";
-    $p->htmltable($p->convert($html));
+    $htmlConverted = $p->convert($html);
+    $p->htmltable($htmlConverted);
 
     $p->output($filename,'I');
 }

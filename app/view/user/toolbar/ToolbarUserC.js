@@ -12,29 +12,17 @@ Ext.define('App.view.user.toolbar.ToolbarUserC', {
                 if (button.pressed) {
                     console.log('click mainMI');
 
-                    var main = button.up('main'),
+                    /*var main = button.up('main'),
                         layout = main.getLayout();
                     layout.activeItem.query('panel').forEach(App.util.Utilities.cascadeRemoveGrid);
-                    layout.setActiveItem(0);
+                    layout.setActiveItem(0);*/
+                    location.reload();
                 }
             }
         },
         '#testMI': {
             toggle: function (me, state) {  // * использую toggle вместо click, т.к. при click можно нажать уже нажатую кнопку, а нам это не нужно
                 if (me.pressed) {
-                    /*var toolbarUser = me.up('toolbarUser'),
-                        viewport = me.up('viewport'),
-                        panel = Ext.ComponentQuery.query('panelTest')[0],
-                        layout = viewport.getLayout();
-                    if (!panel) {
-                        panel = Ext.create('App.view.user.PanelTestV');
-                    }
-                    if (layout.activeItem) {
-                        layout.activeItem.query('.panel').forEach(App.util.Utilities.cascadeRemoveGrid);
-                        layout.activeItem.add(panel);
-                    }*/
-
-
                     var main = me.up('main'),
                         toolbar = me.up('toolbar'),
                         layout = main.getLayout(),
@@ -50,19 +38,8 @@ Ext.define('App.view.user.toolbar.ToolbarUserC', {
 
         '#selfMI': {
             toggle: function (me, state) {
+                Ext.TaskManager.stopAll();
                 if (me.pressed) {
-                    /*var toolbarUser = me.up('toolbarUser'),
-                        viewport = me.up('viewport'),
-                        panel = Ext.ComponentQuery.query('panelSelf')[0],
-                        layout = viewport.getLayout();
-                    if (!panel) {
-                        panel = Ext.create('App.view.user.PanelSelfV');
-                    }
-                    if (layout.activeItem) {
-                        layout.activeItem.query('.panel').forEach(App.util.Utilities.cascadeRemoveGrid);
-                        //layout.activeItem.cascade(cascadeRemoveGrid, {scope:this, args:false});
-                        layout.activeItem.add(panel);
-                    }*/
                     var main = me.up('main'),
                         toolbar = me.up('toolbar'),
                         layout = main.getLayout(),

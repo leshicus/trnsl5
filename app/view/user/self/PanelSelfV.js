@@ -2,9 +2,11 @@ Ext.define('App.view.user.self.PanelSelfV', {
     extend: 'Ext.container.Container',
     requires: [
         'App.view.main.MainM',
-        'App.view.user.self.PanelSelfC'
+        'App.view.user.self.PanelSelfC',
+        'App.view.user.self.PanelSelfM',
+        'App.view.admin.clas.GridExamM'
     ],
-    viewModel: {type: 'main'},
+    viewModel: {type: 'panelSelf'},
     controller:'panelSelf',
     alias: 'widget.panelSelf',
     itemId: 'content',
@@ -13,8 +15,9 @@ Ext.define('App.view.user.self.PanelSelfV', {
         type: 'hbox',
         align: 'stretch'
     },
-    border:false,
-    frame:false,
+    bind:'{card}', // * без этого не работает store load event в listen контроллера
+  /*  border:false,
+    frame:false,*/
     questionMaxInCardSelf : 0, // * число вопросов в билете
    /* myTooltip: Ext.create('Ext.tip.ToolTip', {
         renderTo: Ext.getBody()
@@ -25,79 +28,110 @@ Ext.define('App.view.user.self.PanelSelfV', {
 
         //var storeKnow = Ext.create('App.store.user.KnowS');
         this.items = [
-// * левая половина: Информация
             {
-                xtype: 'panel',
-                cls: 'my_shadowborder',
-                margin: 5,
-                frame: true,
-                border: false,
-                width: 300,
-                itemId: 'panelProgress',
-                title: 'Прогресс',
                 layout: {
                     type: 'vbox',
                     align: 'stretch'
                 },
-                defaults: {
-                    margin: '5 5 5 5',
-                    labelWidth: 130
-                },
+                width: 300,
                 items: [
                     {
-                        xtype: 'combobox',
-                        //store: 'user.KnowS',
-                        bind: {store: '{know}'},
-                        itemId: 'comboKnow',
-                        queryMode: 'local',
-                        editable: false,
-                        valueField: 'knowid',
-                        fieldLabel: 'Область знаний',
-                        tpl: Ext.create('Ext.XTemplate',
-                            '<tpl for=".">',
-                            '<div class="x-boundlist-item">{knownum}  {knowname}</div>',
-                            '</tpl>'
-                        ),
-                        displayTpl: Ext.create('Ext.XTemplate',
-                            '<tpl for=".">',
-                            '{knownum} {knowname}',
-                            '</tpl>'
-                        )
+                        xtype: 'panel',
+                        cls: 'my_shadowborder',
+                        margin: 5,
+                        title: 'Область',
+                        itemId: 'panelKnow',
+                        height: 150,
+                        layout: {
+                            type: 'vbox',
+                            align: 'stretch'
+                        },
+                        defaults: {
+                            margin: '5 5 5 5',
+                            labelWidth: 130
+                        },
+                        items: [
+                            {
+                                xtype: 'combobox',
+                                //store: 'user.KnowS',
+                                viewModel: {type: 'main'},
+                                bind: {store: '{know}'},
+                                itemId: 'comboKnow',
+                                queryMode: 'local',
+                                editable: false,
+                                valueField: 'knowid',
+                                fieldLabel: 'Область знаний',
+                                tpl: Ext.create('Ext.XTemplate',
+                                    '<tpl for=".">',
+                                    '<div class="x-boundlist-item">{knownum}  {knowname}</div>',
+                                    '</tpl>'
+                                ),
+                                displayTpl: Ext.create('Ext.XTemplate',
+                                    '<tpl for=".">',
+                                    '{knownum} {knowname}',
+                                    '</tpl>'
+                                ),
+                                listeners:{
+                                    //change:'onChangeComboKnow'
+                                }
+                            }
+                        ],
+                        buttons: [
+                            {
+                                xtype: 'button',
+                                action: 'starttest',
+                                itemId: 'startTest',
+                                scale:'medium',
+                                iconCls: 'icon_start',
+                                text: 'Начать тестирование'
+                            }
+                        ]
                     },
                     {
-                        xtype: 'displayfield',
-                        fieldLabel: 'Вопрос',
-                        itemId: 'textQuestion',
-                        fieldStyle: {
-                            color: '#666666',
-                            'font-weight': 'bold',
-                            'font-size': 'larger',
-                            'font-variant': 'small-caps'
-                        }
-                    },
-                    {
-                        xtype: 'displayfield',
-                        fieldLabel: 'Ответ',
-                        myCustomText:' ', // * текст вопроса во всплывающей подсказке
-                        itemId: 'textAnswer',
-                        listeners: {
-                            //afterrender: 'answerTooltip'
-                        }
-                    },
-                    {
-                        xtype: 'displayfield',
-                        fieldLabel: 'Нормативный документ',
-                        itemId: 'textNormdoc'
-                    }
-                ],
-                buttons: [
-                    {
-                        xtype: 'button',
-                        action: 'starttest',
-                        itemId: 'startTest',
-                        scale:'medium',
-                        iconCls: 'icon_start',
-                        text: 'Начать тестирование'
+                        xtype: 'panel',
+                        cls: 'my_shadowborder',
+                        margin: 5,
+                        flex: 2,
+                        /*frame: true,
+                         border: false,*/
+                        width: 300,
+                        itemId: 'panelProgress',
+                        title: 'Прогресс',
+                        layout: {
+                            type: 'vbox',
+                            align: 'stretch'
+                        },
+                        defaults: {
+                            margin: '5 5 5 5',
+                            labelWidth: 130
+                        },
+                        items: [
+                            {
+                                xtype: 'displayfield',
+                                fieldLabel: 'Вопрос',
+                                itemId: 'textQuestion',
+                                fieldStyle: {
+                                    color: '#666666',
+                                    'font-weight': 'bold',
+                                    'font-size': 'larger',
+                                    'font-variant': 'small-caps'
+                                }
+                            },
+                            {
+                                xtype: 'displayfield',
+                                fieldLabel: 'Ответ',
+                                myCustomText:' ', // * текст вопроса во всплывающей подсказке
+                                itemId: 'textAnswer',
+                                listeners: {
+                                    //afterrender: 'answerTooltip'
+                                }
+                            },
+                            {
+                                xtype: 'displayfield',
+                                fieldLabel: 'Нормативный документ',
+                                itemId: 'textNormdoc'
+                            }
+                        ]
                     }
                 ]
             },
@@ -138,7 +172,7 @@ Ext.define('App.view.user.self.PanelSelfV', {
                         height:200,
                         autoScroll:true,
                         style: {
-                            'font-variant': 'small-caps'
+                            //'font-variant': 'small-caps'
                             //'font-style': 'italic'
                         },
                         hideCollapseTool: true,
@@ -155,7 +189,7 @@ Ext.define('App.view.user.self.PanelSelfV', {
                         flex: 1,
                         autoScroll:true,
                         style: {
-                            'font-variant': 'small-caps'
+                            //'font-variant': 'small-caps'
                             //'font-style': 'italic'
                         },
                         itemId: 'answerAccordion',

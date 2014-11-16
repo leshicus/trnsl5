@@ -4,15 +4,9 @@ Ext.define('App.view.user.test.PanelTestM', {
     stores: {
         exam: {
             fields: [
-                {name: 'examid'},
-                {name: 'examdate'},
-                {name: 'userid'},
-                {name: 'fio'},
-                {name: 'login'},
-                {name: 'orgid'},
-                {name: 'orgabbr',type:'string'}
+
             ],
-            autoSync: true,
+            //autoSync: true,
             autoLoad: true,
             idProperty:'examid',
             proxy: {
@@ -33,12 +27,12 @@ Ext.define('App.view.user.test.PanelTestM', {
                     type: 'json',
                     writeAllFields:true,
                     encode: true,
-                    writeValue:function (data, field) {
+                    /*writeValue:function (data, field) {
                         console.info(arguments);
                         if('orgabbr' !== field.name)   {
                             Ext.data.writer.Json.prototype.writeValue.apply(this,arguments);
                         }
-                    }
+                    }*/
                 },
                 appendId: false,
                 actionMethods: {

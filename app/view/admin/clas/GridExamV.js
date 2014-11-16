@@ -77,7 +77,7 @@ Ext.define('App.view.admin.clas.GridExamV', {
             });
 
 
-        var comboOrg = Ext.create('Ext.form.ComboBox', {
+    /*    var comboOrg = Ext.create('Ext.form.ComboBox', {
             bind: {store: '{org1}'},
             itemId: 'comboOrg',
             valueField: 'orgid',
@@ -85,7 +85,7 @@ Ext.define('App.view.admin.clas.GridExamV', {
             editable: false,
             queryMode: 'local',
             displayField: 'orgabbr'
-        });
+        });*/
 
         this.columns = [
             {
@@ -143,7 +143,6 @@ Ext.define('App.view.admin.clas.GridExamV', {
                 /*renderer: function(value,metaData ,record ,rowIndex ,colIndex ,store ,view ,retrn ) {
                  var result = '',
                  storeOrg = this.up('main').getViewModel().getStore('org');
-                 //TODO при нажатии на поле Организация показывает id
                  storeOrg.findBy(function(record) {
                  if (record.get('orgid') == value) {
                  result = record.get('orgabbr');
@@ -154,7 +153,7 @@ Ext.define('App.view.admin.clas.GridExamV', {
             }
         ];
 
-        this.contextMenu = Ext.create('Ext.menu.Menu', {
+    /*    this.contextMenu = Ext.create('Ext.menu.Menu', {
             plain: true,
             border: false,
             items: [
@@ -164,7 +163,7 @@ Ext.define('App.view.admin.clas.GridExamV', {
                     iconCls: 'icon_excel'
                 }
             ]
-        });
+        });*/
 
         this.callParent(arguments);
         console.log('GridExam end');

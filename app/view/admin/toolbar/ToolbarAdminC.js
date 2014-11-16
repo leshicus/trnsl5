@@ -58,13 +58,14 @@ Ext.define('App.view.admin.toolbar.ToolbarAdminC', {
                 if (me.pressed) {
                     console.log('click mainMI');
 
-                    var main = me.up('main'),
+                    /*var main = me.up('main'),
                         layout = main.getLayout(),
                         content = layout.activeItem.query('#content')[0];
                     if (content) {
                         layout.activeItem.remove(content);
                     }
-                    layout.setActiveItem(0);
+                    layout.setActiveItem(0);*/
+                    location.reload();
                 }
             }
         },

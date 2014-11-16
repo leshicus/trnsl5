@@ -3,16 +3,15 @@ Ext.define('App.view.user.test.PanelTestV', {
     requires: [
         'App.view.main.MainM',
         'App.view.user.test.PanelTestC',
-        'App.view.user.test.PanelTestM',
+        'App.view.user.self.PanelSelfM',
         'Ext.layout.container.Accordion'
     ],
-    viewModel: {type: 'paneltest'},
+    viewModel: {type: 'panelSelf'},
     controller:'panelTest',
+    bind:'{card}',
     alias: 'widget.panelTest',
     itemId: 'content',
     flex: 1,
-    border: false,
-    frame:false,
     padding: '0 0 0 0',
     layout: {
         type: 'hbox',
@@ -45,13 +44,10 @@ Ext.define('App.view.user.test.PanelTestV', {
     examTimerQuestionMin : 3, // * минут на экзамен для одного вопроса
     maxquestion:0,
     minquestion:0,
-    regstatint:0,
+    regstatint:5,
     regstatdur:0,
     passed:false, // * проходился тест или не
     examTimerSec : App.util.Utilities.examTimerSec, // * секунд в минуте
-    /*myTooltip: Ext.create('Ext.tip.ToolTip', {
-        renderTo: Ext.getBody()
-    }),*/ //todo разобраться
     constructor: function () {
         console.log('PanelTestV init');
 
@@ -78,7 +74,6 @@ Ext.define('App.view.user.test.PanelTestV', {
                         cls: 'my_shadowborder',
                         margin: 5,
                         title: 'Регистрация на экзамен',
-                        frame: true,
                         height: 150,
                         //border: false,
                         //margin: '0 0 5 0',
@@ -94,7 +89,8 @@ Ext.define('App.view.user.test.PanelTestV', {
                             {
                                 xtype: 'combobox',
                                 //store: storeExam,
-                                bind:'{exam}',
+                                viewModel: {type: 'paneltest'},
+                                bind:{store:'{exam}'},
                                 //store: 'admin.GridExamS',
                                 itemId: 'comboExam',
                                 queryMode: 'local',
@@ -144,7 +140,6 @@ Ext.define('App.view.user.test.PanelTestV', {
 // * прогресс
                     {
                         xtype: 'panel',
-                        frame: true,
                         cls: 'my_shadowborder',
                         margin: 5,
                         flex: 2,
@@ -246,7 +241,7 @@ Ext.define('App.view.user.test.PanelTestV', {
                         height:200,
                         autoScroll:true,
                         style: {
-                            'font-variant': 'small-caps'
+                            //'font-variant': 'small-caps'
                             //'font-style': 'italic'
                         },
                         hideCollapseTool: true,
@@ -263,7 +258,7 @@ Ext.define('App.view.user.test.PanelTestV', {
                         flex: 1,
                         autoScroll:true,
                         style: {
-                            'font-variant': 'small-caps'
+                            //'font-variant': 'small-caps'
                             //'font-style': 'italic'
                         },
                         itemId: 'answerAccordion',

@@ -7,6 +7,9 @@ Ext.define('App.view.admin.griduser.GridUserC', {
     alias: 'controller.griduser',
 
     control: {
+        '#':{
+
+        },
         '#refreshGridUserS': {
             click: function (button) {
                 console.log('click refreshGridUserS');

@@ -97,7 +97,7 @@ Ext.define('App.view.admin.griduser.GridUserV', {
             }
         ];
 
-        this.contextMenu = Ext.create('Ext.menu.Menu', {
+      /*  this.contextMenu = Ext.create('Ext.menu.Menu', {
             plain: true,
             border: false,
             items: [
@@ -118,7 +118,7 @@ Ext.define('App.view.admin.griduser.GridUserV', {
                     iconCls: 'icon_unblock'
                 }
             ]
-        });
+        });*/
 
         this.callParent(arguments);
         console.log('GridUser end');

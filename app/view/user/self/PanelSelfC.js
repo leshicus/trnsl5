@@ -1,16 +1,27 @@
 Ext.define('App.view.user.self.PanelSelfC', {
     extend: 'Ext.app.ViewController',
+    requires: [
+        'Ext.form.field.Radio'
+    ],
     alias: 'controller.panelSelf',
-    onLaunch: function () {
-       /* var me = this;
-        var storeCard = Ext.data.StoreManager.lookup('user.CardSelfS');
-        // * старт показа вопросов после генерации билета
-        storeCard.on('load', me.onStoreCardLoad, me);*/
+
+    listen: {
+        store: {
+            '#card': {
+                load: function (store, rec) {
+                    // * старт показа вопросов после генерации билета
+                    /*console.log('onStoreCardLoad');
+
+                     var maxRownum = this.getStoreMaxValue(store, 'rownum'), // число вопросов в билете
+                     panelSelf = this.getView();
+                     panelSelf.questionMaxInCardSelf = maxRownum;
+                     this.showCard(1);*/
+                }
+            }
+        }
     },
     control: {
-        '#':{
-
-        },
+        '#': {},
         '#comboKnow': {
             specialkey: function (combo, e) {
                 if (e.getKey() == e.DELETE && combo.readOnly == false) {
@@ -22,7 +33,7 @@ Ext.define('App.view.user.self.PanelSelfC', {
             click: function (button) {
                 console.log('action=starttest');
 
-                var panelSelf = button.up('panelSelf'),
+                var panelSelf = this.getView(),
                     comboKnow = panelSelf.down('#comboKnow'),
                     textAnswer = panelSelf.down('#textAnswer'),
                     textNormdoc = panelSelf.down('#textNormdoc'),
@@ -30,7 +41,7 @@ Ext.define('App.view.user.self.PanelSelfC', {
                 panelSelf.questionNumber = 0;
                 panelSelf.questionMaxInCardSelf = 0;
                 // * генерация билета
-                var storeCard = Ext.data.StoreManager.lookup('user.CardSelfS');
+                var storeCard = panelSelf.getViewModel().getStore('card');
                 storeCard.clearFilter();
                 storeCard.load({params: {know: know}});
                 textAnswer.reset();
@@ -49,9 +60,9 @@ Ext.define('App.view.user.self.PanelSelfC', {
                     textAnswer = panelSelf.down('#textAnswer'), // * прогресс - Ответ
                     answerAccordion = panelSelf.down('#answerAccordion'),
                     arrayAnswers = answerAccordion.query('radiofield'),
-                    storeCard = Ext.data.StoreManager.lookup('user.CardSelfS'),
-                    questionId = storeCard.findRecord('rownum', rownum, 0,false,true,true).get('questionid'),
-                    questionText = storeCard.findRecord('rownum', rownum, 0,false,true,true).get('questiontext'),
+                    storeCard = panelSelf.getViewModel().getStore('card'),
+                    questionId = storeCard.findRecord('rownum', rownum, 0, false, true, true).get('questionid'),
+                    questionText = storeCard.findRecord('rownum', rownum, 0, false, true, true).get('questiontext'),
                     buttonNextQuestion = panelSelf.down('#nextQuestion'),
                     checkedAnswerId,
                     answerText = 'нет ответа',
@@ -75,6 +86,7 @@ Ext.define('App.view.user.self.PanelSelfC', {
                             return true;
                         }
                     }
+
                     var checkedAnswerIndex = storeCard.findBy(findRecordAnswer);
                     if (checkedAnswerIndex != -1) {
                         var checkedAnswerRec = storeCard.getAt(checkedAnswerIndex);
@@ -88,14 +100,14 @@ Ext.define('App.view.user.self.PanelSelfC', {
                 if (correct == 1) {
                     textAnswer.setValue(App.util.Utilities.correctString);
                     textAnswer.setFieldStyle(App.util.Utilities.colorStatusTextReg);
-                    textNormdoc.reset();
+                    //textNormdoc.reset();
                 } else {
-                    // * Норм док
-                    var normdoc = storeCard.findRecord('correct',1).get('normdoc');
-                    textNormdoc.setValue(normdoc);
                     textAnswer.setValue(App.util.Utilities.uncorrectString);
                     textAnswer.setFieldStyle(App.util.Utilities.colorStatusTextUnreg);
                 }
+                // * Норм док
+                var normdoc = storeCard.findRecord('correct', 1).get('normdoc');
+                textNormdoc.setValue(normdoc);
                 // * отсроченный показ следующего билета
                 //taskDelayShowNewQuestion.delay(1000);
                 this.showNextQuestion(buttonNextQuestion);
@@ -107,15 +119,15 @@ Ext.define('App.view.user.self.PanelSelfC', {
                 field.el.on({
                     mouseover: function (e) {
                         /*var tip = field.up('panelSelf').myTooltip;
-                        tip.update(field.myCustomText);
-                        tip.showAt(e.getXY());*/
+                         tip.update(field.myCustomText);
+                         tip.showAt(e.getXY());*/
                         Ext.tip.QuickTipManager.register({
                             target: field.getId(), // Target button's ID
                             //anchor: 'bottom',
                             anchor: 'top',
                             dismissDelay: 3000,
                             anchorOffset: 85,
-                            text  : field.myCustomText // Tip content
+                            text: field.myCustomText // Tip content
                         });
                     },
                     mouseout: function () {
@@ -134,7 +146,7 @@ Ext.define('App.view.user.self.PanelSelfC', {
         console.log('onStoreCardLoad');
 
         var maxRownum = this.getStoreMaxValue(storeCard, 'rownum'), // число вопросов в билете
-            panelSelf = this.getPanelSelf();
+            panelSelf = this.getView();
         panelSelf.questionMaxInCardSelf = maxRownum;
         this.showCard(1);
     },
@@ -152,17 +164,17 @@ Ext.define('App.view.user.self.PanelSelfC', {
     },
     // * смена вопросов и ответов
     showCard: function (num) {
-        var storeCard = Ext.data.StoreManager.lookup('user.CardSelfS');
-        storeCard.clearFilter();
-        var panelSelf = this.getPanelSelf(),
+        var panelSelf = this.getView(),
+            storeCard = panelSelf.getViewModel().getStore('card'),
             panelCard = panelSelf.down('#panelCard'),// * билет
             questionAccordion = panelCard.down('#questionAccordion'),
             answerAccordion = panelCard.down('#answerAccordion'),
             question = panelCard.down('#question'), // * поле внутри аккордиона Вопрос
             textQuestion = panelSelf.down('#textQuestion'), // * Прогресс - Вопрос
             buttonNextQuestion = panelSelf.down('#nextQuestion');
-        if(storeCard.count() > 0){
-            var questionText = storeCard.findRecord('rownum', num, 0,false,true,true).get('questiontext'); // текст вопроса
+        storeCard.clearFilter();
+        if (storeCard.count() > 0) {
+            var questionText = storeCard.findRecord('rownum', num, 0, false, true, true).get('questiontext'); // текст вопроса
             //console.log(num,questionText,storeCard,storeCard.findRecord('rownum', num, 0,false,false,true));
             // * вопросы
             question.setValue(questionText);
@@ -186,22 +198,29 @@ Ext.define('App.view.user.self.PanelSelfC', {
                 );
             });
             buttonNextQuestion.setDisabled(false);
-        }else{
-            Ext.Msg.alert('Внимание','Вопросы не найдены');
+        } else {
+            Ext.Msg.alert('Внимание', 'Вопросы не найдены');
         }
 
 
     },
     showNextQuestion: function (buttonNextQuestion) {
-        var panelSelf = this.getPanelSelf();
+        var panelSelf = this.getView();
         if (panelSelf.questionNumber < panelSelf.questionMaxInCardSelf) {
             buttonNextQuestion.setDisabled(false);
             this.showCard(panelSelf.questionNumber + 1);
         } else {
             buttonNextQuestion.setDisabled(true);
         }
-    }
-
+    },
+    /*  onChangeComboKnow: function (combo, n, o) {
+     var panelProgress = combo.up('#panelProgress'),
+     buttonStartTest = panelProgress.down('#startTest');
+     if (n)
+     buttonStartTest.enable();
+     else
+     buttonStartTest.disable();
+     }*/
 
 
 });

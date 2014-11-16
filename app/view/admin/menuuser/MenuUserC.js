@@ -1,11 +1,27 @@
 Ext.define('App.view.admin.menuuser.MenuUserC', {
     extend: 'Ext.app.ViewController',
-    requires: [
-
-    ],
+    requires: [],
     alias: 'controller.menuuser',
 
     control: {
+        '#': {
+            show: function (menu) {
+                var gridUser = Ext.ComponentQuery.query('gridUser')[0],
+                    selection = gridUser.getSelected(),
+                    block = selection[0].get('enddate'),
+                    menuBlock = menu.down('#menuBlock'),
+                    menuUnblock = menu.down('#menuUnblock'),
+                    menuResetPassword = menu.down('#menuResetPassword');
+                if (block != '00.00.0000 00:00' && block) {
+                    menuBlock.disable();
+                    menuUnblock.enable();
+                } else {
+                    menuBlock.enable();
+                    menuUnblock.disable();
+                }
+                menuResetPassword.enable();
+            }
+        },
         '#menuResetPassword': {
             click: function (button) {
                 console.log('click menuResetPassword');
@@ -74,5 +90,14 @@ Ext.define('App.view.admin.menuuser.MenuUserC', {
 
             }
         }
+    },
+    getMenuResetPassword: function () {
+        return this.contextMenu.query('#menuResetPassword')[0];
+    },
+    getMenuBlock: function () {
+        return this.contextMenu.query('#menuBlock')[0];
+    },
+    getMenuUnblock: function () {
+        return this.contextMenu.query('#menuUnblock')[0];
     }
 });
