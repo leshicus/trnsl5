@@ -32,7 +32,7 @@ Ext.define('App.view.admin.stat.PanelStatC', {
 
                         var chart = Ext.create('App.view.admin.stat.ChartActivityV'),
                             storeAct = panelStat.getViewModel().getStore('chartactivity');
-
+                        panel.add(chart);
                         storeAct.load({
                             params: {
                                 dateFrom: dateFrom,
@@ -41,7 +41,7 @@ Ext.define('App.view.admin.stat.PanelStatC', {
                             },
                             callback: function (records, operation, success) {
                                 if (success == true) {
-                                    panel.add(chart);
+                                    chart.down('cartesian').bindStore(storeAct);
                                 } else {
                                     App.util.Utilities.errorMessage('Ошибка подключения к базе', 'График не получен');
                                 }

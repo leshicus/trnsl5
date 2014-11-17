@@ -1,6 +1,8 @@
 Ext.define('App.view.manage.question.question.FormQuestionC', {
     extend: 'Ext.app.ViewController',
-
+    requires: [
+        'App.model.manage.GridQuestionM'
+    ],
     alias: 'controller.formquestion',
 
     control: {
