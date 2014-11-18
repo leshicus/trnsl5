@@ -18,14 +18,14 @@ Ext.define('App.view.admin.stat.ChartActivityProgressV', {
     legend: {
         position: 'right'
     },
-    bind:{
+  /*  bind:{
         store:'{chartactivityprogress}'
-    },
+    },*/
     insetPadding: 60,
     theme: 'Base',
     initComponent: function () {
         console.log('ChartActivityProgressV init');
-
+        var me = this;
        /* var store = Ext.create('App.store.admin.ChartActivityProgressS');
         this.store = store;*/
 
@@ -38,9 +38,9 @@ Ext.define('App.view.admin.stat.ChartActivityProgressV', {
                 legend: {
                     docked: 'bottom'
                 },
-                bind: {
+             /*   bind: {
                     store: '{chartactivityprogress}'
-                },
+                },*/
                 insetPadding: {
                     top: 40,
                     left: 40,
@@ -51,7 +51,7 @@ Ext.define('App.view.admin.stat.ChartActivityProgressV', {
                 interactions: ['rotate', 'itemhighlight'],
                 sprites: [{
                     type: 'text',
-                    text: 'Column Charts - Stacked Columns',
+                    text: 'Успеваемость по видам деятельности',
                     fontSize: 22,
                     width: 100,
                     height: 30,
@@ -68,16 +68,18 @@ Ext.define('App.view.admin.stat.ChartActivityProgressV', {
                             trackMouse: true,
                             width: 140,
                             height: 28,
-                            renderer: function (storeItem, item) {
+                          /*  renderer: function (storeItem, item) {
                                 //calculate percentage.
                                 var total = 0,
-                                    store = this.getViewModel().getStore('chartactivityprogress');
+                                    store = me.getViewModel().getStore('chartactivityprogress');
                                 store.each(function (rec) {
                                     total += rec.get('data');
+                                    console.info(store,total);
                                 });
+
                                 this.setTitle(storeItem.get('result') + ': ' + Math.round(storeItem.get('data') / total * 100) + '%');
                                 this.setHtml(storeItem.get('result') + ': ' + storeItem.get('data') + '%');
-                            }
+                            }*/
                         },
                         label: {
                             field: 'result',
@@ -85,10 +87,13 @@ Ext.define('App.view.admin.stat.ChartActivityProgressV', {
                             contrast: true,
                             font: '18px Arial',
                             // * чтобы не показывались подписи если значение 0
-                            renderer: function (val) {
-                                var m = store.findRecord('result', val, 0,false,true,true);
+                         /*   renderer: function (val) {
+
+                                var store = me.getViewModel().getStore('chartactivityprogress'),
+                                    m = store.findRecord('result', val, 0,false,true,true);
+                                console.info(store,val);
                                 return m.get('data') > 0 ? val : '';
-                            }
+                            }*/
                         }
                     }
                 ]

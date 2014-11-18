@@ -7,7 +7,7 @@ Ext.define('App.view.admin.stat.ChartActivityV', {
     ],
     alias: 'widget.chartActivity',
     viewModel: {type: 'panelstat'},
-    /*bind:{
+  /*  bind:{
      store:'{chartactivity}'
      },*/
     itemId: 'chartActivity',
@@ -25,20 +25,18 @@ Ext.define('App.view.admin.stat.ChartActivityV', {
     initComponent: function () {
         console.log('ChartActivityV init');
 
-        /* var store = Ext.create('App.store.admin.ChartActivityS');
-         this.store = store;*/
-
         this.items = [
             {
                 xtype: 'cartesian',
+                itemId:'chart',
                 width: '100%',
                 height: 460,
                 legend: {
                     docked: 'bottom'
                 },
-                bind: {
+                /*bind: {
                     store: '{chartactivity}'
-                },
+                },*/
                 insetPadding: {
                     top: 40,
                     left: 40,
@@ -47,7 +45,7 @@ Ext.define('App.view.admin.stat.ChartActivityV', {
                 },
                 sprites: [{
                     type: 'text',
-                    text: 'Column Charts - Stacked Columns',
+                    text: "Количество экзаменуемых по видам деятельности",
                     fontSize: 22,
                     width: 100,
                     height: 30,
@@ -58,7 +56,7 @@ Ext.define('App.view.admin.stat.ChartActivityV', {
                     {
                         type: 'numeric',
                         position: 'left',
-                        fields: ['g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'g7', 'g8', 'g9', 'g10'],
+                        // fields: ['группа 1', 'группа 2', 'группа 3', 'группа 4', 'группа 5'],
                         label: {
                             renderer: Ext.util.Format.numberRenderer('0,0')
                         },
@@ -86,23 +84,21 @@ Ext.define('App.view.admin.stat.ChartActivityV', {
                             width: 140,
                             height: 28,
                             renderer: function (storeItem, item) {
-                                this.setTitle('Группа №' + String(item.yField).replace('g', ''));
+                                //this.setTitle('Группа №' + String(item.yField).replace('группа ', ''));
+                                this.setTitle(item.field);
                             }
                         },
                         label: {
                             display: 'insideEnd',
                             'text-anchor': 'middle',
-                            field: ['g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'g7', 'g8', 'g9', 'g10'],
+                            field: ['группа_1', 'группа_2', 'группа_3', 'группа_4', 'группа_5'],
                             renderer: Ext.util.Format.numberRenderer('0'),
                             orientation: 'vertical',
                             color: '#333'
                         },
                         stacked: true,
                         xField: 'name',
-                        yField: ['g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'g7', 'g8', 'g9', 'g10']/*,
-                     style:{
-                     width:'50'
-                     }*/
+                        yField: ['группа_1', 'группа_2', 'группа_3', 'группа_4', 'группа_5']
                     }
                 ]
             }
