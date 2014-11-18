@@ -50,8 +50,8 @@ Ext.define('App.view.admin.stat.PanelStatC', {
                         });
                         break;
                     case '2':
-                        //var storeAct = Ext.data.StoreManager.lookup('admin.ChartActivityS');
                         var storeAct = panelStat.getViewModel().getStore('chartactivity');
+
                         storeAct.load({
                             params: {
                                 dateFrom: dateFrom,
@@ -61,18 +61,33 @@ Ext.define('App.view.admin.stat.PanelStatC', {
                             callback: function (records, operation, success) {
                                 if (success == true) {
                                     // * получим сколько у нас будет графиков- сколько записей в storeAct
+
                                     storeAct.each(function (rec) {
                                         var act = rec.get('name'),
+                                            storeAP = panelStat.getViewModel().getStore('chartactivityprogress'),
                                             chart = Ext.create('App.view.admin.stat.ChartActivityProgressV');
-                                        // * для каждого вида деятельности грузим стор для своей диаграммы
-                                        chart.store.load({params: {
-                                            dateFrom: dateFrom,
-                                            dateTo: dateTo,
-                                            act: act,
-                                            org: org
-                                        }});
                                         chart.title = act;
                                         panel.add(chart);
+                                        // * для каждого вида деятельности грузим стор для своей диаграммы
+                                        storeAP.load({
+                                            params: {
+                                                dateFrom: dateFrom,
+                                                dateTo: dateTo,
+                                                act: act,
+                                                org: org
+                                            },
+                                            callback: function (records, operation, success) {
+                                                if (success == true) {
+                                                    /*console.info(arguments);
+                                                    console.info(chart.down('polar'),storeAP);*/
+                                                    chart.down('polar').bindStore(storeAP);
+                                                } else {
+                                                    App.util.Utilities.errorMessage('Ошибка подключения к базе', 'График не получен');
+                                                }
+                                            },
+                                            scope: this
+                                        });
+
 
                                         //panel.add({xtype:'textfield',fieldLabel:'textfield'});
                                     });
@@ -99,12 +114,14 @@ Ext.define('App.view.admin.stat.PanelStatC', {
                                         var act = rec.get('name'),
                                             chart = Ext.create('App.view.admin.stat.ChartKnowProgressV');
                                         // * для каждого вида деятельности грузим стор для своей диаграммы
-                                        chart.store.load({params: {
-                                            dateFrom: dateFrom,
-                                            dateTo: dateTo,
-                                            act: act,
-                                            org: org
-                                        }});
+                                        chart.store.load({
+                                            params: {
+                                                dateFrom: dateFrom,
+                                                dateTo: dateTo,
+                                                act: act,
+                                                org: org
+                                            }
+                                        });
                                         chart.title = act;
                                         panel.add(chart);
                                     });
