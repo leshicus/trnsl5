@@ -48,8 +48,8 @@ Ext.define('App.view.main.MainM', {
                 {name: 'groupid'},
                 {name: 'orgid'}
             ],
-            autoSync: false,
-            autoLoad: true,
+            //autoSync: false,
+           // autoLoad: true,
             idProperty:'specid',
             proxy: {
                 type: 'rest',

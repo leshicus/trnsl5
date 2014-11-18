@@ -55,7 +55,7 @@ Ext.define('App.view.auth.tabreg.TabRegV', {
                 xtype: 'textfield',
                 itemId: 'textLastname',
                 name: 'textLastname',
-                validator:this.validatorFio,
+                //validator:this.validatorFio,
                 fieldLabel: 'Отчество'
             },
             comboOrg = {

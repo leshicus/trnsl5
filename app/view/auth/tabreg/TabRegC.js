@@ -6,14 +6,12 @@ Ext.define('App.view.auth.tabreg.TabRegC', {
     alias: 'controller.tabReg',
 
     listen: {
-        controller: {
-
-        }
+        controller: {}
     },
 
     control: {
         'tabReg': {
-            activate: function ( tab, eOpts ) {
+            activate: function (tab, eOpts) {
                 console.log('activate');
 
                 var form = tab.getForm();
@@ -25,7 +23,7 @@ Ext.define('App.view.auth.tabreg.TabRegC', {
                 console.log('action=register');
 
                 var form = button.up('form').getForm();
-                if (form.isValid() ) {
+                if (form.isValid()) {
                     form.submit({
                         waitMsg: 'Регистрация...',
                         success: function (form, action) {
@@ -52,29 +50,29 @@ Ext.define('App.view.auth.tabreg.TabRegC', {
                 var tabReg = field.up('#tabReg'),
                     comboSpec = tabReg.down('#comboSpeciality'),
                     main = field.up('main'),
-                    storeSpec = main.getViewModel().getStore('spec');
-                storeSpec.clearFilter();
+                    storeSpec = this.getView().getViewModel().getStore('spec');
+                //storeSpec.clearFilter();
                 comboSpec.disable();
-                comboSpec.reset();
-                storeSpec.filterBy(function(item){
-                    if(item.get('orgid') == newValue){
-                        comboSpec.enable();
-                        return true;
-                    }
-                });
-                /*comboSpec.store.load({
-                 params:{
-                 orgid:newValue
-                 },
-                 callback: function (records, operation, success) {
-                 if (success == true) {
+                //comboSpec.reset();
+                /*storeSpec.filterBy(function(item){
+                 if(item.get('orgid') == newValue){
                  comboSpec.enable();
-                 } else {
-                 App.util.Utilities.errorMessage('Ошибка подключения к базе', 'Должности не получены');
+                 return true;
                  }
-                 },
-                 scope: this
                  });*/
+                storeSpec.load({
+                    params: {
+                        orgid: newValue
+                    },
+                    callback: function (records, operation, success) {
+                        if (success == true) {
+                            comboSpec.enable();
+                        } else {
+                            App.util.Utilities.errorMessage('Ошибка подключения к базе', 'Должности не получены');
+                        }
+                    },
+                    scope: this
+                });
             }
         }
 
