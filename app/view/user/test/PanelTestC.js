@@ -47,7 +47,6 @@ Ext.define('App.view.user.test.PanelTestC', {
                         answerAccordion.remove(item, true);
                     }
                 });
-//todo при переключении на самоподготовку зависает таймраннер
                 var examid = combo.getValue();
                 var taskRegStatus = {
                     run: function () {

@@ -17,7 +17,7 @@ Ext.define('App.view.admin.stat.PanelStatC', {
                     dateFrom = panelStat.down('#dateFindFrom').getValue(),
                     dateTo = panelStat.down('#dateFindTo').getValue(),
                     org = panelStat.down('#comboOrg').getValue(),
-                    panel = panelStat.down('#panelChart');
+                    panelChart = panelStat.down('#panelChart');
                 if (!org) {
                     Ext.Msg.alert('Внимание', 'Укажите организацию');
                     return false;
@@ -26,13 +26,13 @@ Ext.define('App.view.admin.stat.PanelStatC', {
                     Ext.Msg.alert('Внимание', 'Укажите период');
                     return false;
                 }
-                panel.removeAll(true);
+                panelChart.removeAll();
                 switch (type) {
                     case '1':
 
                         var chart = Ext.create('App.view.admin.stat.ChartActivityV'),
                             storeAct = panelStat.getViewModel().getStore('chartactivity');
-                        panel.add(chart);
+                        panelChart.add(chart);
                         storeAct.load({
                             params: {
                                 dateFrom: dateFrom,
@@ -66,29 +66,19 @@ Ext.define('App.view.admin.stat.PanelStatC', {
                                         var act = rec.get('name'),
                                             storeAP = panelStat.getViewModel().getStore('chartactivityprogress'),
                                             chart = Ext.create('App.view.admin.stat.ChartActivityProgressV');
-                                        chart.title = act;
-                                        panel.add(chart);
+
                                         // * для каждого вида деятельности грузим стор для своей диаграммы
-                                        storeAP.load({
+                                        chart.down('polar').store.load({
                                             params: {
                                                 dateFrom: dateFrom,
                                                 dateTo: dateTo,
                                                 act: act,
                                                 org: org
-                                            },
-                                            callback: function (records, operation, success) {
-                                                if (success == true) {
-                                                    /*console.info(arguments);
-                                                    console.info(chart.down('polar'),storeAP);*/
-                                                    chart.down('polar').bindStore(storeAP);
-                                                } else {
-                                                    App.util.Utilities.errorMessage('Ошибка подключения к базе', 'График не получен');
-                                                }
-                                            },
-                                            scope: this
+                                            }
                                         });
-
-
+                                        chart.title = act;
+                                        panelChart.add(chart);
+                                       // chart.down('polar').bindStore(storeAP);
                                         //panel.add({xtype:'textfield',fieldLabel:'textfield'});
                                     });
                                 } else {
@@ -112,18 +102,29 @@ Ext.define('App.view.admin.stat.PanelStatC', {
                                     // * получим сколько у нас будет графиков- сколько записей в storeAct
                                     storeAct.each(function (rec) {
                                         var act = rec.get('name'),
+                                            storeAKP = panelStat.getViewModel().getStore('chartknowprogress'),
                                             chart = Ext.create('App.view.admin.stat.ChartKnowProgressV');
                                         // * для каждого вида деятельности грузим стор для своей диаграммы
-                                        chart.store.load({
+                                        chart.down('polar').store.load({
                                             params: {
                                                 dateFrom: dateFrom,
                                                 dateTo: dateTo,
                                                 act: act,
                                                 org: org
-                                            }
+                                            },
+                                            callback: function (records, operation, success) {
+                                                if (success == true) {
+                                                    chart.title = act;
+                                                    panelChart.add(chart);
+                                                    //chart.down('polar').bindStore(storeAKP);
+                                                } else {
+                                                    App.util.Utilities.errorMessage('Ошибка подключения к базе', 'График не получен');
+                                                }
+                                            },
+                                            scope: this
                                         });
-                                        chart.title = act;
-                                        panel.add(chart);
+
+
                                     });
                                 } else {
                                     App.util.Utilities.errorMessage('Ошибка подключения к базе', 'График не получен');

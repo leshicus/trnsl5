@@ -25,12 +25,11 @@ Ext.define('App.view.auth.tabauth.TabAuthV', {
     initComponent: function () {
         console.log('TabAuthV init');
 
-        var me = this,
-            textLogin = {
+        var textLogin = {
                 xtype: 'textfield',
                 itemId: 'textLogin',
                 name: 'textLogin',
-                value:'a',
+                //value:'a',
                 validator:this.validatorLogin,
                 allowBlank: false,
                 afterLabelTextTpl: App.util.Utilities.required,
@@ -56,7 +55,7 @@ Ext.define('App.view.auth.tabauth.TabAuthV', {
                 xtype: 'textfield',
                 itemId: 'textPassword',
                 name: 'textPassword',
-                value:'a',
+                //value:'a',
                 validator:this.validatorPassword,
                 inputType: 'password',
                 fieldLabel: 'Пароль',

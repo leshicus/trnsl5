@@ -18,20 +18,20 @@ Ext.define('App.view.user.toolbar.ToolbarUserV', {
                 text: 'Выход',
                 itemId: 'mainMI',
                 scale:'medium',
-                //iconCls: 'icon_back'
+                iconCls: 'icon_back'
             },
             '-',
             {
                 text: 'Тестирование',
                 itemId: 'testMI',
                 scale:'medium',
-                //iconCls: 'icon_test'
+                iconCls: 'icon_test'
             },
             {
                 text: 'Самоподготовка',
                 itemId: 'selfMI',
                 scale:'medium',
-                //iconCls: 'icon_self'
+                iconCls: 'icon_self'
             }
         ];
         this.callParent(arguments);

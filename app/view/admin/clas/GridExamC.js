@@ -72,14 +72,6 @@ Ext.define('App.view.admin.clas.GridExamC', {
                     vm = grid.getViewModel(),
                     store = vm.getStore('exam'),
                     newRecord = store.insert(0, {})[0];
-                //vm.set('exam', newRecord);
-                //TODO не дает редактировать запись
-                /*grid.store.sync({
-                 failure: function () {
-                 Ext.MessageBox.alert('Ошибка', 'Экзамен не добавлен');
-                 },
-                 scope: this
-                 });*/
             }
         },
         'button[action=delete]': {
@@ -98,12 +90,6 @@ Ext.define('App.view.admin.clas.GridExamC', {
                 } else {
                     Ext.Msg.alert('Не удалено', 'В классе находятся сотрудники');
                 }
-                /*grid.store.sync({
-                 failure: function () {
-                 Ext.MessageBox.alert('Ошибка', 'Пользователь не удален');
-                 },
-                 scope: this
-                 });*/
             }
         },
         '#dateFindFrom': {
