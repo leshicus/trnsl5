@@ -34,11 +34,11 @@ Ext.define('App.view.manage.question.question.GridQuestionV', {
         console.log('GridQuestion init');
 
         this.tools = [
-            {
+        /*    {
                 type: 'help',
                 itemId: 'instruction',
                 tooltip: 'Word-инструкция'
-            },
+            },*/
             {
                 type: 'refresh',
                 itemId: 'refreshGridQuestionS',

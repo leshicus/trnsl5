@@ -34,11 +34,11 @@ Ext.define('App.view.manage.spec.GridSpecV', {
         this.tbar = App.util.Utilities.buttonSaveDelete;
 
         this.tools = [
-            {
+         /*   {
                 type: 'help',
                 itemId: 'instruction',
                 tooltip: 'Word-инструкция'
-            },
+            },*/
             {
                 type: 'refresh',
                 itemId: 'refreshGridSpecS',
