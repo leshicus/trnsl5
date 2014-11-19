@@ -17,7 +17,7 @@ Ext.define('App.util.Utilities', {
     '</tr>' +
     '<tr>' +
     '<td>Почта:</td>' +
-    '<td>leshicus@gmail.com</td>' +
+    '<td>benzolring@mail.ru</td>' +
     '</tr>' +
     '<tr>' +
     '<td>Сайт:</td>' +
@@ -28,12 +28,7 @@ Ext.define('App.util.Utilities', {
     '<td>2014</td>' +
     '</tr>' +
     '</table>',
-    textProgramName:'Программа: Система тестирования знаний',
-    textVersionText:'Версия: 1.0',
-    textAuthor:'Разработчик: Волков А.И.',
-    textMail:'Почта: leshicus@gmail.com',
-    textSite:'Сайт: teh5.ru',
-    textYear:'Год: 2014',
+
     dataStat: [
         ['1', "Количество экзаменуемых по видам деятельности"],
         ['2', "Успеваемость по видам деятельности"],

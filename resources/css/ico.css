@@ -15,10 +15,6 @@
 .icon_refresh {
     background-image: url(/resources/image/back-icon.png) !important;
 }
-.icon_enter {
-    background-image: url(/resources/image/door-in-icon.png) !important;
-}
-
 
 
 
@@ -63,9 +59,6 @@
 
     /* manage */
 
-.icon_save {
-    background-image: url(/resources/image/save-icon.png) !important;
-}
 .icon_question {
     background-image: url(/resources/image/Help-File-icon.png) !important;
 }
