@@ -21,7 +21,6 @@ Ext.define('App.view.manage.question.answer.FormAnswerC', {
                     storeAnswer = gridAnswer.getViewModel().getStore('answer'),
                     countAnswer = storeAnswer.getCount(),
                     normdoc = values['normdoc'];
-                //todo не должно давать отмечать второй правильный ответ
                 if (selectedQuestion != '') {
                     var questionid = selectedQuestion[0].get('questionid');
                     if (values.answertext) { // * такая вот валидация, allowBlank=false не работает

@@ -70,7 +70,7 @@ Ext.define('App.view.manage.question.question.GridQuestionV', {
                 iconCls: 'icon_delete'
             },
             '->',
-            /*{//todo что тут с загрузкой файла
+            /*{
                 xtype: 'filefield',
                 name: 'import',
                 itemId: 'import',

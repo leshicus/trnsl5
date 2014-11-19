@@ -9,11 +9,9 @@ Ext.define('App.Application', {
     name: 'App',
 
     stores: [
-        // TODO: add global / shared stores here
     ],
 
     launch: function () {
-        // TODO - Launch the application
     },
     requires: [
         'App.util.Utilities'

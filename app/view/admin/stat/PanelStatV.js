@@ -59,7 +59,7 @@ Ext.define('App.view.admin.stat.PanelStatV', {
                         editable: false,
                         valueField: 'orgid',
                         displayField: 'orgname',
-                        value:1, //todo убрать
+                        //value:1,
                         emptyText: 'Организация'
                     },
                     {

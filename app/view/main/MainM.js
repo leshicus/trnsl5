@@ -213,5 +213,4 @@ Ext.define('App.view.main.MainM', {
         }
 
     }
-    //TODO - add data, formulas and/or methods to support your view
 });

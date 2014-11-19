@@ -42,7 +42,6 @@ Ext.define('App.view.manage.question.question.GridQuestionC', {
                 window.show();
             }
         },
-//todo добавляет 2 записи сразу
         'gridQuestion button[action=add]': {
             click: function (button) {
                 console.log('action=add');
@@ -234,7 +233,6 @@ Ext.define('App.view.manage.question.question.GridQuestionC', {
          }
          },*/
         '#refreshGridQuestionS': {
-            //todo не учитывает выделенный каталог
             click: function (button) {
                 console.log('click refreshGridQuestionS');
 

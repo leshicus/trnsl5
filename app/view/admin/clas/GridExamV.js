@@ -177,7 +177,6 @@ Ext.define('App.view.admin.clas.GridExamV', {
     },
     onEdit: function (b, a) {
         var c = this, d;
-        //todo убрать автосинк
         if ("orgabbr" === a.field) {
             d = a.column.field;
             a.record.set({orgid: d.getValue(), orgabbr: d.getRawValue()});

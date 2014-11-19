@@ -3,6 +3,7 @@ Ext.define('App.view.user.test.PanelTestV', {
     requires: [
         'App.view.main.MainM',
         'App.view.user.test.PanelTestC',
+        'App.view.user.test.PanelTestM',
         'App.view.user.self.PanelSelfM',
         'Ext.layout.container.Accordion'
     ],

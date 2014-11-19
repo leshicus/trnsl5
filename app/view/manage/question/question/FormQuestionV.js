@@ -16,7 +16,7 @@
     constructor: function () {
         console.log('formQuestion init');
 
-        this.items = [//todo не показывает иконки
+        this.items = [
             {
                 xtype: 'htmleditor',
                 itemId: 'textQuestion',

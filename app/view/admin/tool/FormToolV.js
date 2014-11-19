@@ -7,7 +7,7 @@ Ext.define('App.view.admin.tool.FormToolV', {
     alias: 'widget.formTool',
     viewModel: {type: 'main'},
     controller:'formtool',
-    flex: 1,
+    //flex: 1,
     title: 'Глобальные настройки системы',
     layout: {
         type: 'vbox'/*,
@@ -66,7 +66,8 @@ Ext.define('App.view.admin.tool.FormToolV', {
                 text: 'Сохранить',
                 scale:'medium',
                 action: 'save'
-            }
+            },
+            '->'
         ]
 
         this.callParent(arguments);
