@@ -16,13 +16,7 @@ Ext.define('App.view.user.self.PanelSelfV', {
         align: 'stretch'
     },
     bind:'{card}', // * без этого не работает store load event в listen контроллера
-  /*  border:false,
-    frame:false,*/
     questionMaxInCardSelf : 0, // * число вопросов в билете
-   /* myTooltip: Ext.create('Ext.tip.ToolTip', {
-        renderTo: Ext.getBody()
-    }),*/
-
     constructor: function () {
         console.log('PanelSelfV init');
 
@@ -53,7 +47,6 @@ Ext.define('App.view.user.self.PanelSelfV', {
                         items: [
                             {
                                 xtype: 'combobox',
-                                //store: 'user.KnowS',
                                 viewModel: {type: 'main'},
                                 bind: {store: '{know}'},
                                 itemId: 'comboKnow',
@@ -72,7 +65,6 @@ Ext.define('App.view.user.self.PanelSelfV', {
                                     '</tpl>'
                                 ),
                                 listeners:{
-                                    //change:'onChangeComboKnow'
                                 }
                             }
                         ],
@@ -92,8 +84,6 @@ Ext.define('App.view.user.self.PanelSelfV', {
                         cls: 'my_shadowborder',
                         margin: 5,
                         flex: 2,
-                        /*frame: true,
-                         border: false,*/
                         width: 300,
                         itemId: 'panelProgress',
                         title: 'Прогресс',
@@ -123,7 +113,6 @@ Ext.define('App.view.user.self.PanelSelfV', {
                                 myCustomText:' ', // * текст вопроса во всплывающей подсказке
                                 itemId: 'textAnswer',
                                 listeners: {
-                                    //afterrender: 'answerTooltip'
                                 }
                             },
                             {
@@ -154,7 +143,7 @@ Ext.define('App.view.user.self.PanelSelfV', {
                         itemId: 'nextQuestion',
                         disabled: true,
                         scale:'medium',
-                        iconCls: 'icon_next',
+                        glyph: Glyphs.get('arrowright'),
                         text: 'Следующий вопрос'
                     }
                 ],
@@ -172,8 +161,6 @@ Ext.define('App.view.user.self.PanelSelfV', {
                         height:200,
                         autoScroll:true,
                         style: {
-                            //'font-variant': 'small-caps'
-                            //'font-style': 'italic'
                         },
                         hideCollapseTool: true,
                         items: [
@@ -189,8 +176,6 @@ Ext.define('App.view.user.self.PanelSelfV', {
                         flex: 1,
                         autoScroll:true,
                         style: {
-                            //'font-variant': 'small-caps'
-                            //'font-style': 'italic'
                         },
                         itemId: 'answerAccordion',
                         hideCollapseTool: true,

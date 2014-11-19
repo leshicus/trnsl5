@@ -44,7 +44,6 @@
             },
             {
                 xtype: 'combobox',
-                //store: 'manage.GridSpecS',
                 bind:{
                     store:'{spec}'
                 },
@@ -59,7 +58,6 @@
             },
             {
                 xtype: 'combobox',
-                //store: 'admin.ComboRoleS',
                 bind:{
                     store:'{role}'
                 },
@@ -78,12 +76,14 @@
             {
                 text: 'Сохранить',
                 action: 'save',
+                glyph: Glyphs.get('save'),
                 scale: 'medium'
             },
             '->',
             {
                 text: 'Отмена',
                 action: 'cancel',
+                glyph: Glyphs.get('cancel'),
                 scale: 'medium'
             }
         ];

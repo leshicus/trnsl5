@@ -78,8 +78,6 @@ Ext.define('App.view.admin.stat.PanelStatC', {
                                         });
                                         chart.title = act;
                                         panelChart.add(chart);
-                                       // chart.down('polar').bindStore(storeAP);
-                                        //panel.add({xtype:'textfield',fieldLabel:'textfield'});
                                     });
                                 } else {
                                     App.util.Utilities.errorMessage('Ошибка подключения к базе', 'График не получен');
@@ -89,7 +87,6 @@ Ext.define('App.view.admin.stat.PanelStatC', {
                         });
                         break;
                     case '3':
-                        //var storeAct = Ext.data.StoreManager.lookup('admin.ChartActivityS');
                         var storeAct = panelStat.getViewModel().getStore('chartactivity');
                         storeAct.load({
                             params: {
@@ -116,7 +113,6 @@ Ext.define('App.view.admin.stat.PanelStatC', {
                                                 if (success == true) {
                                                     chart.title = act;
                                                     panelChart.add(chart);
-                                                    //chart.down('polar').bindStore(storeAKP);
                                                 } else {
                                                     App.util.Utilities.errorMessage('Ошибка подключения к базе', 'График не получен');
                                                 }

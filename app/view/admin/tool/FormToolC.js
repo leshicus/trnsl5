@@ -52,17 +52,6 @@ Ext.define('App.view.admin.tool.FormToolC', {
                 rec.set('examtimermin', field.getValue());
             }
         },
-        /*'formTool #questiontime': {
-         change:function (field, newValue, oldValue, eOpts) {
-         var storeTool = Ext.data.StoreManager.lookup('admin.FormToolS'),
-         rec = storeTool.getAt(0),
-         maxquestion = this.getFormTool().down('#maxquestion').getValue();
-         if(!(field.getValue() % maxquestion) && maxquestion && field.getValue())
-         rec.set('questiontime',field.getValue());
-         else
-         Ext.Msg.alert('Количество времени на экзамен должно быть кратно числу вопросов в билете');
-         }
-         },*/
         'button[action=save]': {
             click: function (button) {
                 console.log('action=save');

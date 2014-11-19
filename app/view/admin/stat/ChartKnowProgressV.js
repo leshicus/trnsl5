@@ -2,7 +2,6 @@ Ext.define('App.view.admin.stat.ChartKnowProgressV', {
     extend: 'Ext.Panel',
     requires: [
         'Ext.chart.*',
-        // 'App.view.admin.stat.PanelStatM',
         'App.store.admin.ChartKnowProgressS'
     ],
     alias: 'widget.chartKnowProgress',

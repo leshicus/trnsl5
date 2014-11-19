@@ -7,11 +7,9 @@ Ext.define('App.view.admin.tool.FormToolV', {
     alias: 'widget.formTool',
     viewModel: {type: 'main'},
     controller:'formtool',
-    //flex: 1,
     title: 'Глобальные настройки системы',
     layout: {
-        type: 'vbox'/*,
-         align: 'stretch'*/
+        type: 'vbox'
     },
     defaults: {
         xtype: 'numberfield',
@@ -52,19 +50,14 @@ Ext.define('App.view.admin.tool.FormToolV', {
                 itemId: 'examtimermin',
                 name: 'examtimermin',
                 fieldLabel: 'Количество времени на экзамен для всех видов деятельности (мин)'
-            }/*,
-            {
-                xtype: 'textfield',
-                itemId: 'questiontime',
-                name: 'questiontime',
-                fieldLabel: 'Количество времени на один вопрос (мин)'
-            }*/
+            }
         ];
 
         this.buttons=[
             {
                 text: 'Сохранить',
                 scale:'medium',
+                glyph: Glyphs.get('save'),
                 action: 'save'
             },
             '->'

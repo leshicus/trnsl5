@@ -24,9 +24,6 @@ Ext.define('App.view.admin.log.GridLogC', {
         },
         '#dateFindFrom': {
             specialkey: function (field, e) {
-                /*if (e.getKey() == e.DELETE) {
-                 field.reset();
-                 }*/
 
             },
             select: function (field, records) {

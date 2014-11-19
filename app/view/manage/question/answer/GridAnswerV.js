@@ -11,33 +11,21 @@ Ext.define('App.view.manage.question.answer.GridAnswerV', {
     alias: 'widget.gridAnswer',
     itemId: 'gridAnswer',
     frame: false,
-    //height: gridHeight,
     flex: 1,
     forceFit: true,  // * ячейки распределяются по ширине всей таблицы
-    //store: 'manage.GridAnswerS',
     title: 'Ответы',
     columnLines: true,
     selType: 'checkboxmodel',
-   // plugins: 'bufferedrenderer',
     viewConfig: {
         stripeRows: true,
         enableTextSelection: true // * allow to select text in grid. Actually it's a gridview property
     },
     initComponent: function () {
         console.log('GridAnswers init');
-        /*this.plugins = [ Ext.create('Ext.grid.plugin.RowEditing', {
-         clicksToEdit: 2
-         }) ];*/
 
         this.selModel = Ext.create('Ext.selection.CheckboxModel', {
             injectCheckbox: 0,
-            mode: 'MULTI'/*,
-             listeners: {
-             selectionchange: function(sm, selections) {
-             // * кнопка Сохранить доступна если отмечена одна запись
-             me.down('#buttonSave').setDisabled(selections.length != 1);
-             }
-             }*/
+            mode: 'MULTI'
         });
 
         this.tbar = [
@@ -53,15 +41,7 @@ Ext.define('App.view.manage.question.answer.GridAnswerV', {
                 action: 'delete',
                 scale: 'medium',
                 iconCls: 'icon_delete'
-            }/*,
-             '-',
-             {
-             text: 'Сохранить',
-             action: 'save',
-             scale:'medium',
-             itemId:'buttonSave',
-             iconCls: 'icon_save'
-             }*/
+            }
         ];
 
         this.columns = [
@@ -75,20 +55,6 @@ Ext.define('App.view.manage.question.answer.GridAnswerV', {
                 itemId: 'columnAnswertext',
                 dataIndex: 'answertext',
                 tdCls: 'wrapText'
-                //flex: 1
-                //width:200
-                /*,
-             editor: {
-             xtype:'textfield',
-             errorSummary:false,
-             //allowBlank: false,
-             listeners: {  // * чтобы при нажатии ENTER не нажималась кнопка Сохранить, а переходило на другую строку
-             afterrender: function(){
-             var me = this;
-             me.el.swallowEvent(['keypress','keydown' ]);
-             }
-             }
-             }*/
             },
             {
                 xtype: 'checkcolumn',
@@ -105,16 +71,7 @@ Ext.define('App.view.manage.question.answer.GridAnswerV', {
                 itemId: 'columnNormdoc',
                 dataIndex: 'normdoc',
                 width: 170,
-                tdCls: 'wrapText'/*,
-             editor: {
-             xtype:'textfield',
-             listeners: {  // * чтобы при нажатии ENTER не нажималась кнопка Сохранить, а переходило на другую строку
-             afterrender: function(){
-             var me = this;
-             me.el.swallowEvent(['keypress','keydown' ]);
-             }
-             }
-             }*/
+                tdCls: 'wrapText'
             }
         ];
         this.callParent(arguments);

@@ -6,7 +6,6 @@ Ext.define('App.view.user.test.PanelTestM', {
             fields: [
 
             ],
-            //autoSync: true,
             autoLoad: true,
             idProperty:'examid',
             proxy: {
@@ -26,14 +25,8 @@ Ext.define('App.view.user.test.PanelTestM', {
                 writer: {
                     type: 'json',
                     writeAllFields:true,
-                    encode: true,
-                    /*writeValue:function (data, field) {
-                        console.info(arguments);
-                        if('orgabbr' !== field.name)   {
-                            Ext.data.writer.Json.prototype.writeValue.apply(this,arguments);
-                        }
-                    }*/
-                },
+                    encode: true
+                 },
                 appendId: false,
                 actionMethods: {
                     create : 'POST',

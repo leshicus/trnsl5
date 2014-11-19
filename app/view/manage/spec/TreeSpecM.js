@@ -14,13 +14,6 @@ Ext.define('App.view.manage.spec.TreeSpecM', {
                    type: 'json'
                }
            },
-           /*rootVisible: false,
-
-           root: {
-               text: 'Организации',
-               expanded: true,
-               id:0
-           },*/
            root: {expanded: true, children: [] },
            autoLoad:true,
            listeners: {

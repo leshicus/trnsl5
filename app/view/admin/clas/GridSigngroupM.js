@@ -10,8 +10,6 @@ Ext.define('App.view.admin.clas.GridSigngroupM', {
                 {name: 'lastname'},
                 {name: 'firstname'}
             ],
-            //autoSync: true,
-           // autoLoad: true,
             proxy: {
                 type: 'rest',
                 api: {

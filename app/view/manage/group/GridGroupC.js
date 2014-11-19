@@ -1,7 +1,6 @@
 Ext.define('App.view.manage.group.GridGroupC', {
     extend: 'Ext.app.ViewController',
     requires: [
-        'App.view.manage.group.GridGroupM',
     ],
     alias: 'controller.gridGroup',
 
@@ -36,13 +35,8 @@ Ext.define('App.view.manage.group.GridGroupC', {
                 console.log('action=add');
 
                 var grid = button.up('grid'),
-                    //newRecord = Ext.create('App.view.manage.group.GridGroupM'),
                     store = grid.getViewModel().getStore('group'),
                     newRecord = store.insert(0,{})[0];
-                    //rowEditing = grid.plugins[0];
-                //rowEditing.cancelEdit();
-                //store.insert(0, newRecord);
-               // rowEditing.startEdit(0, 0);
             }
         },
         'button[action=delete]': {
@@ -78,6 +72,5 @@ Ext.define('App.view.manage.group.GridGroupC', {
                 });
             }
         }
-
     }
 });

@@ -15,10 +15,6 @@ Ext.define('App.view.admin.clas.MenuExamC', {
                     examArr = Array(),
                     dateFindFrom = grid.down('#dateFindFrom'),
                     dateFindTo = grid.down('#dateFindTo');
-                // * печатает только одну ведомость
-                /*Ext.Ajax.request({
-                 url: 'resources/php/admin/excelOneConsolidated.php'
-                 });*/
 
                 Ext.each(selection, function (item) {
                     var examid = item.get('examid');
@@ -29,12 +25,6 @@ Ext.define('App.view.admin.clas.MenuExamC', {
                     + '&dateFindTo=' + Ext.Date.format(dateFindTo.getValue(), 'd.m.Y')
                 );
 
-                //console.log(Ext.Date.format(dateFindFrom.getValue(),'d.m.Y'));
-                /*Ext.Ajax.request({
-                 url: 'resources/php/admin/excelOneConsolidated.php?examarr=' + examArr
-                 + '&dateFindFrom=' + Ext.Date.format(dateFindFrom.getValue(),'d.m.Y')
-                 + '&dateFindTo=' + Ext.Date.format(dateFindTo.getValue(),'d.m.Y')
-                 });*/
             }
         }
     }

@@ -158,6 +158,12 @@
         {
             "path": "resources/css/crisp.css",
             "bootstrap": true
+        },
+        {
+            "path": "resources/css/glyph.css"
+        },
+        {
+            "path": "resources/css/font-awesome-4.1.0/css/font-awesome.css"
         }
     ],
 

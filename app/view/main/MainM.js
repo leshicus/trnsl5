@@ -13,7 +13,6 @@ Ext.define('App.view.main.MainM', {
                 {name: 'orgname'},
                 {name: 'orgabbr',type:'string'}
             ],
-            //autoSync: true,
             idProperty:'orgid',
             autoLoad: true,
             proxy: {
@@ -48,8 +47,6 @@ Ext.define('App.view.main.MainM', {
                 {name: 'groupid'},
                 {name: 'orgid'}
             ],
-            //autoSync: false,
-           // autoLoad: true,
             idProperty:'specid',
             proxy: {
                 type: 'rest',
@@ -92,7 +89,6 @@ Ext.define('App.view.main.MainM', {
         },
         know: {
             fields: [],
-            //autoSync: true,
             autoLoad: true,
             idProperty:'knowid',
             proxy: {
@@ -121,7 +117,6 @@ Ext.define('App.view.main.MainM', {
         },
         act: {
             fields: [],
-            //autoSync: true,
             autoLoad: true,
             idProperty:'actid',
             proxy: {
@@ -150,7 +145,6 @@ Ext.define('App.view.main.MainM', {
         },
         group: {
             fields: [],
-            //autoSync: true,
             idProperty:'groupid',
             autoLoad: true,
             proxy: {

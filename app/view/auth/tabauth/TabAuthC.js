@@ -1,7 +1,6 @@
 Ext.define('App.view.auth.tabauth.TabAuthC', {
     extend: 'Ext.app.ViewController',
     requires: [
-        // 'Office.view.card.FormCardV'
     ],
     alias: 'controller.tabAuth',
 
@@ -45,7 +44,6 @@ Ext.define('App.view.auth.tabauth.TabAuthC', {
                                     default:
                                         break;
                                 }
-                               // layout.activeItem.query('panel, toolbar').forEach(App.util.Utilities.cascadeRemoveGrid);
                                 layout.setActiveItem(subsystem);
 
                                 var html = layout.activeItem.query('#labelUser')[0],
@@ -97,7 +95,5 @@ Ext.define('App.view.auth.tabauth.TabAuthC', {
                 });
             }
         }
-
     }
-
 });

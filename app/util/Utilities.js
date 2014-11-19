@@ -2,11 +2,38 @@ Ext.define('App.util.Utilities', {
     singleton: true,
     alternateClassName: ['Utilities'],
 
-    /*dataSystem: [
-     [1, "Тестирование"],
-     [2, "Администрирование"],
-     [3, "Ведение"]
-     ],*/
+    textAbout:'<table width="100%">' +
+    '<tr>' +
+    '<td width="100">Программа:</td>' +
+    '<td>Система тестирования знаний</td>' +
+    '</tr>' +
+    '<tr>' +
+    '<td>Версия:</td>' +
+    '<td>1.0</td>' +
+    '</tr>' +
+    '<tr>' +
+    '<td>Разработчик:</td>' +
+    '<td>Волков А.И.</td>' +
+    '</tr>' +
+    '<tr>' +
+    '<td>Почта:</td>' +
+    '<td>leshicus@gmail.com</td>' +
+    '</tr>' +
+    '<tr>' +
+    '<td>Сайт:</td>' +
+    '<td>teh5.ru</td>' +
+    '</tr>' +
+    '<tr>' +
+    '<td>Год:</td>' +
+    '<td>2014</td>' +
+    '</tr>' +
+    '</table>',
+    textProgramName:'Программа: Система тестирования знаний',
+    textVersionText:'Версия: 1.0',
+    textAuthor:'Разработчик: Волков А.И.',
+    textMail:'Почта: leshicus@gmail.com',
+    textSite:'Сайт: teh5.ru',
+    textYear:'Год: 2014',
     dataStat: [
         ['1', "Количество экзаменуемых по видам деятельности"],
         ['2', "Успеваемость по видам деятельности"],
@@ -20,7 +47,6 @@ Ext.define('App.util.Utilities', {
     unpassString: 'экзамен не сдан',
     startSubsystem: 2, // * подсистема выбранная по-умолчанию в стартовом окне
     examTimerSec: 60, // * секунд в минуте
-    //userid: 0,
     nullDate: '00.00.0000 00:00',
     required: '<span style="color:red;font-weight:bold" ext:qtip="Required">*</span>',
     buttonSaveDelete: [
@@ -56,10 +82,6 @@ Ext.define('App.util.Utilities', {
             format: 'd.m.Y H:i'
         }
     ],
-    /*rowEditing: Ext.create('Ext.grid.plugin.RowEditing', {
-     clicksToMoveEditor: 1,
-     autoCancel: false
-     }),*/
     colorStatusTextUnreg: {
         color: '#FF0000',
         'font-weight': 'bold',
@@ -76,7 +98,6 @@ Ext.define('App.util.Utilities', {
     runnerExamTestQuestion: new Ext.util.TaskRunner(),  // * задание для времени вопроса
 
     comboRenderer: function (combo) {
-//console.info(arguments);
         return function (value) {
 
             var record = combo.findRecord(combo.valueField || combo.displayField, value);
@@ -85,7 +106,6 @@ Ext.define('App.util.Utilities', {
     },
 
     comboRendererVM: function (combo, storeName) {
-        //console.info(arguments);
         return function (value) {
 
             var vm = combo.getViewModel(),
@@ -97,21 +117,8 @@ Ext.define('App.util.Utilities', {
                 if (item.getIdProperty() == value)
                     return item ? item.get(combo.displayField) : combo.valueNotFoundText;
             });
-            //console.info(record,combo.valueField,value);
-
         }
     },
-
-    /*comboStoreRenderer: function (combo, store) {
-     return function (value) {
-     var record = store.findRecord(combo.valueField || combo.displayField, value);
-     return record ? record.get(combo.displayField) : combo.valueNotFoundText;
-     }
-     },*/
-    /*renderGridQuestion: function (value, metaData, record, rowIndex, colIndex, store, view) {
-     metaData.style = 'white-space:normal !important;';
-     return value;
-     },*/
 
     columnStatus: function (value, metaData, record, rowIndex, colIndex, store, view) {
         if (value && value != App.util.Utilities.nullDate) {
@@ -173,39 +180,6 @@ Ext.define('App.util.Utilities', {
             return str.join(", \n");
         }
     },
-
-    // * подкраснить запись вопроса, если ответы не удовлетворяют условиям
-    /*questionGridColumnRenderer: function (value, metaData, record, rowIndex, colIndex, store, view) {
-
-     var gridQuestion = view.ownerCt,
-     viewport = gridQuestion.up('viewport'),
-     columnText = gridQuestion.columns[colIndex-1].text,
-     questionid = record.data['questionid'],
-     gridAnswer = viewport.down('gridAnswer'),
-     storeAnswer = gridAnswer.store,
-     flag = false;
-
-     console.log(record);
-     storeAnswer.clearFilter();
-     storeAnswer.filterBy(function (rec) {
-     if (rec.get('questionid') == questionid){
-     return true;
-     }else
-     return false;
-
-     });*//*
-     storeAnswer.data.each(function (rec) {
-     if (rec.get('correct') == 1 && rec.get('normdoc') != '')
-     if (flag == true) {
-     flag = false;
-     } else
-     flag = true;
-     });
-     if (columnText == 'Текст вопроса' && !flag) {
-     metaData.style += 'background:rgb(243, 169, 202);';
-     }*//*
-     return value;
-     },*/
 
 // * удаление старых гридов при нажатии на кнопку меню
     cascadeRemoveGrid: function (item) {

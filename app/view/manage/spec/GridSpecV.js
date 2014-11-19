@@ -1,7 +1,6 @@
 Ext.define('App.view.manage.spec.GridSpecV', {
     extend: 'Ext.grid.Panel',
     requires: [
-        //'App.view.manage.spec.GridSpecM',
         'App.view.main.MainM',
         'App.view.manage.spec.GridSpecC'
     ],
@@ -13,7 +12,6 @@ Ext.define('App.view.manage.spec.GridSpecV', {
     frame: true,
     flex: 1,
     forceFit: true,  // * ячейки распределяются по ширине всей таблицы
-    //store: 'manage.GridSpecS',
     title: 'Специальности',
     viewConfig: {
         plugins: {
@@ -62,18 +60,7 @@ Ext.define('App.view.manage.spec.GridSpecV', {
                 editor: {
                     xtype: 'textfield'
                 }
-                /*editor: {
-                    xtype: 'textfield',
-                    errorSummary: false,
-                    //allowBlank: false,
-                    listeners: {  // * чтобы при нажатии ENTER не нажималась кнопка Сохранить, а переходило на другую строку
-                        afterrender: function () {
-                            var me = this;
-                            me.el.swallowEvent(['keypress', 'keydown' ]);
-                        }
-                    }
-                }*/
-            }
+             }
         ];
         this.callParent(arguments);
         console.log('GridSpec end');

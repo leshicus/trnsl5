@@ -7,7 +7,6 @@ Ext.define('App.view.manage.question.answer.GridAnswerM', {
            fields: [
                {name:'correct',type:'bool'}
            ],
-           //autoSync: true,
            autoLoad: false,
            proxy: {
                type: 'rest',

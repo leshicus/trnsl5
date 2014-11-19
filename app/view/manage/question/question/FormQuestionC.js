@@ -1,7 +1,6 @@
 Ext.define('App.view.manage.question.question.FormQuestionC', {
     extend: 'Ext.app.ViewController',
     requires: [
-        'App.model.manage.GridQuestionM'
     ],
     alias: 'controller.formquestion',
 
@@ -18,22 +17,17 @@ Ext.define('App.view.manage.question.question.FormQuestionC', {
                     storeQuest = grid.getViewModel().getStore('question');
                 if (values.questiontext) { // * такая вот валидация, allowBlank=false не работает
                     if (!record) { // * создание
-                        var newRecord = Ext.create('App.model.manage.GridQuestionM'),
-                            treeQuestion = Ext.ComponentQuery.query('treeQuestion')[0],
+                        var treeQuestion = Ext.ComponentQuery.query('treeQuestion')[0],
                             selectedTree = treeQuestion.getSelected(),
                             gridAnswer = Ext.ComponentQuery.query('gridAnswer')[0],
                             storeAnswer = gridAnswer.getViewModel().getStore('answer');
-                        /*storeAnswer.filterBy(function () {
-                            return false
-                        });*/
-                        newRecord.set(values);
                         if (selectedTree.raw) {
                             var knowid = selectedTree.raw.knowid,
                                 groupid = selectedTree.raw.groupid;
-                            newRecord.set('groupid', groupid);
-                            newRecord.set('knowid', knowid);
+                            values['groupid'] = groupid;
+                            values['knowid'] = knowid;
                         }
-                        storeQuest.insert(0, newRecord);
+                        storeQuest.insert(0, values)[0];
                     } else { // * исправление
                         record.set(values);
                     }

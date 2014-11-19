@@ -17,18 +17,6 @@ Ext.define('App.view.admin.treeuser.TreeUserC', {
                         actid = selection.raw.actid,
                         orgid = selection.raw.orgid,
                         id = selection.raw.id;
-                    /*storeUser.clearFilter();
-                    storeUser.filterBy(function (rec) {
-                        if(groupid)
-                            if (rec.get('groupid') == groupid)
-                                return true;
-                        if(actid)
-                            if (rec.get('actid') == actid)
-                                return true;
-                        if(orgid)
-                            if (rec.get('orgid') == orgid)
-                                return true;
-                    });*/
                     storeUser.load({
                         params: {
                             id: id,
@@ -40,11 +28,7 @@ Ext.define('App.view.admin.treeuser.TreeUserC', {
                 }
             },
             render: function (tree) {
-               /* var gridUser = tree.up('#content').down('grid'),
-                    storeUser = gridUser.getViewModel().getStore('user');
-                storeUser.filterBy(function () {
-                    return false
-                });*/
+
             }
         },
 
@@ -53,9 +37,6 @@ Ext.define('App.view.admin.treeuser.TreeUserC', {
                 var treeUser = button.up('treepanel'),
                     gridUser = treeUser.up('#content').down('grid'),
                     storeUser = gridUser.getViewModel().getStore('user');
-               /* storeUser.filterBy(function () {
-                    return false
-                });*/
                 treeUser.getViewModel().getStore('treeuser').load();
             }
         },
@@ -64,17 +45,5 @@ Ext.define('App.view.admin.treeuser.TreeUserC', {
                 Utilities.treeCollapse(button, e, tree);
             }
         }
-        /*'#expandTreeUser': {
-            click: function (button) {
-                var treeUser = button.up('treepanel');
-                treeUser.expandAll();
-            }
-        },
-        '#collapseTreeUser': {
-            click: function (button) {
-                var treeUser = button.up('treepanel');
-                treeUser.collapseAll();
-            }
-        }*/
     }
 });

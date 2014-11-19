@@ -5,9 +5,7 @@ Ext.define('App.view.manage.question.question.GridQuestionM', {
     stores: {
         question: {
             fields: [],
-            //autoSync: true,
             autoLoad: false,
-            //idProperty:'userid',
             proxy: {
                 type: 'ajax',
                 api: {
@@ -22,12 +20,7 @@ Ext.define('App.view.manage.question.question.GridQuestionM', {
                 writer: {
                     type: 'json',
                     allowSingle: false,
-                    writeAllFields: true,
-                    /*writeValue:function (data, field) {
-                     if('specname' !== field.name)   {
-                     Ext.data.writer.Json.prototype.writeValue.apply(this,arguments);
-                     }
-                     }*/
+                    writeAllFields: true
                 },
                 appendId: false,
                 actionMethods: {

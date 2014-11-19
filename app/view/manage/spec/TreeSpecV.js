@@ -12,7 +12,6 @@ Ext.define('App.view.manage.spec.TreeSpecV', {
     title: 'Структура',
     alias:'widget.treeSpec',
     itemId:'treeSpec',
-    //store: 'manage.TreeSpecS',
     margin: '0 5 0 0',
     resizable:true,
     rootVisible : false,
@@ -29,16 +28,6 @@ Ext.define('App.view.manage.spec.TreeSpecV', {
     },
     initComponent: function(){
         this.tools = [
-           /* {
-                type:'expand',
-                itemId:'expandTreeSpec',
-                tooltip: 'Раскрыть все'
-            },
-            {
-                type:'collapse',
-                itemId:'collapseTreeSpec',
-                tooltip: 'Скрыть все'
-            },*/
             {
                 type: 'maximize',
                 tooltip: 'Скрыть/Раскрыть'

@@ -76,14 +76,14 @@ for($i = 1; $i <= $groupnum; $i++){
               AND c.result <> -1
           )
           AND a.orgid = ".$org."
-          AND g.groupnum = ".$i.") AS g".$i;
+          AND g.groupnum = ".$i.") AS группа_".$i;
     if($i < $groupnum)
         $sql .= ',';
 }
 
 $sql .= '
   FROM activity a
-  HAVING g1 > 0
+  HAVING группа_1 > 0
 ';
 
 try {

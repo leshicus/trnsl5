@@ -12,7 +12,6 @@ Ext.define('App.view.manage.know.GridKnowV', {
     frame: false,
     flex:1,
     forceFit: true,
-    //store: 'manage.GridKnowS',
     title: 'Области знания',
     columnLines: true,
     viewConfig: {
@@ -61,7 +60,6 @@ Ext.define('App.view.manage.know.GridKnowV', {
                 itemId: 'columnKnowfullname',
                 dataIndex: 'knowfullname',
                 tdCls: 'wrapText',
-                //flex:1,
                 width:400,
                 editor: {
                     xtype: 'textfield'

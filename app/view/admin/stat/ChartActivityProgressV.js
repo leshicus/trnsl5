@@ -3,12 +3,10 @@ Ext.define('App.view.admin.stat.ChartActivityProgressV', {
     extend: 'Ext.Panel',
     requires: [
         'Ext.chart.*',
-       // 'App.view.admin.stat.PanelStatM',
         'App.store.admin.ChartActivityProgressS'
     ],
     alias: 'widget.chartActivityProgress',
     viewModel: {type: 'panelstat'},
-    //itemId: 'chartActivityProgress',
     animate: true,
     shadow: true,
     // * title параметры - это из плагина Ext.ux.chart.TitleChart
@@ -34,7 +32,7 @@ Ext.define('App.view.admin.stat.ChartActivityProgressV', {
                 legend: {
                     docked: 'bottom'
                 },
-                store:store,
+                store: store,
                 insetPadding: {
                     top: 40,
                     left: 40,
@@ -62,12 +60,9 @@ Ext.define('App.view.admin.stat.ChartActivityProgressV', {
                             width: 140,
                             height: 28,
                             renderer: function (storeItem, item) {
-                                //calculate percentage.
                                 var total = 0;
-                                    //store = me.getViewModel().getStore('chartactivityprogress');
                                 store.each(function (rec) {
                                     total += rec.get('data');
-                                    console.info(store,total);
                                 });
 
                                 this.setTitle(storeItem.get('result') + ': ' + Math.round(storeItem.get('data') / total * 100) + '%');
@@ -81,56 +76,15 @@ Ext.define('App.view.admin.stat.ChartActivityProgressV', {
                             font: '18px Arial',
                             // * чтобы не показывались подписи если значение 0
                             renderer: function (val) {
-
-                                var //store = me.getViewModel().getStore('chartactivityprogress'),
-                                    m = store.findRecord('result', val, 0,false,true,true);
-                               // console.info(store,val);
+                                var m = store.findRecord('result', val, 0, false, true, true);
                                 return m.get('data') > 0 ? val : '';
                             }
                         }
                     }
                 ]
             }
-            ]
+        ]
 
-        /*this.series = [
-            {
-                type: 'pie',
-                angleField: 'data',
-                showInLegend: true,
-
-                tips: {
-                    trackMouse: true,
-                    width: 140,
-                    height: 28,
-                    renderer: function (storeItem, item) {
-                        //calculate percentage.
-                        var total = 0;
-                        store.each(function (rec) {
-                            total += rec.get('data');
-                        });
-                        this.setTitle(storeItem.get('result') + ': ' + Math.round(storeItem.get('data') / total * 100) + '%');
-                    }
-                },
-                highlight: {
-                    segment: {
-                        margin: 20
-                    }
-                },
-                label: {
-                    field: 'result',
-                    display: 'rotate',
-                    contrast: true,
-                    font: '18px Arial',
-                    // * чтобы не показывались подписи если значение 0
-                    renderer: function (val) {
-                        var m = store.findRecord('result', val, 0,false,true,true);
-                        return m.get('data') > 0 ? val : '';
-                    }
-                }
-            }
-        ];
-*/
         this.callParent(arguments);
         console.log('ChartActivityProgressV end');
     }

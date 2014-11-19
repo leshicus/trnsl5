@@ -18,18 +18,7 @@ Ext.define('App.view.manage.spec.GridSpecC', {
                 });
             }
         },
-    /*    'gridSpec': {
-            edit: function (editor, context) {
-                console.log('edit');
-                var storeSpec = context.getViewModel().getStore('spec');
-                storeSpec.sync({
-                    failure: function () {
-                        Ext.MessageBox.alert('Ошибка', 'Не сохранено');
-                    },
-                    scope: this
-                });
-            }
-        },*/
+
         '#instruction': {
             click: function (button) {
                 window.open('resources/php/instruction.php?taskname=speciality&subsystem=manage'/*, '_blank', 'directories=0,titlebar=0,toolbar=0,location=0,statusbar=0,menubar=0'*/);
@@ -49,7 +38,6 @@ Ext.define('App.view.manage.spec.GridSpecC', {
                 console.log('action=add');
 
                 var grid = button.up('grid'),
-                    //newRecord = Ext.create('App.view.manage.spec.GridSpecM'),
                     storeSpec = grid.getViewModel().getStore('spec'),
                     newRecord = storeSpec.add({})[0],
                     treeSpec = button.up('#content').down('treeSpec'),

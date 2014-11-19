@@ -58,7 +58,6 @@ Ext.define('App.view.admin.clas.MenuPersonC', {
                 Ext.each(selection, function (item) {
                     var userid = item.get('userid'),
                         examid = item.get('examid');
-                    //window.open('../../resources/pdftable/example/bkhdvaora.pdf.php');
                     window.open('resources/php/admin/pdfOne.php?examid=' + examid
                     + '&userid=' + userid, '_blank', 'directories=0,titlebar=0,toolbar=0,location=0,statusbar=0,menubar=0');
                 });

@@ -29,12 +29,7 @@ Ext.define('App.view.admin.stat.PanelStatM', {
         },
         chartactivity:{
             fields:[
-                {name:'name'},
-            /*    {name:'g1',type:'int'},
-                {name:'g2',type:'int'},
-                {name:'g3',type:'int'},
-                {name:'g4',type:'int'},
-                {name:'g5',type:'int'}*/
+                {name:'name'}
             ],
             proxy:{
                 type:'ajax',

@@ -14,13 +14,6 @@ Ext.define('App.view.manage.question.tree.TreeQuestionM', {
                    type: 'json'
                }
            },
-           // * если не указывать нижние строчки, то ругается на isUtilObservable of undefined
-           /*rootVisible: true,
-           root: {
-               text: 'Организации',
-               expanded: true,
-               id:0
-           },*/
            root: {expanded: true, children: [] },
            autoLoad:true,
            listeners: {

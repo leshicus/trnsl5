@@ -36,21 +36,6 @@ Ext.define('App.view.manage.question.tree.TreeQuestionC', {
                                 groupid: groupid
                             }
                         });
-                        // * фильтрация вопросов в зависимости от того какой уровень в структуре выбрали
-                        /*storeQuestion.filterBy(function (rec) {
-                         if ((rec.get('knowid') == knowid
-                         && rec.get('groupid') == groupid) // * ОЗ
-                         ||
-                         (id == 'root') // * root
-                         ||
-                         (rec.get('actid') == actid
-                         && groupid == undefined
-                         && knowid == undefined) // * Вид деятельности
-                         ||
-                         (rec.get('groupid') == groupid
-                         && knowid == undefined)) // * Группа
-                         return true;
-                         });*/
                     }
                 }
             }
@@ -64,8 +49,6 @@ Ext.define('App.view.manage.question.tree.TreeQuestionC', {
             // чтобы не добавлялась запись в tree при драгндропе:
             // сохраняем перемещаемую запись в переменную droppedRecords, очищаем список перемещаемых записей
             beforedrop: function (node, gridRec, overModel, dropPos, opts) {
-                /*var layout = this.getTreeQuestion().up('#card-3-manage');
-                 layout.body.mask('Идет обработка...');*/
                 this.droppedRecords = gridRec.records;
                 gridRec.records = [];
             },
@@ -142,23 +125,7 @@ Ext.define('App.view.manage.question.tree.TreeQuestionC', {
                 });
                 storeTree.reload();
             }
-        },
-        /*'#expandTreeQuestionS': {
-         click: function (button) {
-         console.log('click expandTreeQuestionS');
-
-         var treeQuestion = button.up('treepanel');
-         treeQuestion.expandAll();
-         }
-         },
-         '#collapseTreeQuestionS': {
-         click: function (button) {
-         console.log('click collapseTreeQuestionS');
-
-         var treeQuestion = button.up('treepanel');
-         treeQuestion.collapseAll();
-         }
-         }*/
+        }
 
     }
 });

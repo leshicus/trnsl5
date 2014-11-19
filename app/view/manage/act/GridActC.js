@@ -7,28 +7,7 @@ Ext.define('App.view.manage.act.GridActC', {
 
     control: {
         '#':{
-            /*validateedit: function (editor, e) {
-                console.log('edit');
 
-                //var storeTool = Ext.data.StoreManager.lookup('admin.FormToolS'),
-                var main = Ext.ComponentQuery.query('main')[0],
-                    mainVM = main.getViewModel(),
-                    storeTool = mainVM.getStore('tool'),
-                    maxquestion = storeTool.getAt(0).get('maxquestion'),
-                    examtimermin = e.value;
-                if(e.field == 'timelimit'){
-                    if ((examtimermin % maxquestion) == 0) {
-                        if (!examtimermin || examtimermin == 0) {
-                            Ext.Msg.alert('Лимит времени -ошибка', 'Значение должно быть не 0');
-                            return false;
-                        } else
-                            return true;
-                    } else {
-                        Ext.Msg.alert('Лимит времени -ошибка', 'Количество времени на экзамен (' + examtimermin + ') должно быть кратно числу вопросов в билете (' + maxquestion + ')');
-                        return false;
-                    }
-                }
-            }*/
             edit: function (editor, context) {
                 console.log('edit');
 
@@ -38,51 +17,8 @@ Ext.define('App.view.manage.act.GridActC', {
                     },
                     scope: this
                 });
-            },
-            /*validateedit: function (editor, context) {
-                console.log('edit');
-                var main = Ext.ComponentQuery.query('main')[0],
-                    mainVM = main.getViewModel(),
-                    storeTool = mainVM.getStore('tool'),
-                    maxquestion = storeTool.getAt(0).get('maxquestion'),
-                    examtimermin = context.value,
-                    storeAct = mainVM.getStore('act');
-                if(context.field == 'timelimit'){
-                    if ((examtimermin % maxquestion) == 0) {
-                        if (!examtimermin || examtimermin == 0) {
-                            Ext.Msg.alert('Лимит времени -ошибка', 'Значение должно быть не 0');
-                            return false;
-                        } else {
-                            context.grid.getViewModel().getStore('act').sync({
-                                *//*success: function () {
-                                    console.info('success');
-                                    context.grid.getViewModel().getStore('act').reload();
-                                    //storeAct.load();
-                                },*//*
-                                failure: function () {
-                                    Ext.MessageBox.alert('Ошибка', 'Не сохранено');
-                                },
-                                scope: this
-                            });
-                        }
-                    } else {
-                        Ext.Msg.alert('Лимит времени -ошибка', 'Количество времени на экзамен (' + examtimermin + ') должно быть кратно числу вопросов в билете (' + maxquestion + ')');
-                        return false;
-                    }
-                }else{
-                    context.grid.getViewModel().getStore('act').sync({
-                        *//*success: function () {
-                         console.info('success');
-                         context.grid.getViewModel().getStore('act').reload();
-                         //storeAct.load();
-                         },*//*
-                        failure: function () {
-                            Ext.MessageBox.alert('Ошибка', 'Не сохранено');
-                        },
-                        scope: this
-                    });
-                }
-            }*/
+            }
+
         },
         '#instruction': {
             click: function (button) {
@@ -123,8 +59,6 @@ Ext.define('App.view.manage.act.GridActC', {
 
                 var grid = button.up('grid'),
                     selection = grid.getSelected();
-                /*controllerQuestion = App.app.getController('manage.PanelQuestionC'),
-                 tree = controllerQuestion.getTreeQuestion()*/
                 if (selection) {
                     var actid = selection.get('actid'),
                         main = button.up('main'),
@@ -148,11 +82,8 @@ Ext.define('App.view.manage.act.GridActC', {
                             }
                         }
                     });
-
-
                 }
             }
         }
-
     }
 });

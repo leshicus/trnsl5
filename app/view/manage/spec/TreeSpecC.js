@@ -18,11 +18,6 @@ Ext.define('App.view.manage.spec.TreeSpecC', {
                             orgid = selection.raw.orgid,
                             actid = selection.raw.actid,
                             id = selection.raw.id;
-                        //storeSpec.clearFilter();
-                        /*storeSpec.filterBy(function (rec) {
-                         if (rec.get('groupid') == groupid)
-                         return true;
-                         });*/
                         storeSpec.load({
                             params: {
                                 id: id,
@@ -33,14 +28,7 @@ Ext.define('App.view.manage.spec.TreeSpecC', {
                         });
                     }
                 }
-            },
-            /*render: function () {
-             var gridSpec = this.getView().up('#content').down('gridSpec'),
-             storeSpec = gridSpec.getViewModel().getStore('spec');
-             storeSpec.filterBy(function () {
-             return false
-             });
-             }*/
+            }
         },
 
         'dataview': {
@@ -92,17 +80,5 @@ Ext.define('App.view.manage.spec.TreeSpecC', {
                 Utilities.treeCollapse(button, e, tree);
             }
         }
-        /*'#expandTreeSpec': {
-         click: function (button) {
-         var treeSpec = this.getView();
-         treeSpec.expandAll();
-         }
-         },
-         '#collapseTreeSpec': {
-         click: function (button) {
-         var treeSpec = this.getView();
-         treeSpec.collapseAll();
-         }
-         }*/
     }
 });

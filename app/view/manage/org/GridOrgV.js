@@ -12,7 +12,6 @@ Ext.define('App.view.manage.org.GridOrgV', {
     frame: false,
     forceFit: true,
     flex:1,
-    //store: 'manage.GridOrgS',
     title: 'Организации',
     columnLines: true,
     viewConfig: {

@@ -71,33 +71,6 @@ Ext.define('App.view.manage.question.answer.GridAnswerC', {
                     Ext.Msg.alert('Ошибка', 'Не выбран ни один ответ');
                 }
             }
-        },
-        /*'button[action=save]': {
-         render: function (button) {
-         console.log('button render');
-
-         var controller = App.app.getController('manage.PanelQuestionC');
-         controller.buttonSaveDisable();
-         },
-         click: function (button) {
-         console.log('action=save');
-
-         var grid = button.up('grid');
-         grid.store.sync({
-         failure: function () {
-         Ext.MessageBox.alert('Ошибка', 'Не сохранено');
-         },
-         scope: this
-         });
-         //grid.body.mask('Saving Record Please Wait...');
-         }
-         },*/
-        /*'gridAnswer checkcolumn': {
-         checkchange: function (me, rowIndex, checked, eOpts) {
-         var controller = App.app.getController('manage.PanelQuestionC');
-         controller.buttonSaveDisable();
-         }
-         },*/
-
+        }
     }
 });

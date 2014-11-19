@@ -27,7 +27,6 @@
                 defaultFont: 'Arial',
                 enableLinks: false,
                 enableSourceEdit: false
-                //fieldLabel:'Вопрос'
             }
         ];
 
@@ -35,12 +34,14 @@
             {
                 text: 'Сохранить',
                 action: 'save',
+                glyph: Glyphs.get('save'),
                 scale: 'medium'
             },
             '->',
             {
                 text: 'Отмена',
                 action: 'cancel',
+                glyph: Glyphs.get('cancel'),
                 scale: 'medium'
             }
         ];

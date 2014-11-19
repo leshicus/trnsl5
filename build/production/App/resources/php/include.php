@@ -123,7 +123,7 @@ function _objectsIntoArray($arrObjData, $arrSkipIndices = array())
         }
     }
     // * одновременно с парсингом заменяем все # на &
-    str_replace('#','&',$arrData);
+   // str_replace('#','&',$arrData);
     return $arrData;
 }
 

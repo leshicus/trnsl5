@@ -61,7 +61,6 @@ Ext.define('App.view.auth.tabauth.TabAuthV', {
                 fieldLabel: 'Пароль',
                 allowBlank: false,
                 afterLabelTextTpl: App.util.Utilities.required
-                //style: 'margin-top:15px'
             },
             textOldPassword = {
                 xtype: 'textfield',
@@ -83,6 +82,7 @@ Ext.define('App.view.auth.tabauth.TabAuthV', {
                 text: 'Поменять',
                 anchor: '25%',
                 scale:'medium',
+                glyph: Glyphs.get('change'),
                 action: 'changepassword'
             },
             fieldsetChangePas = Ext.create('Ext.form.FieldSet', {
@@ -105,6 +105,7 @@ Ext.define('App.view.auth.tabauth.TabAuthV', {
                 text: 'Вход',
                 scale:'medium',
                 action: 'enter',
+                glyph: Glyphs.get('signin'),
                 reference: 'enter',
                 itemId:'enter'
             });
@@ -121,9 +122,9 @@ Ext.define('App.view.auth.tabauth.TabAuthV', {
             {
                 text: 'Очистить',
                 scale:'medium',
+                glyph: Glyphs.get('cancel'),
                 action: 'refresh'
-            }/*,
-             { xtype: 'tbspacer', width: 150 }*/
+            }
         ];
         Ext.apply(App, {
             defaultButton: '[itemId=enter]'

@@ -15,24 +15,18 @@ Ext.define('App.view.manage.question.tree.TreeQuestionV', {
     alias: 'widget.treeQuestion',
     itemId: 'treeQuestion',
     forceFit: true,
-    //store: 'manage.TreeQuestionS',
     bind: '{treequestion}',
     margin: '0 5 0 0',
     resizable: true,
     _collapsed: true,
-    //rowLines: true,
-    // allowDeselect: true,
-    //selModel: {  allowDeselect: true },
     rootVisible: false,
     viewConfig: {
         stripeRows: true,
         plugins: {
             ptype: 'treeviewdragdrop',
             dropGroup: 'ddgroup',
-            //appendOnly: true,
             sortOnDrop: true, // * чтобы deselect происходил
             enableDrag: false,
-            //enableDrop: true,
             containerScroll: true
         }
     },
@@ -43,16 +37,6 @@ Ext.define('App.view.manage.question.tree.TreeQuestionV', {
                 type: 'maximize',
                 tooltip: 'Скрыть/Раскрыть'
             },
-            /*{
-             type:'expand',
-             itemId:'expandTreeQuestionS',
-             tooltip: 'Раскрыть все'
-             },
-             {
-             type:'collapse',
-             itemId:'collapseTreeQuestionS',
-             tooltip: 'Скрыть все'
-             },*/
             {
                 type: 'refresh',
                 itemId: 'refreshTreeQuestionS',

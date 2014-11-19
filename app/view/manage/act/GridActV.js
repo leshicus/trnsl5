@@ -11,9 +11,7 @@ Ext.define('App.view.manage.act.GridActV', {
     itemId: 'gridAct',
     frame: false,
     flex:1,
-    //height: gridHeight,
     forceFit: true,
-    //store: 'manage.GridActS',
     title: 'Виды деятельности',
     columnLines: true,
     viewConfig: {
@@ -43,8 +41,7 @@ Ext.define('App.view.manage.act.GridActV', {
             }
         ]
 
-        var //storeOrg = Ext.data.StoreManager.lookup('manage.GridOrgS'),
-            comboOrg = Ext.create('Ext.form.ComboBox', {
+        var comboOrg = Ext.create('Ext.form.ComboBox', {
                 bind:{store: '{org}'},
                 valueField: 'orgid',
                 name: 'orgid',
@@ -78,7 +75,6 @@ Ext.define('App.view.manage.act.GridActV', {
                 dataIndex: 'actname',
                 tdCls: 'wrapText',
                 width:400,
-                //flex:1,
                 editor: {
                     xtype: 'textfield'
                 }

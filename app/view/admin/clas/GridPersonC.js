@@ -29,14 +29,6 @@ Ext.define('App.view.admin.clas.GridPersonC', {
                         Ext.Msg.alert('Не удалено', 'Сотрудник проходил тест');
                     }
                 });
-
-
-                /*grid.store.sync({
-                 failure: function () {
-                 Ext.MessageBox.alert('Ошибка', 'Пользователь не удален');
-                 },
-                 scope: this
-                 });*/
             }
         },
 

@@ -17,16 +17,6 @@ Ext.define('App.view.admin.clas.GridExamC', {
                     examid = selection.get('examid'),
                     storePerson = gridPerson.getViewModel().getStore('person'),
                     storeSigngroup = gridSigngroup.getViewModel().getStore('signgroup');
-                /*gridSigngroup.getViewModel().getStore('signgroup').clearFilter();
-                 gridPerson.getViewModel().getStore('person').clearFilter();*/
-                /*gridSigngroup.getViewModel().getStore('signgroup').filterBy(function (rec) {
-                 if (rec.get('examid') == examid)
-                 return true;
-                 });
-                 gridPerson.getViewModel().getStore('person').filterBy(function (rec) {
-                 if (rec.get('examid') == examid)
-                 return true;
-                 });*/
 
                 if (selection) {
                     storeSigngroup.load({
@@ -45,8 +35,6 @@ Ext.define('App.view.admin.clas.GridExamC', {
                 // * опрос подавших заявку на тест в классе
                 var taskClassCheck = {
                     run: function () {
-                        /*var gridPerson = Ext.ComponentQuery.query('#gridPerson')[0];
-                         gridPerson.getViewModel().getStore('person').load();*/
                         storePerson.reload();
                     },
                     interval: 1000 * Utilities.getTool('regstatint'), // в секундах
@@ -171,44 +159,6 @@ Ext.define('App.view.admin.clas.GridExamC', {
                 var gridExam = button.up('grid');
                 gridExam.getViewModel().getStore('exam').reload();
             }
-        },
-        /*'#menuPrintConsolidated': {
-            click: function (button) {
-                console.log('click menuPrintConsolidated');
-
-                var grid = button.up('grid'),
-                    selection = grid.getSelected(),
-                    examArr = Array(),
-                    dateFindFrom = grid.down('#dateFindFrom'),
-                    dateFindTo = grid.down('#dateFindTo');
-                // * печатает только одну ведомость
-                *//*Ext.Ajax.request({
-                 url: 'resources/php/admin/excelOneConsolidated.php'
-                 });*//*
-
-                Ext.each(selection, function (item) {
-                    var examid = item.get('examid');
-                    examArr.push(examid);
-                });
-                window.open('resources/php/admin/excelOneConsolidated.php?examarr=' + examArr
-                    + '&dateFindFrom=' + Ext.Date.format(dateFindFrom.getValue(), 'd.m.Y')
-                    + '&dateFindTo=' + Ext.Date.format(dateFindTo.getValue(), 'd.m.Y')
-                );
-
-                //console.log(Ext.Date.format(dateFindFrom.getValue(),'d.m.Y'));
-                *//*Ext.Ajax.request({
-                 url: 'resources/php/admin/excelOneConsolidated.php?examarr=' + examArr
-                 + '&dateFindFrom=' + Ext.Date.format(dateFindFrom.getValue(),'d.m.Y')
-                 + '&dateFindTo=' + Ext.Date.format(dateFindTo.getValue(),'d.m.Y')
-                 });*//*
-            }
-        }*/
-    },
-    // * возвращает значение константы из Tool
-   /* getTool: function (field) {
-        var storeTool = this.getViewModel().getStore('tool'),
-            recTool = storeTool.getAt(0),
-            value = recTool.get(field);
-        return value;
-    }*/
+        }
+    }
 });

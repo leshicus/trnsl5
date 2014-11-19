@@ -7,22 +7,8 @@ Ext.define('App.view.admin.griduser.GridUserM', {
     stores: {
        user: {
             fields:[
-               /* {name: 'userid',type:'int'},
-                {name: 'familyname'},
-                {name: 'firstname'},
-                {name: 'lastname'},
-                {name: 'roleid'},
-                {name: 'login'},
-                {name: 'begindate'},
-                {name: 'enddate'},
-                {name: 'groupid'},
-                {name: 'specid'},
-                {name: 'password'},
-                {name: 'actid'},
-                {name: 'orgid'}*/
+
             ],
-           //autoSync: true,
-           //autoLoad: true,
            idProperty:'userid',
            proxy: {
                type: 'ajax',

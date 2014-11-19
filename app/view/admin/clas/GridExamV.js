@@ -12,16 +12,13 @@ Ext.define('App.view.admin.clas.GridExamV', {
     controller: 'gridexam',
     itemId: 'gridExam',
     flex: 1,
-    //margin: '0 0 5 0',
     forceFit: true,
     bind: '{exam}',
     title: 'Экзамены',
     columnLines: true,
     selType: 'checkboxmodel',
-    //bufferedRenderer : false,
     viewConfig: {
         stripeRows: true
-        //enableTextSelection:true // * allow to select text in grid. Actually it's a gridview property
     },
     plugins: [
         {
@@ -41,16 +38,6 @@ Ext.define('App.view.admin.clas.GridExamV', {
             injectCheckbox: 0,
             mode: 'MULTI'
         });
-
-        /*   this.plugins = [
-         Ext.create('Ext.grid.plugin.CellEditing', {
-         clicksToEdit: 1,
-         listeners: {
-         scope: 'this',
-         edit: 'onEdit'
-         }
-         })
-         ];*/
 
         this.tools = [
             {
@@ -76,17 +63,6 @@ Ext.define('App.view.admin.clas.GridExamV', {
                 _allowBlankFrom: false
             });
 
-
-    /*    var comboOrg = Ext.create('Ext.form.ComboBox', {
-            bind: {store: '{org1}'},
-            itemId: 'comboOrg',
-            valueField: 'orgid',
-            name: 'orgid',
-            editable: false,
-            queryMode: 'local',
-            displayField: 'orgabbr'
-        });*/
-
         this.columns = [
             {
                 text: 'Номер',
@@ -108,7 +84,6 @@ Ext.define('App.view.admin.clas.GridExamV', {
                 itemId: 'columnFio',
                 dataIndex: 'fio',
                 tdCls: 'wrapText'
-                //width: 140
             },
             {
                 text: 'Организация',
@@ -116,54 +91,18 @@ Ext.define('App.view.admin.clas.GridExamV', {
                 dataIndex: 'orgabbr',
                 tdCls: 'wrapText',
                 name: 'orgid',
-                //editor: comboOrg,
                 menuDisabled: true,
                 width: 110,
-                //renderer: App.util.Utilities.comboRenderer(comboOrg)
                 editor: {
                     xtype: 'combobox',
                     bind: {store: '{org}'},
                     editable: false,
                     queryMode: 'local',
                     valueField: 'orgid',
-                    displayField: 'orgabbr',
-                    /* listeners: {
-                     select: function (combo, record) {
-
-                     var grid = combo.up('grid'),
-                     vm = grid.getViewModel(),
-                     store = vm.getStore('exam');
-                     //selected = grid.getSelectionModel().getSelection()[0],
-                     //rec = store.findRecord('examid',selected.get('examid'));
-                     console.info(record, store.getProxy().getWriter());
-                     store.getProxy().getWriter().config.writeValue(record.get('orgabbr'), record);
-                     }
-                     }*/
-                },
-                /*renderer: function(value,metaData ,record ,rowIndex ,colIndex ,store ,view ,retrn ) {
-                 var result = '',
-                 storeOrg = this.up('main').getViewModel().getStore('org');
-                 storeOrg.findBy(function(record) {
-                 if (record.get('orgid') == value) {
-                 result = record.get('orgabbr');
-                 }
-                 });
-                 return result;
-                 }*/
+                    displayField: 'orgabbr'
+                }
             }
         ];
-
-    /*    this.contextMenu = Ext.create('Ext.menu.Menu', {
-            plain: true,
-            border: false,
-            items: [
-                {
-                    text: 'Печать: Сводная экзаменационная ведомость',
-                    itemId: 'menuPrintConsolidated',
-                    iconCls: 'icon_excel'
-                }
-            ]
-        });*/
 
         this.callParent(arguments);
         console.log('GridExam end');

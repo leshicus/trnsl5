@@ -87,8 +87,9 @@ foreach ($orgList as $i => $rowOrg) {
         }
         $out .= '
     {
-        "id": "' . $rowOrg['orgid'] . '",
-        "text": "' . $rowOrg['orgabbr'] . '",';
+        "id": "' . uniqid('',true) . '",
+        "text": "' . $rowOrg['orgabbr'] . '",
+        "orgid": "' . $rowOrg['orgid'] . '",';
         if (count(_filter_by_value($actList,'orgid',$rowOrg['orgid'])) == 0) {
             $out .= '"leaf": true';
         } else {
@@ -103,14 +104,17 @@ foreach ($orgList as $i => $rowOrg) {
                     }
                     $out .= '
             {
-                "id": "' . $rowOrg['orgid'] . '-' . $rowAct['actid'] . '",
+                "id": "' . uniqid('',true) . '",
                 "text": "' . $rowAct['actabbr'] . '",
-                "leaf": false';
-                    // * перебор групп
-                    if (count(_filter_by_value($groupList, 'actid', $rowAct['actid']))) {
+                "actid": "' . $rowAct['actid'] . '",';
+                    if (count(_filter_by_value($groupList, 'actid', $rowAct['actid'])) == 0) {
+                        $out .= '"leaf": true';
+                    } else {
+                        $out .= '"leaf": false';
                         $out .= ',
                 "children": [';
                         $cntGroup = 0;
+                        // * перебор групп
                         foreach ($groupList as $j => $rowGroup) {
                             if ($rowGroup['actid'] == $rowAct['actid']) {
                                 if ($cntGroup > 0) {
@@ -118,7 +122,7 @@ foreach ($orgList as $i => $rowOrg) {
                                 }
                                 $out .= '
                     {
-                        "id": "' . $rowOrg['orgid'] . '-' . $rowAct['actid'] . '-' . $rowGroup['groupid'] . '",
+                        "id": "' . uniqid('',true) . '",
                         "text": "Группа № ' . $rowAct['actnum'] . '.' . $rowGroup['groupnum'] . ' ' . $rowGroup['groupname'] . '",
                         "leaf": true,
                         "groupid": ' . $rowGroup['groupid'] . '}';

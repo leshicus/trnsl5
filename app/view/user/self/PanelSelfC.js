@@ -9,13 +9,7 @@ Ext.define('App.view.user.self.PanelSelfC', {
         store: {
             '#card': {
                 load: function (store, rec) {
-                    // * старт показа вопросов после генерации билета
-                    /*console.log('onStoreCardLoad');
 
-                     var maxRownum = this.getStoreMaxValue(store, 'rownum'), // число вопросов в билете
-                     panelSelf = this.getView();
-                     panelSelf.questionMaxInCardSelf = maxRownum;
-                     this.showCard(1);*/
                 }
             }
         }
@@ -67,10 +61,7 @@ Ext.define('App.view.user.self.PanelSelfC', {
                     checkedAnswerId,
                     answerText = 'нет ответа',
                     correct = 0,
-                    textNormdoc = panelSelf.down('#textNormdoc') // * Прогресс - Норм док
-                /*taskDelayShowNewQuestion = Ext.create('Ext.util.DelayedTask', function () {
-                 this.showNextQuestion(buttonNextQuestion);
-                 }, this)*/;
+                    textNormdoc = panelSelf.down('#textNormdoc');
 
                 // * проверим правильность ответа
                 function getCheckedAnswer(element, index, array) {
@@ -100,7 +91,6 @@ Ext.define('App.view.user.self.PanelSelfC', {
                 if (correct == 1) {
                     textAnswer.setValue(App.util.Utilities.correctString);
                     textAnswer.setFieldStyle(App.util.Utilities.colorStatusTextReg);
-                    //textNormdoc.reset();
                 } else {
                     textAnswer.setValue(App.util.Utilities.uncorrectString);
                     textAnswer.setFieldStyle(App.util.Utilities.colorStatusTextUnreg);
@@ -109,7 +99,6 @@ Ext.define('App.view.user.self.PanelSelfC', {
                 var normdoc = storeCard.findRecord('correct', 1).get('normdoc');
                 textNormdoc.setValue(normdoc);
                 // * отсроченный показ следующего билета
-                //taskDelayShowNewQuestion.delay(1000);
                 this.showNextQuestion(buttonNextQuestion);
             }
         },
@@ -118,12 +107,8 @@ Ext.define('App.view.user.self.PanelSelfC', {
             boxready: function (field) {
                 field.el.on({
                     mouseover: function (e) {
-                        /*var tip = field.up('panelSelf').myTooltip;
-                         tip.update(field.myCustomText);
-                         tip.showAt(e.getXY());*/
                         Ext.tip.QuickTipManager.register({
                             target: field.getId(), // Target button's ID
-                            //anchor: 'bottom',
                             anchor: 'top',
                             dismissDelay: 3000,
                             anchorOffset: 85,
@@ -131,7 +116,6 @@ Ext.define('App.view.user.self.PanelSelfC', {
                         });
                     },
                     mouseout: function () {
-                        //field.up('panelSelf').myTooltip.hide();
 
                     }
                 });

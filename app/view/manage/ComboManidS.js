@@ -8,5 +8,4 @@ Ext.define('App.store.ComboManidS', {
             type:'json'
         }
     }
-    //autoLoad:true
 });

@@ -1,12 +1,6 @@
 Ext.define('App.view.user.test.PanelTestC', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.panelTest',
-    onLaunch: function () {
-       /* var me = this;
-        var storeCard = Ext.data.StoreManager.lookup('user.CardS');
-        // * старт показа вопросов после генерации билета
-        storeCard.on('load', me.onStoreCardLoad, me);*/
-    },
     control: {
         '#':{
 
@@ -52,14 +46,11 @@ Ext.define('App.view.user.test.PanelTestC', {
                     run: function () {
                         var comboExam = Ext.ComponentQuery.query('#comboExam')[0],
                             examid = comboExam.getValue();
-                        //console.log('taskRegStatus');
-                        //console.log(this.getTool('regstatdur'));
                         Ext.Ajax.request({
                             url: 'resources/php/user/getRegStatus.php?examid=' + examid,
                             success: function (response, options) {
                                 var resp = Ext.decode(response.responseText),
                                     cnt = resp.cnt;
-                                //console.log(cnt);
                                 if (cnt == 1) {
                                     var textStatus = Ext.ComponentQuery.query('#textStatus')[0],
                                         buttonStartTest = Ext.ComponentQuery.query('#startTest')[0];
@@ -246,7 +237,6 @@ Ext.define('App.view.user.test.PanelTestC', {
                         textAnswer.setFieldStyle(App.util.Utilities.colorStatusTextUnreg);
                     }
                     // * отсроченный показ следующего билета
-                    //taskDelayShowNewQuestion.delay(1000);
                     this.showNextQuestion(buttonNextQuestion);
                     App.util.Utilities.runnerExamTestQuestion.stopAll();
                     this.runTimerQuestion();
@@ -317,9 +307,6 @@ Ext.define('App.view.user.test.PanelTestC', {
             boxready: function (field) {
                 field.el.on({
                     mouseover: function (e) {
-                        /*var tip = field.up('panelTest').myTooltip;
-                        tip.update(field.myCustomText);
-                        tip.showAt(e.getXY());*/
                         Ext.tip.QuickTipManager.register({
                             target: field.getId(), // Target button's ID
                             //anchor: 'bottom',
@@ -330,7 +317,6 @@ Ext.define('App.view.user.test.PanelTestC', {
                         });
                     },
                     mouseout: function () {
-                        //field.up('panelTest').myTooltip.hide();
                     }
                 });
             }
@@ -386,14 +372,12 @@ Ext.define('App.view.user.test.PanelTestC', {
             taskExamTimerSec = {
                 run: function () {
                     if (varExamTimerSec < 0) {
-                        //buttonNextQuestion.setDisabled(true);
                         App.util.Utilities.runnerExamTestQuestion.stop(taskExamTimerSec);
                         if (panelTest.questionNumber < panelTest.maxquestion) {
                             buttonNextQuestion.fireEvent('click', buttonNextQuestion);
                         } else {
                             this.saveToClass();
                         }
-                        //this.saveToClass();
                     } else {
                         textTime.setValue(varExamTimerSec + ' секунд');
                         varExamTimerSec -= 1;
@@ -582,8 +566,6 @@ Ext.define('App.view.user.test.PanelTestC', {
         Ext.Ajax.request({
             url: 'resources/php/user/resetCard.php?examid=' + examid,
             success: function (response, options) {
-                //Ext.example.msg('Внимание', 'Билет отменен');
-                //Ext.Msg.alert('Внимание', 'Билет отменен');
                 Utilities.errorMessage('Внимание', 'Билет отменен. Перезайдите в систему.');
             },
             failure: function () {
@@ -592,14 +574,7 @@ Ext.define('App.view.user.test.PanelTestC', {
             scope: this
         });
     },
-    // * возвращает значение константы из Tool
-  /*  getTool: function (field) {
-        var main = this.getView().up('main'),
-            storeTool = main.getViewModel().getStore('tool'),
-            recTool = storeTool.getAt(0),
-            value = recTool.get(field);
-        return value;
-    },*/
+
     answerCounter: function () {
         if (!this.no) {
             this.no = 0;
@@ -607,7 +582,4 @@ Ext.define('App.view.user.test.PanelTestC', {
             this.no = this.no + 1;
         }
     }
-
-
-
 });

@@ -59,7 +59,6 @@ Ext.define('App.view.admin.stat.PanelStatV', {
                         editable: false,
                         valueField: 'orgid',
                         displayField: 'orgname',
-                        //value:1,
                         emptyText: 'Организация'
                     },
                     {
@@ -83,7 +82,6 @@ Ext.define('App.view.admin.stat.PanelStatV', {
                 itemId: 'panelChart',
                 flex: 1,
                 autoScroll:true,
-                //margin: '0 0 0 5',
                 margin: 5,
                 cls: 'my_shadowborder',
                 layout: {
@@ -91,20 +89,9 @@ Ext.define('App.view.admin.stat.PanelStatV', {
                     align: 'stretch'
                 },
                 defaults:{
-                    //flex:1,
                     height:500,
-                    //width:300,
                     border:1
-                }/*,
-                buttons:[
-                    {
-                        xtype: 'button',
-                        action: 'saveChart',
-                        itemId: 'saveChart',
-                        scale:'medium',
-                        text: 'Сохранить'
-                    }
-                ]*/
+                }
             }
         ];
 

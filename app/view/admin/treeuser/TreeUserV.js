@@ -1,8 +1,6 @@
 Ext.define('App.view.admin.treeuser.TreeUserV', {
     extend: 'Ext.tree.Panel',
     requires: [
-        /*'Ext.tree.View',
-        'Ext.tree.Panel',*/
         'App.view.admin.treeuser.TreeUserM',
         'App.view.admin.treeuser.TreeUserC'
     ],
@@ -22,16 +20,6 @@ Ext.define('App.view.admin.treeuser.TreeUserV', {
     initComponent: function () {
         console.log('TreeUserV init');
         this.tools = [
-            /*{
-                type: 'expand',
-                itemId: 'expandTreeUser',
-                tooltip: 'Раскрыть все'
-            },
-            {
-                type: 'collapse',
-                itemId: 'collapseTreeUser',
-                tooltip: 'Скрыть все'
-            },*/
             {
                 type: 'maximize',
                 tooltip: 'Скрыть/Раскрыть'

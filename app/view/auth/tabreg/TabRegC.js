@@ -51,15 +51,7 @@ Ext.define('App.view.auth.tabreg.TabRegC', {
                     comboSpec = tabReg.down('#comboSpeciality'),
                     main = field.up('main'),
                     storeSpec = this.getView().getViewModel().getStore('spec');
-                //storeSpec.clearFilter();
                 comboSpec.disable();
-                //comboSpec.reset();
-                /*storeSpec.filterBy(function(item){
-                 if(item.get('orgid') == newValue){
-                 comboSpec.enable();
-                 return true;
-                 }
-                 });*/
                 storeSpec.load({
                     params: {
                         orgid: newValue

@@ -47,8 +47,6 @@
                 name:'correct',
                 labelWidth: 100,
                 disabled:true,
-                //hideLabel:true,
-                //fieldStyle : 'float:left;',
                 boxLabelAlign:'before',
                 inputValue:'1'
             }
@@ -58,12 +56,14 @@
             {
                 text: 'Сохранить',
                 action: 'save',
+                glyph: Glyphs.get('save'),
                 scale: 'medium'
             },
             '->',
             {
                 text: 'Отмена',
                 action: 'cancel',
+                glyph: Glyphs.get('cancel'),
                 scale: 'medium'
             }
         ];

@@ -12,7 +12,6 @@ Ext.define('App.view.manage.group.GridGroupV', {
     frame: false,
     flex: 1,
     forceFit: true,
-    //store: 'manage.GridGroupS',
     title: 'Группы',
     columnLines: true,
     viewConfig: {
@@ -46,22 +45,14 @@ Ext.define('App.view.manage.group.GridGroupV', {
             storeAct = mainVM.getStore('act'),
             storeKnow = mainVM.getStore('know'),
             comboAct = Ext.create('Ext.form.ComboBox', {
-                //store: storeAct,
                 bind:{store:'{act}'},
                 viewModel: {type: 'main'},
                 valueField: 'actid',
                 name: 'actid',
                 editable: false,
-                displayField: 'actabbr'/*,
-                 listeners: {  // * чтобы при нажатии ENTER не нажималась кнопка Сохранить, а переходило на другую строку
-                 afterrender: function () {
-                 var me = this;
-                 me.el.swallowEvent(['keypress', 'keydown' ]);
-                 }
-                 }*/
+                displayField: 'actabbr'
             }),
             comboKnow = Ext.create('Ext.form.ComboBox', {
-                //store: storeKnow,
                 bind:{store:'{know}'},
                 viewModel: {type: 'main'},
                 valueField: 'knowid',
@@ -84,7 +75,6 @@ Ext.define('App.view.manage.group.GridGroupV', {
                 width: 130,
                 editor: comboAct,
                 renderer: Utilities.renderGridGroup(comboAct)
-                //renderer: App.util.Utilities.comboRendererVM(comboAct,'act')
             },//todo после добавления Вида деятельности, здесь не отображается до перезагрузки
             {
                 text: 'Номер<br>группы',
@@ -99,32 +89,18 @@ Ext.define('App.view.manage.group.GridGroupV', {
                 text: 'Наименование',
                 itemId: 'columnGroupname',
                 dataIndex: 'groupname',
-                //flex: 1,
-                //width: 300,
                 editor: {
                     xtype: 'textfield'
                 }
-                /*editor: {
-                 xtype: 'textfield',
-                 errorSummary: false,
-                 listeners: {  // * чтобы при нажатии ENTER не нажималась кнопка Сохранить, а переходило на другую строку
-                 afterrender: function () {
-                 var me = this;
-                 me.el.swallowEvent(['keypress', 'keydown' ]);
-                 }
-                 }
-                 }*/
             },
             {
                 text: 'Области знания',
                 itemId: 'columnGroupknow',
                 dataIndex: 'knowids',
                 tdCls: 'wrapText',
-                //flex: 1,
                 width: 300,
                 editor: comboKnow,
                 renderer: App.util.Utilities.renderGroupknow
-                //renderer: App.util.Utilities.comboRendererVM(comboKnow,'know')
             }
         ];
         this.callParent(arguments);

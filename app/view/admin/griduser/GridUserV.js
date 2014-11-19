@@ -97,29 +97,6 @@ Ext.define('App.view.admin.griduser.GridUserV', {
             }
         ];
 
-      /*  this.contextMenu = Ext.create('Ext.menu.Menu', {
-            plain: true,
-            border: false,
-            items: [
-                {
-                    text: 'Сбросить пароль',
-                    itemId: 'menuResetPassword',
-                    iconCls: 'icon_password'
-                },
-                '-',
-                {
-                    text: 'Блокировать',
-                    itemId: 'menuBlock',
-                    iconCls: 'icon_block'
-                },
-                {
-                    text: 'Разблокировать',
-                    itemId: 'menuUnblock',
-                    iconCls: 'icon_unblock'
-                }
-            ]
-        });*/
-
         this.callParent(arguments);
         console.log('GridUser end');
     },

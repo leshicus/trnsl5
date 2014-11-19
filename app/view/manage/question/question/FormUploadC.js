@@ -51,29 +51,6 @@ Ext.define('App.view.manage.question.question.FormUploadC', {
                             },
                             scope: this
                         });
-
-                        /*Ext.Ajax.request({
-                         url: 'resources/php/manage/importQuestion.php',
-                         isUpload: true,
-                         params: {
-                         knowid: knowid,
-                         groupid: groupid
-                         },
-                         timeout: 600000,  // * 5 минут
-                         method: 'POST',
-                         form: formId,
-                         success: function (response, options) {
-
-                         },
-                         failure: function (response, options) {
-                         var resp = Ext.decode(response.responseText),
-                         message = resp.message;
-                         App.util.Utilities.errorMessage('Ошибка подключения к базе', message);
-                         Ext.getBody().unmask();
-                         },
-                         scope: this
-                         });*/
-
                     } else {
                         App.util.Utilities.errorMessage('Ошибка импорта', 'Не выбран каталог для импорта');
                     }
