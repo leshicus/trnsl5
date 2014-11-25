@@ -131,9 +131,7 @@ Ext.define('App.util.Utilities', {
         }
     },
     renderOrg: function (combo) {
-        var main = Ext.ComponentQuery.query('main')[0],
-            mainVM = main.getViewModel(),
-            storeAct = mainVM.getStore('org');
+        var storeAct = Ext.ComponentQuery.query('main')[0].getViewModel().getStore('org');
 
         return function (value) {
             var record = storeAct.findRecord('orgid', value);

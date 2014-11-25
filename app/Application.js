@@ -12,6 +12,7 @@ Ext.define('App.Application', {
     ],
 
     launch: function () {
+
     },
     requires: [
         'App.util.Utilities',

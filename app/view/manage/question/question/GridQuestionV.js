@@ -72,6 +72,9 @@ Ext.define('App.view.manage.question.question.GridQuestionV', {
                 action: 'export',
                 scale: 'medium',
                 iconCls: 'icon_export'
+            },
+            {
+                xtype:'form'
             }
         ];
 

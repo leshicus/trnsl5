@@ -6,11 +6,11 @@ Ext.define('App.view.manage.act.GridActV', {
     ],
     alias: 'widget.gridAct',
     viewModel: {type: 'main'},
-    controller:'gridAct',
+    controller: 'gridAct',
     bind: '{act}',
     itemId: 'gridAct',
     frame: false,
-    flex:1,
+    flex: 1,
     forceFit: true,
     title: 'Виды деятельности',
     columnLines: true,
@@ -42,19 +42,20 @@ Ext.define('App.view.manage.act.GridActV', {
         ]
 
         var comboOrg = Ext.create('Ext.form.ComboBox', {
-                bind:{store: '{org}'},
-                valueField: 'orgid',
-                name: 'orgid',
-                editable: false,
-                displayField: 'orgabbr'
-            });
+            bind: {store: '{org}'},
+            viewModel: {type: 'main'},
+            valueField: 'orgid',
+            name: 'orgid',
+            editable: false,
+            displayField: 'orgabbr'
+        });
 
         this.columns = [
             {
                 text: 'Номер',
                 itemId: 'columnActnum',
                 dataIndex: 'actnum',
-                width:70,
+                width: 70,
                 editor: {
                     xtype: 'textfield'
                 }
@@ -64,7 +65,7 @@ Ext.define('App.view.manage.act.GridActV', {
                 itemId: 'columnActabbr',
                 dataIndex: 'actabbr',
                 tdCls: 'wrapText',
-                width:160,
+                width: 160,
                 editor: {
                     xtype: 'textfield'
                 }
@@ -74,7 +75,7 @@ Ext.define('App.view.manage.act.GridActV', {
                 itemId: 'columnActname',
                 dataIndex: 'actname',
                 tdCls: 'wrapText',
-                width:400,
+                width: 400,
                 editor: {
                     xtype: 'textfield'
                 }
@@ -85,13 +86,13 @@ Ext.define('App.view.manage.act.GridActV', {
                 dataIndex: 'orgid',
                 width: 200,
                 editor: comboOrg,
-                renderer: App.util.Utilities.renderOrg(comboOrg)
+                renderer: Utilities.renderOrg(comboOrg)
             },
             {
                 text: 'Лимит времени (мин)',
                 itemId: 'columnTimelimit',
                 dataIndex: 'timelimit',
-                width:150,
+                width: 150,
                 editor: {
                     xtype: 'textfield'
                 }

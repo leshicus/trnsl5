@@ -16,6 +16,11 @@ Ext.define('App.view.manage.org.GridOrgC', {
                     },
                     scope: this
                 });
+                /* нужно обновить стор вьюмодела */
+                var main = Ext.ComponentQuery.query('main')[0],
+                    vm = main.getViewModel(),
+                    store = vm.getStore('org');
+                store.reload();
             }
         },
         '#refreshGridOrgS': {

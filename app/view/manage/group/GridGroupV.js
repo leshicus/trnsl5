@@ -40,11 +40,7 @@ Ext.define('App.view.manage.group.GridGroupV', {
             }
         ]
 
-        var main = Ext.ComponentQuery.query('main')[0],
-            mainVM = main.getViewModel(),
-            storeAct = mainVM.getStore('act'),
-            storeKnow = mainVM.getStore('know'),
-            comboAct = Ext.create('Ext.form.ComboBox', {
+        var comboAct = Ext.create('Ext.form.ComboBox', {
                 bind:{store:'{act}'},
                 viewModel: {type: 'main'},
                 valueField: 'actid',
@@ -62,20 +58,21 @@ Ext.define('App.view.manage.group.GridGroupV', {
                 displayField: 'knowname'
             });
         this.columns = [
-            {
+          /*  {
                 text: 'id',
                 itemId: 'columnGroupid',
                 dataIndex: 'groupid',
                 width: 50
-            },
+            },*/
             {
                 text: 'Вид<br>деятельности',
                 itemId: 'columnActid',
                 dataIndex: 'actid',
+                name: 'actid',
                 width: 130,
                 editor: comboAct,
                 renderer: Utilities.renderGridGroup(comboAct)
-            },//todo после добавления Вида деятельности, здесь не отображается до перезагрузки
+            },
             {
                 text: 'Номер<br>группы',
                 itemId: 'columnGroupnum',

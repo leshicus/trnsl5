@@ -15,6 +15,10 @@ Ext.define('App.view.manage.group.GridGroupC', {
                     },
                     scope: this
                 });
+                var main = Ext.ComponentQuery.query('main')[0],
+                    vm = main.getViewModel(),
+                    store = vm.getStore('group');
+                store.reload();
             }
         },
         '#instruction': {

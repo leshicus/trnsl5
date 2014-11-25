@@ -2,7 +2,8 @@
     extend: 'Ext.form.Panel',
     requires: [
         'App.view.admin.formuser.FormUserC',
-        'App.view.main.MainM'
+        'App.view.main.MainM',
+        'Ext.form.field.ComboBox'
     ],
     alias: 'widget.formUser',
     viewModel: {type: 'main'},
@@ -12,7 +13,7 @@
     defaults: {
         labelWidth: 100
     },
-    autoScroll:true,
+    autoScroll: true,
     border: false,
     layout: {
         type: 'vbox',
@@ -43,11 +44,12 @@
                 fieldLabel: 'Отчество'
             },
             {
-                xtype: 'combobox',
-                bind:{
-                    store:'{spec}'
+                xtype: 'combo',
+                //viewModel: {type: 'main'},
+                bind: {
+                    store: '{spec}'
                 },
-                itemId: 'comboSpec',
+                itemId: 'specid',
                 queryMode: 'local',
                 valueField: 'specid',
                 name: 'specid',
@@ -58,8 +60,8 @@
             },
             {
                 xtype: 'combobox',
-                bind:{
-                    store:'{role}'
+                bind: {
+                    store: '{role}'
                 },
                 itemId: 'comboRole',
                 queryMode: 'local',

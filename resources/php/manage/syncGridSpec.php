@@ -10,7 +10,7 @@ $data = json_decode(file_get_contents('php://input'), true);
 switch ($act) {
     case 'create':
         $sql = "
-            insert into speciality()values();
+            insert into speciality() values();
         ";
         try {
             $res = $mysqli->query($sql);

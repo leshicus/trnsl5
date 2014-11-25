@@ -16,6 +16,10 @@ Ext.define('App.view.manage.know.GridKnowC', {
                     },
                     scope: this
                 });
+                var main = Ext.ComponentQuery.query('main')[0],
+                    vm = main.getViewModel(),
+                    store = vm.getStore('know');
+                store.reload();
             }
         },
         '#refreshGridKnowS': {

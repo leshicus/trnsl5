@@ -6,7 +6,7 @@ Ext.define('App.view.manage.spec.GridSpecC', {
     alias: 'controller.gridSpec',
 
     control: {
-        '#':{
+        '#': {
             edit: function (editor, context) {
                 console.log('edit');
                 var storeSpec = context.grid.getViewModel().getStore('spec');
@@ -39,19 +39,28 @@ Ext.define('App.view.manage.spec.GridSpecC', {
 
                 var grid = button.up('grid'),
                     storeSpec = grid.getViewModel().getStore('spec'),
-                    newRecord = storeSpec.add({})[0],
                     treeSpec = button.up('#content').down('treeSpec'),
                     selectedTree = treeSpec.getSelected();
                 if (selectedTree) {
                     if (selectedTree.raw.leaf) {
-                        var groupid = selectedTree.raw.groupid;
-                        newRecord.set('groupid', groupid);
+                        var groupid = selectedTree.raw.groupid,
+                            orgid = selectedTree.raw.orgid,
+                            actid = selectedTree.raw.actid;
+                        var newRecord = storeSpec.add({
+                                groupid:groupid,
+                                orgid:orgid,
+                                actid:actid
+                            })[0];
                         storeSpec.insert(0, newRecord);
                         storeSpec.sync();
-                    }else {
+                        var main = Ext.ComponentQuery.query('main')[0],
+                            vm = main.getViewModel(),
+                            store = vm.getStore('spec');
+                        store.reload();
+                    } else {
                         Ext.Msg.alert('Ошибка', 'Не выбрана группа');
                     }
-                }else {
+                } else {
                     Ext.Msg.alert('Ошибка', 'Не выбрана группа');
                 }
             }
@@ -71,7 +80,7 @@ Ext.define('App.view.manage.spec.GridSpecC', {
                         },
                         scope: this
                     });
-                }else {
+                } else {
                     Ext.Msg.alert('Ошибка', 'Не выбрана специальность');
                 }
             }

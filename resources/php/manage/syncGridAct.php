@@ -10,8 +10,9 @@ $success = true;
 
 switch ($act) {
     case 'create':
+        $timelimit = $data['timelimit'];
         $sql = "
-            insert into activity () values ();
+            insert into activity (timelimit) values ($timelimit);
         ";
         try {
             $res = $mysqli->query($sql);

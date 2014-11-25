@@ -3,7 +3,8 @@ Ext.define('App.view.manage.question.question.GridQuestionC', {
     requires: [
         'App.view.manage.question.question.FormQuestionV',
         'App.view.manage.question.question.FormUploadV',
-        'Ext.dom.Helper'
+        'Ext.dom.Helper',
+        'Ext.ux.IFrame'
     ],
     alias: 'controller.gridQuestion',
 
@@ -42,7 +43,7 @@ Ext.define('App.view.manage.question.question.GridQuestionC', {
                 window.show();
             }
         },
-        'gridQuestion button[action=add]': {
+        'button[action=add]': {
             click: function (button) {
                 console.log('action=add');
                 var treeQuestion = button.up('#content').down('treeQuestion'),
@@ -69,7 +70,7 @@ Ext.define('App.view.manage.question.question.GridQuestionC', {
                 }
             }
         },
-        'gridQuestion button[action=delete]': {
+        'button[action=delete]': {
             click: function (button) {
                 console.log('action=delete');
 
@@ -99,27 +100,49 @@ Ext.define('App.view.manage.question.question.GridQuestionC', {
                 }
             }
         },
-        'gridQuestion button[action=export]': {
+        'button[action=export]': {
             click: function (button) {
                 console.log('action=export');
+
                 var gridQuestion = button.up('gridQuestion'),
                     selection = gridQuestion.getSelected(),
                     arr = Array();
                 if (selection.length) {
+
                     Ext.each(selection, function (item) {
                         arr.push(item.get('questionid'));
                     });
                     var str = arr.join(',');
 
+             /*       var comp = Ext.create('Ext.Component',{
+                        //renderTo:Ext.getBody(),
+                        autoEl:{
+                            tag:'a',
+                            id:'atag',
+                            href : "data:application/octet-stream,field1%2Cfield2%0Afoo%2Cbar%0Agoo%2Cgai%0A",
+                            download : 'test.csv'
+                        }
+                    });*/
+
+                    var pom = document.createElement('a');
+                    pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent('123'));
+                    pom.setAttribute('download', '1.txt');
+                    pom.click();
+
+
+                    /*document.getElementById("atag").click();*/
+
+/*работает, но только в браузере*/
                     var body = Ext.getBody(),
                         iframe = body.appendChild({
                             tag: 'iframe',
                             id: 'iframe-helper',
-                            cls: 'x-hidden'
+                            cls: 'x-hidden',
+                            name: 'iframe'
                         }),
                         form = body.appendChild({
                             tag: 'form',
-                            method: 'post',
+                            method: 'POST',
                             target: 'iframe-helper',
                             action: 'resources/php/manage/exportQuestion.php',
                             cls: 'x-hidden'
@@ -128,12 +151,71 @@ Ext.define('App.view.manage.question.question.GridQuestionC', {
                             tag: 'input',
                             type: 'hidden',
                             name: 'str',
+                            id:'hidden-input',
                             value: str,
-                            cls:'x-hidden'
+                            cls: 'x-hidden'
                         });
                     form.dom.submit();
-                    iframe.destroy();
+                    //iframe.destroy();
                     form.destroy();
+                    input.destroy();
+
+// window.open('resources/php/manage/exportQuestion.php?str=' + arr, '_blank','location=0');
+
+/*работает, но только в браузере*/
+                   /* var a = window.document.createElement('a');
+                    a.href = window.URL.createObjectURL(new Blob([str], {type: 'text/csv'}));
+                    a.download = 'test.csv';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);*/
+
+            /*        var a = window.document.createElement('a');
+                    a.href = "data:application/octet-stream,field1%2Cfield2%0Afoo%2Cbar%0Agoo%2Cgai%0A";
+                    a.download = 'test.csv';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);*/
+
+
+
+                 /*       form = Ext.create('Ext.form.Panel',{
+                            url:'resources/php/manage/exportQuestion.php'
+                        });
+                    form.getForm().submit({
+                        params:{str:str}
+                    });*/
+
+
+     /*                var iframe = Ext.create('Ext.ux.IFrame', {
+                     id: 'iframe-helper'
+                     }),
+                     form = Ext.create('Ext.form.Panel', {
+                     url: 'resources/php/manage/exportQuestion.php',
+                     items: [{
+                     xtype: 'textfield',
+                     name: 'str'
+                     }]
+                     }),
+                     //iframe = document.getElementById('iframe-helper'),
+                     form = body.appendChild({
+                     tag: 'form',
+                     method: 'post',
+                     target: 'iframe-helper',
+                     action: 'resources/php/manage/exportQuestion.php',
+                     cls: 'x-hidden'
+                     }),
+                     input = form.appendChild({
+                     tag: 'input',
+                     type: 'hidden',
+                     name: 'str',
+                     value: str,
+                     cls: 'x-hidden'
+                     });*/
+
+
+
+
                 } else {
                     Ext.Msg.alert('Внимание', 'Отметьте вопросы для экспорта');
                 }
@@ -142,7 +224,6 @@ Ext.define('App.view.manage.question.question.GridQuestionC', {
         'button[action=import]': {
             click: function (button) {
                 console.log('filefield');
-
                 var form = Ext.create('App.view.manage.question.question.FormUploadV'),
                     window = Ext.create('Ext.Window', {
                         frame: true,

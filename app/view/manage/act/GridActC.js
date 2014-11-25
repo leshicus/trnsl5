@@ -17,6 +17,10 @@ Ext.define('App.view.manage.act.GridActC', {
                     },
                     scope: this
                 });
+                var main = Ext.ComponentQuery.query('main')[0],
+                    vm = main.getViewModel(),
+                    store = vm.getStore('act');
+                store.reload();
             }
 
         },
@@ -38,13 +42,15 @@ Ext.define('App.view.manage.act.GridActC', {
                 console.log('action=add');
 
                 var grid = button.up('grid'),
-                    store = grid.getViewModel().getStore('act'),
-                    newRecord = store.add({})[0];
-                grid.getViewModel().getStore('act').insert(0, newRecord);
-
-                grid.getViewModel().getStore('act').sync({
+                    vm = grid.getViewModel(),
+                    store = vm.getStore('act'),
+                    newRecord = store.add({
+                        timelimit: Utilities.getTool('examtimermin')
+                    })[0];
+                store.insert(0, newRecord);
+                store.sync({
                     success: function () {
-                        newRecord.commit();
+                        //newRecord.commit();
                     },
                     failure: function () {
                         Ext.MessageBox.alert('Ошибка', 'Не сохранено');

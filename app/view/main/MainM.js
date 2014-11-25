@@ -8,11 +8,7 @@ Ext.define('App.view.main.MainM', {
     },
     stores: {
         org: {
-            fields: [
-                {name: 'orgid',type:'int'},
-                {name: 'orgname'},
-                {name: 'orgabbr',type:'string'}
-            ],
+            fields: [],
             idProperty:'orgid',
             autoLoad: true,
             proxy: {
@@ -42,11 +38,12 @@ Ext.define('App.view.main.MainM', {
         },
         spec: {
             fields: [
-                {name: 'specid'},
+                /*{name: 'specid'},
                 {name: 'specname'},
                 {name: 'groupid'},
-                {name: 'orgid'}
+                {name: 'orgid'}*/
             ],
+            //autoLoad:true,
             idProperty:'specid',
             proxy: {
                 type: 'rest',
@@ -75,8 +72,8 @@ Ext.define('App.view.main.MainM', {
         },
         role: {
             fields: [
-                {name: 'id'},
-                {name: 'name'},
+               /* {name: 'id'},
+                {name: 'name'}*/
             ],
             autoLoad: true,
             proxy: {

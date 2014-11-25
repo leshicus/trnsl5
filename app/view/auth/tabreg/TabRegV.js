@@ -4,7 +4,8 @@ Ext.define('App.view.auth.tabreg.TabRegV', {
         'Ext.form.FieldSet',
         'Ext.form.field.ComboBox',
         'App.view.auth.tabreg.TabRegC',
-        'App.view.auth.tabreg.TabRegM'
+        'App.view.auth.tabreg.TabRegM',
+        'App.view.main.MainM'
     ],
     alias: 'widget.tabReg',
     controller: 'tabReg',
