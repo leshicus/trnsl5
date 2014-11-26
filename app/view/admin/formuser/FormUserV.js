@@ -2,6 +2,7 @@
     extend: 'Ext.form.Panel',
     requires: [
         'App.view.admin.formuser.FormUserC',
+        'App.view.common.ResizableComboBoxV',
         'App.view.main.MainM',
         'Ext.form.field.ComboBox'
     ],
@@ -59,7 +60,7 @@
                 /* то, что показывается в списке */
                 tpl: Ext.create('Ext.XTemplate',
                     '<tpl for=".">',
-                    '<div class="x-boundlist-item">{specname} <b>{orgabbr}</b></div>',
+                    '<div class="x-boundlist-item">{specname} <b>({orgabbr})</b></div>',
                     '</tpl>'
                 ),
                 /* то, что показывается на форме - титульное значение */

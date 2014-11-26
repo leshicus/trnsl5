@@ -40,8 +40,6 @@ Ext.define('App.view.admin.griduser.GridUserC', {
                             actid: actid
                         },*/
                         callback: function (records, operation, success) {
-//todo почему комбик специальности пустой?
-
                             var window = Ext.create('Ext.Window', {
                                 frame: true,
                                 title: 'Редактирование данных сотрудника',
