@@ -1,5 +1,7 @@
 build/.sass-cache
 build/temp
+.sencha
+.idea
 
 # Windows image file caches
 Thumbs.db

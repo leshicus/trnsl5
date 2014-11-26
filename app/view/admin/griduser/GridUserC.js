@@ -22,23 +22,26 @@ Ext.define('App.view.admin.griduser.GridUserC', {
 
                 var tree = this.getView().up('#content').down('treeUser'),
                     selected = tree.getSelected();
+                var form = Ext.create('App.view.admin.formuser.FormUserV');
+                form.loadRecord(record);
                 if (selected) {
-                    var groupid = selected.raw.groupid,
+                    var /*groupid = selected.raw.groupid,
                         orgid = selected.raw.orgid,
-                        actid = selected.raw.actid,
-                        main = tree.up('main'),
+                        actid = selected.raw.actid,*/
+                        /*main = tree.up('main'),
                         vm = main.getViewModel(),
+                        storeSpec = vm.getStore('spec');*/
+                        vm = form.getViewModel(),
                         storeSpec = vm.getStore('spec');
                     storeSpec.load({
-                        params: {
+                        /*params: {
                             groupid: groupid,
                             orgid: orgid,
                             actid: actid
-                        },
+                        },*/
                         callback: function (records, operation, success) {
 //todo почему комбик специальности пустой?
-                            var form = Ext.create('App.view.admin.formuser.FormUserV');
-                            form.loadRecord(record);
+
                             var window = Ext.create('Ext.Window', {
                                 frame: true,
                                 title: 'Редактирование данных сотрудника',

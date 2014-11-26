@@ -45,7 +45,6 @@
             },
             {
                 xtype: 'combo',
-                //viewModel: {type: 'main'},
                 bind: {
                     store: '{spec}'
                 },
@@ -56,7 +55,19 @@
                 editable: false,
                 allowBlank: false,
                 displayField: 'specname',
-                fieldLabel: 'Специальность'
+                fieldLabel: 'Специальность',
+                /* то, что показывается в списке */
+                tpl: Ext.create('Ext.XTemplate',
+                    '<tpl for=".">',
+                    '<div class="x-boundlist-item">{specname} <b>{orgabbr}</b></div>',
+                    '</tpl>'
+                ),
+                /* то, что показывается на форме - титульное значение */
+                displayTpl: Ext.create('Ext.XTemplate',
+                    '<tpl for=".">',
+                    '{specname} ({orgabbr})',
+                    '</tpl>'
+                )
             },
             {
                 xtype: 'combobox',
