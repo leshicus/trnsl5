@@ -2,7 +2,9 @@
 .x-fieldset-header-default > .x-fieldset-header-text {
     color: rgb(39, 127, 204);
 }
-
+/*.x-box-inner {
+    overflow: hidden;
+}*/
 /* заголовки grid */
 .x-column-header {
     color: rgb(39, 127, 204);
@@ -43,8 +45,8 @@
     background:#E6F1F9;
     padding: 7px;
     font-size: x-large;
-    font-variant: small-caps;
-    font-family: serif;
+    /*font-variant: small-caps;
+    font-family: serif;*/
     border-radius: 4px;
     text-align: left;
     border-width: 1px;
@@ -66,16 +68,19 @@
 .mystyle_title_subsystem_text {
     color: #666666;
     font-size: x-large;
-    font-variant: small-caps;
-    font-family: serif;
+    font-weight: 100;
+    overflow: initial;
+    /*font-variant: small-caps;
+    font-family: serif;*/
 }
 /* стиль заголовков подсистем (имя пользователя) */
 .mystyle_title_subsystem_user {
     text-align: right;
     color: #666666;
     font-size: larger;
-    font-variant: small-caps;
-    font-family: serif;
+    overflow: initial;
+    /*font-variant: small-caps;
+    font-family: serif;*/
 }
 
 /*.mystyle_title_user {
