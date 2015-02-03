@@ -2,7 +2,9 @@
     extend: 'Ext.form.Panel',
     requires: [
         'App.view.admin.formuser.FormUserC',
-        'App.view.main.MainM'
+        'App.view.common.ResizableComboBoxV',
+        'App.view.main.MainM',
+        'Ext.form.field.ComboBox'
     ],
     alias: 'widget.formUser',
     viewModel: {type: 'main'},
@@ -12,7 +14,7 @@
     defaults: {
         labelWidth: 100
     },
-    autoScroll:true,
+    //autoScroll: true,
     border: false,
     layout: {
         type: 'vbox',
@@ -43,25 +45,35 @@
                 fieldLabel: 'Отчество'
             },
             {
-                xtype: 'combobox',
-                //store: 'manage.GridSpecS',
-                bind:{
-                    store:'{spec}'
+                xtype: 'combo',
+                bind: {
+                    store: '{spec}'
                 },
-                itemId: 'comboSpec',
+                itemId: 'specid',
                 queryMode: 'local',
                 valueField: 'specid',
                 name: 'specid',
                 editable: false,
                 allowBlank: false,
                 displayField: 'specname',
-                fieldLabel: 'Специальность'
+                fieldLabel: 'Специальность',
+                /* то, что показывается в списке */
+                tpl: Ext.create('Ext.XTemplate',
+                    '<tpl for=".">',
+                    '<div class="x-boundlist-item">{specname} <b>({orgabbr})</b></div>',
+                    '</tpl>'
+                ),
+                /* то, что показывается на форме - титульное значение */
+                displayTpl: Ext.create('Ext.XTemplate',
+                    '<tpl for=".">',
+                    '{specname} ({orgabbr})',
+                    '</tpl>'
+                )
             },
             {
                 xtype: 'combobox',
-                //store: 'admin.ComboRoleS',
-                bind:{
-                    store:'{role}'
+                bind: {
+                    store: '{role}'
                 },
                 itemId: 'comboRole',
                 queryMode: 'local',
@@ -78,12 +90,14 @@
             {
                 text: 'Сохранить',
                 action: 'save',
+                glyph: Glyphs.get('save'),
                 scale: 'medium'
             },
             '->',
             {
                 text: 'Отмена',
                 action: 'cancel',
+                glyph: Glyphs.get('cancel'),
                 scale: 'medium'
             }
         ];

@@ -27,6 +27,7 @@ switch ($act) {
                   '$knowid'
                 );
             ";
+            //echo $sql;
             try {
                 $res = $mysqli->query($sql);
             } catch (Exception $e) {

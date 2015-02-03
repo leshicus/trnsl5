@@ -9,13 +9,13 @@ Ext.define('App.view.admin.log.GridLogV', {
     viewModel: {type: 'gridlog'},
     controller: 'gridlog',
     itemId: 'gridLog',
-    frame: true,
     flex: 1,
     //forceFit: true,  // * ячейки распределяются по ширине всей таблицы
     bind: {store: '{log}'},
     title: 'Журнал действий пользователя',
     columnLines: true,
     viewConfig: {
+        stripeRows: true,
         enableTextSelection: true // * allow to select text in grid. Actually it's a gridview property
     },
     initComponent: function () {

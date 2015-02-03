@@ -48,7 +48,6 @@ Ext.define('App.view.admin.toolbar.ToolbarAdminC', {
                             }
                         ]
                     });
-                    //storeTreeUser.getRootNode().expand(true);
                     layout.activeItem.add(content);
                 }
             }
@@ -57,14 +56,7 @@ Ext.define('App.view.admin.toolbar.ToolbarAdminC', {
             toggle: function (me, state) {
                 if (me.pressed) {
                     console.log('click mainMI');
-
-                    var main = me.up('main'),
-                        layout = main.getLayout(),
-                        content = layout.activeItem.query('#content')[0];
-                    if (content) {
-                        layout.activeItem.remove(content);
-                    }
-                    layout.setActiveItem(0);
+                    location.reload();
                 }
             }
         },
@@ -149,15 +141,6 @@ Ext.define('App.view.admin.toolbar.ToolbarAdminC', {
                         ]
                     });
                     layout.activeItem.add(content);
-
-                    var gridPerson = Ext.ComponentQuery.query('gridPerson')[0],
-                        gridSigngroup = Ext.ComponentQuery.query('gridSigngroup')[0];
-                    gridPerson.store.filter(function () {
-                        return false
-                    });
-                    gridSigngroup.store.filter(function () {
-                        return false
-                    });
                 }
             }
         },
@@ -190,18 +173,6 @@ Ext.define('App.view.admin.toolbar.ToolbarAdminC', {
                         ]
                     });
                     layout.activeItem.add(content);
-
-                    // * установим даты по умолчанию как начало и конец текущего месяца
-                    /*  var dateFrom = content.down('#panelStat #dateFrom'),
-                     dateTo = content.down('#panelStat #dateTo'),
-                     now = new Date(),
-                     year = now.getFullYear(),
-                     month = App.util.Utilities.reverseDate(now.getMonth() + 1),
-                     daysCount = new Date(year, month, 0).getDate(),
-                     dateBegin = ['01', month, year].join('.'),
-                     dateEnd = [daysCount, month, year].join('.');
-                     dateFrom.setValue(dateBegin);
-                     dateTo.setValue(dateEnd);*/
                 }
             }
         },
@@ -234,12 +205,7 @@ Ext.define('App.view.admin.toolbar.ToolbarAdminC', {
                             }
                         ]
                     });
-                    /*// * загрузим данные в форму
-                     var form = content.down('form'),
-                     store = form.getViewModel().getStore('tool'),
-                     rec = store.getAt(0);
-                     console.info(form,store,rec);
-                     form.getForm().loadRecord(rec);*/
+
                     layout.activeItem.add(content);
                 }
             }

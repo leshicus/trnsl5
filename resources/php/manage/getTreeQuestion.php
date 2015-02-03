@@ -2,8 +2,6 @@
 require_once("../db_connect.php");
 require_once("../include.php");
 
-$success = true;
-
 // * организации
 $orgQuery = "
             select
@@ -125,78 +123,84 @@ foreach ($orgList as $i => $rowOrg) {
         }
         $out .= '
     {
-        "id": "' . $rowOrg['orgid'] . '",
+        "id": "' . uniqid('',true) . '",
         "text": "' . $rowOrg['orgabbr'] . '",
-        "orgid": "' . $rowOrg['orgid'] . '",
-        "leaf": false';
-        $out .= ',
+        "orgid": "' . $rowOrg['orgid'] . '",';
+        if (count(_filter_by_value($actList,'orgid',$rowOrg['orgid'])) == 0) {
+            $out .= '"leaf": true';
+        } else {
+            $out .= '"leaf": false';
+            $out .= ',
         "children": [';
-        $cntAct = 0;
-        foreach ($actList as $i => $rowAct) {
-            if ($rowAct['orgid'] == $rowOrg['orgid']) {
-                if ($cntAct > 0) {
-                    $out .= ',';
-                }
-                $out .= '
+            $cntAct = 0;
+            foreach ($actList as $i => $rowAct) {
+                if ($rowAct['orgid'] == $rowOrg['orgid']) {
+                    if ($cntAct > 0) {
+                        $out .= ',';
+                    }
+                    $out .= '
             {
-                "id": "' . $rowOrg['orgid']. '-' . $rowAct['actid'] . '",
+                "id": "' . uniqid('',true) . '",
                 "text": "' . $rowAct['actabbr'] . '",
-                "actid": "' . $rowAct['actid'] . '",
-                "leaf": false';
-                // * перебор групп
-                if (count(_filter_by_value($groupList,'actid',$rowAct['actid']))) {
-                    $out .= ',
+                "actid": "' . $rowAct['actid'] . '",';
+                    if (count(_filter_by_value($groupList,'actid',$rowAct['actid'])) == 0) {
+                        $out .= '"leaf": true';
+                    } else {
+                        $out .= '"leaf": false';
+                        $out .= ',
                 "children": [';
-                    $cntGroup = 0;
-                    foreach ($groupList as $j => $rowGroup) {
-                        if ($rowGroup['actid'] == $rowAct['actid']) {
-                            if ($cntGroup > 0) {
-                                $out .= ',';
-                            }
-                            $out .= '
+                        $cntGroup = 0;
+                        // * перебор групп
+                        foreach ($groupList as $j => $rowGroup) {
+                            if ($rowGroup['actid'] == $rowAct['actid']) {
+                                if ($cntGroup > 0) {
+                                    $out .= ',';
+                                }
+                                $out .= '
                     {
-                        "id": "' .$rowOrg['orgid']. '-' . $rowAct['actid'] . '-' . $rowGroup['groupid'] . '",
+                        "id": "' . uniqid('',true) . '",
                         "text": "Группа № ' . $rowAct['actnum'] . '.' . $rowGroup['groupnum'] . ' ' . $rowGroup['groupname'] . '",
                         "groupid": ' . $rowGroup['groupid'] . ',';
-                            //"leaf": false';
-                            if ($rowGroup['groupnum'] == 0) {
-                                $out .= '"leaf": true';
-                            } else {
-                                $out .= '"leaf": false';
-                                // * перебор областей знаний
-                                if ($rowGroup['knowids']) {
-                                    $out .= ',
+                                //"leaf": false';
+                                if ($rowGroup['groupnum'] == 0) {
+                                    $out .= '"leaf": true';
+                                } else {
+                                    $out .= '"leaf": false';
+                                    // * перебор областей знаний
+                                    if ($rowGroup['knowids']) {
+                                        $out .= ',
                             "children": [';
-                                    $cntKnow = 0;
-                                    foreach ($rowGroup['knowarr'] as $j => $rowKnow) {
-                                        if ($cntKnow > 0) {
-                                            $out .= ',';
-                                        }
-                                        $out .= '{
-                                "id": "' . $rowOrg['orgid']. '-'. $rowAct['actid'] . '-' . $rowGroup['groupid'] . '-' . $rowKnow['knowid'] . '",
+                                        $cntKnow = 0;
+                                        foreach ($rowGroup['knowarr'] as $j => $rowKnow) {
+                                            if ($cntKnow > 0) {
+                                                $out .= ',';
+                                            }
+                                            $out .= '{
+                                "id": "' . uniqid('',true) . '",
                                 "text": "' . $rowKnow['knownum'] . ' (' . $rowKnow['knowname'] . ')' . '",
                                 "leaf": true,
                                 "groupid": ' . $rowGroup['groupid'] . ',
                                 "knowid": ' . $rowKnow['knowid'] . '}';
-                                        $cntKnow++;
+                                            $cntKnow++;
+                                        }
+                                        $out .= ']';
                                     }
-                                    $out .= ']';
                                 }
+
+                                $out .= '}';
+                                $cntGroup++;
                             }
-
-                            $out .= '}';
-                            $cntGroup++;
                         }
+                        $out .= ']';
                     }
-                    $out .= ']';
+                    $out .= '}';
+                    $cntAct++;
                 }
-                $out .= '}';
-                $cntAct++;
-            }
 
-        }
-        $out .= '
+            }
+            $out .= '
         ]';
+        }
     }
     $out .= '
     }';

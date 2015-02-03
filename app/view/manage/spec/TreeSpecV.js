@@ -1,21 +1,22 @@
-Ext.define('App.view.manage.TreeSpecV', {
+Ext.define('App.view.manage.spec.TreeSpecV', {
     extend: 'Ext.tree.TreePanel',
     requires: [
-        'Ext.tree.*',
-        'Ext.data.*',
-        'Ext.util.Point',
-        'Ext.layout.container.HBox'
+        'App.view.manage.spec.TreeSpecC',
+        'App.view.manage.spec.TreeSpecM'
     ],
-    frame:true,
+    viewModel: {type: 'treeSpec'},
+    controller:'treeSpec',
+    bind: '{treespec}',
     border: 5,
     title: 'Структура',
     alias:'widget.treeSpec',
     itemId:'treeSpec',
-    store: 'manage.TreeSpecS',
     margin: '0 5 0 0',
     resizable:true,
     rootVisible : false,
+    _collapsed: true,
     viewConfig: {
+        stripeRows: true,
         plugins: {
             ptype: 'treeviewdragdrop',
             dropGroup: 'ddspec',
@@ -27,14 +28,8 @@ Ext.define('App.view.manage.TreeSpecV', {
     initComponent: function(){
         this.tools = [
             {
-                type:'expand',
-                itemId:'expandTreeSpec',
-                tooltip: 'Раскрыть все'
-            },
-            {
-                type:'collapse',
-                itemId:'collapseTreeSpec',
-                tooltip: 'Скрыть все'
+                type: 'maximize',
+                tooltip: 'Скрыть/Раскрыть'
             },
             {
                 type:'refresh',

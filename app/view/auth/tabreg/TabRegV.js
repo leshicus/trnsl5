@@ -4,7 +4,8 @@ Ext.define('App.view.auth.tabreg.TabRegV', {
         'Ext.form.FieldSet',
         'Ext.form.field.ComboBox',
         'App.view.auth.tabreg.TabRegC',
-        'App.view.auth.tabreg.TabRegM'
+        'App.view.auth.tabreg.TabRegM',
+        'App.view.main.MainM'
     ],
     alias: 'widget.tabReg',
     controller: 'tabReg',
@@ -55,12 +56,10 @@ Ext.define('App.view.auth.tabreg.TabRegV', {
                 xtype: 'textfield',
                 itemId: 'textLastname',
                 name: 'textLastname',
-                validator:this.validatorFio,
                 fieldLabel: 'Отчество'
             },
             comboOrg = {
                 xtype: 'combo',
-                //store: 'manage.GridOrgS',
                 bind:{
                     store:'{org}'
                 },
@@ -76,7 +75,6 @@ Ext.define('App.view.auth.tabreg.TabRegV', {
             },
             comboSpeciality = {
                 xtype: 'combo',
-                //store: 'manage.GridSpecS',
                 bind:{
                     store:'{spec}'
                 },
@@ -100,13 +98,10 @@ Ext.define('App.view.auth.tabreg.TabRegV', {
                 allowBlank: false,
                 validator:this.validatorPassword,
                 afterLabelTextTpl: App.util.Utilities.required
-                //style: 'margin-top:15px'
             };
 
 
         this.items = [
-            /*fieldsetUser,
-            fieldsetAuth*/
             textFamily,
             textName,
             textLastname,
@@ -120,11 +115,13 @@ Ext.define('App.view.auth.tabreg.TabRegV', {
             {
                 text: 'Зарегистрироваться',
                 action: 'register',
+                glyph: Glyphs.get('key'),
                 scale:'medium'
             },
             {
                 text: 'Очистить',
                 action: 'refresh',
+                glyph: Glyphs.get('cancel'),
                 scale:'medium'
             }
         ];

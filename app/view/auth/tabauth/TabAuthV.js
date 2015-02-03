@@ -28,7 +28,7 @@ Ext.define('App.view.auth.tabauth.TabAuthV', {
                 xtype: 'textfield',
                 itemId: 'textLogin',
                 name: 'textLogin',
-                value:'a',
+                //value:'a',
                 validator:this.validatorLogin,
                 allowBlank: false,
                 afterLabelTextTpl: App.util.Utilities.required,
@@ -54,13 +54,12 @@ Ext.define('App.view.auth.tabauth.TabAuthV', {
                 xtype: 'textfield',
                 itemId: 'textPassword',
                 name: 'textPassword',
-                value:'a',
+                //value:'a',
                 validator:this.validatorPassword,
                 inputType: 'password',
                 fieldLabel: 'Пароль',
                 allowBlank: false,
                 afterLabelTextTpl: App.util.Utilities.required
-                //style: 'margin-top:15px'
             },
             textOldPassword = {
                 xtype: 'textfield',
@@ -82,6 +81,7 @@ Ext.define('App.view.auth.tabauth.TabAuthV', {
                 text: 'Поменять',
                 anchor: '25%',
                 scale:'medium',
+                glyph: Glyphs.get('change'),
                 action: 'changepassword'
             },
             fieldsetChangePas = Ext.create('Ext.form.FieldSet', {
@@ -99,6 +99,14 @@ Ext.define('App.view.auth.tabauth.TabAuthV', {
                     textNewPassword,
                     buttonChangePas
                 ]
+            }),
+            buttonEnter = Ext.create('Ext.button.Button',{
+                text: 'Вход',
+                scale:'medium',
+                action: 'enter',
+                glyph: Glyphs.get('signin'),
+                reference: 'enter',
+                itemId:'enter'
             });
 
         this.items = [
@@ -109,22 +117,20 @@ Ext.define('App.view.auth.tabauth.TabAuthV', {
         ];
 
         this.buttons = [
-            {
-                text: 'Вход',
-                scale:'medium',
-                action: 'enter'
-            },
+            buttonEnter,
             {
                 text: 'Очистить',
                 scale:'medium',
+                glyph: Glyphs.get('cancel'),
                 action: 'refresh'
-            }/*,
-             { xtype: 'tbspacer', width: 150 }*/
+            }
         ];
 
         this.callParent(arguments);
+
         console.log('TabAuthV end');
     },
+
     // * латинский алфавит, длиннее 3-х букв
     validatorLogin:function (val) {
         //var regex = /^\d+(.(\d+){1})?$/;
@@ -150,4 +156,11 @@ Ext.define('App.view.auth.tabauth.TabAuthV', {
          }*/
         return true;
     }
+},
+
+function () {
+    // * короткие имена для полезных методов
+    Ext.apply(App, {
+        defaultButton: '[reference=enter]'
+    });
 });

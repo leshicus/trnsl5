@@ -7,7 +7,7 @@ Ext.define('App.view.main.Main', {
         'App.view.main.MainM',
         'App.view.auth.tabreg.TabRegV',
         'App.view.auth.tabauth.TabAuthV',
-        'App.view.user.ToolbarUserV',
+        'App.view.user.toolbar.ToolbarUserV',
         'App.view.manage.toolbar.ToolbarManageV',
         'App.view.admin.toolbar.ToolbarAdminV',
         'App.view.common.SubsystemTitleV'
@@ -47,7 +47,6 @@ Ext.define('App.view.main.Main', {
                     xtype: 'tabpanel',
                     height: 340,
                     width: 500,
-                    frame: true,
                     activeTab: 0,
                     cls: 'my_shadowborder',
                     margin: '5 5 5 5',
@@ -56,8 +55,26 @@ Ext.define('App.view.main.Main', {
                     },
                     items: [
                         {xtype: 'tabAuth'},
-                        {xtype: 'tabReg'}
+                        {xtype: 'tabReg'},
+                        {
+                            title:'О программе...',
+                            layout:'vbox',
+                            defaults:{
+                                xtype: 'label',
+                                margin: '0 0 0 10'
+                            },
+                            items:[
+                                {html: Utilities.textAbout}
+                            ]
+                        }
                     ]
+                },
+                {
+                    xtype: 'box',
+                    margin: '5 5 5 1',
+                    html: 'Выход из приложения: <b>ALT + F4</b><br>Версия: ' + Utilities.version,
+                    height: 35,
+                    width: 500
                 }
             ]
         },
@@ -73,7 +90,7 @@ Ext.define('App.view.main.Main', {
             items: [
                 {
                     xtype: 'subsystemtitle',
-                    _textSubsystem:'Тестирование'
+                    _textSubsystem: 'Тестирование'
                 },
                 {xtype: 'toolbarUser'}
             ]
@@ -90,7 +107,7 @@ Ext.define('App.view.main.Main', {
             items: [
                 {
                     xtype: 'subsystemtitle',
-                    _textSubsystem:'Администрирование'
+                    _textSubsystem: 'Администрирование'
                 },
                 {xtype: 'toolbarAdmin'}
             ]
@@ -107,7 +124,7 @@ Ext.define('App.view.main.Main', {
             items: [
                 {
                     xtype: 'subsystemtitle',
-                    _textSubsystem:'Ведение'
+                    _textSubsystem: 'Ведение'
                 },
                 {xtype: 'toolbarManage'}
             ]

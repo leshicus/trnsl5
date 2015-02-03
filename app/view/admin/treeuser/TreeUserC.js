@@ -10,32 +10,32 @@ Ext.define('App.view.admin.treeuser.TreeUserC', {
                 console.log('treeUser cellclick');
                 var treeUser = tree.up('#content').down('treepanel'),
                     gridUser = tree.up('#content').down('grid'),
-                    storeUser = gridUser.store,
+                    storeUser = gridUser.getViewModel().getStore('user'),
                     selection = treeUser.getSelected();
                 if (selection) {
                     var groupid = selection.raw.groupid,
                         actid = selection.raw.actid,
-                        orgid = selection.raw.orgid;
-                    storeUser.clearFilter();
-                    storeUser.filter(function (rec) {
-                        if(groupid)
-                            if (rec.get('groupid') == groupid)
-                                return true;
-                        if(actid)
-                            if (rec.get('actid') == actid)
-                                return true;
-                        if(orgid)
-                            if (rec.get('orgid') == orgid)
-                                return true;
-                    });
+                        orgid = selection.raw.orgid,
+                        id = selection.raw.id;
+
+                    gridUser.mask('Загружаем список пользователей...');
+                    Ext.defer(function () {
+                        storeUser.load({
+                            params: {
+                                id: id,
+                                orgid: orgid,
+                                actid: actid,
+                                groupid: groupid
+                            },
+                            callback: function () {
+                                gridUser.unmask();
+                            }
+                        });
+                    }, 20);
                 }
             },
             render: function (tree) {
-                var gridUser = tree.up('#content').down('grid'),
-                    storeUser = gridUser.store;
-                storeUser.filter(function () {
-                    return false
-                });
+
             }
         },
 
@@ -43,23 +43,13 @@ Ext.define('App.view.admin.treeuser.TreeUserC', {
             click: function (button) {
                 var treeUser = button.up('treepanel'),
                     gridUser = treeUser.up('#content').down('grid'),
-                    storeUser = gridUser.store;
-                storeUser.filter(function () {
-                    return false
-                });
-                treeUser.store.load();
+                    storeUser = gridUser.getViewModel().getStore('user');
+                treeUser.getViewModel().getStore('treeuser').load();
             }
         },
-        '#expandTreeUser': {
-            click: function (button) {
-                var treeUser = button.up('treepanel');
-                treeUser.expandAll();
-            }
-        },
-        '#collapseTreeUser': {
-            click: function (button) {
-                var treeUser = button.up('treepanel');
-                treeUser.collapseAll();
+        'tool[type=maximize]': {
+            click: function (button, e, tree) {
+                Utilities.treeCollapse(button, e, tree);
             }
         }
     }

@@ -1,48 +1,45 @@
 Ext.define('App.view.manage.question.tree.TreeQuestionV', {
     extend: 'Ext.tree.TreePanel',
     requires: [
-        'Ext.tree.*',
-        'Ext.data.*',
-        'Ext.util.Point',
-        'Ext.layout.container.HBox'
+        'App.view.manage.question.tree.TreeQuestionC',
+        'App.view.manage.question.tree.TreeQuestionM',
+        'Ext.tree.View',
+        'Ext.tree.Panel',
+        'Ext.data.Session'
     ],
-    frame:true,
+    viewModel: {type: 'treeQuestion'},
+    controller: 'treeQuestion',
+    frame: false,
     border: 5,
     title: 'Структура',
-    alias:'widget.treeQuestion',
-    itemId:'treeQuestion',
-    store: 'manage.TreeQuestionS',
+    alias: 'widget.treeQuestion',
+    itemId: 'treeQuestion',
+    forceFit: true,
+    bind: '{treequestion}',
     margin: '0 5 0 0',
-    resizable:true,
-   // allowDeselect: true,
-    //selModel: {  allowDeselect: true },
+    resizable: true,
+    _collapsed: true,
     rootVisible: false,
     viewConfig: {
+        stripeRows: true,
         plugins: {
             ptype: 'treeviewdragdrop',
             dropGroup: 'ddgroup',
-            //appendOnly: true,
             sortOnDrop: true, // * чтобы deselect происходил
             enableDrag: false,
-            //enableDrop: true,
             containerScroll: true
         }
     },
-    initComponent: function(){
+    session: Ext.create('Ext.data.Session'),
+    initComponent: function () {
         this.tools = [
             {
-                type:'expand',
-                itemId:'expandTreeQuestionS',
-                tooltip: 'Раскрыть все'
+                type: 'maximize',
+                tooltip: 'Скрыть/Раскрыть'
             },
             {
-                type:'collapse',
-                itemId:'collapseTreeQuestionS',
-                tooltip: 'Скрыть все'
-            },
-            {
-                type:'refresh',
-                itemId:'refreshTreeQuestionS',
+                type: 'refresh',
+                itemId: 'refreshTreeQuestionS',
                 tooltip: 'Обновить'
             }
         ]

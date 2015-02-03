@@ -4,13 +4,7 @@ Ext.define('App.view.admin.clas.GridExamM', {
     stores: {
         exam: {
             fields: [
-                {name: 'examid'},
-                {name: 'examdate'},
-                {name: 'userid'},
-                {name: 'fio'},
-                {name: 'login'},
-                {name: 'orgid'},
-                {name: 'orgabbr',type:'string'}
+
             ],
             autoSync: true,
             autoLoad: true,
@@ -28,14 +22,7 @@ Ext.define('App.view.admin.clas.GridExamM', {
                 },
                 writer: {
                     type: 'json',
-                    writeAllFields:true,
-                    encode: true,
-                    writeValue:function (data, field) {
-                        console.info(arguments);
-                        if('orgabbr' !== field.name)   {
-                            Ext.data.writer.Json.prototype.writeValue.apply(this,arguments);
-                        }
-                    }
+                    writeAllFields:true
                 },
                 appendId: false,
                 actionMethods: {

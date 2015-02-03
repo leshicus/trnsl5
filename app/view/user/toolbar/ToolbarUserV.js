@@ -1,20 +1,21 @@
-Ext.define('App.view.user.ToolbarUserV', {
+Ext.define('App.view.user.toolbar.ToolbarUserV', {
     extend: 'Ext.toolbar.Toolbar',
     requires: [
-
+        'App.view.user.toolbar.ToolbarUserC',
     ],
     alias: 'widget.toolbarUser',
+    controller: 'toolbaruser',
     itemId: 'toolbarUser',
     defaults    : {
         toggleGroup    : "user",
-        allowDepress    : false
+        allowDepress    : true
     },
     initComponent: function () {
         console.log('ToolbarUserV init');
 
         this.items = [
             {
-                text: 'Главная',
+                text: 'Выход',
                 itemId: 'mainMI',
                 scale:'medium',
                 iconCls: 'icon_back'

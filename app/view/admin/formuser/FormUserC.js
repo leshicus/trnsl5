@@ -17,8 +17,18 @@ Ext.define('App.view.admin.formuser.FormUserC', {
                     record = form.getForm().getRecord();
                 if (form.isValid()) {
                     record.set(values);
+                    grid.getViewModel().getStore('user').sync({
+                        success: function () {
+                            grid.getViewModel().getStore('user').reload();
+                        },
+                        failure: function () {
+                            //Ext.Msg.alert('Ошибка', 'Не сохранено');
+                            Utilities.errorMessage('Ошибка', 'Не сохранено');
+                        },
+                        scope: this
+                    });
                     win.close();
-                    grid.store.load();
+
                 } else {
                     Ext.Msg.alert('Форма', 'Форма заполнена не правильно');
                 }

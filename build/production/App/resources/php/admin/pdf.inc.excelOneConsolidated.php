@@ -1,6 +1,6 @@
 <?php
-define('FPDF_FONTPATH','../../resources/fpdf/font/');
-require_once('../../resources/pdftable/lib/pdftable.inc.php');
+define('FPDF_FONTPATH','../../lib/fpdf/font/');
+require_once('../../lib/pdftable/lib/pdftable.inc.php');
 
 class PDF extends PDFTable{
 function PDF($orientation='P',$unit='mm',$format='A4'){

@@ -1,11 +1,36 @@
 Ext.define('App.util.Utilities', {
     singleton: true,
+    alternateClassName: ['Utilities'],
+    version: '1.02 от 05.12.2014',
+    textAbout:'<table width="100%">' +
+    '<tr>' +
+    '<td width="100">Программа:</td>' +
+    '<td>Система тестирования знаний</td>' +
+    '</tr>' +
+    '<tr>' +
+    '<td>Версия:</td>' +
+    '<td>' +
+    '1.02 от 05.12.2014' +
+    '</td>' +
+    '</tr>' +
+    '<tr>' +
+    '<td>Разработчик:</td>' +
+    '<td>Волков А.И.</td>' +
+    '</tr>' +
+    '<tr>' +
+    '<td>Почта:</td>' +
+    '<td>benzolring@mail.ru</td>' +
+    '</tr>' +
+    '<tr>' +
+    '<td>Сайт:</td>' +
+    '<td>teh5.ru</td>' +
+    '</tr>' +
+    '<tr>' +
+    '<td>Год:</td>' +
+    '<td>2014</td>' +
+    '</tr>' +
+    '</table>',
 
-    /*dataSystem: [
-        [1, "Тестирование"],
-        [2, "Администрирование"],
-        [3, "Ведение"]
-    ],*/
     dataStat: [
         ['1', "Количество экзаменуемых по видам деятельности"],
         ['2', "Успеваемость по видам деятельности"],
@@ -19,7 +44,6 @@ Ext.define('App.util.Utilities', {
     unpassString: 'экзамен не сдан',
     startSubsystem: 2, // * подсистема выбранная по-умолчанию в стартовом окне
     examTimerSec: 60, // * секунд в минуте
-    //userid: 0,
     nullDate: '00.00.0000 00:00',
     required: '<span style="color:red;font-weight:bold" ext:qtip="Required">*</span>',
     buttonSaveDelete: [
@@ -55,10 +79,6 @@ Ext.define('App.util.Utilities', {
             format: 'd.m.Y H:i'
         }
     ],
-    /*rowEditing: Ext.create('Ext.grid.plugin.RowEditing', {
-     clicksToMoveEditor: 1,
-     autoCancel: false
-     }),*/
     colorStatusTextUnreg: {
         color: '#FF0000',
         'font-weight': 'bold',
@@ -75,7 +95,6 @@ Ext.define('App.util.Utilities', {
     runnerExamTestQuestion: new Ext.util.TaskRunner(),  // * задание для времени вопроса
 
     comboRenderer: function (combo) {
-//console.info(arguments);
         return function (value) {
 
             var record = combo.findRecord(combo.valueField || combo.displayField, value);
@@ -83,34 +102,20 @@ Ext.define('App.util.Utilities', {
         }
     },
 
-    comboRendererVM: function (combo,storeName) {
-        //console.info(arguments);
+    comboRendererVM: function (combo, storeName) {
         return function (value) {
 
             var vm = combo.getViewModel(),
                 store = vm.getStore(storeName);
-                //result = '';
-                store.findBy(function(item){
-                    var id  = item.getIdProperty();
-                    console.info(rec.get(id),item.getIdProperty(),item.getId());
-                      if(rec.get(id) == value)
-                          return item ? item.get(combo.displayField) : combo.valueNotFoundText;
-                });
-            //console.info(record,combo.valueField,value);
-
+            //result = '';
+            store.findBy(function (item) {
+                var id = item.getIdProperty();
+                console.info(item.getIdProperty(), item.getId());
+                if (item.getIdProperty() == value)
+                    return item ? item.get(combo.displayField) : combo.valueNotFoundText;
+            });
         }
     },
-
-    /*comboStoreRenderer: function (combo, store) {
-     return function (value) {
-     var record = store.findRecord(combo.valueField || combo.displayField, value);
-     return record ? record.get(combo.displayField) : combo.valueNotFoundText;
-     }
-     },*/
-    /*renderGridQuestion: function (value, metaData, record, rowIndex, colIndex, store, view) {
-     metaData.style = 'white-space:normal !important;';
-     return value;
-     },*/
 
     columnStatus: function (value, metaData, record, rowIndex, colIndex, store, view) {
         if (value && value != App.util.Utilities.nullDate) {
@@ -120,8 +125,18 @@ Ext.define('App.util.Utilities', {
     },
 
     renderGridGroup: function (combo) {
+        var storeAct = Ext.ComponentQuery.query('main')[0].getViewModel().getStore('act');
+
         return function (value) {
-            var record = combo.findRecord(combo.valueField || combo.displayField, value, 0, false, true, true);
+            var record = storeAct.findRecord('actid', value);
+            return record ? record.get(combo.displayField) : combo.valueNotFoundText;
+        }
+    },
+    renderOrg: function (combo) {
+        var storeAct = Ext.ComponentQuery.query('main')[0].getViewModel().getStore('org');
+
+        return function (value) {
+            var record = storeAct.findRecord('orgid', value);
             return record ? record.get(combo.displayField) : combo.valueNotFoundText;
         }
     },
@@ -142,7 +157,9 @@ Ext.define('App.util.Utilities', {
 
     // * GridGroup knowids
     renderGroupknow: function (value, metaData, record, rowIndex, colIndex, store, view) {
-        var storeKnow = Ext.data.StoreManager.lookup('manage.GridKnowS');
+        var main = Ext.ComponentQuery.query('main')[0],
+            mainVM = main.getViewModel(),
+            storeKnow = mainVM.getStore('know');
         // проверка на массив (для списочных элементов, multiselect)
         if (value instanceof Array) {
             var str = Array();
@@ -158,39 +175,6 @@ Ext.define('App.util.Utilities', {
             return str.join(", \n");
         }
     },
-
-    // * подкраснить запись вопроса, если ответы не удовлетворяют условиям
-    /*questionGridColumnRenderer: function (value, metaData, record, rowIndex, colIndex, store, view) {
-
-     var gridQuestion = view.ownerCt,
-     viewport = gridQuestion.up('viewport'),
-     columnText = gridQuestion.columns[colIndex-1].text,
-     questionid = record.data['questionid'],
-     gridAnswer = viewport.down('gridAnswer'),
-     storeAnswer = gridAnswer.store,
-     flag = false;
-
-     console.log(record);
-     storeAnswer.clearFilter();
-     storeAnswer.filter(function (rec) {
-     if (rec.get('questionid') == questionid){
-     return true;
-     }else
-     return false;
-
-     });*//*
-     storeAnswer.data.each(function (rec) {
-     if (rec.get('correct') == 1 && rec.get('normdoc') != '')
-     if (flag == true) {
-     flag = false;
-     } else
-     flag = true;
-     });
-     if (columnText == 'Текст вопроса' && !flag) {
-     metaData.style += 'background:rgb(243, 169, 202);';
-     }*//*
-     return value;
-     },*/
 
 // * удаление старых гридов при нажатии на кнопку меню
     cascadeRemoveGrid: function (item) {
@@ -229,5 +213,40 @@ Ext.define('App.util.Utilities', {
 // * преобразование даты в удобочитаемый формат
     reverseDate: function (x) {
         return ((x < 10 ? '0' : '') + x)
+    },
+
+    // * скрыть/раскрыть дерево
+    treeCollapse: function (button, e, tree) {
+        if(tree){
+            if (tree._collapsed) {
+                tree.getEl().mask('Раскрываем...');
+                Ext.defer(function () {
+                    tree.expandAll(function () {
+                            tree.getEl().unmask();
+                            tree._collapsed = false;
+                        },
+                        this
+                    );
+                }, 10, this);
+            } else {
+                tree.getEl().mask('Скрываем...');
+                Ext.defer(function () {
+                    tree.collapseAll(function () {
+                            tree.getEl().unmask();
+                            tree._collapsed = true;
+                        },
+                        this
+                    );
+                }, 10, this);
+            }
+        }
+
+    },
+    getTool: function (field) {
+        var main = Ext.ComponentQuery.query('main')[0],
+            storeTool = main.getViewModel().getStore('tool'),
+            recTool = storeTool.getAt(0),
+            value = recTool.get(field);
+        return value;
     }
 });

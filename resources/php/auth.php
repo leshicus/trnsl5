@@ -22,7 +22,7 @@ if (strtoupper($textPassword) == strtoupper($initPassword)) {
      select u.userid
      from `user` u
      where u.login = '$textLogin'
-     and u.enddate = 0
+     and (u.enddate is null or u.enddate = '0000-00-00 00:00:00')
     ";
 
     try {
@@ -61,8 +61,8 @@ if (strtoupper($textPassword) == strtoupper($initPassword)) {
                 $message = $sql_pas;
             }
             $nCNT1 = $row_pas[0];
-            if(!$nCNT1){ // * не верный пароль
-                $message = 'Не верный пароль.';
+            if(!$nCNT1){ // * неверный пароль
+                $message = 'Неверный пароль.';
                 $success = false;
             }else{
                 // * узнаем ФИО пользователя, чтобы вернуть в программу
