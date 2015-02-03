@@ -57,7 +57,7 @@ try {
 }
 
 header('Content-Type: application/vnd.ms-excel');
-header("Content-Disposition: attachment; filename=_excelOneConsolidated.xls");
+header("Content-Disposition: attachment; filename=сводная_ведомость_".time().".xml");
 
 $excel = $header;
 $excel .= '<Row ss:Index="3">

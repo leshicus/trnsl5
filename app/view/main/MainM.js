@@ -8,12 +8,7 @@ Ext.define('App.view.main.MainM', {
     },
     stores: {
         org: {
-            fields: [
-                {name: 'orgid',type:'int'},
-                {name: 'orgname'},
-                {name: 'orgabbr',type:'string'}
-            ],
-            autoSync: true,
+            fields: [],
             idProperty:'orgid',
             autoLoad: true,
             proxy: {
@@ -28,7 +23,8 @@ Ext.define('App.view.main.MainM', {
                     type: 'json'
                 },
                 writer: {
-                    type: 'json'
+                    type: 'json',
+                    writeAllFields: true
                 },
                 appendId: false,
                 actionMethods: {
@@ -42,13 +38,12 @@ Ext.define('App.view.main.MainM', {
         },
         spec: {
             fields: [
-                {name: 'specid'},
+                /*{name: 'specid'},
                 {name: 'specname'},
                 {name: 'groupid'},
-                {name: 'orgid'}
+                {name: 'orgid'}*/
             ],
-            autoSync: true,
-            autoLoad: true,
+            //autoLoad:true,
             idProperty:'specid',
             proxy: {
                 type: 'rest',
@@ -62,7 +57,8 @@ Ext.define('App.view.main.MainM', {
                     type: 'json'
                 },
                 writer: {
-                    type: 'json'
+                    type: 'json',
+                    writeAllFields: true
                 },
                 appendId: false,
                 actionMethods: {
@@ -76,8 +72,8 @@ Ext.define('App.view.main.MainM', {
         },
         role: {
             fields: [
-                {name: 'id'},
-                {name: 'name'},
+               /* {name: 'id'},
+                {name: 'name'}*/
             ],
             autoLoad: true,
             proxy: {
@@ -87,43 +83,125 @@ Ext.define('App.view.main.MainM', {
                     type: 'json'
                 }
             }
+        },
+        know: {
+            fields: [],
+            autoLoad: true,
+            idProperty:'knowid',
+            proxy: {
+                type: 'ajax',
+                api: {
+                    create: 'resources/php/manage/syncGridKnow.php?act=create',
+                    read: 'resources/php/manage/syncGridKnow.php?act=read',
+                    update: 'resources/php/manage/syncGridKnow.php?act=update',
+                    destroy: 'resources/php/manage/syncGridKnow.php?act=destroy'
+                },
+                reader: {
+                    type: 'json'
+                },
+                writer: {
+                    type: 'json',
+                    writeAllFields: true
+                },
+                appendId: false,
+                actionMethods: {
+                    create : 'POST',
+                    read   : 'POST',
+                    update : 'POST',
+                    destroy: 'POST'
+                }
+            }
+        },
+        act: {
+            fields: [],
+            autoLoad: true,
+            idProperty:'actid',
+            proxy: {
+                type: 'ajax',
+                api: {
+                    create: 'resources/php/manage/syncGridAct.php?act=create',
+                    read: 'resources/php/manage/syncGridAct.php?act=read',
+                    update: 'resources/php/manage/syncGridAct.php?act=update',
+                    destroy: 'resources/php/manage/syncGridAct.php?act=destroy'
+                },
+                reader: {
+                    type: 'json'
+                },
+                writer: {
+                    type: 'json',
+                    writeAllFields: true
+                },
+                appendId: false,
+                actionMethods: {
+                    create : 'POST',
+                    read   : 'POST',
+                    update : 'POST',
+                    destroy: 'POST'
+                }
+            }
+        },
+        group: {
+            fields: [],
+            idProperty:'groupid',
+            autoLoad: true,
+            proxy: {
+                type: 'ajax',
+                api: {
+                    create: 'resources/php/manage/syncGridGroup.php?act=create',
+                    read: 'resources/php/manage/syncGridGroup.php?act=read',
+                    update: 'resources/php/manage/syncGridGroup.php?act=update',
+                    destroy: 'resources/php/manage/syncGridGroup.php?act=destroy'
+                },
+                reader: {
+                    type: 'json'
+                },
+                writer: {
+                    type: 'json',
+                    writeAllFields: true
+                },
+                appendId: false,
+                actionMethods: {
+                    create : 'POST',
+                    read   : 'POST',
+                    update : 'POST',
+                    destroy: 'POST'
+                }
+            }
+        },
+        tool: {
+            fields: [
+                {name:'toolid'},
+                {name:'maxquestion',type:'int'},
+                {name:'minquestion',type:'int'},
+                {name:'regstatint',type:'int'},
+                {name:'regstatdur',type:'int'},
+                {name:'examtimermin',type:'int'}
+            ],
+            storeId:'tool',
+            autoLoad: true,
+            idProperty:'toolid',
+            proxy: {
+                type: 'ajax',
+                api: {
+                    read: 'resources/php/admin/syncFormTool.php?act=read',
+                    update: 'resources/php/admin/syncFormTool.php?act=update'
+                },
+                reader: {
+                    type: 'json'
+                },
+                writer: {
+                    type: 'json',
+                    writeAllFields: true
+                },
+                appendId: false,
+                actionMethods: {
+                    create : 'POST',
+                    read   : 'POST',
+                    update : 'POST',
+                    destroy: 'POST'
+                }
+            }
         }
 
-
-
-        /* storeGridcard: {
-         fields: [
-         'cardid',
-         'family',
-         'firstname',
-         'lastname',
-         'pasnum',
-         'passer',
-         'resident',
-         'issued',
-         'dateissue',
-         'depcode',
-         'regaddr',
-         'phone',
-         'vip',
-         'blacklist',
-         'barcode',
-         'status'
-         ],
-         //idProperty: 'id',
-         proxy: {
-         type: 'ajax',
-         url: 'resources/data/card/getGridCard.json',
-         reader: {type: 'json'}
-         },
-         //pageSize: Office.util.Utilities.pageSize,
-         remoteSort: true,
-         sorters: [{
-         property: 'family',
-         direction: 'DESC'
-         }],
-         autoLoad: true
-         }*/
     }
-    //TODO - add data, formulas and/or methods to support your view
 });

@@ -1,108 +1,77 @@
 Ext.define('App.view.manage.question.answer.GridAnswerV', {
     extend: 'Ext.grid.Panel',
+    requires: [
+        'App.view.manage.question.answer.GridAnswerM',
+        'App.view.manage.question.answer.GridAnswerC',
+        'Ext.grid.column.Check'
+    ],
+    viewModel: {type: 'gridanswer'},
+    controller:'gridanswer',
+    bind: '{answer}',
     alias: 'widget.gridAnswer',
     itemId: 'gridAnswer',
-    frame: true,
-    //height: gridHeight,
-    flex:1,
-    forceFit: true,  // * ячейки распределяются по ширине всей таблицы
-    store:'manage.GridAnswerS',
+    frame: false,
+    flex: 1,
+    //forceFit: true,  // * ячейки распределяются по ширине всей таблицы
     title: 'Ответы',
     columnLines: true,
     selType: 'checkboxmodel',
-    plugins: 'bufferedrenderer',
     viewConfig: {
-        enableTextSelection:true // * allow to select text in grid. Actually it's a gridview property
+        stripeRows: true
     },
     initComponent: function () {
         console.log('GridAnswers init');
-        var me = this;
-        /*this.plugins = [ Ext.create('Ext.grid.plugin.RowEditing', {
-            clicksToEdit: 2
-        }) ];*/
 
         this.selModel = Ext.create('Ext.selection.CheckboxModel', {
-            injectCheckbox:0,
-            mode:'MULTI'/*,
-            listeners: {
-                selectionchange: function(sm, selections) {
-                    // * кнопка Сохранить доступна если отмечена одна запись
-                    me.down('#buttonSave').setDisabled(selections.length != 1);
-                }
-            }*/
+            injectCheckbox: 0,
+            mode: 'MULTI'
         });
 
         this.tbar = [
             {
                 text: 'Добавить',
                 action: 'add',
-                scale:'medium',
+                scale: 'medium',
                 iconCls: 'icon_add'
             },
             '-',
             {
                 text: 'Удалить',
                 action: 'delete',
-                scale:'medium',
+                scale: 'medium',
                 iconCls: 'icon_delete'
-            }/*,
-            '-',
-            {
-                text: 'Сохранить',
-                action: 'save',
-                scale:'medium',
-                itemId:'buttonSave',
-                iconCls: 'icon_save'
-            }*/
+            }
         ];
 
         this.columns = [
             {
                 text: '№',
                 xtype: 'rownumberer',
-                width: 30
+                width: 50
             },
             {
                 text: 'Текст ответа',
                 itemId: 'columnAnswertext',
                 dataIndex: 'answertext',
                 tdCls: 'wrapText',
-                flex:1/*,
-                editor: {
-                    xtype:'textfield',
-                    errorSummary:false,
-                    //allowBlank: false,
-                    listeners: {  // * чтобы при нажатии ENTER не нажималась кнопка Сохранить, а переходило на другую строку
-                        afterrender: function(){
-                            var me = this;
-                            me.el.swallowEvent(['keypress','keydown' ]);
-                        }
-                    }
-                }*/
+                flex:1
             },
             {
                 xtype: 'checkcolumn',
                 header: 'Верный',
                 itemId: 'columnCorrect',
                 dataIndex: 'correct',
-                width: 65,
-                processEvent: function () { return false; }
+                width: 60,
+                processEvent: function () {
+                    return false;
+                }
             },
             {
                 text: 'Нормативный документ',
                 itemId: 'columnNormdoc',
                 dataIndex: 'normdoc',
-                width:170,
-                tdCls: 'wrapText'/*,
-                editor: {
-                    xtype:'textfield',
-                    listeners: {  // * чтобы при нажатии ENTER не нажималась кнопка Сохранить, а переходило на другую строку
-                        afterrender: function(){
-                            var me = this;
-                            me.el.swallowEvent(['keypress','keydown' ]);
-                        }
-                    }
-                }*/
+                width: 170,
+                tdCls: 'wrapText'
             }
         ];
         this.callParent(arguments);

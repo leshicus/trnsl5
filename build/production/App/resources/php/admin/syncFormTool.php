@@ -12,10 +12,10 @@ switch ($act) {
 		        from `tool` u";
         try {
             $res = $mysqli->query($sql);
-            $list=array();
+            $list = array();
             while ($row = $res->fetch_array(MYSQLI_ASSOC)) {
                 foreach ($row as $k => $v)
-                    $arr[$k]= $v;
+                    $arr[$k] = $v;
                 array_push($list, $arr);
             }
         } catch (Exception $e) {
@@ -27,14 +27,37 @@ switch ($act) {
         echo json_encode($list);
         break;
     case 'update':
-        foreach ($data as $k=>$row) {
+        /*foreach ($data as $k=>$row) {
             $values .= $k." = $row,";
         }
-        _log($mysqli, $userid, 18, 'Изменение: '.$values);
+
         $values .= "toolid = toolid";
         $sql = "update `tool`
-                    set ".$values;
-        $res = $mysqli->query($sql);
+                    set ".$values;*/
+        $sql = "update `tool`
+                set examtimermin = " . $data['examtimermin'] . ',' . "
+                maxquestion = " . $data['maxquestion'] . ',' . "
+                minquestion = " . $data['minquestion'] . ',' . "
+                regstatdur = " . $data['regstatdur'] . ',' . "
+                regstatint = " . $data['regstatint'] . ',' . "
+                examtimermin = " . $data['examtimermin'] . "
+                where toolid = 1";
+        //echo $sql;
+        try {
+            $res = $mysqli->query($sql);
+        } catch (Exception $e) {
+            $success = false;
+        }
+
+        if ($success) {
+            echo json_encode(
+                array('success' => $success));
+            _log($mysqli, $userid, 18, 'Изменение: ' . $values);
+        } else {
+            echo json_encode(
+                array('success' => $success,
+                    'message' => $message));
+        }
 
         break;
     default:

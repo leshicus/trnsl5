@@ -1,41 +1,34 @@
 Ext.define('App.view.admin.tool.FormToolV', {
     extend: 'Ext.form.Panel',
     requires: [
-        //'App.view.admin.clas.GridExamM',
         'App.view.admin.tool.FormToolC',
-        'App.view.admin.tool.FormToolM'
+        'App.view.main.MainM'
     ],
     alias: 'widget.formTool',
-    viewModel: {type: 'formtool'},
+    viewModel: {type: 'main'},
     controller:'formtool',
-    frame: true,
-    flex: 1,
     title: 'Глобальные настройки системы',
     layout: {
-        type: 'vbox'/*,
-         align: 'stretch'*/
+        type: 'vbox'
     },
-    //buttonAlign: 'left',
     defaults: {
-        xtype: 'textfield',
+        xtype: 'numberfield',
         labelWidth: 250,
         margin: '5 5 5 5',
         labelAlign: 'left',
         allowBlank:false,
-        width: '30%'
+        width: '30%',
+        maxValue: 1000,
+        minValue: 1
     },
     initComponent: function () {
         console.log('FormToolV init');
-        /*var store = Ext.data.StoreManager.lookup('admin.FormToolS'),
-         rec = store.getAt(0);
-         content.down('formTool').getForm().loadRecord(rec);*/
-
-
 
         this.items = [
             {
                 itemId: 'maxquestion',
                 name: 'maxquestion',
+                bind:'{tool.maxquestion}',
                 fieldLabel: 'Число вопросов в билете'
             },
             {
@@ -57,21 +50,17 @@ Ext.define('App.view.admin.tool.FormToolV', {
                 itemId: 'examtimermin',
                 name: 'examtimermin',
                 fieldLabel: 'Количество времени на экзамен для всех видов деятельности (мин)'
-            }/*,
-            {
-                xtype: 'textfield',
-                itemId: 'questiontime',
-                name: 'questiontime',
-                fieldLabel: 'Количество времени на один вопрос (мин)'
-            }*/
+            }
         ];
 
         this.buttons=[
             {
                 text: 'Сохранить',
                 scale:'medium',
+                glyph: Glyphs.get('save'),
                 action: 'save'
-            }
+            },
+            '->'
         ]
 
         this.callParent(arguments);

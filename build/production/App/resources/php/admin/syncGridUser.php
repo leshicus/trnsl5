@@ -13,6 +13,20 @@ switch ($act) {
 
         break;
     case 'read':
+        $actid = $_REQUEST['actid'];
+        $id = $_REQUEST['id'];
+        $groupid = $_REQUEST['groupid'];
+        $orgid = $_REQUEST['orgid'];
+        $where = ' where 1=1 ';
+
+        if($actid)
+            $where .= ' and g.actid = '.$actid;
+        if($groupid)
+            $where .= ' and g.groupid = '.$groupid;
+        if($orgid)
+            $where .= ' and a.orgid = '.$orgid;
+        if($id == 'root')
+            $where = ' where 1=1 ';
         $sql = "select
                   u.userid,
                   u.familyname,
@@ -23,15 +37,20 @@ switch ($act) {
                   DATE_FORMAT(u.begindate, '%d.%m.%Y %H:%i') as begindate,
                   DATE_FORMAT(u.enddate, '%d.%m.%Y %H:%i') as enddate,
                   u.specid,
+                  s.specname,
                   s.groupid,
                   u.password,
                   a.orgid,
-                  a.actid
+                  a.actid,
+                  o.orgid
 		        from `user` u
 		         left join `speciality` s on s.specid = u.specid
 		         left join `group` g on g.groupid = s.groupid
 		         left join `activity` a on a.actid = g.actid
-		        order by u.familyname, u.firstname, u.lastname, u.begindate";
+		         left join `org` o on o.orgid = a.orgid "
+		         .$where.
+		        " order by u.familyname, u.firstname, u.lastname, u.begindate";
+       // echo $sql;
         try {
             $res = $mysqli->query($sql);
             $list=array();

@@ -87,51 +87,59 @@ foreach ($orgList as $i => $rowOrg) {
         }
         $out .= '
     {
-        "id": "' . $rowOrg['orgid'] . '",
+        "id": "' . uniqid('',true) . '",
         "text": "' . $rowOrg['orgabbr'] . '",
-        "leaf": false';
-        $out .= ',
+        "orgid": "' . $rowOrg['orgid'] . '",';
+        if (count(_filter_by_value($actList,'orgid',$rowOrg['orgid'])) == 0) {
+            $out .= '"leaf": true';
+        } else {
+            $out .= '"leaf": false';
+            $out .= ',
         "children": [';
-        $cntAct = 0;
-        foreach ($actList as $i => $rowAct) {
-            if ($rowAct['orgid'] == $rowOrg['orgid']) {
-                if ($cntAct != 0) {
-                    $out .= ',';
-                }
-                $out .= '
-            {
-                "id": "' . $rowOrg['orgid']. '-'.$rowAct['actid']  . '",
-                "text": "' . $rowAct['actabbr'] . '",
-                "leaf": false';
-                // * перебор групп
-                if (count(_filter_by_value($groupList,'actid',$rowAct['actid']))) {
-                    $out .= ',
-                "children": [';
-                    $cntGroup = 0;
-                    foreach ($groupList as $j => $rowGroup) {
-                        if ($rowGroup['actid'] == $rowAct['actid']) {
-                            if ($cntGroup > 0) {
-                                $out .= ',';
-                            }
-                            $out .= '
-                    {
-                        "id": "'.$rowOrg['orgid']. '-' . $rowAct['actid'] . '-' . $rowGroup['groupid'] . '",
-                        "text": "Группа № ' . $rowAct['actnum'] . '.' . $rowGroup['groupnum'] . ' '.$rowGroup['groupname'].'",
-                        "leaf": true,
-                        "groupid": ' .$rowGroup['groupid'].'}';
-                            $cntGroup++;
-                        }
+            $cntAct = 0;
+            foreach ($actList as $i => $rowAct) {
+                if ($rowAct['orgid'] == $rowOrg['orgid']) {
+                    if ($cntAct != 0) {
+                        $out .= ',';
                     }
                     $out .= '
+            {
+                "id": "' . uniqid('',true) . '",
+                "text": "' . $rowAct['actabbr'] . '",
+                "actid": "' . $rowAct['actid'] . '",';
+                    if (count(_filter_by_value($groupList, 'actid', $rowAct['actid'])) == 0) {
+                        $out .= '"leaf": true';
+                    } else {
+                        $out .= '"leaf": false';
+                        $out .= ',
+                "children": [';
+                        $cntGroup = 0;
+                        // * перебор групп
+                        foreach ($groupList as $j => $rowGroup) {
+                            if ($rowGroup['actid'] == $rowAct['actid']) {
+                                if ($cntGroup > 0) {
+                                    $out .= ',';
+                                }
+                                $out .= '
+                    {
+                        "id": "' . uniqid('',true) . '",
+                        "text": "Группа № ' . $rowAct['actnum'] . '.' . $rowGroup['groupnum'] . ' ' . $rowGroup['groupname'] . '",
+                        "leaf": true,
+                        "groupid": ' . $rowGroup['groupid'] . '}';
+                                $cntGroup++;
+                            }
+                        }
+                        $out .= '
                 ]';
-                }
-                $out .= '
+                    }
+                    $out .= '
             }';
-                $cntAct++;
+                    $cntAct++;
+                }
             }
-        }
-        $out .= '
+            $out .= '
         ]';
+        }
     }
     $out .= '
     }';

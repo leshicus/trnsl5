@@ -8,14 +8,19 @@ Ext.define('App.Application', {
 
     name: 'App',
 
-    stores: [
-        // TODO: add global / shared stores here
+    controllers: [
     ],
 
     launch: function () {
-        // TODO - Launch the application
+        /*var url = Ext.util.Format.format("ext/packages/ext-locale/build/ext-locale-{0}.js", 'ru');
+        Ext.Loader.loadScript({
+                url: url,
+                scope: this
+            }
+        );*/
     },
     requires: [
-        'App.util.Utilities'
+        'App.util.Utilities',
+        'App.util.Glyphs'
     ]
 });

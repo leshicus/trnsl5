@@ -17,7 +17,7 @@ if (!$textLogin || !$textOldPassword || !$textNewPassword) {
     // * проверим, что пароль не начальный
     if (strtoupper($textNewPassword) == strtoupper($initPassword)) {
         $success = false;
-        $message = 'Не допустимый пароль: ' . $initPassword;
+        $message = 'Недопустимый пароль: ' . $initPassword;
     } else {
         // * проверка, что логин существует
         $sql_login = "
@@ -63,7 +63,7 @@ if (!$textLogin || !$textOldPassword || !$textNewPassword) {
                     $message = $sql_change;
                 }
             } else {
-                $message = 'Старый пароль указан не верно.';
+                $message = 'Старый пароль указан неверно.';
                 $success = false;
             }
         } else {

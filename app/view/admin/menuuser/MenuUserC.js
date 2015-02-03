@@ -1,11 +1,27 @@
 Ext.define('App.view.admin.menuuser.MenuUserC', {
     extend: 'Ext.app.ViewController',
-    requires: [
-
-    ],
+    requires: [],
     alias: 'controller.menuuser',
 
     control: {
+        '#': {
+            show: function (menu) {
+                var gridUser = Ext.ComponentQuery.query('gridUser')[0],
+                    selection = gridUser.getSelected(),
+                    block = selection[0].get('enddate'),
+                    menuBlock = menu.down('#menuBlock'),
+                    menuUnblock = menu.down('#menuUnblock'),
+                    menuResetPassword = menu.down('#menuResetPassword');
+                if (block != '00.00.0000 00:00' && block) {
+                    menuBlock.disable();
+                    menuUnblock.enable();
+                } else {
+                    menuBlock.enable();
+                    menuUnblock.disable();
+                }
+                menuResetPassword.enable();
+            }
+        },
         '#menuResetPassword': {
             click: function (button) {
                 console.log('click menuResetPassword');
@@ -17,7 +33,12 @@ Ext.define('App.view.admin.menuuser.MenuUserC', {
                         Ext.each(selection, function (item) {
                             item.set('password', null);
                         });
-                        //grid.store.sync();
+                        grid.getViewModel().getStore('user').sync({
+                            failure: function () {
+                                Ext.MessageBox.alert('Ошибка', 'Не сохранено');
+                            },
+                            scope: this
+                        });
                     }
                 }, this);
 
@@ -37,7 +58,12 @@ Ext.define('App.view.admin.menuuser.MenuUserC', {
                         Ext.each(selection, function (item) {
                             item.set('enddate', date);
                         });
-                        //grid.store.sync();
+                        grid.getViewModel().getStore('user').sync({
+                            failure: function () {
+                                Ext.MessageBox.alert('Ошибка', 'Не сохранено');
+                            },
+                            scope: this
+                        });
                     }
                 }, this);
             }
@@ -53,11 +79,25 @@ Ext.define('App.view.admin.menuuser.MenuUserC', {
                         Ext.each(selection, function (item) {
                             item.set('enddate', App.util.Utilities.nullDate);
                         });
-                        //grid.store.sync();
+                        grid.getViewModel().getStore('user').sync({
+                            failure: function () {
+                                Ext.MessageBox.alert('Ошибка', 'Не сохранено');
+                            },
+                            scope: this
+                        });
                     }
                 }, this);
 
             }
         }
+    },
+    getMenuResetPassword: function () {
+        return this.contextMenu.query('#menuResetPassword')[0];
+    },
+    getMenuBlock: function () {
+        return this.contextMenu.query('#menuBlock')[0];
+    },
+    getMenuUnblock: function () {
+        return this.contextMenu.query('#menuUnblock')[0];
     }
 });

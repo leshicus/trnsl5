@@ -1,16 +1,21 @@
-Ext.define('App.view.manage.GridActV', {
+Ext.define('App.view.manage.act.GridActV', {
     extend: 'Ext.grid.Panel',
+    requires: [
+        'App.view.main.MainM',
+        'App.view.manage.act.GridActC'
+    ],
     alias: 'widget.gridAct',
+    viewModel: {type: 'main'},
+    controller: 'gridAct',
+    bind: '{act}',
     itemId: 'gridAct',
-    frame: true,
-    flex:1,
-    //height: gridHeight,
-    //forceFit: true,
-    store: 'manage.GridActS',
+    frame: false,
+    flex: 1,
+    forceFit: true,
     title: 'Виды деятельности',
     columnLines: true,
     viewConfig: {
-        enableTextSelection:true // * allow to select text in grid. Actually it's a gridview property
+        stripeRows: true
     },
     initComponent: function () {
         console.log('GridAct init');
@@ -24,11 +29,11 @@ Ext.define('App.view.manage.GridActV', {
         this.tbar = App.util.Utilities.buttonSaveDelete;
 
         this.tools = [
-            {
+          /*  {
                 type: 'help',
                 itemId: 'instruction',
                 tooltip: 'Word-инструкция'
-            },
+            },*/
             {
                 type: 'refresh',
                 itemId: 'refreshGridActS',
@@ -36,21 +41,21 @@ Ext.define('App.view.manage.GridActV', {
             }
         ]
 
-        var storeOrg = Ext.data.StoreManager.lookup('manage.GridOrgS'),
-            comboOrg = Ext.create('Ext.form.ComboBox', {
-                store: storeOrg,
-                valueField: 'orgid',
-                name: 'orgid',
-                editable: false,
-                displayField: 'orgabbr'
-            });
+        var comboOrg = Ext.create('Ext.form.ComboBox', {
+            bind: {store: '{org}'},
+            viewModel: {type: 'main'},
+            valueField: 'orgid',
+            name: 'orgid',
+            editable: false,
+            displayField: 'orgabbr'
+        });
 
         this.columns = [
             {
                 text: 'Номер',
                 itemId: 'columnActnum',
                 dataIndex: 'actnum',
-                width:100,
+                width: 70,
                 editor: {
                     xtype: 'textfield'
                 }
@@ -60,7 +65,7 @@ Ext.define('App.view.manage.GridActV', {
                 itemId: 'columnActabbr',
                 dataIndex: 'actabbr',
                 tdCls: 'wrapText',
-                width:160,
+                width: 160,
                 editor: {
                     xtype: 'textfield'
                 }
@@ -70,8 +75,7 @@ Ext.define('App.view.manage.GridActV', {
                 itemId: 'columnActname',
                 dataIndex: 'actname',
                 tdCls: 'wrapText',
-                //width:100,
-                flex:1,
+                width: 400,
                 editor: {
                     xtype: 'textfield'
                 }
@@ -82,13 +86,13 @@ Ext.define('App.view.manage.GridActV', {
                 dataIndex: 'orgid',
                 width: 200,
                 editor: comboOrg,
-                renderer: App.util.Utilities.renderGridGroup(comboOrg)
+                renderer: Utilities.renderOrg(comboOrg)
             },
             {
                 text: 'Лимит времени (мин)',
                 itemId: 'columnTimelimit',
                 dataIndex: 'timelimit',
-                width:150,
+                width: 150,
                 editor: {
                     xtype: 'textfield'
                 }

@@ -1,6 +1,7 @@
 Ext.define('App.view.admin.clas.GridExamC', {
     extend: 'Ext.app.ViewController',
     requires: [
+        'App.view.admin.clas.MenuExamV'
     ],
     alias: 'controller.gridexam',
 
@@ -13,33 +14,41 @@ Ext.define('App.view.admin.clas.GridExamC', {
                     gridPerson = grid.up('#content').down('gridPerson'),
                     gridExam = grid.up('gridExam'),
                     selection = gridExam.getSelected()[0],
-                    examid = selection.get('examid');
-                gridSigngroup.store.clearFilter();
-                gridPerson.store.clearFilter();
-                gridSigngroup.store.filter(function (rec) {
-                    if (rec.get('examid') == examid)
-                        return true;
-                });
-                gridPerson.store.filter(function (rec) {
-                    if (rec.get('examid') == examid)
-                        return true;
-                });
+                    examid = selection.get('examid'),
+                    storePerson = gridPerson.getViewModel().getStore('person'),
+                    storeSigngroup = gridSigngroup.getViewModel().getStore('signgroup');
+
+                if (selection) {
+                    storeSigngroup.load({
+                        params: {
+                            examid: examid
+                        }
+                    });
+                    storePerson.load({
+                        params: {
+                            examid: examid
+                        }
+                    });
+                }
+
+
                 // * опрос подавших заявку на тест в классе
                 var taskClassCheck = {
                     run: function () {
-                        var gridPerson = Ext.ComponentQuery.query('#gridPerson')[0];
-                        gridPerson.store.load();
+                        storePerson.reload();
                     },
-                    interval: 1000 * this.getTool('regstatint'), // в секундах
-                    duration: 1000 * 60 * this.getTool('regstatdur')
+                    interval: 1000 * Utilities.getTool('regstatint'), // в секундах
+                    duration: 1000 * 60 * Utilities.getTool('regstatdur')
                 };
 
                 // * старт опроса подавших заявки сотрудников в классе
                 Ext.TaskManager.start(taskClassCheck);
             },
+            // * чтобы контекстное меню показывалось
             itemcontextmenu: function (view, rec, node, index, e) {
                 e.stopEvent();
-                view.ownerCt.contextMenu.showAt(e.getXY());
+                var menu = Ext.create('App.view.admin.clas.MenuExamV');
+                menu.showAt(e.getXY());
                 return false;
             }
         },
@@ -51,70 +60,95 @@ Ext.define('App.view.admin.clas.GridExamC', {
                     vm = grid.getViewModel(),
                     store = vm.getStore('exam'),
                     newRecord = store.insert(0, {})[0];
-                vm.set('exam', newRecord);
-                //TODO не дает редактировать запись
-                /*grid.store.sync({
-                 failure: function () {
-                 Ext.MessageBox.alert('Ошибка', 'Экзамен не добавлен');
-                 },
-                 scope: this
-                 });*/
             }
         },
         'button[action=delete]': {
             click: function (button) {
                 console.log('action=delete');
 
-                var grid = button.up('grid'),
-                    selection = grid.getSelected(),
+                var grid = button.up('gridExam'),
+                    content = grid.up('#content'),
+                    selection = grid.getSelectionModel().getSelection()[0],
                     examid = selection.get('examid'),
-                    gridPerson = this.getGridPerson(),
-                    storePerson = gridPerson.store,
+                    gridPerson = content.down('gridPerson'),
+                    storePerson = gridPerson.getViewModel().getStore('person'),
                     recordUser = storePerson.findRecord('examid', examid, 0, false, true, true);
                 if (examid && !recordUser) {
                     grid.store.remove(selection);
                 } else {
                     Ext.Msg.alert('Не удалено', 'В классе находятся сотрудники');
                 }
-                /*grid.store.sync({
-                 failure: function () {
-                 Ext.MessageBox.alert('Ошибка', 'Пользователь не удален');
-                 },
-                 scope: this
-                 });*/
             }
         },
         '#dateFindFrom': {
             specialkey: function (field, e) {
-                /*if (e.getKey() == e.DELETE) {
-                 field.reset();
-                 }*/
+                if (e.getKey() == e.DELETE) {
+                    field.reset();
+                }
                 if (e.getKey() == e.ENTER) {
+                    if (field.isValid()) {
+                        var grid = field.up('grid'),
+                            dateFindTo = grid.down('#dateFindTo');
+                        if (dateFindTo.isValid()) {
+                            grid.getViewModel().getStore('exam').load({
+                                params: {
+                                    dateFindFrom: field.getValue(),
+                                    dateFindTo: dateFindTo.getValue()
+                                }
+                            });
+                        }
+                    }
+                }
+            },
+            select: function (field, records) {
+                if (field.isValid()) {
                     var grid = field.up('grid'),
                         dateFindTo = grid.down('#dateFindTo');
-                    grid.store.load({
-                        params: {
-                            dateFindFrom: field.getValue(),
-                            dateFindTo: dateFindTo.getValue()
-                        }
-                    });
+                    if (dateFindTo.isValid()) {
+                        grid.getViewModel().getStore('exam').load({
+                            params: {
+                                dateFindFrom: field.getValue(),
+                                dateFindTo: dateFindTo.getValue()
+                            }
+                        });
+                    }
                 }
             }
         },
         '#dateFindTo': {
             specialkey: function (field, e) {
-                /*if (e.getKey() == e.DELETE) {
-                 field.reset();
-                 }*/
+                if (e.getKey() == e.DELETE) {
+                    field.reset();
+                }
                 if (e.getKey() == e.ENTER) {
+                    if (field.isValid()) {
+                        var grid = field.up('grid'),
+                            dateFindFrom = grid.down('#dateFindFrom');
+                        if (dateFindFrom.isValid()) {
+                            grid.getViewModel().getStore('exam').load({
+                                params: {
+                                    dateFindFrom: dateFindFrom.getValue(),
+                                    dateFindTo: field.getValue()
+                                }
+                            });
+                        }
+
+                    }
+                }
+            },
+            select: function (field, records) {
+                if (field.isValid()) {
                     var grid = field.up('grid'),
                         dateFindFrom = grid.down('#dateFindFrom');
-                    grid.store.load({
-                        params: {
-                            dateFindFrom: dateFindFrom.getValue(),
-                            dateFindTo: field.getValue()
-                        }
-                    });
+                    if (dateFindFrom.isValid()) {
+                        grid.getViewModel().getStore('exam').load({
+                            params: {
+                                dateFindFrom: dateFindFrom.getValue(),
+                                dateFindTo: field.getValue()
+                            }
+                        });
+                    }
+
                 }
             }
         },
@@ -123,47 +157,8 @@ Ext.define('App.view.admin.clas.GridExamC', {
                 console.log('click refreshGridExamS');
 
                 var gridExam = button.up('grid');
-                gridExam.store.load();
-            }
-        },
-        '#menuPrintConsolidated': {
-            click: function (button) {
-                console.log('click menuPrintConsolidated');
-
-                var grid = button.up('grid'),
-                    selection = grid.getSelected(),
-                    examArr = Array(),
-                    dateFindFrom = grid.down('#dateFindFrom'),
-                    dateFindTo = grid.down('#dateFindTo');
-                // * печатает только одну ведомость
-                /*Ext.Ajax.request({
-                 url: 'resources/php/admin/excelOneConsolidated.php'
-                 });*/
-
-//TODO сделать меню по-другому
-                Ext.each(selection, function (item) {
-                    var examid = item.get('examid');
-                    examArr.push(examid);
-                });
-                window.open('resources/php/admin/excelOneConsolidated.php?examarr=' + examArr
-                    + '&dateFindFrom=' + Ext.Date.format(dateFindFrom.getValue(), 'd.m.Y')
-                    + '&dateFindTo=' + Ext.Date.format(dateFindTo.getValue(), 'd.m.Y')
-                );
-
-                //console.log(Ext.Date.format(dateFindFrom.getValue(),'d.m.Y'));
-                /*Ext.Ajax.request({
-                 url: 'resources/php/admin/excelOneConsolidated.php?examarr=' + examArr
-                 + '&dateFindFrom=' + Ext.Date.format(dateFindFrom.getValue(),'d.m.Y')
-                 + '&dateFindTo=' + Ext.Date.format(dateFindTo.getValue(),'d.m.Y')
-                 });*/
+                gridExam.getViewModel().getStore('exam').reload();
             }
         }
-    },
-    // * возвращает значение константы из Tool
-    getTool : function (field) {
-        var storeTool = this.getViewModel().getStore('tool'),
-            recTool = storeTool.getAt(0),
-            value = recTool.get(field);
-        return value;
     }
 });

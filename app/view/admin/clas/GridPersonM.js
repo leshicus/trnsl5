@@ -17,7 +17,7 @@ Ext.define('App.view.admin.clas.GridPersonM', {
                 {name: 'timelimit'}
             ],
             autoSync: true,
-            autoLoad: true,
+           // autoLoad: true,
             idProperty:'userid',
             proxy: {
                 type: 'rest',

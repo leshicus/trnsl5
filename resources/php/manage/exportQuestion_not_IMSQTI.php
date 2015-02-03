@@ -48,7 +48,7 @@ foreach($list as $i => $answer){
 $xml .= '</question>
          </root>';
 
-$filename ="_questions_export.xml";
+$filename ="export_questions_".time().".xml";
 
 header("Content-type: application/force-download");
 //header('Content-Type: text/xml');

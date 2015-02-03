@@ -1,6 +1,11 @@
-﻿Ext.define('App.view.manage.FormAnswerV', {
+﻿Ext.define('App.view.manage.question.answer.FormAnswerV', {
     extend: 'Ext.form.Panel',
+    requires: [
+        'App.view.manage.question.answer.FormAnswerC',
+        'Ext.form.field.HtmlEditor'
+    ],
     alias: 'widget.formAnswer',
+    controller:'formanswer',
     itemId: 'formAnswer',
     bodyPadding: 5,
     defaults: {
@@ -21,6 +26,7 @@
                 xtype: 'htmleditor',
                 itemId: 'textAnswer',
                 name: 'answertext',
+                allowBlank:false,
                 enableColors: false,
                 enableFont: false,
                 defaultFont: 'Arial',
@@ -33,30 +39,31 @@
                 itemId:'textNormdoc',
                 name:'normdoc',
                 fieldLabel:'Нормативный документ'
-            }/*,
+            },
             {
                 xtype:'checkboxfield',
                 fieldLabel:'Верный',
                 itemId:'correct',
                 name:'correct',
                 labelWidth: 100,
-                //hideLabel:true,
-                //fieldStyle : 'float:left;',
+                readOnly:true,
                 boxLabelAlign:'before',
                 inputValue:'1'
-            }*/
+            }
         ];
 
         this.buttons = [
             {
                 text: 'Сохранить',
                 action: 'save',
+                glyph: Glyphs.get('save'),
                 scale: 'medium'
             },
             '->',
             {
                 text: 'Отмена',
                 action: 'cancel',
+                glyph: Glyphs.get('cancel'),
                 scale: 'medium'
             }
         ];

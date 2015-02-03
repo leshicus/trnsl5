@@ -87,6 +87,8 @@ switch ($act) {
         } else
             $correct = 0;
 
+        // * должен быть только один, занулим остальные
+        //if($correct)
         $sql = "
                 update answer
                 set answertext = '$answertext',

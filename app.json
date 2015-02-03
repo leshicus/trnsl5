@@ -29,7 +29,7 @@
      */
 
     "theme": "ext-theme-crisp",
-    
+
     /**
      * The list of required packages (with optional versions; default is "latest").
      *
@@ -41,7 +41,8 @@
      */
     "requires": [
         // * чтобы чарты работали
-        "sencha-charts"
+        "sencha-charts",
+        "ext-locale"
     ],
 
     /**
@@ -112,6 +113,9 @@
      */
     "js": [
         {
+            "path": "${ext.dir}/build/ext-all-rtl-debug.js"  // new default for generated apps
+        },
+        {
             "path": "app.js",
             "bundle": true
         }
@@ -148,12 +152,20 @@
             "bootstrap": true
         },
         {
-            "path": "resources/css/style.css",
-            "bootstrap": true
+            "path": "resources/css/crisp.css"
         },
         {
-            "path": "resources/css/ico.css",
-            "bootstrap": true
+            "path": "resources/css/style.css"
+        },
+
+        {
+            "path": "resources/css/ico.css"
+        },
+        {
+            "path": "resources/css/glyph.css"
+        },
+        {
+            "path": "resources/css/font-awesome-4.1.0/css/font-awesome.css"
         }
     ],
 
@@ -182,8 +194,7 @@
     /**
      * Extra resources to be copied along when build
      */
-    "resources": [
-    ],
+    "resources": [],
 
     /**
      * File / directory name matchers to ignore when copying to the builds, must be valid regular expressions
@@ -210,19 +221,23 @@
             }
         ]
     },
-    
+
     /**
-     * override objects for setting build environment specific 
+     * override objects for setting build environment specific
      * settings.
      */
-    "production": {
-    },
-    
-    "testing": {
-    },
-    
     "development": {
+        "loader": {
+            "cache": true
+        }
     },
+    "production": {
+        "loader": {
+            "cache": "${build.timestamp}"
+        }
+    },
+
+    "testing": {},
 
     /**
      *  Controls the output structure of bootstrap artifacts.  May be specified by a string:
@@ -290,5 +305,6 @@
      * Uniquely generated id for this application, used as prefix for localStorage keys.
      * Normally you should never change this value.
      */
-    "id": "0c771fe0-f28d-4a73-a40e-635921947365"
+    "id": "0c771fe0-f28d-4a73-a40e-635921947365",
+    "locale": "ru"
 }

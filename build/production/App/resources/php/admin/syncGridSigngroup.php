@@ -34,6 +34,12 @@ switch ($act) {
         }
         break;
     case 'read':
+        $examid = $_REQUEST['examid'];
+        $where = ' where 1=1 ';
+
+        if($examid)
+            $where .= ' and examid = '.$examid;
+
         $sql = "select
                   signgroupid,
                   examid,
@@ -41,8 +47,10 @@ switch ($act) {
                   firstname,
                   lastname,
                   CONCAT_WS(' ',familyname,firstname,lastname) as fio
-		        from `signgroup`
-		        order by familyname, firstname";
+		        from `signgroup`"
+		        .$where.
+		        " order by familyname, firstname";
+        //echo $sql;
         try {
             $res = $mysqli->query($sql);
             $list=array();

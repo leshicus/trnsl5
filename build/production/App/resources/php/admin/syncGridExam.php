@@ -87,10 +87,13 @@ switch ($act) {
                   e.userid,
                   CONCAT_WS(' ',u.familyname,u.firstname,u.lastname) as fio,
                   u.login,
-                  e.orgid
-		        from exam   e,
-		             `user` u
-		        where u.userid = e.userid " . $where .
+                  e.orgid,
+                  o.orgabbr
+		        from `exam`   e,
+		             `user` u,
+		             `org` o
+		        where o.orgid = e.orgid
+		        and u.userid = e.userid " . $where .
             " order by examdate desc";
         //echo $sql;
         try {

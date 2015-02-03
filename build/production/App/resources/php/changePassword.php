@@ -63,7 +63,7 @@ if (!$textLogin || !$textOldPassword || !$textNewPassword) {
                     $message = $sql_change;
                 }
             } else {
-                $message = 'Старый пароль указан не верно.';
+                $message = 'Старый пароль указан неверно.';
                 $success = false;
             }
         } else {

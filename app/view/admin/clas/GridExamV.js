@@ -11,17 +11,14 @@ Ext.define('App.view.admin.clas.GridExamV', {
     viewModel: {type: 'gridexam'},
     controller: 'gridexam',
     itemId: 'gridExam',
-    frame: true,
     flex: 1,
-    //margin: '0 0 5 0',
     forceFit: true,
     bind: '{exam}',
     title: 'Экзамены',
     columnLines: true,
     selType: 'checkboxmodel',
-    //bufferedRenderer : false,
     viewConfig: {
-        //enableTextSelection:true // * allow to select text in grid. Actually it's a gridview property
+        stripeRows: true
     },
     plugins: [
         {
@@ -42,16 +39,6 @@ Ext.define('App.view.admin.clas.GridExamV', {
             mode: 'MULTI'
         });
 
-     /*   this.plugins = [
-            Ext.create('Ext.grid.plugin.CellEditing', {
-                clicksToEdit: 1,
-                listeners: {
-                    scope: 'this',
-                    edit: 'onEdit'
-                }
-            })
-        ];*/
-
         this.tools = [
             {
                 type: 'refresh',
@@ -61,19 +48,21 @@ Ext.define('App.view.admin.clas.GridExamV', {
         ]
 
         this.tbar = Ext.create('Ext.toolbar.Toolbar');
-        var datefromto = Ext.create('App.view.common.DateFromToV');
-        this.tbar.add(App.util.Utilities.buttonSaveDelete);
-        this.tbar.add(datefromto);
 
-        var comboOrg = Ext.create('Ext.form.ComboBox', {
-            bind: {store: '{org1}'},
-            itemId: 'comboOrg',
-            valueField: 'orgid',
-            name: 'orgid',
-            editable: false,
-            queryMode: 'local',
-            displayField: 'orgabbr'
-        });
+        var now = new Date(),
+            year = now.getFullYear(),
+            month = App.util.Utilities.reverseDate(now.getMonth() + 1),
+            day = App.util.Utilities.reverseDate(now.getDate()),
+            dateBegin = [[day, month, year].join('.'), '00:00'].join(' ');
+
+        this.tbar.add(App.util.Utilities.buttonSaveDelete);
+        this.tbar.add(
+            {
+                xtype: 'datefromto',
+                _dateFrom: dateBegin,
+                _allowBlankFrom: false,
+                _allowBlankTo: true
+            });
 
         this.columns = [
             {
@@ -96,7 +85,6 @@ Ext.define('App.view.admin.clas.GridExamV', {
                 itemId: 'columnFio',
                 dataIndex: 'fio',
                 tdCls: 'wrapText'
-                //width: 140
             },
             {
                 text: 'Организация',
@@ -104,55 +92,18 @@ Ext.define('App.view.admin.clas.GridExamV', {
                 dataIndex: 'orgabbr',
                 tdCls: 'wrapText',
                 name: 'orgid',
-                //editor: comboOrg,
                 menuDisabled: true,
                 width: 110,
-                //renderer: App.util.Utilities.comboRenderer(comboOrg)
                 editor: {
                     xtype: 'combobox',
                     bind: {store: '{org}'},
                     editable: false,
                     queryMode: 'local',
                     valueField: 'orgid',
-                    displayField: 'orgabbr',
-                    /* listeners: {
-                     select: function (combo, record) {
-
-                     var grid = combo.up('grid'),
-                     vm = grid.getViewModel(),
-                     store = vm.getStore('exam');
-                     //selected = grid.getSelectionModel().getSelection()[0],
-                     //rec = store.findRecord('examid',selected.get('examid'));
-                     console.info(record, store.getProxy().getWriter());
-                     store.getProxy().getWriter().config.writeValue(record.get('orgabbr'), record);
-                     }
-                     }*/
-                },
-                /*renderer: function(value,metaData ,record ,rowIndex ,colIndex ,store ,view ,retrn ) {
-                 var result = '',
-                 storeOrg = this.up('main').getViewModel().getStore('org');
-                 //TODO при нажатии на поле Организация показывает id
-                 storeOrg.findBy(function(record) {
-                 if (record.get('orgid') == value) {
-                 result = record.get('orgabbr');
-                 }
-                 });
-                 return result;
-                 }*/
+                    displayField: 'orgabbr'
+                }
             }
         ];
-
-        this.contextMenu = Ext.create('Ext.menu.Menu', {
-            plain: true,
-            border: false,
-            items: [
-                {
-                    text: 'Печать: Сводная экзаменационная ведомость',
-                    itemId: 'menuPrintConsolidated',
-                    iconCls: 'icon_excel'
-                }
-            ]
-        });
 
         this.callParent(arguments);
         console.log('GridExam end');
@@ -166,7 +117,6 @@ Ext.define('App.view.admin.clas.GridExamV', {
     },
     onEdit: function (b, a) {
         var c = this, d;
-        //todo убрать автосинк
         if ("orgabbr" === a.field) {
             d = a.column.field;
             a.record.set({orgid: d.getValue(), orgabbr: d.getRawValue()});
