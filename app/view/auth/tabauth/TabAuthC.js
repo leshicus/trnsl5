@@ -55,7 +55,7 @@ Ext.define('App.view.auth.tabauth.TabAuthC', {
                             }
                         },
                         failure: function (form, action) {
-                            Ext.Msg.alert('Ошибка', action.result ? action.result.message : 'No response');
+                            Ext.Msg.alert('Ошибка', action.result ? action.result.message : 'Нет ответа от сервера');
                         }
                     });
                 }

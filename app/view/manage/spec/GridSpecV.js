@@ -9,7 +9,6 @@ Ext.define('App.view.manage.spec.GridSpecV', {
     bind: '{spec}',
     alias: 'widget.gridSpec',
     itemId: 'gridSpec',
-    frame: true,
     flex: 1,
     forceFit: true,  // * ячейки распределяются по ширине всей таблицы
     title: 'Специальности',

@@ -54,7 +54,7 @@ try {
     $rowHeader = $resHeader->fetch_row();
 
     $fioFull = $rowHeader[1].' '.$rowHeader[2].' '.$rowHeader[3];
-    $fioAbbr = $rowHeader[1].' '.substr($rowHeader[1],0,2).'.'.substr($rowHeader[3],0,2).'.';
+    $fioAbbr = $rowHeader[1].' '.substr($rowHeader[2],0,2).'.'.substr($rowHeader[3],0,2).'.';
     $examDate = $rowHeader[0];
     $specName = $rowHeader[4];
     $result = $rowHeader[5];
@@ -199,7 +199,7 @@ if($success){
     $html .= "</table>";
     $htmlConverted = $p->convert($html);
     $p->htmltable($htmlConverted);
-
+    $filename = "ведомость_".time().".pdf";
     $p->output($filename,'I');
 }
 

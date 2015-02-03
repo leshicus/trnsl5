@@ -11,8 +11,7 @@ Ext.define('App.view.admin.stat.PanelStatC', {
         '#comboStat': {
             select: function (combo, records, eOpts) {
                 console.log('comboStat');
-
-                var type = records[0].get('id'),
+                var type = records.get('id'),
                     panelStat = combo.up('#panelStat'),
                     dateFrom = panelStat.down('#dateFindFrom').getValue(),
                     dateTo = panelStat.down('#dateFindTo').getValue(),

@@ -14,7 +14,7 @@
     defaults: {
         labelWidth: 100
     },
-    autoScroll: true,
+    //autoScroll: true,
     border: false,
     layout: {
         type: 'vbox',

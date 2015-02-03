@@ -29,14 +29,7 @@ Ext.define('App.view.admin.griduser.GridUserV', {
             }
         ];
 
-        this.tbar = [
-            {
-                text: 'Удалить',
-                action: 'delete',
-                scale: 'medium',
-                iconCls: 'icon_delete'
-            }
-        ];
+        this.tbar = Utilities.buttonSaveDelete;
 
         this.selModel = Ext.create('Ext.selection.CheckboxModel', {
             injectCheckbox: 0,

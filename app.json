@@ -41,7 +41,8 @@
      */
     "requires": [
         // * чтобы чарты работали
-        "sencha-charts"
+        "sencha-charts",
+        "ext-locale"
     ],
 
     /**
@@ -111,6 +112,9 @@
      *      }
      */
     "js": [
+        {
+            "path": "${ext.dir}/build/ext-all-rtl-debug.js"  // new default for generated apps
+        },
         {
             "path": "app.js",
             "bundle": true
@@ -222,11 +226,18 @@
      * override objects for setting build environment specific
      * settings.
      */
-    "production": {},
+    "development": {
+        "loader": {
+            "cache": true
+        }
+    },
+    "production": {
+        "loader": {
+            "cache": "${build.timestamp}"
+        }
+    },
 
     "testing": {},
-
-    "development": {},
 
     /**
      *  Controls the output structure of bootstrap artifacts.  May be specified by a string:
@@ -294,5 +305,6 @@
      * Uniquely generated id for this application, used as prefix for localStorage keys.
      * Normally you should never change this value.
      */
-    "id": "0c771fe0-f28d-4a73-a40e-635921947365"
+    "id": "0c771fe0-f28d-4a73-a40e-635921947365",
+    "locale": "ru"
 }

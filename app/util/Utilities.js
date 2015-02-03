@@ -1,7 +1,7 @@
 Ext.define('App.util.Utilities', {
     singleton: true,
     alternateClassName: ['Utilities'],
-
+    version: '1.02 от 05.12.2014',
     textAbout:'<table width="100%">' +
     '<tr>' +
     '<td width="100">Программа:</td>' +
@@ -9,7 +9,9 @@ Ext.define('App.util.Utilities', {
     '</tr>' +
     '<tr>' +
     '<td>Версия:</td>' +
-    '<td>1.01 от 26.11.2014</td>' +
+    '<td>' +
+    '1.02 от 05.12.2014' +
+    '</td>' +
     '</tr>' +
     '<tr>' +
     '<td>Разработчик:</td>' +

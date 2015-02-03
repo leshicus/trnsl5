@@ -60,7 +60,8 @@ Ext.define('App.view.admin.clas.GridExamV', {
             {
                 xtype: 'datefromto',
                 _dateFrom: dateBegin,
-                _allowBlankFrom: false
+                _allowBlankFrom: false,
+                _allowBlankTo: true
             });
 
         this.columns = [

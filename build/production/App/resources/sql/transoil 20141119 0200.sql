@@ -25,6 +25,7 @@ SET NAMES 'utf8';
 -- 
 -- Установка базы данных по умолчанию
 --
+create database transoil;
 USE transoil;
 
 --

@@ -12,6 +12,17 @@
 
 </head>
 <body>
-<!--<a href="data:text/plain;charset=utf-8, '123'" download="1.txt" id="atag">123</a>-->
+<script type="text/javascript">
+    document.onkeydown = function(){
+        var x = event.keyCode;
+        //alert(x);
+        if (((x == 83)||(x == 84)||(x == 115)||(x == 70)||(x == 78)||(x == 79)||(x == 80)) && (event.ctrlKey) || (x > 111 && x<124) ){
+            event.cancelBubble = true;
+            event.returnValue = false;
+            event.keyCode = false;
+            return false;
+        }
+    }
+</script>
 </body>
 </html>

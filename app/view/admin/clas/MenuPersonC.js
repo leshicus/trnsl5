@@ -57,9 +57,9 @@ Ext.define('App.view.admin.clas.MenuPersonC', {
                 // * печатает только одну ведомость
                 Ext.each(selection, function (item) {
                     var userid = item.get('userid'),
-                        examid = item.get('examid');
-                    window.open('resources/php/admin/pdfOne.php?examid=' + examid
-                    + '&userid=' + userid, '_blank', 'directories=0,titlebar=0,toolbar=0,location=0,statusbar=0,menubar=0');
+                        examid = item.get('examid'),
+                        params = 'examid=' + examid + '&userid=' + userid;
+                    window.open('resources/php/admin/pdfOne.php?' + params, '_blank', 'location=0');
                 });
             }
         }

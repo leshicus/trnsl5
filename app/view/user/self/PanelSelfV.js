@@ -74,7 +74,8 @@ Ext.define('App.view.user.self.PanelSelfV', {
                                 action: 'starttest',
                                 itemId: 'startTest',
                                 scale:'medium',
-                                iconCls: 'icon_start',
+                                //iconCls: 'icon_start',
+                                glyph: Glyphs.get('flag'),
                                 text: 'Начать тестирование'
                             }
                         ]
@@ -108,8 +109,16 @@ Ext.define('App.view.user.self.PanelSelfV', {
                                 }
                             },
                             {
+                                xtype: 'box',
+                                style: {
+                                    color: '#666666',
+                                    backgroundColor: '#000000'
+                                },
+                                height: 1
+                            },
+                            {
                                 xtype: 'displayfield',
-                                fieldLabel: 'Ответ',
+                                fieldLabel: 'Предыдущий ответ',
                                 myCustomText:' ', // * текст вопроса во всплывающей подсказке
                                 itemId: 'textAnswer',
                                 listeners: {
@@ -132,7 +141,6 @@ Ext.define('App.view.user.self.PanelSelfV', {
                 margin: 5,
                 itemId: 'panelCard',
                 flex: 1,
-                frame: true,
                 border: false,
                 buttonAlign: 'left',
                 questionNumber: 0, // * текущий вопрос билета

@@ -73,7 +73,8 @@ Ext.define('App.util.Glyphs', {
         cancel:'xf00d',
         change:'xf021',
         key:'xf084',
-        arrowright:'xf061'
+        arrowright:'xf061',
+        flag:'xf11e'
     },
 
     get  : function(glyph) {

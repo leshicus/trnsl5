@@ -13,14 +13,13 @@ Ext.define('App.view.manage.question.question.GridQuestionV', {
     itemId: 'gridQuestion',
     frame: false,
     flex: 1,
-    forceFit: true,  // * ячейки распределяются по ширине всей таблицы
+    //forceFit: true,  // * ячейки распределяются по ширине всей таблицы
     title: 'Вопросы',
     viewConfig: {
         plugins: {
             ptype: 'gridviewdragdrop',
             ddGroup: 'ddgroup'
         },
-        enableTextSelection:true,
         stripeRows: true
     },
     selModel: {
@@ -72,10 +71,19 @@ Ext.define('App.view.manage.question.question.GridQuestionV', {
                 action: 'export',
                 scale: 'medium',
                 iconCls: 'icon_export'
+            }
+            /*{
+                text: 'Выгрузка<br>download link',
+                action: 'export2',
+                scale: 'medium',
+                iconCls: 'icon_export'
             },
             {
-                xtype:'form'
-            }
+                text: 'Выгрузка<br>window.open',
+                action: 'export3',
+                scale: 'medium',
+                iconCls: 'icon_export'
+            }*/
         ];
 
         this.columns = [
@@ -88,7 +96,8 @@ Ext.define('App.view.manage.question.question.GridQuestionV', {
                 text: 'Текст вопроса',
                 itemId: 'columnQuestiontext',
                 dataIndex: 'questiontext',
-                tdCls: 'wrapText'
+                tdCls: 'wrapText',
+                flex:1
             }
         ];
         this.callParent(arguments);

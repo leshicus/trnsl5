@@ -17,14 +17,21 @@ Ext.define('App.view.admin.treeuser.TreeUserC', {
                         actid = selection.raw.actid,
                         orgid = selection.raw.orgid,
                         id = selection.raw.id;
-                    storeUser.load({
-                        params: {
-                            id: id,
-                            orgid: orgid,
-                            actid: actid,
-                            groupid: groupid
-                        }
-                    });
+
+                    gridUser.mask('Загружаем список пользователей...');
+                    Ext.defer(function () {
+                        storeUser.load({
+                            params: {
+                                id: id,
+                                orgid: orgid,
+                                actid: actid,
+                                groupid: groupid
+                            },
+                            callback: function () {
+                                gridUser.unmask();
+                            }
+                        });
+                    }, 20);
                 }
             },
             render: function (tree) {

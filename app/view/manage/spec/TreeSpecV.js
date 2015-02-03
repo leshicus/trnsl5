@@ -7,7 +7,6 @@ Ext.define('App.view.manage.spec.TreeSpecV', {
     viewModel: {type: 'treeSpec'},
     controller:'treeSpec',
     bind: '{treespec}',
-    frame:true,
     border: 5,
     title: 'Структура',
     alias:'widget.treeSpec',

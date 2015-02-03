@@ -46,7 +46,7 @@
                 itemId:'correct',
                 name:'correct',
                 labelWidth: 100,
-                disabled:true,
+                readOnly:true,
                 boxLabelAlign:'before',
                 inputValue:'1'
             }

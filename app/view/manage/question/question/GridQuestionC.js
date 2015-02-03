@@ -4,7 +4,7 @@ Ext.define('App.view.manage.question.question.GridQuestionC', {
         'App.view.manage.question.question.FormQuestionV',
         'App.view.manage.question.question.FormUploadV',
         'Ext.dom.Helper',
-        'Ext.ux.IFrame'
+        //'Ext.ux.IFrame'
     ],
     alias: 'controller.gridQuestion',
 
@@ -114,105 +114,97 @@ Ext.define('App.view.manage.question.question.GridQuestionC', {
                     });
                     var str = arr.join(',');
 
-             /*       var comp = Ext.create('Ext.Component',{
-                        //renderTo:Ext.getBody(),
-                        autoEl:{
-                            tag:'a',
-                            id:'atag',
-                            href : "data:application/octet-stream,field1%2Cfield2%0Afoo%2Cbar%0Agoo%2Cgai%0A",
-                            download : 'test.csv'
-                        }
-                    });*/
-
-                    var pom = document.createElement('a');
-                    pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent('123'));
-                    pom.setAttribute('download', '1.txt');
-                    pom.click();
-
-
-                    /*document.getElementById("atag").click();*/
-
-/*работает, но только в браузере*/
-                    var body = Ext.getBody(),
+                    /*работает, но только в браузере*/
+                    /*var body = Ext.getBody(),
                         iframe = body.appendChild({
                             tag: 'iframe',
                             id: 'iframe-helper',
-                            cls: 'x-hidden',
+                            //cls: 'x-hidden',
                             name: 'iframe'
                         }),
                         form = body.appendChild({
                             tag: 'form',
-                            method: 'POST',
+                            method: 'post',
                             target: 'iframe-helper',
                             action: 'resources/php/manage/exportQuestion.php',
-                            cls: 'x-hidden'
+                            //cls: 'x-hidden'
+                            style: "display:none"
                         }),
                         input = form.appendChild({
                             tag: 'input',
                             type: 'hidden',
                             name: 'str',
-                            id:'hidden-input',
-                            value: str,
-                            cls: 'x-hidden'
+                            id: 'hidden-input',
+                            value: str
+                            //cls: 'x-hidden'
                         });
-                    form.dom.submit();
-                    //iframe.destroy();
-                    form.destroy();
-                    input.destroy();
+                    form.dom.submit();*/
 
-// window.open('resources/php/manage/exportQuestion.php?str=' + arr, '_blank','location=0');
+                    var body = document.getElementsByTagName('body')[0],
+                        iframe = document.createElement('iframe'),
+                        form = document.createElement('form'),
+                        input = document.createElement('input');
+                    iframe.id = 'iframe-helper';
+                    iframe.hidden = true;
 
-/*работает, но только в браузере*/
-                   /* var a = window.document.createElement('a');
-                    a.href = window.URL.createObjectURL(new Blob([str], {type: 'text/csv'}));
-                    a.download = 'test.csv';
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);*/
+                    form.method = 'post';
+                    form.target = 'iframe-helper';
+                    form.action = 'resources/php/manage/exportQuestion.php';
 
-            /*        var a = window.document.createElement('a');
-                    a.href = "data:application/octet-stream,field1%2Cfield2%0Afoo%2Cbar%0Agoo%2Cgai%0A";
-                    a.download = 'test.csv';
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);*/
+                    input.value = str;
+                    input.name = 'str';
 
+                    body.appendChild(iframe);
+                    body.appendChild(form);
+                    form.appendChild(input);
+                    form.submit();
 
 
-                 /*       form = Ext.create('Ext.form.Panel',{
-                            url:'resources/php/manage/exportQuestion.php'
-                        });
-                    form.getForm().submit({
-                        params:{str:str}
-                    });*/
+                    Ext.defer(function () {
+                        form.removeChild(input);
+                        body.removeChild(form);
+                        body.removeChild(iframe);
+                        /*iframe.destroy();
+                        form.destroy();
+                        input.destroy();*/
+                    }, 1000, this);
+                } else {
+                    Ext.Msg.alert('Внимание', 'Отметьте вопросы для экспорта');
+                }
+            }
+        },
+        /*'button[action=export2]': {
+            click: function (button) {
+                console.log('action=export');
 
+                var gridQuestion = button.up('gridQuestion'),
+                    selection = gridQuestion.getSelected(),
+                    arr = Array();
+                if (selection.length) {
 
-     /*                var iframe = Ext.create('Ext.ux.IFrame', {
-                     id: 'iframe-helper'
-                     }),
-                     form = Ext.create('Ext.form.Panel', {
-                     url: 'resources/php/manage/exportQuestion.php',
-                     items: [{
-                     xtype: 'textfield',
-                     name: 'str'
-                     }]
-                     }),
-                     //iframe = document.getElementById('iframe-helper'),
-                     form = body.appendChild({
-                     tag: 'form',
-                     method: 'post',
-                     target: 'iframe-helper',
-                     action: 'resources/php/manage/exportQuestion.php',
-                     cls: 'x-hidden'
-                     }),
-                     input = form.appendChild({
-                     tag: 'input',
-                     type: 'hidden',
-                     name: 'str',
-                     value: str,
-                     cls: 'x-hidden'
-                     });*/
-
+                    Ext.each(selection, function (item) {
+                        arr.push(item.get('questionid'));
+                    });
+                    var str = arr.join(',');
+                    Ext.Ajax.request({
+                        url: 'resources/php/manage/exportQuestion.php',
+                        params: {
+                            str: str
+                        },
+                        success: function (response, options) {
+                            var response = response.responseText;
+                            *//*работает !!!, но только в браузере*//*
+                            var a = window.document.createElement('a');
+                            a.href = "data:application/octet-stream," + response;
+                            a.download = "export.xml";
+                            document.body.appendChild(a);
+                            a.click();
+                            document.body.removeChild(a);
+                        },
+                        failure: function (response, options) {
+                            Ext.Msg.alert('Ошибка', message);
+                        }
+                    });
 
 
 
@@ -221,19 +213,95 @@ Ext.define('App.view.manage.question.question.GridQuestionC', {
                 }
             }
         },
+        'button[action=export2]': {
+            click: function (button) {
+                console.log('action=export');
+
+                var gridQuestion = button.up('gridQuestion'),
+                    selection = gridQuestion.getSelected(),
+                    arr = Array();
+                if (selection.length) {
+
+                    Ext.each(selection, function (item) {
+                        arr.push(item.get('questionid'));
+                    });
+                    var str = arr.join(',');
+                    Ext.Ajax.request({
+                        url: 'resources/php/manage/exportQuestion.php',
+                        params: {
+                            str: str
+                        },
+                        success: function (response, options) {
+                            var response = response.responseText;
+                            function linkDownload(a, filename, content) {
+                                contentType =  'data:application/octet-stream,';
+                                uriContent = contentType + encodeURIComponent(content);
+                                a.setAttribute('href', uriContent);
+                                //a.setAttribute('download', filename);
+                                a.download = filename;
+                            };
+                            function download(filename, content) {
+                                var a = document.createElement('a'),
+                                    body = document.getElementsByTagName('body')[0];
+                                linkDownload(a, filename, content);
+                                body.appendChild(a);
+                                a.click();
+                                body.removeChild(a);
+                            };
+                            download('export_question.xml', response);
+                        },
+                        failure: function (response, options) {
+                            Ext.Msg.alert('Ошибка', message);
+                        }
+                    });
+                } else {
+                    Ext.Msg.alert('Внимание', 'Отметьте вопросы для экспорта');
+                }
+            }
+        },
+        'button[action=export3]': {
+            click: function (button) {
+                console.log('action=export');
+
+                var gridQuestion = button.up('gridQuestion'),
+                    selection = gridQuestion.getSelected(),
+                    arr = Array();
+                if (selection.length) {
+
+                    Ext.each(selection, function (item) {
+                        arr.push(item.get('questionid'));
+                    });
+                    var str = arr.join(',');
+                    window.open('resources/php/manage/exportQuestion.php?str=' + str, '_blank','location=0');
+                } else {
+                    Ext.Msg.alert('Внимание', 'Отметьте вопросы для экспорта');
+                }
+            }
+        },*/
         'button[action=import]': {
             click: function (button) {
                 console.log('filefield');
-                var form = Ext.create('App.view.manage.question.question.FormUploadV'),
-                    window = Ext.create('Ext.Window', {
-                        frame: true,
-                        title: 'Загрузка вопросов',
-                        closable: false,
-                        modal: true,
-                        layout: 'fit'
-                    });
-                window.add(form);
-                window.show();
+
+                var treeQuestion = button.up('#content').down('treeQuestion'),
+                    selectedTree = treeQuestion.getSelected();
+                if (selectedTree != null) {
+                    if (selectedTree.raw.leaf) {
+                        var form = Ext.create('App.view.manage.question.question.FormUploadV'),
+                            window = Ext.create('Ext.Window', {
+                                frame: true,
+                                title: 'Загрузка вопросов',
+                                closable: false,
+                                modal: true,
+                                layout: 'fit'
+                            });
+                        window.add(form);
+                        window.show();
+                    } else {
+                        Ext.Msg.alert('Ошибка', 'Не выделена область знания');
+                    }
+                } else {
+                    Ext.Msg.alert('Ошибка', 'Не выделена область знания');
+                }
             }
         },
         'gridQuestion filefield': {
@@ -256,11 +324,15 @@ Ext.define('App.view.manage.question.question.GridQuestionC', {
                 if (selectedTree) {
                     if (selectedTree.raw) {
                         var knowid = selectedTree.raw.knowid,
-                            groupid = selectedTree.raw.groupid;
+                            groupid = selectedTree.raw.groupid,
+                            orgid = selectedTree.raw.orgid,
+                            actid = selectedTree.raw.actid;
                         gridQuestion.getViewModel().getStore('question').load({
                             params: {
                                 knowid: knowid,
-                                groupid: groupid
+                                groupid: groupid,
+                                orgid: orgid,
+                                actid: actid
                             }
                         });
                     }

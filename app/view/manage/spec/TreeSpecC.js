@@ -18,14 +18,21 @@ Ext.define('App.view.manage.spec.TreeSpecC', {
                             orgid = selection.raw.orgid,
                             actid = selection.raw.actid,
                             id = selection.raw.id;
-                        storeSpec.load({
-                            params: {
-                                id: id,
-                                orgid: orgid,
-                                actid: actid,
-                                groupid: groupid
-                            }
-                        });
+
+                        gridSpec.mask('Загружаем список специальностей...');
+                        Ext.defer(function () {
+                            storeSpec.load({
+                                params: {
+                                    id: id,
+                                    orgid: orgid,
+                                    actid: actid,
+                                    groupid: groupid
+                                },
+                                callback: function () {
+                                    gridSpec.unmask();
+                                }
+                            });
+                        }, 20);
                     }
                 }
             }

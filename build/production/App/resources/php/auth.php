@@ -15,7 +15,7 @@ $message = '';
 // * проверим, что пароль не начальный
 if (strtoupper($textPassword) == strtoupper($initPassword)) {
     $success = false;
-    $message = 'Не допустимый пароль: ' . $initPassword;
+    $message = 'Недопустимый пароль: ' . $initPassword;
 } else {
     // * проверим, что пользователь зарегистрирован
     $sql_reg = "
@@ -61,8 +61,8 @@ if (strtoupper($textPassword) == strtoupper($initPassword)) {
                 $message = $sql_pas;
             }
             $nCNT1 = $row_pas[0];
-            if(!$nCNT1){ // * не верный пароль
-                $message = 'Не верный пароль.';
+            if(!$nCNT1){ // * неверный пароль
+                $message = 'Неверный пароль.';
                 $success = false;
             }else{
                 // * узнаем ФИО пользователя, чтобы вернуть в программу
@@ -90,7 +90,7 @@ if (strtoupper($textPassword) == strtoupper($initPassword)) {
             $success = false;
         }
     } else {
-        $message = 'Указанный логин не зарегистрированы в системе.';
+        $message = 'Указанный логин не зарегистрирован в системе.';
         $success = false;
     }
 }

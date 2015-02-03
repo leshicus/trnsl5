@@ -1,7 +1,7 @@
-build/.sass-cache
-build/temp
-.sencha
-.idea
+build/
+.sencha/
+.idea/
+ext/
 
 # Windows image file caches
 Thumbs.db
@@ -48,9 +48,4 @@ Network Trash Folder
 Temporary Items
 .apdisk
 *.xml
-.idea/workspace.xml
-.idea/workspace.xml
-*.xml
-*.xml
-.idea/workspace.xml
 .idea/workspace.xml

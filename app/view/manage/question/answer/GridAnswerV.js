@@ -12,13 +12,12 @@ Ext.define('App.view.manage.question.answer.GridAnswerV', {
     itemId: 'gridAnswer',
     frame: false,
     flex: 1,
-    forceFit: true,  // * ячейки распределяются по ширине всей таблицы
+    //forceFit: true,  // * ячейки распределяются по ширине всей таблицы
     title: 'Ответы',
     columnLines: true,
     selType: 'checkboxmodel',
     viewConfig: {
-        stripeRows: true,
-        enableTextSelection: true // * allow to select text in grid. Actually it's a gridview property
+        stripeRows: true
     },
     initComponent: function () {
         console.log('GridAnswers init');
@@ -54,14 +53,15 @@ Ext.define('App.view.manage.question.answer.GridAnswerV', {
                 text: 'Текст ответа',
                 itemId: 'columnAnswertext',
                 dataIndex: 'answertext',
-                tdCls: 'wrapText'
+                tdCls: 'wrapText',
+                flex:1
             },
             {
                 xtype: 'checkcolumn',
                 header: 'Верный',
                 itemId: 'columnCorrect',
                 dataIndex: 'correct',
-                width: 50,
+                width: 60,
                 processEvent: function () {
                     return false;
                 }

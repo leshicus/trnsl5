@@ -10,7 +10,7 @@ $data = json_decode(file_get_contents('php://input'), true);
 switch ($act) {
     case 'create':
         $sql = "
-            insert into speciality()values();
+            insert into speciality() values();
         ";
         try {
             $res = $mysqli->query($sql);
@@ -48,10 +48,12 @@ switch ($act) {
                   s.specid,
                   s.specname,
                   s.groupid,
-                  a.orgid
+                  a.orgid,
+                  o.orgabbr
 		        from speciality s
 		         left join `group` g on g.groupid = s.groupid
-		         left join `activity` a on a.actid = g.actid '
+		         left join `activity` a on a.actid = g.actid
+		         left join `org` o on o.orgid = a.orgid '
                 .$where.
 		        ' order by s.specname';
         try {

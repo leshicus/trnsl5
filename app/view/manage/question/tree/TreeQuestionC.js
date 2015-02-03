@@ -27,15 +27,22 @@ Ext.define('App.view.manage.question.tree.TreeQuestionC', {
                             actid = selection.raw.actid,
                             id = selection.raw.id;
                         storeQuestion.clearFilter();
-                        storeQuestion.load({
-                            params: {
-                                id: id,
-                                orgid: orgid,
-                                actid: actid,
-                                knowid: knowid,
-                                groupid: groupid
-                            }
-                        });
+
+                        gridQuestion.mask('Загружаем вопросы...');
+                        Ext.defer(function () {
+                            storeQuestion.load({
+                                params: {
+                                    id: id,
+                                    orgid: orgid,
+                                    actid: actid,
+                                    knowid: knowid,
+                                    groupid: groupid
+                                },
+                                callback: function () {
+                                    gridQuestion.unmask();
+                                }
+                            });
+                        }, 20);
                     }
                 }
             }

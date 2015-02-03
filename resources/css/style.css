@@ -1,40 +1,40 @@
 /* заголовок fieldset */
 .x-fieldset-header-default > .x-fieldset-header-text {
-    color: rgb(39, 127, 204);
+    color: rgb(39, 127, 204) !important;;
 }
 /*.x-box-inner {
     overflow: hidden;
 }*/
 /* заголовки grid */
 .x-column-header {
-    color: rgb(39, 127, 204);
+    color: rgb(39, 127, 204) !important;;
 }
 
 /*отступ сверху названий полей грида*/
 .x-column-header-inner {
-    line-height: 17px;
-    text-align: center;
+    line-height: 17px !important;;
+    text-align: center !important;;
 }
 
 /* перенос строки в гриде*/
 .wrapText .x-grid-cell-inner {
-    white-space: normal;
+    white-space: normal !important;
 }
 
 /* убираем надпись Trial из заголовка панелей */
 .x-panel-header-title-default-framed > .x-title-text-default-framed:after {
-    content: '';
+    content: '' !important;
 }
 
 .x-panel-header-title-default > .x-title-text-default:after {
-    content: '';
+    content: '' !important;
 }
 .x-window-header-title-default>.x-title-text-default:after {
-    content: '';
+    content: '' !important;
 }
 /* фон инвалидного поля (по умолчанию- белый)*/
 .x-form-type-text textarea.x-form-invalid-field, .x-form-type-text input.x-form-invalid-field, .x-form-type-password textarea.x-form-invalid-field, .x-form-type-password input.x-form-invalid-field, .x-form-type-number textarea.x-form-invalid-field, .x-form-type-number input.x-form-invalid-field, .x-form-type-email textarea.x-form-invalid-field, .x-form-type-email input.x-form-invalid-field, .x-form-type-search textarea.x-form-invalid-field, .x-form-type-search input.x-form-invalid-field, .x-form-type-tel textarea.x-form-invalid-field, .x-form-type-tel input.x-form-invalid-field {
-    background-color: #FFECE8;
+    background-color: #FFECE8 !important;
 }
 
 
@@ -43,10 +43,10 @@
 .mystyle_title_subsystem {
     color: #666666;
     background:#E6F1F9;
-    padding: 7px;
+    padding: 8px;
     font-size: x-large;
-    /*font-variant: small-caps;
-    font-family: serif;*/
+    font-variant: small-caps;
+    font-family: serif;
     border-radius: 4px;
     text-align: left;
     border-width: 1px;
@@ -57,7 +57,7 @@
 /* стиль заголовков подсистем (контейнер) */
 .mystyle_title_subsystem_container {
     background:#E6F1F9;
-    padding: 7px;
+    padding: 8px;
     border-radius: 4px;
     border-width: 1px;
     border-color: silver;
@@ -70,8 +70,8 @@
     font-size: x-large;
     font-weight: 100;
     overflow: initial;
-    /*font-variant: small-caps;
-    font-family: serif;*/
+    font-variant: small-caps;
+    font-family: serif;
 }
 /* стиль заголовков подсистем (имя пользователя) */
 .mystyle_title_subsystem_user {
@@ -79,8 +79,8 @@
     color: #666666;
     font-size: larger;
     overflow: initial;
-    /*font-variant: small-caps;
-    font-family: serif;*/
+    font-variant: small-caps;
+    font-family: serif;
 }
 
 /*.mystyle_title_user {

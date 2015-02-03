@@ -1,10 +1,11 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+    <!--<script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script>-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="UTF-8">
 
-    <title>Тестирование</title>
+    <title>Система тестирования знаний</title>
 
     <!-- The line below must be kept intact for Sencha Cmd to build your application -->
     <script type="text/javascript">var Ext=Ext||{};Ext.manifest=Ext.manifest||"app.json";Ext=Ext||{};
@@ -21,8 +22,8 @@ new k(a);a.prependBaseUrl=!0;return d.load(a)},loadSyncBasePrefix:function(a){a=
 onBootReady:function(a){d.isLoading()?d.listeners.push(a):a()},getPathsFromIndexes:function(a,b){return k.prototype.getPathsFromIndexes(a,b)},createLoadOrderMap:function(a){return k.prototype.createLoadOrderMap(a)},fetch:function(a,b,c,e){e=void 0===e?!!b:e;var d=new XMLHttpRequest,f,g,w,p=!1,h=function(){d&&4==d.readyState&&(g=1223===d.status?204:0===d.status&&("file:"===(self.location||{}).protocol||"ionp:"===(self.location||{}).protocol)?200:d.status,w=d.responseText,f={content:w,status:g,exception:p},
 b&&b.call(c,f),d=null)};e&&(d.onreadystatechange=h);try{d.open("GET",a,e),d.send(null)}catch(j){return p=j,h(),f}e||h();return f},notifyAll:function(a){a.notifyRequests()}};k.prototype={$isRequest:!0,createLoadOrderMap:function(a){var b=a.length,c={},e,d;for(e=0;e<b;e++)d=a[e],c[d.path]=d;return c},getLoadIndexes:function(a,b,c,e,l){var f=c[a],g,h,p,j,k;if(b[a])return b;b[a]=!0;for(a=!1;!a;){p=!1;for(j in b)if(b.hasOwnProperty(j)&&(f=c[j]))if(h=this.prepareUrl(f.path),h=d.getEntry(h),!l||!h||!h.done){h=
 f.requires;e&&f.uses&&(h=h.concat(f.uses));f=h.length;for(g=0;g<f;g++)k=h[g],b[k]||(p=b[k]=!0)}p||(a=!0)}return b},getPathsFromIndexes:function(a,b){var c=[],e=[],d,f;for(d in a)a.hasOwnProperty(d)&&a[d]&&c.push(d);c.sort(function(a,b){return a-b});d=c.length;for(f=0;f<d;f++)e.push(b[c[f]].path);return e},expandUrl:function(a,b,c,e){"string"==typeof a&&(a=[a]);var d=this.loadOrder,f=this.loadOrderMap;if(d){this.loadOrderMap=f=f||this.createLoadOrderMap(d);b=b||{};var g=a.length,h=[],j,k;for(j=0;j<
-g;j++)(k=f[a[j]])?this.getLoadIndexes(k.idx,b,d,c,e):h.push(a[j]);return this.getPathsFromIndexes(b,d).concat(h)}return a},expandUrls:function(a,b){"string"==typeof a&&(a=[a]);var c=[],d={},f,h=a.length,g,j,k,m;for(g=0;g<h;g++){f=this.expandUrl(a[g],{},b,!0);j=0;for(k=f.length;j<k;j++)m=f[j],d[m]||(d[m]=!0,c.push(m))}0==c.length&&(c=a);return c},expandLoadOrder:function(){var a=this.urls,b;this.expanded?b=a:(b=this.expandUrls(a),this.expanded=!0);this.urls=b;a.length!=b.length&&(this.sequential=!0);
-return this},getUrls:function(){this.expandLoadOrder();return this.urls},prepareUrl:function(a){return this.prependBaseUrl?d.baseUrl+a:a},getEntries:function(){var a=this.entries,b,c,e;if(!a){a=[];e=this.getUrls();for(b=0;b<e.length;b++)c=this.prepareUrl(e[b]),c=d.getEntry(c,{buster:this.buster,charset:this.charset}),c.requests.push(this),a.push(c);this.entries=a}return a},loadEntries:function(a){var b=this,c=b.getEntries(),d=c.length,f=b.loadStart||0,h,g;void 0!==a&&(b.sync=a);b.loaded=b.loaded||
+g;j++)(k=f[a[j]])?this.getLoadIndexes(k.idx,b,d,c,e):h.push(a[j]);return this.getPathsFromIndexes(b,d).concat(h)}return a},expandUrls:function(a,b){"string"==typeof a&&(a=[a]);var c=[],d={},f,h=a.length,g,j,k,m;for(g=0;g<h;g++){f=this.expandUrl(a[g],{},b,!0);j=0;for(k=f.length;j<k;j++)m=f[j],d[m]||(d[m]=!0,c.push(m))}0==c.length&&(c=a);return c},expandLoadOrder:function(){var a=this.urls,b;this.expanded?b=a:(b=this.expandUrls(a,!0),this.expanded=!0);this.urls=b;a.length!=b.length&&(this.sequential=
+!0);return this},getUrls:function(){this.expandLoadOrder();return this.urls},prepareUrl:function(a){return this.prependBaseUrl?d.baseUrl+a:a},getEntries:function(){var a=this.entries,b,c,e;if(!a){a=[];e=this.getUrls();for(b=0;b<e.length;b++)c=this.prepareUrl(e[b]),c=d.getEntry(c,{buster:this.buster,charset:this.charset}),c.requests.push(this),a.push(c);this.entries=a}return a},loadEntries:function(a){var b=this,c=b.getEntries(),d=c.length,f=b.loadStart||0,h,g;void 0!==a&&(b.sync=a);b.loaded=b.loaded||
 0;b.loading=b.loading||d;for(g=f;g<d;g++)if(h=c[g],f=h.loaded?!0:c[g].load(b.sync),!f){b.loadStart=g;h.onDone(function(){b.loadEntries(a)});break}b.processLoadedEntries()},processLoadedEntries:function(){var a=this.getEntries(),b=a.length,c=this.startIndex||0,d;if(!this.done){for(;c<b;c++){d=a[c];if(!d.loaded){this.startIndex=c;return}d.evaluated||d.evaluate();d.error&&(this.error=!0)}this.notify()}},notify:function(){var a=this;if(!a.done){var b=a.error,c=a[b?"failure":"success"],b="delay"in a?a.delay:
 b?1:d.config.chainDelay,e=a.scope||a;a.done=!0;c&&(0===b||0<b?setTimeout(function(){c.call(e,a)},b):c.call(e,a));a.fireListeners();d.requestComplete(a)}},onDone:function(a){var b=this.listeners||(this.listeners=[]);this.done?a(this):b.push(a)},fireListeners:function(){var a=this.listeners,b;if(a)for(;b=a.shift();)b(this)}};t.prototype={$isEntry:!0,done:!1,evaluated:!1,loaded:!1,isCrossDomain:function(){void 0===this.crossDomain&&(this.crossDomain=0!==this.getLoadUrl().indexOf(d.origin));return this.crossDomain},
 isCss:function(){void 0===this.css&&(this.css=this.url&&x.test(this.url));return this.css},getElement:function(a){var b=this.el;b||(this.isCss()?(a=a||"link",b=j.createElement(a),"link"==a?(b.rel="stylesheet",this.prop="href"):this.prop="textContent",b.type="text/css"):(b=j.createElement(a||"script"),b.type="text/javascript",this.prop="src",d.hasAsync&&(b.async=!1)),this.el=b);return b},getLoadUrl:function(){var a=d.canonicalUrl(this.url);this.loadUrl||(this.loadUrl=this.buster?a+(-1===a.indexOf("?")?
@@ -39,5 +40,18 @@ var f=Ext.manifest;if("string"===typeof f){var j=f.indexOf(".json")===f.length-5
 success:d,failure:d})},onMicroloaderReady:function(f){t?f():k.push(f)},notify:function(){for(var f;f=k.shift();)f()}};return m}();Ext.manifest=Ext.manifest||"bootstrap";Ext.Microloader.run();</script>
 
 </head>
-<body></body>
+<body>
+<script type="text/javascript">
+    document.onkeydown = function(){
+        var x = event.keyCode;
+        //alert(x);
+        if (((x == 83)||(x == 84)||(x == 115)||(x == 70)||(x == 78)||(x == 79)||(x == 80)) && (event.ctrlKey) || (x > 111 && x<124) ){
+            event.cancelBubble = true;
+            event.returnValue = false;
+            event.keyCode = false;
+            return false;
+        }
+    }
+</script>
+</body>
 </html>

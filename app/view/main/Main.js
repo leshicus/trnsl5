@@ -68,6 +68,13 @@ Ext.define('App.view.main.Main', {
                             ]
                         }
                     ]
+                },
+                {
+                    xtype: 'box',
+                    margin: '5 5 5 1',
+                    html: 'Выход из приложения: <b>ALT + F4</b><br>Версия: ' + Utilities.version,
+                    height: 35,
+                    width: 500
                 }
             ]
         },

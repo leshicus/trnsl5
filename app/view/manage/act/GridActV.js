@@ -29,11 +29,11 @@ Ext.define('App.view.manage.act.GridActV', {
         this.tbar = App.util.Utilities.buttonSaveDelete;
 
         this.tools = [
-            {
+          /*  {
                 type: 'help',
                 itemId: 'instruction',
                 tooltip: 'Word-инструкция'
-            },
+            },*/
             {
                 type: 'refresh',
                 itemId: 'refreshGridActS',

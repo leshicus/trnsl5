@@ -8,11 +8,16 @@ Ext.define('App.Application', {
 
     name: 'App',
 
-    stores: [
+    controllers: [
     ],
 
     launch: function () {
-
+        /*var url = Ext.util.Format.format("ext/packages/ext-locale/build/ext-locale-{0}.js", 'ru');
+        Ext.Loader.loadScript({
+                url: url,
+                scope: this
+            }
+        );*/
     },
     requires: [
         'App.util.Utilities',

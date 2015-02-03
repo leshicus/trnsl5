@@ -21,7 +21,6 @@ Ext.define('App.view.auth.tabauth.TabAuthV', {
     defaults:{
         blankText:'Обязательное поле'
     },
-    defaultButton: '[reference=enter]',
     initComponent: function () {
         console.log('TabAuthV init');
 
@@ -126,10 +125,7 @@ Ext.define('App.view.auth.tabauth.TabAuthV', {
                 action: 'refresh'
             }
         ];
-        Ext.apply(App, {
-            defaultButton: '[itemId=enter]'
-        });
-        //buttonEnter.focus(); //todo почему-то не работает
+
         this.callParent(arguments);
 
         console.log('TabAuthV end');

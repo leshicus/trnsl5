@@ -64,6 +64,35 @@ Ext.define('App.view.admin.griduser.GridUserC', {
                 return false;
             }
         },
+        'gridUser button[action=add]': {
+            click: function (button) {
+                console.log('action=add');
+
+                var tree = this.getView().up('#content').down('treeUser'),
+                    selected = tree.getSelected();
+                var form = Ext.create('App.view.admin.formuser.FormUserV');
+                if (selected) {
+                    var vm = form.getViewModel(),
+                        storeSpec = vm.getStore('spec');
+                    storeSpec.load({
+                        callback: function (records, operation, success) {
+                            var window = Ext.create('Ext.Window', {
+                                frame: true,
+                                title: 'Редактирование данных сотрудника',
+                                width: 500,
+                                height: 250,
+                                closable: false,
+                                modal: true,
+                                layout: 'fit'
+                            });
+                            window.add(form);
+                            window.show();
+                        }
+                    });
+
+                }
+            }
+        },
         'gridUser button[action=delete]': {
             click: function (button) {
                 console.log('action=delete');

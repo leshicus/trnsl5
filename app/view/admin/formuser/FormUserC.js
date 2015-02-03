@@ -22,7 +22,8 @@ Ext.define('App.view.admin.formuser.FormUserC', {
                             grid.getViewModel().getStore('user').reload();
                         },
                         failure: function () {
-                            Ext.MessageBox.alert('Ошибка', 'Не сохранено');
+                            //Ext.Msg.alert('Ошибка', 'Не сохранено');
+                            Utilities.errorMessage('Ошибка', 'Не сохранено');
                         },
                         scope: this
                     });

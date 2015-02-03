@@ -416,7 +416,7 @@ Ext.define('App.view.user.test.PanelTestC', {
             buttonNextQuestion = panelTest.down('#nextQuestion'),
             startTest = panelTest.down('#startTest');
         if (maxRownum != maxquestion) {
-            App.util.Utilities.errorMessage('Ошибка генерации билета', 'Не верное число вопросов в билете. Нужно: ' + maxquestion + ', сгенерировано: ' + maxRownum);
+            App.util.Utilities.errorMessage('Ошибка генерации билета', 'Неверное число вопросов в билете. Нужно: ' + maxquestion + ', сгенерировано: ' + maxRownum);
             // * тут нужно сбросить билет, т.к. пользователь не проходил экзамен
             Ext.defer(function () {
                 this.cardReset();

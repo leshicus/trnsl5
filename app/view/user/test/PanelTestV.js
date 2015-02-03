@@ -120,7 +120,8 @@ Ext.define('App.view.user.test.PanelTestV', {
                                 itemId: 'startTest',
                                 disabled: true,
                                 scale:'medium',
-                                iconCls: 'icon_start',
+                                //iconCls: 'icon_start',
+                                glyph: Glyphs.get('flag'),
                                 text: 'Начать тестирование'
                             }
                         ]
@@ -199,7 +200,6 @@ Ext.define('App.view.user.test.PanelTestV', {
                 margin: 5,
                 itemId: 'panelCard',
                 flex: 1,
-                frame: true,
                 border: false,
                 buttonAlign: 'left',
                 questionNumber: 0, // * текущий вопрос билета
