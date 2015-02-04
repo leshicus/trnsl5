@@ -2,14 +2,15 @@
 require_once("db_connect.php");
 require_once("include.php");
 
-$textLogin = $_REQUEST["textLogin"];
-$textFamily = $_REQUEST["textFamily"];
-$textName = $_REQUEST["textName"];
-$textLastname = $_REQUEST["textLastname"];
-$comboSpeciality = $_REQUEST["comboSpeciality"];
-$textPassword = $_REQUEST["textPassword"];
-$success = true;
+$textLogin = $_REQUEST["textLogin"] || $_REQUEST["login"];
+$textFamily = $_REQUEST["textFamily"] || $_REQUEST["familyname"];
+$textName = $_REQUEST["textName"] || $_REQUEST["firstname"];
+$textLastname = $_REQUEST["textLastname"] || $_REQUEST["lastname"];
+$comboSpeciality = $_REQUEST["comboSpeciality"] || $_REQUEST["specid"];
+$roleid = $_REQUEST["roleid"];
+$textPassword = $_REQUEST["textPassword"] || $_REQUEST["password"];
 
+$initRole = $initRole || $roleid;
 $message = 'Вы зарегистрировались.';
 
 // * проверим, что все необходимые поля заполнены

@@ -248,5 +248,15 @@ Ext.define('App.util.Utilities', {
             recTool = storeTool.getAt(0),
             value = recTool.get(field);
         return value;
+    },
+    toast: function (title, msg) {
+        Ext.toast({
+            html: msg,
+            title: title,
+            autoCloseDelay: 4000,
+            slideInDuration: 500,
+            width: 300,
+            align: 't'
+        });
     }
 });
