@@ -2,15 +2,16 @@
 require_once("db_connect.php");
 require_once("include.php");
 
-$textLogin = $_REQUEST["textLogin"] || $_REQUEST["login"];
-$textFamily = $_REQUEST["textFamily"] || $_REQUEST["familyname"];
-$textName = $_REQUEST["textName"] || $_REQUEST["firstname"];
-$textLastname = $_REQUEST["textLastname"] || $_REQUEST["lastname"];
-$comboSpeciality = $_REQUEST["comboSpeciality"] || $_REQUEST["specid"];
-$roleid = $_REQUEST["roleid"];
-$textPassword = $_REQUEST["textPassword"] || $_REQUEST["password"];
+$data = json_decode(file_get_contents('php://input'), true);
+$textLogin = ($_REQUEST["textLogin"] ? $_REQUEST["textLogin"] : $data[0]['login']);
+$textFamily = $_REQUEST["textFamily"] ? $_REQUEST["textFamily"] : $data[0]['familyname'];
+$textName = $_REQUEST["textName"] ? $_REQUEST["textName"] : $data[0]['firstname'];
+$textLastname = $_REQUEST["textLastname"] ? $_REQUEST["textLastname"] :  $data[0]['lastname'];
+$comboSpeciality = $_REQUEST["comboSpeciality"] ? $_REQUEST["comboSpeciality"] : $data[0]['specid'];
+$roleid = $data[0]['roleid'];
+$textPassword = $_REQUEST["textPassword"] ? $_REQUEST["textPassword"] : $data[0]['password'];
 
-$initRole = $initRole || $roleid;
+$initRole = ($roleid ? $roleid : $initRole);
 $message = 'Вы зарегистрировались.';
 
 // * проверим, что все необходимые поля заполнены
@@ -93,9 +94,7 @@ if (!$textLogin || !$textFamily || !$textName || !$comboSpeciality || !$textPass
 
 if ($success) {
     echo json_encode(
-        array('success' => $success,
-            'message' => $message,
-            'userid' => $mysqli->insert_id));
+        array('userid' => $mysqli->insert_id));
     _log($mysqli, $mysqli->insert_id, 3, 'Создание: '.$textFamily.' '.$textName.' '.$textLastname.', '.$comboSpeciality.', '.$textLogin);
 } else {
     echo json_encode(

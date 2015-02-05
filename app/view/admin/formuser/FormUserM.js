@@ -4,6 +4,10 @@ Ext.define('App.view.admin.formuser.FormUserM', {
 
     ],
     alias: 'viewmodel.formuser',
+    data: {
+        specid: null,
+        roleid: null
+    },
     stores: {
         spec: {
             fields: [
@@ -33,7 +37,7 @@ Ext.define('App.view.admin.formuser.FormUserM', {
                     update: 'POST',
                     destroy: 'POST'
                 },
-                storeId: 'storeSpec'
+                storeId: 'storeSpecUser'
             }
         },
         role: {
@@ -47,7 +51,8 @@ Ext.define('App.view.admin.formuser.FormUserM', {
                 reader: {
                     type: 'json'
                 }
-            }
+            },
+            storeId: 'storeRoleUser'
         }
     }
 });

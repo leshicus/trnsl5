@@ -17,6 +17,8 @@ Ext.define('App.view.admin.formuser.FormUserC', {
                 if (form.isValid()) {
                     if (values['userid']) { // * исправление
                         //record.set(values);
+                        form.getViewModel().set('theUser.specid', form.getViewModel().get('specid'));
+                        form.getViewModel().set('theUser.roleid', form.getViewModel().get('roleid'));
                         grid.getViewModel().getStore('user').sync({
                             callback: function (batch, options) {
                                 var response = batch.operations[0].request._scope.reader.rawData;
@@ -42,17 +44,14 @@ Ext.define('App.view.admin.formuser.FormUserC', {
                          firstname,
                          lastname,
                          });*/
+                        form.getViewModel().set('theUser.specid', form.getViewModel().get('specid'));
+                        form.getViewModel().set('theUser.roleid', form.getViewModel().get('roleid'));
                         grid.getViewModel().getStore('user').sync({
                             callback: function (batch, options) {
                                 var response = batch.operations[0].request._scope.reader.rawData;
                                 if (response) {
-                                    if (response.success) {
-                                        Utilities.toast('Успех', 'Пользователь сохранен');
-                                        storeUser.commitChanges();
-                                    } else {
-                                        Utilities.errorMessage('Ошибка', response.message);
-                                        storeUser.rejectChanges();
-                                    }
+                                    Utilities.toast('Успех', 'Пользователь сохранен');
+                                    storeUser.commitChanges();
                                 } else {
                                     storeUser.rejectChanges();
                                     Utilities.errorMessage('Ошибка', 'Пользователь не сохранен');

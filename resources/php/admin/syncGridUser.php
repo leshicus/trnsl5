@@ -6,7 +6,6 @@ require_once("../include.php");
 
 $act = $_REQUEST['act'];
 $data = json_decode(file_get_contents('php://input'), true);
-$success = true;
 
 switch ($act) {
     case 'create':
