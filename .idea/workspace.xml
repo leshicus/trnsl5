@@ -52,7 +52,6 @@
                   <folding>
                     <marker date="1422957942251" expanded="true" signature="110:258" placeholder="[...]" />
                     <marker date="1422957942251" expanded="true" signature="2681:2761" placeholder="{...}" />
-                    <marker date="1422957942251" expanded="true" signature="2818:2923" placeholder="{...}" />
                   </folding>
                 </state>
               </provider>
@@ -63,17 +62,7 @@
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0" vertical-offset="127" max-vertical-offset="1000">
                   <caret line="22" column="17" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
-                  <folding>
-                    <marker date="1422957942251" expanded="true" signature="204:1370" placeholder="{...}" />
-                    <marker date="1422957942251" expanded="true" signature="204:1364" placeholder="{&quot;idProperty&quot;: 'userid'...}" />
-                    <marker date="1422957942251" expanded="true" signature="256:1354" placeholder="{&quot;type&quot;: 'ajax'...}" />
-                    <marker date="1422957942251" expanded="true" signature="307:634" placeholder="{&quot;create&quot;: 'resources/php/admin/syncGridUser.php?act=create'...}" />
-                    <marker date="1422957942251" expanded="true" signature="659:709" placeholder="{&quot;type&quot;: 'json'...}" />
-                    <marker date="1422957942251" expanded="true" signature="734:1116" placeholder="{&quot;type&quot;: 'json'...}" />
-                    <marker date="1422957942251" expanded="true" signature="900:1099" placeholder="{...}" />
-                    <marker date="1422957942251" expanded="true" signature="958:1078" placeholder="{...}" />
-                    <marker date="1422957942251" expanded="true" signature="1180:1341" placeholder="{&quot;create&quot;: 'POST'...}" />
-                  </folding>
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -81,7 +70,7 @@
           <file leaf-file-name="FormUserV.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/view/admin/formuser/FormUserV.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-0.41860464" vertical-offset="360" max-vertical-offset="2260">
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2260">
                   <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
                   <folding />
                 </state>
@@ -95,10 +84,13 @@
           <file leaf-file-name="GridUserC.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/view/admin/griduser/GridUserC.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="1127" max-vertical-offset="2520">
-                  <caret line="87" column="41" selection-start-line="87" selection-start-column="41" selection-end-line="87" selection-end-column="41" />
+                <state vertical-scroll-proportion="0.0" vertical-offset="1600" max-vertical-offset="2520">
+                  <caret line="80" column="41" selection-start-line="80" selection-start-column="41" selection-end-line="80" selection-end-column="41" />
                   <folding>
-                    <marker date="1422957942250" expanded="true" signature="247:4766" placeholder="{...}" />
+                    <marker date="1423161114456" expanded="true" signature="1575:1794" placeholder="/*...*/" />
+                    <marker date="1423161114456" expanded="true" signature="3023:3248" placeholder="/*...*/" />
+                    <marker date="1423161114456" expanded="true" signature="3332:3831" placeholder="{...}" />
+                    <marker date="1423161114456" expanded="true" signature="3397:3742" placeholder="{&quot;frame&quot;: true...}" />
                   </folding>
                 </state>
               </provider>
@@ -107,8 +99,8 @@
           <file leaf-file-name="FormUserC.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/view/admin/formuser/FormUserC.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.2520046" vertical-offset="180" max-vertical-offset="1060">
-                  <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+                <state vertical-scroll-proportion="0.26689577" vertical-offset="187" max-vertical-offset="1060">
+                  <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -213,6 +205,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -251,7 +244,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -290,15 +282,15 @@
     <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
       <method />
     </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server" server_id="d56882be-4dd1-4a33-a06d-58937bb00316" server_name="transoil5">
+      <method />
+    </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
       <node-options />
       <gulpfile />
       <tasks />
       <pass-parent-env-vars>false</pass-parent-env-vars>
       <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server" server_id="d56882be-4dd1-4a33-a06d-58937bb00316" server_name="transoil5">
       <method />
     </configuration>
     <list size="0" />
@@ -347,20 +339,20 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21077909" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21291356" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32928178" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18895027" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4088398" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4088398" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -386,6 +378,62 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app/view/main/MainM.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3860" max-vertical-offset="4240">
+          <caret line="193" column="25" selection-start-line="193" selection-start-column="25" selection-end-line="193" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/admin/griduser/GridUserV.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="2160">
+          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding>
+            <marker date="1422957942251" expanded="true" signature="110:258" placeholder="[...]" />
+            <marker date="1422957942251" expanded="true" signature="2681:2761" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/admin/griduser/GridUserM.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="127" max-vertical-offset="1000">
+          <caret line="22" column="17" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/admin/formuser/FormUserV.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2880">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/admin/griduser/GridUserC.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1740" max-vertical-offset="2660">
+          <caret line="87" column="41" selection-start-line="87" selection-start-column="41" selection-end-line="87" selection-end-column="41" />
+          <folding>
+            <marker date="1423161114456" expanded="true" signature="1575:1794" placeholder="/*...*/" />
+            <marker date="1423161114456" expanded="true" signature="3023:3248" placeholder="/*...*/" />
+            <marker date="1423161114456" expanded="true" signature="3332:3831" placeholder="{...}" />
+            <marker date="1423161114456" expanded="true" signature="3397:3742" placeholder="{&quot;frame&quot;: true...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/admin/formuser/FormUserC.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1720">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/php/manage/exportQuestion.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2060">
@@ -635,17 +683,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="127" max-vertical-offset="1000">
           <caret line="22" column="17" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
-          <folding>
-            <marker date="1422957942251" expanded="true" signature="204:1370" placeholder="{...}" />
-            <marker date="1422957942251" expanded="true" signature="204:1364" placeholder="{&quot;idProperty&quot;: 'userid'...}" />
-            <marker date="1422957942251" expanded="true" signature="256:1354" placeholder="{&quot;type&quot;: 'ajax'...}" />
-            <marker date="1422957942251" expanded="true" signature="307:634" placeholder="{&quot;create&quot;: 'resources/php/admin/syncGridUser.php?act=create'...}" />
-            <marker date="1422957942251" expanded="true" signature="659:709" placeholder="{&quot;type&quot;: 'json'...}" />
-            <marker date="1422957942251" expanded="true" signature="734:1116" placeholder="{&quot;type&quot;: 'json'...}" />
-            <marker date="1422957942251" expanded="true" signature="900:1099" placeholder="{...}" />
-            <marker date="1422957942251" expanded="true" signature="958:1078" placeholder="{...}" />
-            <marker date="1422957942251" expanded="true" signature="1180:1341" placeholder="{&quot;create&quot;: 'POST'...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -663,17 +701,19 @@
           <folding>
             <marker date="1422957942251" expanded="true" signature="110:258" placeholder="[...]" />
             <marker date="1422957942251" expanded="true" signature="2681:2761" placeholder="{...}" />
-            <marker date="1422957942251" expanded="true" signature="2818:2923" placeholder="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/view/admin/griduser/GridUserC.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1127" max-vertical-offset="2520">
-          <caret line="87" column="41" selection-start-line="87" selection-start-column="41" selection-end-line="87" selection-end-column="41" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1600" max-vertical-offset="2520">
+          <caret line="80" column="41" selection-start-line="80" selection-start-column="41" selection-end-line="80" selection-end-column="41" />
           <folding>
-            <marker date="1422957942250" expanded="true" signature="247:4766" placeholder="{...}" />
+            <marker date="1423161114456" expanded="true" signature="1575:1794" placeholder="/*...*/" />
+            <marker date="1423161114456" expanded="true" signature="3023:3248" placeholder="/*...*/" />
+            <marker date="1423161114456" expanded="true" signature="3332:3831" placeholder="{...}" />
+            <marker date="1423161114456" expanded="true" signature="3397:3742" placeholder="{&quot;frame&quot;: true...}" />
           </folding>
         </state>
       </provider>
@@ -688,7 +728,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/view/admin/formuser/FormUserV.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.41860464" vertical-offset="360" max-vertical-offset="2260">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2880">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -696,8 +736,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/view/admin/formuser/FormUserC.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2520046" vertical-offset="180" max-vertical-offset="1060">
-          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.26689577" vertical-offset="187" max-vertical-offset="1060">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding />
         </state>
       </provider>
