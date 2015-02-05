@@ -30,7 +30,7 @@ Ext.define('App.view.admin.formuser.FormUserC', {
                     win.close();
 
                 } else {
-                    Ext.Msg.alert('Форма', 'Форма заполнена не правильно');
+                    Ext.Msg.alert('Форма', 'Форма заполнена с ошибками');
                 }
             }
         },
