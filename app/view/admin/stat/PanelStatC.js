@@ -8,6 +8,20 @@ Ext.define('App.view.admin.stat.PanelStatC', {
     alias: 'controller.panelstat',
 
     control: {
+        '#dateFindFrom, #dateFindTo': {
+            select: function (field, val, eOpts) {
+                console.log('dateFindFrom');
+                var comboStat = field.up('panelStat').down('#comboStat');
+                comboStat.reset();
+            }
+        },
+        '#comboOrg': {
+            select: function (combo, records, eOpts) {
+                console.log('comboOrg');
+                var comboStat = combo.up('panelStat').down('#comboStat');
+                comboStat.reset();
+            }
+        },
         '#comboStat': {
             select: function (combo, records, eOpts) {
                 console.log('comboStat');
@@ -28,7 +42,6 @@ Ext.define('App.view.admin.stat.PanelStatC', {
                 panelChart.removeAll();
                 switch (type) {
                     case '1':
-
                         var chart = Ext.create('App.view.admin.stat.ChartActivityV'),
                             storeAct = panelStat.getViewModel().getStore('chartactivity');
                         panelChart.add(chart);
