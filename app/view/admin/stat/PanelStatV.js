@@ -78,7 +78,7 @@ Ext.define('App.view.admin.stat.PanelStatV', {
 // * Диаграмма
             {
                 xtype: 'panel',
-                title: 'Диаграмма',
+                title: 'Диаграммы',
                 itemId: 'panelChart',
                 flex: 1,
                 autoScroll:true,
