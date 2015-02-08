@@ -15,8 +15,7 @@ Ext.define('App.view.user.self.PanelSelfV', {
         type: 'hbox',
         align: 'stretch'
     },
-    bind:'{card}', // * без этого не работает store load event в listen контроллера
-    questionMaxInCardSelf : 0, // * число вопросов в билете
+    //questionMaxInCardSelf : 0, // * число вопросов в билете
     constructor: function () {
         console.log('PanelSelfV init');
 

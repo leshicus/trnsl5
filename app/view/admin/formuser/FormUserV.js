@@ -55,8 +55,8 @@
                 xtype: 'combo',
                 bind: {
                     store: '{spec}',
-                    //selection:'{specid}',
-                    value:'{specid}'
+                    //selection:'{theUser.specid}',
+                    value:'{theUser.specid}'
                 },
                 itemId: 'specid',
                 queryMode: 'local',
@@ -77,19 +77,14 @@
                     '<tpl for=".">',
                     '{specname} ({orgabbr})',
                     '</tpl>'
-                ),
-                listeners: {
-                    select: function(combo, recs) {
-                        console.info(combo.up('formUser').getViewModel().getData().specid);
-                    }
-                }
+                )
             },
             {
                 xtype: 'combobox',
                 bind: {
                     store: '{role}',
-                    //selection:'{role_1}',
-                    value:'{roleid}'
+                    //selection:'{theUser.roleid}',
+                    value:'{theUser.roleid}'
                 },
                 itemId: 'comboRole',
                 queryMode: 'local',

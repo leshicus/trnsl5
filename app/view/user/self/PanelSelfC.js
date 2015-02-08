@@ -5,15 +5,6 @@ Ext.define('App.view.user.self.PanelSelfC', {
     ],
     alias: 'controller.panelSelf',
 
-    listen: {
-        store: {
-            '#card': {
-                load: function (store, rec) {
-
-                }
-            }
-        }
-    },
     control: {
         '#': {},
         '#comboKnow': {
@@ -31,13 +22,27 @@ Ext.define('App.view.user.self.PanelSelfC', {
                     comboKnow = panelSelf.down('#comboKnow'),
                     textAnswer = panelSelf.down('#textAnswer'),
                     textNormdoc = panelSelf.down('#textNormdoc'),
-                    know = comboKnow.getValue();
+                    know = comboKnow.getValue(),
+                    me = this;
                 panelSelf.questionNumber = 0;
-                panelSelf.questionMaxInCardSelf = 0;
+                panelSelf.getViewModel().set('questionMaxInCardSelf', 0);
                 // * генерация билета
                 var storeCard = panelSelf.getViewModel().getStore('card');
                 storeCard.clearFilter();
-                storeCard.load({params: {know: know}});
+                storeCard.load({
+                    params: {know: know},
+                    callback: function (records, operation, success) {
+                        if (success == true) {
+                            if (records.length > 0) {
+                                me.onStoreCardLoad(storeCard);
+                            }else{
+                                App.util.Utilities.errorMessage('Ошибка', 'Билет не сформирован: не достаточно вопросов');
+                            }
+                        } else {
+                            App.util.Utilities.errorMessage('Ошибка подключения к базе', 'Билет не получен');
+                        }
+                    }
+                });
                 textAnswer.reset();
                 textAnswer.myCustomText = ' ';
                 textNormdoc.reset();
@@ -128,10 +133,8 @@ Ext.define('App.view.user.self.PanelSelfC', {
     // * показ 1-го вопроса после загрузки стора билетов
     onStoreCardLoad: function (storeCard) {
         console.log('onStoreCardLoad');
-
-        var maxRownum = this.getStoreMaxValue(storeCard, 'rownum'), // число вопросов в билете
-            panelSelf = this.getView();
-        panelSelf.questionMaxInCardSelf = maxRownum;
+        var panelSelf = this.getView();
+        panelSelf.getViewModel().set('questionMaxInCardSelf',storeCard.getCount());
         this.showCard(1);
     },
     // * нахождение максимального значения поля в сторе
@@ -163,7 +166,7 @@ Ext.define('App.view.user.self.PanelSelfC', {
             // * вопросы
             question.setValue(questionText);
             questionAccordion.setTitle('Вопрос №' + num);
-            textQuestion.setValue(num + ' / ' + panelSelf.questionMaxInCardSelf);
+            textQuestion.setValue(num + ' / ' + panelSelf.getViewModel().getData().questionMaxInCardSelf);
             panelSelf.questionNumber = num;
             // * ответы
             answerAccordion.removeAll(true);
@@ -190,21 +193,14 @@ Ext.define('App.view.user.self.PanelSelfC', {
     },
     showNextQuestion: function (buttonNextQuestion) {
         var panelSelf = this.getView();
-        if (panelSelf.questionNumber < panelSelf.questionMaxInCardSelf) {
+        if (panelSelf.questionNumber < panelSelf.getViewModel().getData().questionMaxInCardSelf) {
             buttonNextQuestion.setDisabled(false);
             this.showCard(panelSelf.questionNumber + 1);
         } else {
             buttonNextQuestion.setDisabled(true);
         }
-    },
-    /*  onChangeComboKnow: function (combo, n, o) {
-     var panelProgress = combo.up('#panelProgress'),
-     buttonStartTest = panelProgress.down('#startTest');
-     if (n)
-     buttonStartTest.enable();
-     else
-     buttonStartTest.disable();
-     }*/
+    }
+
 
 
 });

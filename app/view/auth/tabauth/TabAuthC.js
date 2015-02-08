@@ -51,7 +51,7 @@ Ext.define('App.view.auth.tabauth.TabAuthC', {
                                 if (content) {
                                     layout.activeItem.remove(content);
                                 };
-                                html.update('<img src="resources/image/App-user-icon.png">' + ' ' + action.result.fio);
+                                html.update(/*'<img src="resources/image/App-user-icon.png">' + ' ' + */action.result.fio);
                             }
                         },
                         failure: function (form, action) {

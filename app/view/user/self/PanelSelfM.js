@@ -1,6 +1,9 @@
 Ext.define('App.view.user.self.PanelSelfM', {
     extend: 'Ext.app.ViewModel',
     alias: 'viewmodel.panelSelf',
+    data:{
+        questionMaxInCardSelf:0
+    },
     stores: {
         card: {
             fields: [
@@ -10,12 +13,13 @@ Ext.define('App.view.user.self.PanelSelfM', {
                 type: 'ajax',
                 url: 'resources/php/user/getCard.php',
                 reader: {
-                    type: 'json'
+                    type: 'json',
+                    rootProperty:'rows'
                 }
             },
-            listeners: {
+            /*listeners: {
                 load: 'onStoreCardLoad'
-            }
+            }*/
         }
     }
 });

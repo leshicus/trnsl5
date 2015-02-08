@@ -211,7 +211,9 @@ if ($success) {
         shuffle($list);
     }
     _log($mysqli, $userid, 9, $examid);
-    echo json_encode($list);
+    $rows = array();
+    $rows['rows'] = $list;
+    echo json_encode($rows);
 } else {
     echo json_encode(
         array('success' => $success,
