@@ -4,3 +4,4 @@ build/.sass-cache
 build/temp
 ext/
 .sencha/
+.idea/workspace.xml
