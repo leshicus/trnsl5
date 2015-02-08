@@ -2,12 +2,16 @@
     extend: 'Ext.form.Panel',
     requires: [
         'App.view.admin.formuser.FormUserC',
+        'App.view.admin.formuser.FormUserM',
         'App.view.common.ResizableComboBoxV',
         'App.view.main.MainM',
         'Ext.form.field.ComboBox'
     ],
     alias: 'widget.formUser',
-    viewModel: {type: 'main'},
+    //viewModel: {type: 'main'},
+    viewModel: {
+        type: 'formuser'
+    },
     controller: 'formuser',
     itemId: 'formUser',
     bodyPadding: 5,
@@ -27,32 +31,37 @@
             {
                 xtype: 'textfield',
                 itemId: 'textFamilyname',
-                name: 'familyname',
+                //name: 'textFamily',
+                bind:'{theUser.familyname}',
                 allowBlank: false,
                 fieldLabel: 'Фамилия'
             },
             {
                 xtype: 'textfield',
                 itemId: 'textFirstname',
-                name: 'firstname',
+               // name: 'textName',
+                bind:'{theUser.firstname}',
                 allowBlank: false,
                 fieldLabel: 'Имя'
             },
             {
                 xtype: 'textfield',
                 itemId: 'textLastname',
-                name: 'lastname',
+                //name: 'textLastname',
+                bind:'{theUser.lastname}',
                 fieldLabel: 'Отчество'
             },
             {
                 xtype: 'combo',
                 bind: {
-                    store: '{spec}'
+                    store: '{spec}',
+                    //selection:'{theUser.specid}',
+                    value:'{theUser.specid}'
                 },
                 itemId: 'specid',
                 queryMode: 'local',
                 valueField: 'specid',
-                name: 'specid',
+                name: 'comboSpeciality',
                 editable: false,
                 allowBlank: false,
                 displayField: 'specname',
@@ -73,16 +82,33 @@
             {
                 xtype: 'combobox',
                 bind: {
-                    store: '{role}'
+                    store: '{role}',
+                    //selection:'{theUser.roleid}',
+                    value:'{theUser.roleid}'
                 },
                 itemId: 'comboRole',
                 queryMode: 'local',
                 valueField: 'id',
-                name: 'roleid',
+                //name: 'roleid',
                 editable: false,
                 allowBlank: false,
                 displayField: 'name',
                 fieldLabel: 'Роль'
+            },
+            {
+                xtype: 'textfield',
+                itemId: 'textLogin',
+                //name: 'textLogin',
+                bind:'{theUser.login}',
+                fieldLabel: 'Логин'
+            },
+            {
+                xtype: 'textfield',
+                itemId: 'textPassword',
+                //name: 'textPassword',
+                bind:'{theUser.password}',
+                inputType:'password',
+                fieldLabel: 'Пароль'
             }
         ];
 

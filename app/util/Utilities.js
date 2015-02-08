@@ -42,7 +42,7 @@ Ext.define('App.util.Utilities', {
     uncorrectString: 'неверный',
     passString: 'экзамен сдан',
     unpassString: 'экзамен не сдан',
-    startSubsystem: 2, // * подсистема выбранная по-умолчанию в стартовом окне
+    startSubsystem: 1, // * подсистема выбранная по-умолчанию в стартовом окне
     examTimerSec: 60, // * секунд в минуте
     nullDate: '00.00.0000 00:00',
     required: '<span style="color:red;font-weight:bold" ext:qtip="Required">*</span>',
@@ -248,5 +248,15 @@ Ext.define('App.util.Utilities', {
             recTool = storeTool.getAt(0),
             value = recTool.get(field);
         return value;
+    },
+    toast: function (title, msg) {
+        Ext.toast({
+            html: msg,
+            title: title,
+            autoCloseDelay: 4000,
+            slideInDuration: 500,
+            width: 300,
+            align: 't'
+        });
     }
 });

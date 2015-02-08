@@ -60,17 +60,36 @@ Ext.define('App.view.admin.griduser.GridUserV', {
             {
                 text: 'Специальность',
                 itemId: 'columnSpecid',
-                dataIndex: 'specname',
-                tdCls: 'wrapText'
+                dataIndex: 'specid',
+                tdCls: 'wrapText',
+                renderer: function (val) {
+                    /*var main = Ext.ComponentQuery.query('main')[0],
+                        storeRole = main.getViewModel().getStore('spec'),
+                        rec = storeRole.findRecord('id', val, 0, false, true, true);
+                    if (rec)
+                        return rec.get('specname');*/
+                    var grid = this,
+                        vm = grid.getViewModel(),
+                        store = vm.getStore('spec'),
+                        rec = store.findRecord('specid', val, 0, false, true, true);
+                    if (rec)
+                        return rec.get('specname');
+                }
             },
             {
                 text: 'Роль',
                 itemId: 'columnRoleid',
                 dataIndex: 'roleid',
                 renderer: function (val) {
-                    var main = Ext.ComponentQuery.query('main')[0],
+                    /*var main = Ext.ComponentQuery.query('main')[0],
                         storeRole = main.getViewModel().getStore('role'),
                         rec = storeRole.findRecord('id', val, 0, false, true, true);
+                    if (rec)
+                        return rec.get('name');*/
+                    var grid = this,
+                        vm = grid.getViewModel(),
+                        store = vm.getStore('role'),
+                        rec = store.findRecord('id', val, 0, false, true, true);
                     if (rec)
                         return rec.get('name');
                 }

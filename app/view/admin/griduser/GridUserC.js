@@ -20,41 +20,38 @@ Ext.define('App.view.admin.griduser.GridUserC', {
             celldblclick: function (row, td, cellIndex, record, tr, rowIndex, e, eOpts) {
                 console.log('celldblclick');
 
-                var tree = this.getView().up('#content').down('treeUser'),
-                    selected = tree.getSelected();
+                /*  var tree = this.getView().up('#content').down('treeUser'),
+                 selected = tree.getSelected();*/
                 var form = Ext.create('App.view.admin.formuser.FormUserV');
-                form.loadRecord(record);
-                if (selected) {
-                    var /*groupid = selected.raw.groupid,
-                        orgid = selected.raw.orgid,
-                        actid = selected.raw.actid,*/
-                        /*main = tree.up('main'),
-                        vm = main.getViewModel(),
-                        storeSpec = vm.getStore('spec');*/
-                        vm = form.getViewModel(),
-                        storeSpec = vm.getStore('spec');
-                    storeSpec.load({
-                        /*params: {
-                            groupid: groupid,
-                            orgid: orgid,
-                            actid: actid
-                        },*/
-                        callback: function (records, operation, success) {
-                            var window = Ext.create('Ext.Window', {
-                                frame: true,
-                                title: 'Редактирование данных сотрудника',
-                                width: 500,
-                                height: 250,
-                                closable: false,
-                                modal: true,
-                                layout: 'fit'
-                            });
-                            window.add(form);
-                            window.show();
-                        }
-                    });
+                //form.loadRecord(record);
+                //if (selected) {
+                var /*groupid = selected.raw.groupid,
+                 orgid = selected.raw.orgid,
+                 actid = selected.raw.actid,*/
+                /*main = tree.up('main'),
+                 vm = main.getViewModel(),
+                 storeSpec = vm.getStore('spec');*/
+                    vm = form.getViewModel(),
+                    storeSpec = vm.getStore('spec');
+                vm.set('theUser', record);
+                /*storeSpec.load({
+                 callback: function (records, operation, success) {
 
-                }
+                 }
+                 });*/
+                var window = Ext.create('Ext.Window', {
+                    frame: true,
+                    title: 'Редактирование данных сотрудника',
+                    width: 500,
+                    height: 300,
+                    closable: false,
+                    modal: true,
+                    layout: 'fit'
+                });
+                window.add(form);
+                window.show();
+
+                //}
             },
             // * чтобы контекстное меню показывалось
             itemcontextmenu: function (view, rec, node, index, e) {
@@ -68,29 +65,39 @@ Ext.define('App.view.admin.griduser.GridUserC', {
             click: function (button) {
                 console.log('action=add');
 
-                var tree = this.getView().up('#content').down('treeUser'),
-                    selected = tree.getSelected();
-                var form = Ext.create('App.view.admin.formuser.FormUserV');
-                if (selected) {
-                    var vm = form.getViewModel(),
-                        storeSpec = vm.getStore('spec');
-                    storeSpec.load({
-                        callback: function (records, operation, success) {
-                            var window = Ext.create('Ext.Window', {
-                                frame: true,
-                                title: 'Редактирование данных сотрудника',
-                                width: 500,
-                                height: 250,
-                                closable: false,
-                                modal: true,
-                                layout: 'fit'
-                            });
-                            window.add(form);
-                            window.show();
-                        }
-                    });
+                var /*tree = this.getView().up('#content').down('treeUser'),
+                 selected = tree.getSelected(),*/
+                    grid = this.getView(),
+                    vmGrid = grid.getViewModel(),
+                    storeUser = vmGrid.getStore('user');
+                //if (selected) {
+                var newRec = storeUser.add({
 
-                }
+                    })[0],
+                    form = Ext.create('App.view.admin.formuser.FormUserV'),
+                    vm = form.getViewModel(),
+                    storeSpec = vm.getStore('spec');
+                storeUser.insert(0, newRec);
+                vm.set('theUser', newRec);
+                /* storeSpec.load({
+                 callback: function (records, operation, success) {
+
+                 }
+                 });*/
+                Ext.defer(function () {
+                    var window = Ext.create('Ext.Window', {
+                        frame: true,
+                        title: 'Редактирование данных сотрудника',
+                        width: 500,
+                        height: 300,
+                        closable: false,
+                        modal: true,
+                        layout: 'fit'
+                    });
+                    window.add(form);
+                    window.show();
+                }, 200);
+                // }
             }
         },
         'gridUser button[action=delete]': {
