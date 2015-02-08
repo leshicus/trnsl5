@@ -50,7 +50,7 @@ Ext.define('App.view.admin.formuser.FormUserC', {
                                 } else {
                                     storeUser.rejectChanges();
                                     Utilities.errorMessage('Ошибка', 'Пользователь не сохранен');
-                                }
+                                } 
                             },
                             scope: this
                         });
