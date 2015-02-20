@@ -85,6 +85,7 @@ Ext.define('App.view.user.self.PanelSelfV', {
                         margin: 5,
                         flex: 2,
                         width: 300,
+                        autoScroll: true,
                         itemId: 'panelProgress',
                         title: 'Прогресс',
                         layout: {
@@ -92,7 +93,7 @@ Ext.define('App.view.user.self.PanelSelfV', {
                             align: 'stretch'
                         },
                         defaults: {
-                            margin: '5 5 5 5',
+                            //margin: '5 5 5 5',
                             labelWidth: 130
                         },
                         items: [
@@ -100,6 +101,8 @@ Ext.define('App.view.user.self.PanelSelfV', {
                                 xtype: 'displayfield',
                                 fieldLabel: 'Вопрос',
                                 itemId: 'textQuestion',
+                                labelWidth: 160,
+                                margin: '5 5 5 5',
                                 fieldStyle: {
                                     color: '#666666',
                                     'font-weight': 'bold',
@@ -113,20 +116,87 @@ Ext.define('App.view.user.self.PanelSelfV', {
                                     color: '#666666',
                                     backgroundColor: '#000000'
                                 },
+                                margin: '0 5 0 5',
                                 height: 1
                             },
                             {
                                 xtype: 'displayfield',
-                                fieldLabel: 'Предыдущий ответ',
+                                fieldLabel: 'Результат',
                                 myCustomText:' ', // * текст вопроса во всплывающей подсказке
                                 itemId: 'textAnswer',
-                                listeners: {
+                                labelWidth: 160,
+                                margin: '5 5 0 5',
+                                bind:{
+                                    value: '{correct}'
+                                },
+                                renderer: function (correct, field) {
+                                    if (correct === "1") {
+                                        return '<b><font color="green">'+App.util.Utilities.correctString+'</font></b>';
+                                    } else if(correct === "0") {
+                                        return '<b><font color="red">'+App.util.Utilities.uncorrectString+'</font></b>';
+                                    }else{
+                                        return '<b><font color="red">нет ответа</font></b>';
+                                    }
+                                }
+                            },
+                            {
+                                xtype: 'displayfield',
+                                fieldLabel: 'Предыдущий вопрос',
+                                margin: '5 5 0 5'
+                            },
+                            {
+                                xtype: 'displayfield',
+                                bind:{
+                                    value: '{previousQuestion}'
+                                },
+                                margin: '0 5 0 5',
+                                renderer: function (val) {
+                                    return '<i>'+val+'</i>';
+                                }
+                            },
+                            {
+                                xtype: 'displayfield',
+                                fieldLabel: 'Данный ответ',
+                                margin: '5 5 0 5'
+                            },
+                            {
+                                xtype: 'displayfield',
+                                bind:{
+                                    value: '{previousAnswer}'
+                                },
+                                margin: '0 5 0 5',
+                                renderer: function (val) {
+                                    return '<i>'+val+'</i>';
+                                }
+                            },
+                            {
+                                xtype: 'displayfield',
+                                fieldLabel: 'Правильный ответ',
+                                margin: '5 5 0 5'
+                            },
+                            {
+                                xtype: 'displayfield',
+                                bind:{
+                                    value: '{previousRightAnswer}'
+                                },
+                                margin: '0 5 0 5',
+                                renderer: function (val) {
+                                    return '<i>'+val+'</i>';
                                 }
                             },
                             {
                                 xtype: 'displayfield',
                                 fieldLabel: 'Нормативный документ',
-                                itemId: 'textNormdoc'
+                                labelWidth: 160,
+                                margin: '5 5 0 5'
+                            },
+                            {
+                                xtype: 'displayfield',
+                                bind:'{normdoc}',
+                                margin: '0 5 0 5',
+                                renderer: function (val) {
+                                    return '<i>'+val+'</i>';
+                                }
                             }
                         ]
                     }
@@ -140,7 +210,7 @@ Ext.define('App.view.user.self.PanelSelfV', {
                 margin: 5,
                 itemId: 'panelCard',
                 flex: 1,
-                border: false,
+                border: true,
                 buttonAlign: 'left',
                 questionNumber: 0, // * текущий вопрос билета
                 buttons: [
@@ -182,8 +252,6 @@ Ext.define('App.view.user.self.PanelSelfV', {
                         title: 'Варианты ответа',
                         flex: 1,
                         autoScroll:true,
-                        style: {
-                        },
                         itemId: 'answerAccordion',
                         hideCollapseTool: true,
                         defaultType: 'radiofield',

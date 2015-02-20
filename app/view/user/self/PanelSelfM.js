@@ -2,7 +2,12 @@ Ext.define('App.view.user.self.PanelSelfM', {
     extend: 'Ext.app.ViewModel',
     alias: 'viewmodel.panelSelf',
     data:{
-        questionMaxInCardSelf:0
+        questionMaxInCardSelf:0,
+        correct:'',
+        normdoc:'',
+        previousQuestion:'',
+        previousAnswer:'',
+        previousRightAnswer:''
     },
     stores: {
         card: {
@@ -16,10 +21,7 @@ Ext.define('App.view.user.self.PanelSelfM', {
                     type: 'json',
                     rootProperty:'rows'
                 }
-            },
-            /*listeners: {
-                load: 'onStoreCardLoad'
-            }*/
+            }
         }
     }
 });

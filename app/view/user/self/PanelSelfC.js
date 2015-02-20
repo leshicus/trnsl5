@@ -19,6 +19,7 @@ Ext.define('App.view.user.self.PanelSelfC', {
                 console.log('action=starttest');
 
                 var panelSelf = this.getView(),
+                    vmPanelSelf =  panelSelf.getViewModel(),
                     comboKnow = panelSelf.down('#comboKnow'),
                     textAnswer = panelSelf.down('#textAnswer'),
                     textNormdoc = panelSelf.down('#textNormdoc'),
@@ -35,7 +36,7 @@ Ext.define('App.view.user.self.PanelSelfC', {
                         if (success == true) {
                             if (records.length > 0) {
                                 me.onStoreCardLoad(storeCard);
-                            }else{
+                            } else {
                                 App.util.Utilities.errorMessage('Ошибка', 'Билет не сформирован: не достаточно вопросов');
                             }
                         } else {
@@ -43,9 +44,14 @@ Ext.define('App.view.user.self.PanelSelfC', {
                         }
                     }
                 });
-                textAnswer.reset();
+                vmPanelSelf.set({
+                    correct:'',
+                    normdoc:'',
+                    previousQuestion:'',
+                    previousAnswer:'',
+                    previousRightAnswer:''
+                });
                 textAnswer.myCustomText = ' ';
-                textNormdoc.reset();
             }
         },
         'button[action=nextquestion]': {
@@ -53,6 +59,7 @@ Ext.define('App.view.user.self.PanelSelfC', {
                 console.log('action=nextquestion');
 
                 var panelSelf = button.up('panelSelf'),
+                    vmPanelSelf =  panelSelf.getViewModel(),
                     panelCard = panelSelf.down('#panelCard'),
                     panelProgress = panelSelf.down('#panelProgress'),
                     rownum = panelSelf.questionNumber,
@@ -75,6 +82,9 @@ Ext.define('App.view.user.self.PanelSelfC', {
                 }
 
                 arrayAnswers.forEach(getCheckedAnswer);
+
+                this.checkAnswer(checkedAnswerId, questionId);
+
                 if (checkedAnswerId) {
                     function findRecordAnswer(rec, id) {
                         if (rec.get('rownum') == rownum &&
@@ -82,27 +92,19 @@ Ext.define('App.view.user.self.PanelSelfC', {
                             return true;
                         }
                     }
-
                     var checkedAnswerIndex = storeCard.findBy(findRecordAnswer);
                     if (checkedAnswerIndex != -1) {
                         var checkedAnswerRec = storeCard.getAt(checkedAnswerIndex);
-                        correct = checkedAnswerRec.get('correct');
+                        answerText = checkedAnswerRec.get('answertext');
                     }
-                    answerText = checkedAnswerRec.get('answertext');
                 }
+
+                vmPanelSelf.set('previousQuestion',questionText);
+                vmPanelSelf.set('previousAnswer',answerText);
+
                 textAnswer.myCustomText = '<ins>Вопрос:</ins> ' + questionText;
                 textAnswer.myCustomText = textAnswer.myCustomText + '<br><ins>Ответ:</ins> ' + answerText;
-                // * прогресс - ответ
-                if (correct == 1) {
-                    textAnswer.setValue(App.util.Utilities.correctString);
-                    textAnswer.setFieldStyle(App.util.Utilities.colorStatusTextReg);
-                } else {
-                    textAnswer.setValue(App.util.Utilities.uncorrectString);
-                    textAnswer.setFieldStyle(App.util.Utilities.colorStatusTextUnreg);
-                }
-                // * Норм док
-                var normdoc = storeCard.findRecord('correct', 1).get('normdoc');
-                textNormdoc.setValue(normdoc);
+
                 // * отсроченный показ следующего билета
                 this.showNextQuestion(buttonNextQuestion);
             }
@@ -112,13 +114,13 @@ Ext.define('App.view.user.self.PanelSelfC', {
             boxready: function (field) {
                 field.el.on({
                     mouseover: function (e) {
-                        Ext.tip.QuickTipManager.register({
+                       /* Ext.tip.QuickTipManager.register({
                             target: field.getId(), // Target button's ID
                             anchor: 'top',
                             dismissDelay: 3000,
                             anchorOffset: 85,
                             text: field.myCustomText // Tip content
-                        });
+                        });*/
                     },
                     mouseout: function () {
 
@@ -129,12 +131,55 @@ Ext.define('App.view.user.self.PanelSelfC', {
 
     },
 
+    // * проверить правильность ответа
+    checkAnswer: function (answerId, questionId) {
+        var request = function () {
+            Ext.Ajax.request({
+                url: 'resources/php/user/checkAnswer.php',
+                params: {
+                    answerid: answerId,
+                    questionid: questionId
+                },
+                success: function (response) {
+                    var resp = Ext.decode(response.responseText);
+                    if (resp) {
+                        var panelSelf = Ext.ComponentQuery.query('panelSelf')[0],
+                            vm = panelSelf.getViewModel();
+                        vm.set({
+                            correct: resp.correct,
+                            normdoc: resp.normdoc,
+                            previousRightAnswer: resp.answertext
+                        });
+                    } else {
+                        var str = 'Не могу проверить ответ.<br>Нет соединения с сервером.<br>Повторить?';
+                        Ext.Msg.confirm('Ошибка подключения к базе', str, function (button) {
+                            if (button == 'yes') {
+                                request();
+                            }
+                        }, this);
+                    }
+                },
+                failure: function (response) {
+                    // var str = 'Не могу проверить ответ.<br>Ошибка соединения с сервером.<br>Повторить?<br>(в противном случае тестирование будет окончено)';
+                    var str = 'Не могу проверить ответ.<br>Ошибка соединения с сервером.<br>Повторить?';
+                    Ext.Msg.confirm('Ошибка подключения к базе', str, function (button) {
+                        if (button == 'yes') {
+                            request();
+                        }
+                    }, this);
+                },
+                method: 'POST'
+            });
+        }
+        request();
+
+    },
 
     // * показ 1-го вопроса после загрузки стора билетов
     onStoreCardLoad: function (storeCard) {
         console.log('onStoreCardLoad');
         var panelSelf = this.getView();
-        panelSelf.getViewModel().set('questionMaxInCardSelf',storeCard.getCount());
+        panelSelf.getViewModel().set('questionMaxInCardSelf', storeCard.getCount());
         this.showCard(1);
     },
     // * нахождение максимального значения поля в сторе
@@ -200,7 +245,6 @@ Ext.define('App.view.user.self.PanelSelfC', {
             buttonNextQuestion.setDisabled(true);
         }
     }
-
 
 
 });
