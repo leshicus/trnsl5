@@ -7,7 +7,7 @@ Ext.define('App.view.user.self.PanelSelfV', {
         'App.view.admin.clas.GridExamM'
     ],
     viewModel: {type: 'panelSelf'},
-    controller:'panelSelf',
+    controller: 'panelSelf',
     alias: 'widget.panelSelf',
     itemId: 'content',
     flex: 1,
@@ -18,6 +18,16 @@ Ext.define('App.view.user.self.PanelSelfV', {
     //questionMaxInCardSelf : 0, // * число вопросов в билете
     constructor: function () {
         console.log('PanelSelfV init');
+
+        /*var vm = this.getViewModel();
+         vm.set({
+         questionMaxInCardSelf:0,
+         correct:-1,
+         normdoc:'',
+         previousQuestion:'',
+         previousAnswer:'',
+         previousRightAnswer:''
+         });*/
 
         //var storeKnow = Ext.create('App.store.user.KnowS');
         this.items = [
@@ -63,8 +73,7 @@ Ext.define('App.view.user.self.PanelSelfV', {
                                     '{knownum} {knowname}',
                                     '</tpl>'
                                 ),
-                                listeners:{
-                                }
+                                listeners: {}
                             }
                         ],
                         buttons: [
@@ -72,7 +81,7 @@ Ext.define('App.view.user.self.PanelSelfV', {
                                 xtype: 'button',
                                 action: 'starttest',
                                 itemId: 'startTest',
-                                scale:'medium',
+                                scale: 'medium',
                                 //iconCls: 'icon_start',
                                 glyph: Glyphs.get('flag'),
                                 text: 'Начать тестирование'
@@ -122,19 +131,19 @@ Ext.define('App.view.user.self.PanelSelfV', {
                             {
                                 xtype: 'displayfield',
                                 fieldLabel: 'Результат',
-                                myCustomText:' ', // * текст вопроса во всплывающей подсказке
+                                myCustomText: ' ', // * текст вопроса во всплывающей подсказке
                                 itemId: 'textAnswer',
                                 labelWidth: 160,
                                 margin: '5 5 0 5',
-                                bind:{
+                                bind: {
                                     value: '{correct}'
                                 },
                                 renderer: function (correct, field) {
                                     if (correct === "1") {
-                                        return '<b><font color="green">'+App.util.Utilities.correctString+'</font></b>';
-                                    } else if(correct === "0") {
-                                        return '<b><font color="red">'+App.util.Utilities.uncorrectString+'</font></b>';
-                                    }else{
+                                        return '<b><font color="green">' + App.util.Utilities.correctString + '</font></b>';
+                                    } else if (correct === "0") {
+                                        return '<b><font color="red">' + App.util.Utilities.uncorrectString + '</font></b>';
+                                    } else {
                                         return '<b><font color="red">нет ответа</font></b>';
                                     }
                                 }
@@ -146,12 +155,12 @@ Ext.define('App.view.user.self.PanelSelfV', {
                             },
                             {
                                 xtype: 'displayfield',
-                                bind:{
+                                bind: {
                                     value: '{previousQuestion}'
                                 },
                                 margin: '0 5 0 5',
                                 renderer: function (val) {
-                                    return '<i>'+val+'</i>';
+                                    return '<i>' + val + '</i>';
                                 }
                             },
                             {
@@ -161,12 +170,12 @@ Ext.define('App.view.user.self.PanelSelfV', {
                             },
                             {
                                 xtype: 'displayfield',
-                                bind:{
+                                bind: {
                                     value: '{previousAnswer}'
                                 },
                                 margin: '0 5 0 5',
                                 renderer: function (val) {
-                                    return '<i>'+val+'</i>';
+                                    return '<i>' + val + '</i>';
                                 }
                             },
                             {
@@ -176,12 +185,12 @@ Ext.define('App.view.user.self.PanelSelfV', {
                             },
                             {
                                 xtype: 'displayfield',
-                                bind:{
+                                bind: {
                                     value: '{previousRightAnswer}'
                                 },
                                 margin: '0 5 0 5',
                                 renderer: function (val) {
-                                    return '<i>'+val+'</i>';
+                                    return '<i>' + val + '</i>';
                                 }
                             },
                             {
@@ -192,10 +201,10 @@ Ext.define('App.view.user.self.PanelSelfV', {
                             },
                             {
                                 xtype: 'displayfield',
-                                bind:'{normdoc}',
+                                bind: '{normdoc}',
                                 margin: '0 5 0 5',
                                 renderer: function (val) {
-                                    return '<i>'+val+'</i>';
+                                    return '<i>' + val + '</i>';
                                 }
                             }
                         ]
@@ -219,7 +228,7 @@ Ext.define('App.view.user.self.PanelSelfV', {
                         action: 'nextquestion',
                         itemId: 'nextQuestion',
                         disabled: true,
-                        scale:'medium',
+                        scale: 'medium',
                         glyph: Glyphs.get('arrowright'),
                         text: 'Следующий вопрос'
                     }
@@ -232,13 +241,12 @@ Ext.define('App.view.user.self.PanelSelfV', {
                 },
                 items: [
                     {
-                        title:'Вопрос',
+                        title: 'Вопрос',
                         itemId: 'questionAccordion',
                         //flex: 1,
-                        height:200,
-                        autoScroll:true,
-                        style: {
-                        },
+                        height: 200,
+                        autoScroll: true,
+                        style: {},
                         hideCollapseTool: true,
                         items: [
                             {
@@ -251,7 +259,7 @@ Ext.define('App.view.user.self.PanelSelfV', {
                     {
                         title: 'Варианты ответа',
                         flex: 1,
-                        autoScroll:true,
+                        autoScroll: true,
                         itemId: 'answerAccordion',
                         hideCollapseTool: true,
                         defaultType: 'radiofield',

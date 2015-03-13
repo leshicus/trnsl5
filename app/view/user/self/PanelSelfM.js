@@ -3,7 +3,7 @@ Ext.define('App.view.user.self.PanelSelfM', {
     alias: 'viewmodel.panelSelf',
     data:{
         questionMaxInCardSelf:0,
-        correct:'',
+        correct:-1,
         normdoc:'',
         previousQuestion:'',
         previousAnswer:'',
@@ -11,8 +11,7 @@ Ext.define('App.view.user.self.PanelSelfM', {
     },
     stores: {
         card: {
-            fields: [
-            ],
+            fields: [],
             storeId: 'card',
             proxy: {
                 type: 'ajax',

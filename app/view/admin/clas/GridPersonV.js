@@ -16,7 +16,8 @@ Ext.define('App.view.admin.clas.GridPersonV', {
     selType: 'checkboxmodel',
     forceFit:true,
     viewConfig: {
-        stripeRows: true
+        stripeRows: true,
+        preserveScrollOnRefresh: true
     },
     initComponent: function () {
         console.log('GridPerson init');

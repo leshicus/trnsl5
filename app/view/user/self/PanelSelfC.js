@@ -45,7 +45,7 @@ Ext.define('App.view.user.self.PanelSelfC', {
                     }
                 });
                 vmPanelSelf.set({
-                    correct:'',
+                    correct:-1,
                     normdoc:'',
                     previousQuestion:'',
                     previousAnswer:'',
