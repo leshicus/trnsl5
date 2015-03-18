@@ -1,6 +1,10 @@
 Ext.define('App.view.user.test.PanelTestM', {
     extend: 'Ext.app.ViewModel',
     alias: 'viewmodel.paneltest',
+    data:{
+        questionMaxInCardSelf:0,
+        correct:-1
+    },
     stores: {
         exam: {
             fields: [

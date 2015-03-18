@@ -15,7 +15,7 @@ $message = '';
 // * проверим, что пароль не начальный
 if (strtoupper($textPassword) == strtoupper($initPassword)) {
     $success = false;
-    $message = 'Недопустимый пароль: ' . $initPassword;
+    $message = 'Не допустимый пароль: ' . $initPassword;
 } else {
     // * проверим, что пользователь зарегистрирован
     $sql_reg = "
@@ -90,7 +90,7 @@ if (strtoupper($textPassword) == strtoupper($initPassword)) {
             $success = false;
         }
     } else {
-        $message = 'Указанный логин не зарегистрирован в системе.';
+        $message = 'Указанный логин не зарегистрированы в системе.';
         $success = false;
     }
 }

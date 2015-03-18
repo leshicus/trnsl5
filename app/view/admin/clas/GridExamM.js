@@ -67,5 +67,6 @@ Ext.define('App.view.admin.clas.GridExamM', {
                 }
             }
         }
+
     }
 });

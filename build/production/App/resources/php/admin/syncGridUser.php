@@ -6,10 +6,10 @@ require_once("../include.php");
 
 $act = $_REQUEST['act'];
 $data = json_decode(file_get_contents('php://input'), true);
-$success = true;
 
 switch ($act) {
     case 'create':
+        require_once("../register.php");
 
         break;
     case 'read':
@@ -98,8 +98,6 @@ switch ($act) {
                 continue;
             }
 
-
-
             // * значения до изменений
             $sql = '
                 select u.familyname,
@@ -181,7 +179,7 @@ switch ($act) {
                 _log($mysqli, $userid_admin, 3, 'Изменение роли пользователя. '.$fio_0.', старая: '.$rolename_0.', новая: '._getRolename($mysqli,$roleid));
         }else{
             echo json_encode(
-                array('success' => $success,
+                array('success' => 'Ошибка запроса к базе',
                     'message' => $sql));
         }
 

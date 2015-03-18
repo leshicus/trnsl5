@@ -125,6 +125,8 @@ foreach ($orgList as $i => $rowOrg) {
                         "id": "' . uniqid('',true) . '",
                         "text": "Группа № ' . $rowAct['actnum'] . '.' . $rowGroup['groupnum'] . ' ' . $rowGroup['groupname'] . '",
                         "leaf": true,
+                        "orgid": "' . $rowOrg['orgid'] . '",
+                        "actid": "' . $rowAct['actid'] . '",
                         "groupid": ' . $rowGroup['groupid'] . '}';
                                 $cntGroup++;
                             }

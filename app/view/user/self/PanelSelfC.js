@@ -82,7 +82,6 @@ Ext.define('App.view.user.self.PanelSelfC', {
                 }
 
                 arrayAnswers.forEach(getCheckedAnswer);
-
                 this.checkAnswer(checkedAnswerId, questionId);
 
                 if (checkedAnswerId) {
@@ -172,7 +171,6 @@ Ext.define('App.view.user.self.PanelSelfC', {
             });
         }
         request();
-
     },
 
     // * показ 1-го вопроса после загрузки стора билетов

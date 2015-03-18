@@ -13,12 +13,11 @@ Ext.define('App.view.admin.clas.GridExamC', {
                 var gridSigngroup = grid.up('#content').down('gridSigngroup'),
                     gridPerson = grid.up('#content').down('gridPerson'),
                     gridExam = grid.up('gridExam'),
-                    selection = gridExam.getSelected()[0],
-                    examid = selection.get('examid'),
-                    storePerson = gridPerson.getViewModel().getStore('person'),
-                    storeSigngroup = gridSigngroup.getViewModel().getStore('signgroup');
-
+                    selection = gridExam.getSelected()[0];
                 if (selection) {
+                    var examid = selection.get('examid'),
+                        storePerson = gridPerson.getViewModel().getStore('person'),
+                        storeSigngroup = gridSigngroup.getViewModel().getStore('signgroup');
                     storeSigngroup.load({
                         params: {
                             examid: examid
@@ -30,7 +29,6 @@ Ext.define('App.view.admin.clas.GridExamC', {
                         }
                     });
                 }
-
 
                 // * опрос подавших заявку на тест в классе
                 var taskClassCheck = {
@@ -59,7 +57,13 @@ Ext.define('App.view.admin.clas.GridExamC', {
                 var grid = button.up('grid'),
                     vm = grid.getViewModel(),
                     store = vm.getStore('exam'),
-                    newRecord = store.insert(0, {})[0];
+                    main = Ext.ComponentQuery.query('main')[0],
+                    vmMain = main.getViewModel(),
+                    storeOrg = vmMain.getStore('org'),
+                    minOrgRec = storeOrg.getAt(0),
+                    minOrgid = minOrgRec.get('orgid'),
+                    newRecord = store.insert(0, {orgid: minOrgid})[0];
+                grid.getSelectionModel().select(newRecord);
             }
         },
         'button[action=delete]': {

@@ -11,6 +11,7 @@ $userid = $_SESSION['userid'];
 switch ($act) {
     case 'create':
         $fio = '';
+        $orgid = $data['orgid'];
         $curdate = date('d.m.Y H:i');
         // * определим ФИО наблюдателя
         $sql_fio = "select
@@ -31,10 +32,12 @@ switch ($act) {
         $sql = "
             insert into exam(
               examdate,
-              userid
+              userid,
+              orgid
             )values(
               NOW(),
-              '$userid'
+              '$userid',
+              '$orgid'
             );
         ";
         try {
@@ -48,6 +51,7 @@ switch ($act) {
                     array('examid' => $mysqli->insert_id,
                         'userid' => $userid,
                         'examdate' => $curdate,
+                        'orgid' => $orgid,
                         'fio' => $fio));
             _log($mysqli, $userid, 17, 'Создание: ' . $mysqli->insert_id . ', ' . $curdate);
         } else {

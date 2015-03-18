@@ -1,6 +1,12 @@
 Ext.define('App.view.user.test.PanelTestC', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.panelTest',
+    /*onLaunch: function () {
+         var me = this;
+         var storeCard = Ext.data.StoreManager.lookup('user.CardS');
+         // * старт показа вопросов после генерации билета
+         storeCard.on('load', me.onStoreCardLoad, me);
+    },*/
     control: {
         '#':{
 
@@ -57,7 +63,7 @@ Ext.define('App.view.user.test.PanelTestC', {
                                     textStatus.setValue(App.util.Utilities.regString);
                                     textStatus.setFieldStyle(App.util.Utilities.colorStatusTextReg);
                                     Ext.TaskManager.stop(taskRegStatus);
-                                    comboExam.setReadOnly(true);
+                                    //comboExam.setReadOnly(true);
                                     buttonStartTest.enable();
                                 }
                             },
@@ -104,8 +110,10 @@ Ext.define('App.view.user.test.PanelTestC', {
                 console.log('action=starttest');
 
                 var panelTest = this.getView(),
+                    vmPanelTest =  panelTest.getViewModel(),
                     comboExam = panelTest.down('#comboExam'),
-                    examid = comboExam.getValue();
+                    examid = comboExam.getValue(),
+                    me = this;
 
                 // * установка начальных значений
                 panelTest.rightAnswersAmount = 0;
@@ -142,13 +150,32 @@ Ext.define('App.view.user.test.PanelTestC', {
                                         buttonNextQuestion.enable();
                                         // * показ вопросов на событие load в storeCard
                                         storeCard.clearFilter();
+
                                         // * приоритет у глобальных настроек времени экзамена перед Видами деятельности
                                         // * лимит времени по тесту
                                         if (panelTest.examTimerMin == 0)
                                             panelTest.examTimerMin = timelimit;
                                         // * лимит времени по одному вопросу = всего времени / общее число вопросов в билете
                                         panelTest.examTimerQuestionMin = panelTest.examTimerMin / panelTest.maxquestion;
-                                        storeCard.load({params: {examid: examid}});
+                                       // storeCard.load({params: {examid: examid}});
+                                        storeCard.load({
+                                            params: {examid: examid},
+                                            callback: function (records, operation, success) {
+                                                if (success == true) {
+                                                    if (records.length > 0) {
+                                                        comboExam.setReadOnly(true);
+                                                        me.onStoreCardLoad(storeCard);
+                                                    } else {
+                                                        App.util.Utilities.errorMessage('Ошибка', 'Билет не сформирован: не достаточно вопросов');
+                                                    }
+                                                } else {
+                                                    App.util.Utilities.errorMessage('Ошибка подключения к базе', 'Билет не получен');
+                                                }
+                                            }
+                                        });
+                                        vmPanelTest.set({
+                                            correct:-1
+                                        });
                                     } else {
                                         var textStatus = panelTest.down('#textStatus'),
                                             buttonStartTest = panelTest.down('#startTest');
@@ -179,6 +206,7 @@ Ext.define('App.view.user.test.PanelTestC', {
                 console.log('action=nextquestion');
 
                 var panelTest = this.getView(),
+                    vmTest = panelTest.getViewModel(),
                     panelCard = panelTest.down('#panelCard'),
                     panelProgress = panelTest.down('#panelProgress'),
                     rownum = panelTest.questionNumber,
@@ -208,6 +236,8 @@ Ext.define('App.view.user.test.PanelTestC', {
                     }
 
                     arrayAnswers.forEach(getCheckedAnswer);
+                    this.checkAnswer(checkedAnswerId, questionId);
+
                     //if (checkedAnswerId) {
                     function findRecordAnswer(rec, id) {
                         if (rec.get('rownum') == rownum &&
@@ -219,7 +249,7 @@ Ext.define('App.view.user.test.PanelTestC', {
                     var checkedAnswerIndex = storeCard.findBy(findRecordAnswer);
                     if (checkedAnswerIndex != -1) {
                         var checkedAnswerRec = storeCard.getAt(checkedAnswerIndex);
-                        correct = checkedAnswerRec.get('correct');
+                        correct = vmTest.get('correct');
                         answerText = checkedAnswerRec.get('answertext');
                     }
                     textAnswer.myCustomText = textAnswer.myCustomText + '<br><ins>Ответ:</ins> ' + answerText;
@@ -266,6 +296,18 @@ Ext.define('App.view.user.test.PanelTestC', {
                     comboExam.store.load({
                         params:{
                             testMode:1
+                        },
+                        callback: function (records, operation, success) {
+                            if (success == true) {
+                                if (records.length > 0) {
+                                    var recordSelected = comboExam.getStore().getAt(0);
+                                    Ext.defer(function(){
+                                        comboExam.setSelection(recordSelected);
+                                    },100);
+                                }
+                            } else {
+                                App.util.Utilities.errorMessage('Ошибка подключения к базе', 'Доступные зкзамены не получены');
+                            }
                         }
                     });
                     textStatus.reset();
@@ -323,7 +365,46 @@ Ext.define('App.view.user.test.PanelTestC', {
         }
 
     },
-
+// * проверить правильность ответа
+    checkAnswer: function (answerId, questionId) {
+        var request = function () {
+            Ext.Ajax.request({
+                url: 'resources/php/user/checkAnswer.php',
+                params: {
+                    answerid: answerId,
+                    questionid: questionId
+                },
+                success: function (response) {
+                    var resp = Ext.decode(response.responseText);
+                    if (resp) {
+                        var panelSelf = Ext.ComponentQuery.query('panelTest')[0],
+                            vm = panelSelf.getViewModel();
+                        vm.set({
+                            correct: resp.correct
+                        });
+                    } else {
+                        var str = 'Не могу проверить ответ.<br>Нет соединения с сервером.<br>Повторить?';
+                        Ext.Msg.confirm('Ошибка подключения к базе', str, function (button) {
+                            if (button == 'yes') {
+                                request();
+                            }
+                        }, this);
+                    }
+                },
+                failure: function (response) {
+                    // var str = 'Не могу проверить ответ.<br>Ошибка соединения с сервером.<br>Повторить?<br>(в противном случае тестирование будет окончено)';
+                    var str = 'Не могу проверить ответ.<br>Ошибка соединения с сервером.<br>Повторить?';
+                    Ext.Msg.confirm('Ошибка подключения к базе', str, function (button) {
+                        if (button == 'yes') {
+                            request();
+                        }
+                    }, this);
+                },
+                method: 'POST'
+            });
+        }
+        request();
+    },
 // * запуск таймера теста
     runTimerAll: function () {
         var panelTest = this.getView(),

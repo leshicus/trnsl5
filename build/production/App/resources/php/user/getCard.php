@@ -66,9 +66,9 @@ if (isset($know)) { // самоподготовка
             q.questionid,
             q.questiontext,
             a.answerid,
-            a.answertext,
-            a.correct,
-            a.normdoc
+            a.answertext
+            /*a.correct,
+            a.normdoc*/
             /*@n:=@n+1 as rownum*/
         from
             `question` q,
@@ -143,9 +143,9 @@ if (isset($know)) { // самоподготовка
                             q.questionid,
                             q.questiontext,
                             a.answerid,
-                            a.answertext,
-                            a.correct,
-                            a.normdoc
+                            a.answertext
+                            /*a.correct,
+                            a.normdoc*/
                             /*@n:=@n+1 as rownum*/
                         from
                             `question` q,
@@ -211,7 +211,9 @@ if ($success) {
         shuffle($list);
     }
     _log($mysqli, $userid, 9, $examid);
-    echo json_encode($list);
+    $rows = array();
+    $rows['rows'] = $list;
+    echo json_encode($rows);
 } else {
     echo json_encode(
         array('success' => $success,

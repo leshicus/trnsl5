@@ -27,7 +27,7 @@ Ext.define('App.view.admin.clas.GridExamV', {
             clicksToEdit: 1,
             listeners: {
                 scope: 'this',
-                edit: 'onEdit'
+                // edit: 'onEdit'
             }
         }
     ],
@@ -62,7 +62,8 @@ Ext.define('App.view.admin.clas.GridExamV', {
                 _dateFrom: dateBegin,
                 _allowBlankFrom: false,
                 _allowBlankTo: true
-            });
+            }
+        );
 
         this.columns = [
             {
@@ -89,11 +90,19 @@ Ext.define('App.view.admin.clas.GridExamV', {
             {
                 text: 'Организация',
                 itemId: 'columnOrg',
-                dataIndex: 'orgabbr',
+                dataIndex: 'orgid',
                 tdCls: 'wrapText',
                 name: 'orgid',
                 menuDisabled: true,
                 width: 110,
+                renderer: function (val) {
+                    var main = Ext.ComponentQuery.query('main')[0],
+                        vm = main.getViewModel(),
+                        storeOrg = vm.getStore('org'),
+                        record = storeOrg.findRecord('orgid', val, 0, false, true, true);
+                    if (record.get('orgabbr'))
+                        return record.get('orgabbr');
+                },
                 editor: {
                     xtype: 'combobox',
                     bind: {store: '{org}'},

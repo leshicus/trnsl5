@@ -8,15 +8,17 @@ Ext.define('App.view.admin.clas.MenuPersonC', {
             show: function (menu) {
                 var gridPerson = Ext.ComponentQuery.query('gridPerson')[0],
                     selection = gridPerson.getSelected(),
-                    reg = selection[0].get('reg'),
                     menuReg = menu.down('#menuReg'),
                     menuUnreg = menu.down('#menuUnreg');
-                if (!reg || reg == 0) {
-                    menuReg.enable();
-                    menuUnreg.disable();
-                } else {
-                    menuReg.disable();
-                    menuUnreg.enable();
+                if(selection[0]){
+                    var reg = selection[0].get('reg');
+                    if (!reg || reg == 0) {
+                        menuReg.enable();
+                        menuUnreg.disable();
+                    } else {
+                        menuReg.disable();
+                        menuUnreg.enable();
+                    }
                 }
             }
         },
