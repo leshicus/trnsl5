@@ -46,6 +46,7 @@ Ext.define('App.view.manage.group.GridGroupV', {
                 valueField: 'actid',
                 name: 'actid',
                 editable: false,
+                queryMode: 'local',
                 displayField: 'actabbr'
             }),
             comboKnow = Ext.create('Ext.form.ComboBox', {
@@ -54,9 +55,11 @@ Ext.define('App.view.manage.group.GridGroupV', {
                 valueField: 'knowid',
                 name: 'knowid',
                 multiSelect: true,
+                queryMode: 'local',
                 editable: false,
                 displayField: 'knowname'
             });
+
         this.columns = [
           /*  {
                 text: 'id',

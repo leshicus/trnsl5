@@ -1,7 +1,7 @@
 Ext.define('App.util.Utilities', {
     singleton: true,
     alternateClassName: ['Utilities'],
-    version: '1.02 от 05.12.2014',
+    version: '1.03 от 19.03.2015',
     textAbout:'<table width="100%">' +
     '<tr>' +
     '<td width="100">Программа:</td>' +
@@ -10,7 +10,7 @@ Ext.define('App.util.Utilities', {
     '<tr>' +
     '<td>Версия:</td>' +
     '<td>' +
-    '1.02 от 05.12.2014' +
+    '1.03 от 19.03.2015' +
     '</td>' +
     '</tr>' +
     '<tr>' +
@@ -20,6 +20,10 @@ Ext.define('App.util.Utilities', {
     '<tr>' +
     '<td>Почта:</td>' +
     '<td>benzolring@mail.ru</td>' +
+    '</tr>' +
+    '<tr>' +
+    '<td>Телефон:</td>' +
+    '<td>+7(926)153-94-19</td>' +
     '</tr>' +
     '<tr>' +
     '<td>Сайт:</td>' +
@@ -93,6 +97,20 @@ Ext.define('App.util.Utilities', {
     },
     runnerExamTestAll: new Ext.util.TaskRunner(),  // * задание для времени тестов
     runnerExamTestQuestion: new Ext.util.TaskRunner(),  // * задание для времени вопроса
+
+    // * проверка, что элемент присутствует в массиве
+    in_array: function (str, arr, strict) {	// Checks if a value exists in an array
+        // +   original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+        var found = false, key, strict = !!strict;
+
+        for (key in arr) {
+            if ((strict && arr[key] === str) || (!strict && arr[key] == str)) {
+                found = true;
+                break;
+            }
+        }
+        return found;
+    },
 
     comboRenderer: function (combo) {
         return function (value) {

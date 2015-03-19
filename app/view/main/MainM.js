@@ -85,7 +85,7 @@ Ext.define('App.view.main.MainM', {
             }
         },
         know: {
-            fields: [],
+            fields: ['knowid','knowname','knownum','knowfullname','checked'],
             autoLoad: true,
             idProperty:'knowid',
             proxy: {

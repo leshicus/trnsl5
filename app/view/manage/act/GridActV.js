@@ -47,6 +47,7 @@ Ext.define('App.view.manage.act.GridActV', {
             valueField: 'orgid',
             name: 'orgid',
             editable: false,
+            queryMode: 'local',
             displayField: 'orgabbr'
         });
 
