@@ -277,4 +277,5 @@ Ext.define('App.util.Utilities', {
             align: 't'
         });
     }
+
 });

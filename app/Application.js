@@ -18,6 +18,11 @@ Ext.define('App.Application', {
                 scope: this
             }
         );*/
+
+        // * багфиксы
+        // * Исправление бага 43 Хрома, когда смещалось отображение textfield
+        if(Ext.isChrome && Ext.chromeVersion===43)
+            Ext.getBody().addCls('chrome-43');
     },
     requires: [
         'App.util.Utilities',

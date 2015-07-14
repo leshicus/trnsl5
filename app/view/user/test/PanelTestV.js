@@ -188,6 +188,14 @@ Ext.define('App.view.user.test.PanelTestV', {
                                 },
                                 height: 1
                             }
+                        ],
+                        bbar:[
+                            {
+                                xtype:'button',
+                                text:'Печать ведомости',
+                                glyph:Glyphs.get('print'),
+                                handler:'onPrintResults'
+                            }
                         ]
                     }
                 ]

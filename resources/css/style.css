@@ -1,3 +1,9 @@
+/* багфиксы */
+/* Исправление бага 43 Хрома, когда смещалось отображение textfield */
+.chrome-43 .x-form-text {
+    display: inline!important;
+}
+
 /* заголовок fieldset */
 .x-fieldset-header-default > .x-fieldset-header-text {
     color: rgb(39, 127, 204) !important;;

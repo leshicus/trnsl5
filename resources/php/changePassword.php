@@ -8,6 +8,8 @@ $textOldPassword = $_REQUEST["textOldPassword"];
 $textNewPassword = $_REQUEST["textNewPassword"];
 $success = true;
 $message = 'Пароль изменен';
+$oldPassSha1 = sha1($textOldPassword);
+$newPassSha1 = sha1($textNewPassword);
 
 // * проверим, что все необходимые поля заполнены
 if (!$textLogin || !$textOldPassword || !$textNewPassword) {
@@ -35,11 +37,12 @@ if (!$textLogin || !$textOldPassword || !$textNewPassword) {
 
         if ($row_login[0]) {
             // * проверим, что старый пароль верен
+
             $sql_pas = "
              select count(*) as nCNT
              from `user` u
              where u.login = '$textLogin'
-             and u.password = '$textOldPassword'
+             and u.password = '$oldPassSha1'
             ";
             try {
                 $res_pas = $mysqli->query($sql_pas);
@@ -53,7 +56,7 @@ if (!$textLogin || !$textOldPassword || !$textNewPassword) {
                 // * все ОК, поменяем старый пароль на новый
                 $sql_change = "
                  update `user` u
-                 set u.password = '$textNewPassword'
+                 set u.password = '$newPassSha1'
                  where u.login = '$textLogin'
                 ";
                 try {

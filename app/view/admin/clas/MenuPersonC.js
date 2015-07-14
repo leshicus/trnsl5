@@ -57,7 +57,7 @@ Ext.define('App.view.admin.clas.MenuPersonC', {
                 var grid = Ext.ComponentQuery.query('gridPerson')[0],
                     selection = grid.getSelected();
                 // * печатает только одну ведомость
-                Ext.each(selection, function (item) {
+                Ext.Array.each(selection, function (item) {
                     var userid = item.get('userid'),
                         examid = item.get('examid'),
                         params = 'examid=' + examid + '&userid=' + userid;

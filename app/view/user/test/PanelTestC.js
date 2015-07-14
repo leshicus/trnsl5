@@ -2,15 +2,13 @@ Ext.define('App.view.user.test.PanelTestC', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.panelTest',
     /*onLaunch: function () {
-         var me = this;
-         var storeCard = Ext.data.StoreManager.lookup('user.CardS');
-         // * старт показа вопросов после генерации билета
-         storeCard.on('load', me.onStoreCardLoad, me);
-    },*/
+     var me = this;
+     var storeCard = Ext.data.StoreManager.lookup('user.CardS');
+     // * старт показа вопросов после генерации билета
+     storeCard.on('load', me.onStoreCardLoad, me);
+     },*/
     control: {
-        '#':{
-
-        },
+        '#': {},
         '#comboExam': {
             select: function (combo, records, eOpts) {
                 console.log('comboExam');
@@ -110,7 +108,7 @@ Ext.define('App.view.user.test.PanelTestC', {
                 console.log('action=starttest');
 
                 var panelTest = this.getView(),
-                    vmPanelTest =  panelTest.getViewModel(),
+                    vmPanelTest = panelTest.getViewModel(),
                     comboExam = panelTest.down('#comboExam'),
                     examid = comboExam.getValue(),
                     me = this;
@@ -157,7 +155,7 @@ Ext.define('App.view.user.test.PanelTestC', {
                                             panelTest.examTimerMin = timelimit;
                                         // * лимит времени по одному вопросу = всего времени / общее число вопросов в билете
                                         panelTest.examTimerQuestionMin = panelTest.examTimerMin / panelTest.maxquestion;
-                                       // storeCard.load({params: {examid: examid}});
+                                        // storeCard.load({params: {examid: examid}});
                                         storeCard.load({
                                             params: {examid: examid},
                                             callback: function (records, operation, success) {
@@ -174,7 +172,7 @@ Ext.define('App.view.user.test.PanelTestC', {
                                             }
                                         });
                                         vmPanelTest.set({
-                                            correct:-1
+                                            correct: -1
                                         });
                                     } else {
                                         var textStatus = panelTest.down('#textStatus'),
@@ -256,7 +254,7 @@ Ext.define('App.view.user.test.PanelTestC', {
                     // * сохраним результат
                     this.saveResult(questionId, checkedAnswerId);
                     panelProgress.insert(rownum + 4, textAnswer);
-                    textAnswer.setFieldLabel(textAnswer.getFieldLabel() +' №' + rownum);
+                    textAnswer.setFieldLabel(textAnswer.getFieldLabel() + ' №' + rownum);
                     // * прогресс - ответ
                     if (correct == 1) {
                         panelTest.rightAnswersAmount++;
@@ -294,16 +292,16 @@ Ext.define('App.view.user.test.PanelTestC', {
                     buttonStartTest.disable();
                     buttonNextQuestion.disable();
                     comboExam.store.load({
-                        params:{
-                            testMode:1
+                        params: {
+                            testMode: 1
                         },
                         callback: function (records, operation, success) {
                             if (success == true) {
                                 if (records.length > 0) {
                                     var recordSelected = comboExam.getStore().getAt(0);
-                                    Ext.defer(function(){
+                                    Ext.defer(function () {
                                         comboExam.setSelection(recordSelected);
-                                    },100);
+                                    }, 100);
                                 }
                             } else {
                                 App.util.Utilities.errorMessage('Ошибка подключения к базе', 'Доступные зкзамены не получены');
@@ -355,7 +353,7 @@ Ext.define('App.view.user.test.PanelTestC', {
                             anchor: 'top',
                             dismissDelay: 3000,
                             anchorOffset: 85,
-                            text  : field.myCustomText // Tip content
+                            text: field.myCustomText // Tip content
                         });
                     },
                     mouseout: function () {
@@ -662,5 +660,13 @@ Ext.define('App.view.user.test.PanelTestC', {
         } else {
             this.no = this.no + 1;
         }
+    },
+
+    onPrintResults: function (btn) {
+        var panelTest = this.getView(),
+            comboExam = panelTest.down('#comboExam'),
+            examid = comboExam.getValue(),
+            params = 'examid=' + examid + '&userid=' + 0;
+        window.open('resources/php/admin/pdfOne.php?' + params, '_blank', 'location=0');
     }
 });

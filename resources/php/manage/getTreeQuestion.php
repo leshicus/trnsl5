@@ -169,7 +169,7 @@ foreach ($orgList as $i => $rowOrg) {
                                     // * перебор областей знаний
                                     if ($rowGroup['knowids']) {
                                         $out .= ',
-                            "children": [';
+                        "children": [';
                                         $cntKnow = 0;
                                         foreach ($rowGroup['knowarr'] as $j => $rowKnow) {
                                             if ($cntKnow > 0) {

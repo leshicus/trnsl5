@@ -27,10 +27,10 @@ Ext.define('App.view.auth.tabreg.TabRegC', {
                     form.submit({
                         waitMsg: 'Регистрация...',
                         success: function (form, action) {
-                            Ext.Msg.alert('Регистрация', action.result.message);
+                            Ext.Msg.alert('Регистрация', 'Регистрация прошла успешно');
                         },
                         failure: function (form, action) {
-                            Ext.Msg.alert('Ошибка', action.result ? action.result.message : 'No response');
+                            Ext.Msg.alert('Ошибка', action.result ? action.result.message : 'Нет ответа от сервера');
                         }
                     });
                 }

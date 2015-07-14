@@ -12,10 +12,11 @@ $textPassword = $_REQUEST["textPassword"];
 $success = true;
 $message = '';
 
+//todo поменять в реальной базе пароли на зашифрованные, длина строки 40
 // * проверим, что пароль не начальный
 if (strtoupper($textPassword) == strtoupper($initPassword)) {
     $success = false;
-    $message = 'Не допустимый пароль: ' . $initPassword;
+    $message = 'Недопустимый пароль: ' . $initPassword;
 } else {
     // * проверим, что пользователь зарегистрирован
     $sql_reg = "
@@ -47,11 +48,13 @@ if (strtoupper($textPassword) == strtoupper($initPassword)) {
             $res_sys = $mysqli->query($sql_sys);
             $row_sys = $res_sys->fetch_row();
             // * проверка пароля
+            $passSha1 = sha1($textPassword);
+            //echo $passSha1;
             $sql_pas = "
              select count(*) as nCNT
              from `user`     u
              where u.userid = '$userid'
-             and   u.password = '$textPassword'
+             and   u.password = '$passSha1'
             ";
             try {
                 $res_pas = $mysqli->query($sql_pas);

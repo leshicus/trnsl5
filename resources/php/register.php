@@ -54,6 +54,7 @@ if (!$textLogin || !$textFamily || !$textName || !$comboSpeciality || !$textPass
                 $message = $sql_fio;
             }
             if (!$row_fio[0]) {
+                $passSha1 = sha1($textPassword);
                 $sql = "
                     insert into user(
                       familyname,
@@ -69,7 +70,7 @@ if (!$textLogin || !$textFamily || !$textName || !$comboSpeciality || !$textPass
                       '$textName',
                       '$textLastname',
                       '$comboSpeciality',
-                      '$textPassword',
+                      '$passSha1',
                       '$textLogin',
                       NOW(),
                       '$initRole'
@@ -94,7 +95,8 @@ if (!$textLogin || !$textFamily || !$textName || !$comboSpeciality || !$textPass
 
 if ($success) {
     echo json_encode(
-        array('userid' => $mysqli->insert_id));
+        array('success' => $success,
+            'userid' => $mysqli->insert_id));
     _log($mysqli, $mysqli->insert_id, 3, 'Создание: '.$textFamily.' '.$textName.' '.$textLastname.', '.$comboSpeciality.', '.$textLogin);
 } else {
     echo json_encode(

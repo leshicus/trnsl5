@@ -8,6 +8,11 @@ require_once('pdf.inc.excelOneConsolidated.php');
 $userid = $_REQUEST['userid'];
 $examid = $_REQUEST['examid'];
 
+// * случай печати отчета в Тестировании на самого пользователя
+if($userid == 0){
+    $userid = $_SESSION['userid'];
+}
+
 // * функция для апперкейса
 function reverseStringCharactersCase($string)
 {
